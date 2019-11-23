@@ -1,0 +1,6 @@
+# Project
+node_modules
+*/postchain-node
+
+# IDE
+.idea

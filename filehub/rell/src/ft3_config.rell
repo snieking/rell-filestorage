@@ -1,0 +1,7 @@
+module;
+
+object ft3_config {
+  blockchain_name: text = "Filehub";
+  blockchain_website: text = "chromia.com";
+  blockchain_description: text = "Filehub";
+}

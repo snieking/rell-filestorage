@@ -1,0 +1,11 @@
+@log
+entity blockchain {
+	key rid: byte_array;
+}
+
+@log
+entity chunk {
+	key hash: byte_array;
+	pubkey;
+	blockchain;
+}

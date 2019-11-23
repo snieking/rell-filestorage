@@ -1,0 +1,14 @@
+import ft3_acc: lib.ft3.account;
+
+operation add_blockchain(rid: byte_array) {
+	
+}
+
+operation store_chunk(ft3_acc.account, ft3_acc.auth_descriptor, hash: byte_array, pubkey) {
+	ft3.require_auth(ft3_acc.account, ft3_acc.auth_descriptor, ["A"]);
+	// Check if user has sufficient funds & take funds
+	
+	
+	val blockchain = blockchain@{}; // choose a blockchain
+	create chunk(hash, pubkey, blockchain);
+}
