@@ -26,4 +26,5 @@ script:
   - ./build.sh
   - ./run-dev-node.sh &
   - cd ../test
+  - npm install
   - npm run test
