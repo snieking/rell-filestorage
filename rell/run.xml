@@ -1,0 +1,20 @@
+<run wipe-db="false">
+    <nodes>
+        <config src="config/node-config.properties" add-signers="true" />
+    </nodes>
+    <chains>
+    	<chain name="filehub" iid="1">
+    		<config height="0">
+    			<app module="filehub" />
+    		</config>
+    	</chain>
+        <chain name="filechain" iid="2">
+            <config height="0">
+                <app module="filechain" />
+                <dependencies>
+			        <dependency name="filehub" chain="filehub" />
+			    </dependencies>
+            </config>
+        </chain>
+    </chains>
+</run>

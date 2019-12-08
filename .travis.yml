@@ -1,0 +1,29 @@
+---
+language: generic
+jdk: "openjdk8"
+node_js: "node"
+
+dist: trusty
+
+services:
+  - postgresql
+
+before_script:
+  - sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 762E3157
+  - npm i yarn
+  - bash rell/install-postgres-10.sh
+  - psql -c "create database filestorage;" -U postgres
+  - psql -c "create role postchain LOGIN ENCRYPTED PASSWORD 'postchain';" -U postgres
+  - psql -c "grant ALL ON DATABASE filestorage TO postchain;" -U postgres
+
+cache:
+  pip: true
+  directories:
+    - test/node_modules
+
+script:
+  - cd rell
+  - ./build.sh
+  - ./run-dev-node.sh &
+  - cd ../test
+  - npm run test

@@ -13,15 +13,11 @@ export const FILEHUB_GTX = pcl.gtxClient.createClient(FILEHUB_REST_CLIENT, Buffe
 
 export const FILEHUB_BLOCKCHAIN = Blockchain.initialize(
   Buffer.from(FILEHUB_BLOCKCHAIN_RID, "hex"),
-  new DirectoryService()
+  new DirectoryService(FILEHUB_BLOCKCHAIN_RID, NODE_API_URL)
 );
 
 // Filechain chain
 const FILECHAIN_BLOCKCHAIN_RID = config.filechainRID;
+
 export const FILECHAIN_REST_CLIENT = pcl.restClient.createRestClient(NODE_API_URL, FILECHAIN_BLOCKCHAIN_RID, 10);
 export const FILECHAIN_GTX = pcl.gtxClient.createClient(FILECHAIN_REST_CLIENT, Buffer.from(FILECHAIN_BLOCKCHAIN_RID, "hex"), []);
-
-export const FILECHAIN_BLOCKCHAIN = Blockchain.initialize(
-  Buffer.from(FILECHAIN_BLOCKCHAIN_RID, "hex"),
-  new DirectoryService()
-);

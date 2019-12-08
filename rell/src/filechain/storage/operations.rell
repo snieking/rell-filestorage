@@ -1,0 +1,18 @@
+operation add_chunk_data (data: byte_array) {
+   val hash = data.sha256();
+   val chunk = chunk @ { hash };
+   require(chunk.blockchain.rid == chain_context.blockchain_rid); // TODO: this won't work now, can be done using module_args instead
+   
+   // Verify that the same user stores the data, that paid for it
+   require(is_signer(chunk.pubkey));
+   
+   create stored_file(hash, op_context.transaction);
+}
+
+operation remove_chunk_data(data: byte_array) {
+	val hash = data.sha256();
+	val chunk = chunk@{ hash };
+	
+	require(is_signer(chunk.pubkey));
+	delete stored_file@{ hash };
+}

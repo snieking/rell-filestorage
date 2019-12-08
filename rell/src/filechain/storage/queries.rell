@@ -1,0 +1,4 @@
+query get_chunk(hash: byte_array): gtv {
+	val gtx_tx = gtx_transaction.from_bytes(stored_file@{ hash } ( .transaction.tx_data ));
+	return gtx_tx.operations[0].args[0];	
+}

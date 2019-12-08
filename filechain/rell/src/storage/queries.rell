@@ -1,4 +1,0 @@
-query get_chunk(hash: byte_array): byte_array {
-	val gtx_tx = gtx_transaction.from_bytes(mapping@{ hash } ( .transaction.tx_data ));
-	return gtx_tx.operations[0].args[0];	
-}
