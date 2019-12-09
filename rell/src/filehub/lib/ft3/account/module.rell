@@ -43,7 +43,6 @@ function _add_auth_descriptor (account, auth_descriptor) {
 }
 
 function create_account_with_auth (auth_descriptor): byte_array {
-    print(auth_descriptor);
      val id = auth_descriptor.hash();
      val acc = create account (id);
      _add_auth_descriptor(
