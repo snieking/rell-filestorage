@@ -23,6 +23,7 @@ cache:
 
 script:
   - cd rell
+  - ./download-binaries.sh
   - ./build.sh
   - ./run-dev-node.sh &
   - cd ../test
