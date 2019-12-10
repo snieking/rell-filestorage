@@ -11,7 +11,7 @@ services:
 before_script:
   - sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 762E3157
   - npm i yarn
-  - bash rell/install-postgres-10.sh
+  - bash filechain/rell/install-postgres-10.sh
   - psql -c "create role postchain LOGIN ENCRYPTED PASSWORD 'postchain';" -U postgres
   - psql -c "create database filechain;" -U postgres
   - psql -c "grant ALL ON DATABASE filechain TO postchain;" -U postgres
