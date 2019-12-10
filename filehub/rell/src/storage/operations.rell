@@ -1,4 +1,4 @@
-import ft3_acc: filehub.lib.ft3.account;
+import ft3_acc: lib.ft3.account;
 
 operation register_admin(descriptor_id: byte_array) {
     if (admin@?{} == null) {

@@ -2,5 +2,5 @@ module;
 
 //import ^.ft3_basic_dev;
 
-import filehub.ft3_config;
+import ft3_config;
 import ^.ft3_xc_basic_dev;

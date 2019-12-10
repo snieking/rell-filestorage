@@ -1,0 +1,1032 @@
+DEBUG 2019-12-10 07:28:55.175 [0-BaseBlockDatabaseWorker] ManualBlockchainConfigurationProvider - lastHeight: 411, currentConfigHeight: 0, nextConfigHeight: 0
+DEBUG 2019-12-10 07:28:55.243 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - end -------------------
+DEBUG 2019-12-10 07:28:55.243 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job commitBlock
+DEBUG 2019-12-10 07:28:55.344 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job buildBlock
+DEBUG 2019-12-10 07:28:55.346 [0-BaseBlockDatabaseWorker] BlockchainDependencies - Have height for dependency: name: filehub,  , 849D2CC55796785516386566F8F9BF827B426221AD0820A9B09AFAD391C89A00 ( height: 411, last_block_RID: FB433C9E43C158551E9B25FBA39600C839172D5F39F514DFB58459DA83624DB6 )
+DEBUG 2019-12-10 07:28:55.346 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Checking transaction queue
+INFO  2019-12-10 07:28:55.346 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Chain: C7:BC: Block is finalized: 1 ms, 0 net tps, 0 gross tps, height: 395, accepted txs: 0, rejected txs: 0, root-hash: 46AF9064F12528CAD6A7C377204ACD0AC38CDC6912903E7DAB3703764C8DD5E5, block-rid: 16340F5B5506E9C02BFECEBEEC49BBFD38E1414095AED6657EBC8789D6BD38CA, prev-block-rid: 3602741D1DD38A3583951840800C74F49F1B5482D5C65865DD575BAD1193C00D
+DEBUG 2019-12-10 07:28:55.347 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job buildBlock
+DEBUG 2019-12-10 07:28:55.365 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job commitBlock
+DEBUG 2019-12-10 07:28:55.365 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - start -------------------
+DEBUG 2019-12-10 07:28:55.367 [0-BaseBlockDatabaseWorker] ManualBlockchainConfigurationProvider - lastHeight: 395, currentConfigHeight: 0, nextConfigHeight: 0
+DEBUG 2019-12-10 07:28:55.367 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - end -------------------
+DEBUG 2019-12-10 07:28:55.367 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job commitBlock
+DEBUG 2019-12-10 07:29:04.832 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:412 ro:0 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:29:04.883 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:396 ro:0 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:29:14.834 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:412 ro:1 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:29:14.885 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:396 ro:1 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:29:24.849 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:412 ro:2 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:29:24.886 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:396 ro:2 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:29:25.161 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job buildBlock
+DEBUG 2019-12-10 07:29:25.165 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Checking transaction queue
+INFO  2019-12-10 07:29:25.165 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Chain: 84:00: Block is finalized: 4 ms, 0 net tps, 0 gross tps, height: 412, accepted txs: 0, rejected txs: 0, root-hash: 46AF9064F12528CAD6A7C377204ACD0AC38CDC6912903E7DAB3703764C8DD5E5, block-rid: 210F21EFB8305F4961E747E38E2F93A5260CA2D111438514705D96543AF23761, prev-block-rid: FB433C9E43C158551E9B25FBA39600C839172D5F39F514DFB58459DA83624DB6
+DEBUG 2019-12-10 07:29:25.166 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job buildBlock
+DEBUG 2019-12-10 07:29:25.183 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job commitBlock
+DEBUG 2019-12-10 07:29:25.183 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - start -------------------
+DEBUG 2019-12-10 07:29:25.192 [0-BaseBlockDatabaseWorker] ManualBlockchainConfigurationProvider - lastHeight: 412, currentConfigHeight: 0, nextConfigHeight: 0
+DEBUG 2019-12-10 07:29:25.192 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - end -------------------
+DEBUG 2019-12-10 07:29:25.193 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job commitBlock
+DEBUG 2019-12-10 07:29:25.369 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job buildBlock
+DEBUG 2019-12-10 07:29:25.372 [0-BaseBlockDatabaseWorker] BlockchainDependencies - Have height for dependency: name: filehub,  , 849D2CC55796785516386566F8F9BF827B426221AD0820A9B09AFAD391C89A00 ( height: 412, last_block_RID: 210F21EFB8305F4961E747E38E2F93A5260CA2D111438514705D96543AF23761 )
+DEBUG 2019-12-10 07:29:25.372 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Checking transaction queue
+INFO  2019-12-10 07:29:25.373 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Chain: C7:BC: Block is finalized: 4 ms, 0 net tps, 0 gross tps, height: 396, accepted txs: 0, rejected txs: 0, root-hash: 46AF9064F12528CAD6A7C377204ACD0AC38CDC6912903E7DAB3703764C8DD5E5, block-rid: 470479604781C6F1208BF9441C12937D030177FBD87667D39DE1283B3CDADC23, prev-block-rid: 16340F5B5506E9C02BFECEBEEC49BBFD38E1414095AED6657EBC8789D6BD38CA
+DEBUG 2019-12-10 07:29:25.373 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job buildBlock
+DEBUG 2019-12-10 07:29:25.393 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job commitBlock
+DEBUG 2019-12-10 07:29:25.393 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - start -------------------
+DEBUG 2019-12-10 07:29:25.395 [0-BaseBlockDatabaseWorker] ManualBlockchainConfigurationProvider - lastHeight: 396, currentConfigHeight: 0, nextConfigHeight: 0
+DEBUG 2019-12-10 07:29:25.395 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - end -------------------
+DEBUG 2019-12-10 07:29:25.395 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job commitBlock
+DEBUG 2019-12-10 07:29:34.861 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:413 ro:0 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:29:34.892 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:397 ro:0 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:29:44.867 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:413 ro:1 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:29:44.901 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:397 ro:1 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:29:54.887 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:413 ro:2 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:29:54.913 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:397 ro:2 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:29:55.182 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job buildBlock
+DEBUG 2019-12-10 07:29:55.185 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Checking transaction queue
+INFO  2019-12-10 07:29:55.185 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Chain: 84:00: Block is finalized: 2 ms, 0 net tps, 0 gross tps, height: 413, accepted txs: 0, rejected txs: 0, root-hash: 46AF9064F12528CAD6A7C377204ACD0AC38CDC6912903E7DAB3703764C8DD5E5, block-rid: 5FCA25F46F7ABA35E4625E162F4926627C425EE5CC6FFA9F27B1EC560CB0D082, prev-block-rid: 210F21EFB8305F4961E747E38E2F93A5260CA2D111438514705D96543AF23761
+DEBUG 2019-12-10 07:29:55.186 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job buildBlock
+DEBUG 2019-12-10 07:29:55.205 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job commitBlock
+DEBUG 2019-12-10 07:29:55.205 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - start -------------------
+DEBUG 2019-12-10 07:29:55.207 [0-BaseBlockDatabaseWorker] ManualBlockchainConfigurationProvider - lastHeight: 413, currentConfigHeight: 0, nextConfigHeight: 0
+DEBUG 2019-12-10 07:29:55.207 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - end -------------------
+DEBUG 2019-12-10 07:29:55.207 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job commitBlock
+DEBUG 2019-12-10 07:29:55.393 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job buildBlock
+DEBUG 2019-12-10 07:29:55.396 [0-BaseBlockDatabaseWorker] BlockchainDependencies - Have height for dependency: name: filehub,  , 849D2CC55796785516386566F8F9BF827B426221AD0820A9B09AFAD391C89A00 ( height: 413, last_block_RID: 5FCA25F46F7ABA35E4625E162F4926627C425EE5CC6FFA9F27B1EC560CB0D082 )
+DEBUG 2019-12-10 07:29:55.396 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Checking transaction queue
+INFO  2019-12-10 07:29:55.397 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Chain: C7:BC: Block is finalized: 4 ms, 0 net tps, 0 gross tps, height: 397, accepted txs: 0, rejected txs: 0, root-hash: 46AF9064F12528CAD6A7C377204ACD0AC38CDC6912903E7DAB3703764C8DD5E5, block-rid: 98091AC659DA55BC4A558F47317719362756B6F85209962A621F14EADF0C0D3C, prev-block-rid: 470479604781C6F1208BF9441C12937D030177FBD87667D39DE1283B3CDADC23
+DEBUG 2019-12-10 07:29:55.398 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job buildBlock
+DEBUG 2019-12-10 07:29:55.413 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job commitBlock
+DEBUG 2019-12-10 07:29:55.413 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - start -------------------
+DEBUG 2019-12-10 07:29:55.415 [0-BaseBlockDatabaseWorker] ManualBlockchainConfigurationProvider - lastHeight: 397, currentConfigHeight: 0, nextConfigHeight: 0
+DEBUG 2019-12-10 07:29:55.415 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - end -------------------
+DEBUG 2019-12-10 07:29:55.415 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job commitBlock
+DEBUG 2019-12-10 07:30:04.905 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:414 ro:0 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:30:04.922 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:398 ro:0 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:30:14.923 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:414 ro:1 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:30:14.923 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:398 ro:1 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:30:24.926 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:414 ro:2 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:30:24.926 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:398 ro:2 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:30:25.201 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job buildBlock
+DEBUG 2019-12-10 07:30:25.203 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Checking transaction queue
+INFO  2019-12-10 07:30:25.203 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Chain: 84:00: Block is finalized: 1 ms, 0 net tps, 0 gross tps, height: 414, accepted txs: 0, rejected txs: 0, root-hash: 46AF9064F12528CAD6A7C377204ACD0AC38CDC6912903E7DAB3703764C8DD5E5, block-rid: A4D8815BEF0B28C3FF68D5971D6D2081FB4B7DD1AD6767C55524BE7B0B14367E, prev-block-rid: 5FCA25F46F7ABA35E4625E162F4926627C425EE5CC6FFA9F27B1EC560CB0D082
+DEBUG 2019-12-10 07:30:25.204 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job buildBlock
+DEBUG 2019-12-10 07:30:25.225 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job commitBlock
+DEBUG 2019-12-10 07:30:25.225 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - start -------------------
+DEBUG 2019-12-10 07:30:25.227 [0-BaseBlockDatabaseWorker] ManualBlockchainConfigurationProvider - lastHeight: 414, currentConfigHeight: 0, nextConfigHeight: 0
+DEBUG 2019-12-10 07:30:25.227 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - end -------------------
+DEBUG 2019-12-10 07:30:25.227 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job commitBlock
+DEBUG 2019-12-10 07:30:25.413 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job buildBlock
+DEBUG 2019-12-10 07:30:25.417 [0-BaseBlockDatabaseWorker] BlockchainDependencies - Have height for dependency: name: filehub,  , 849D2CC55796785516386566F8F9BF827B426221AD0820A9B09AFAD391C89A00 ( height: 414, last_block_RID: A4D8815BEF0B28C3FF68D5971D6D2081FB4B7DD1AD6767C55524BE7B0B14367E )
+DEBUG 2019-12-10 07:30:25.417 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Checking transaction queue
+INFO  2019-12-10 07:30:25.417 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Chain: C7:BC: Block is finalized: 4 ms, 0 net tps, 0 gross tps, height: 398, accepted txs: 0, rejected txs: 0, root-hash: 46AF9064F12528CAD6A7C377204ACD0AC38CDC6912903E7DAB3703764C8DD5E5, block-rid: A0D71A5D86CA5835D5CB66E6899A1C94692ACC9CFFBEFBB2F07EF515D631B583, prev-block-rid: 98091AC659DA55BC4A558F47317719362756B6F85209962A621F14EADF0C0D3C
+DEBUG 2019-12-10 07:30:25.418 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job buildBlock
+DEBUG 2019-12-10 07:30:25.436 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job commitBlock
+DEBUG 2019-12-10 07:30:25.436 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - start -------------------
+DEBUG 2019-12-10 07:30:25.437 [0-BaseBlockDatabaseWorker] ManualBlockchainConfigurationProvider - lastHeight: 398, currentConfigHeight: 0, nextConfigHeight: 0
+DEBUG 2019-12-10 07:30:25.437 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - end -------------------
+DEBUG 2019-12-10 07:30:25.437 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job commitBlock
+DEBUG 2019-12-10 07:30:34.934 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:399 ro:0 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:30:34.938 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:415 ro:0 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:30:44.938 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:399 ro:1 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:30:44.944 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:415 ro:1 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:30:54.962 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:399 ro:2 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:30:54.963 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:415 ro:2 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:30:55.212 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job buildBlock
+DEBUG 2019-12-10 07:30:55.213 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Checking transaction queue
+INFO  2019-12-10 07:30:55.214 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Chain: 84:00: Block is finalized: 1 ms, 0 net tps, 0 gross tps, height: 415, accepted txs: 0, rejected txs: 0, root-hash: 46AF9064F12528CAD6A7C377204ACD0AC38CDC6912903E7DAB3703764C8DD5E5, block-rid: 3E7BD69D17B0D53CBF1F9133F611AE540B71ADBB87993DDFDE2D33A2222F5262, prev-block-rid: A4D8815BEF0B28C3FF68D5971D6D2081FB4B7DD1AD6767C55524BE7B0B14367E
+DEBUG 2019-12-10 07:30:55.214 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job buildBlock
+DEBUG 2019-12-10 07:30:55.234 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job commitBlock
+DEBUG 2019-12-10 07:30:55.234 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - start -------------------
+DEBUG 2019-12-10 07:30:55.236 [0-BaseBlockDatabaseWorker] ManualBlockchainConfigurationProvider - lastHeight: 415, currentConfigHeight: 0, nextConfigHeight: 0
+DEBUG 2019-12-10 07:30:55.236 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - end -------------------
+DEBUG 2019-12-10 07:30:55.236 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job commitBlock
+DEBUG 2019-12-10 07:30:55.435 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job buildBlock
+DEBUG 2019-12-10 07:30:55.440 [0-BaseBlockDatabaseWorker] BlockchainDependencies - Have height for dependency: name: filehub,  , 849D2CC55796785516386566F8F9BF827B426221AD0820A9B09AFAD391C89A00 ( height: 415, last_block_RID: 3E7BD69D17B0D53CBF1F9133F611AE540B71ADBB87993DDFDE2D33A2222F5262 )
+DEBUG 2019-12-10 07:30:55.440 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Checking transaction queue
+INFO  2019-12-10 07:30:55.441 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Chain: C7:BC: Block is finalized: 6 ms, 0 net tps, 0 gross tps, height: 399, accepted txs: 0, rejected txs: 0, root-hash: 46AF9064F12528CAD6A7C377204ACD0AC38CDC6912903E7DAB3703764C8DD5E5, block-rid: 719DB209546B319731444707C68473C37CCF3F5303C5CAD2E79641B667527502, prev-block-rid: A0D71A5D86CA5835D5CB66E6899A1C94692ACC9CFFBEFBB2F07EF515D631B583
+DEBUG 2019-12-10 07:30:55.442 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job buildBlock
+DEBUG 2019-12-10 07:30:55.457 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job commitBlock
+DEBUG 2019-12-10 07:30:55.457 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - start -------------------
+DEBUG 2019-12-10 07:30:55.460 [0-BaseBlockDatabaseWorker] ManualBlockchainConfigurationProvider - lastHeight: 399, currentConfigHeight: 0, nextConfigHeight: 0
+DEBUG 2019-12-10 07:30:55.460 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - end -------------------
+DEBUG 2019-12-10 07:30:55.461 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job commitBlock
+DEBUG 2019-12-10 07:31:04.968 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:400 ro:0 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:31:04.968 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:416 ro:0 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:31:14.986 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:416 ro:1 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:31:14.991 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:400 ro:1 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:31:24.996 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:400 ro:2 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:31:25.003 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:416 ro:2 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:31:25.215 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job buildBlock
+DEBUG 2019-12-10 07:31:25.217 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Checking transaction queue
+INFO  2019-12-10 07:31:25.217 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Chain: 84:00: Block is finalized: 2 ms, 0 net tps, 0 gross tps, height: 416, accepted txs: 0, rejected txs: 0, root-hash: 46AF9064F12528CAD6A7C377204ACD0AC38CDC6912903E7DAB3703764C8DD5E5, block-rid: 7296267CD76E98611ED3656FD7B992B9CCAF40BB32D78DB68D9A1027E2B227E1, prev-block-rid: 3E7BD69D17B0D53CBF1F9133F611AE540B71ADBB87993DDFDE2D33A2222F5262
+DEBUG 2019-12-10 07:31:25.218 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job buildBlock
+DEBUG 2019-12-10 07:31:25.236 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job commitBlock
+DEBUG 2019-12-10 07:31:25.236 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - start -------------------
+DEBUG 2019-12-10 07:31:25.237 [0-BaseBlockDatabaseWorker] ManualBlockchainConfigurationProvider - lastHeight: 416, currentConfigHeight: 0, nextConfigHeight: 0
+DEBUG 2019-12-10 07:31:25.237 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - end -------------------
+DEBUG 2019-12-10 07:31:25.237 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job commitBlock
+DEBUG 2019-12-10 07:31:25.454 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job buildBlock
+DEBUG 2019-12-10 07:31:25.456 [0-BaseBlockDatabaseWorker] BlockchainDependencies - Have height for dependency: name: filehub,  , 849D2CC55796785516386566F8F9BF827B426221AD0820A9B09AFAD391C89A00 ( height: 416, last_block_RID: 7296267CD76E98611ED3656FD7B992B9CCAF40BB32D78DB68D9A1027E2B227E1 )
+DEBUG 2019-12-10 07:31:25.456 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Checking transaction queue
+INFO  2019-12-10 07:31:25.457 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Chain: C7:BC: Block is finalized: 2 ms, 0 net tps, 0 gross tps, height: 400, accepted txs: 0, rejected txs: 0, root-hash: 46AF9064F12528CAD6A7C377204ACD0AC38CDC6912903E7DAB3703764C8DD5E5, block-rid: 4AB1D36FC8D61190CA39B7374AADAD6AD45B2DBEB0E2CB70A87F8027899C0FB9, prev-block-rid: 719DB209546B319731444707C68473C37CCF3F5303C5CAD2E79641B667527502
+DEBUG 2019-12-10 07:31:25.457 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job buildBlock
+DEBUG 2019-12-10 07:31:25.478 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job commitBlock
+DEBUG 2019-12-10 07:31:25.478 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - start -------------------
+DEBUG 2019-12-10 07:31:25.480 [0-BaseBlockDatabaseWorker] ManualBlockchainConfigurationProvider - lastHeight: 400, currentConfigHeight: 0, nextConfigHeight: 0
+DEBUG 2019-12-10 07:31:25.480 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - end -------------------
+DEBUG 2019-12-10 07:31:25.480 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job commitBlock
+DEBUG 2019-12-10 07:31:35.014 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:401 ro:0 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:31:35.025 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:417 ro:0 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:31:45.019 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:401 ro:1 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:31:45.040 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:417 ro:1 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:31:55.026 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:401 ro:2 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:31:55.041 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:417 ro:2 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:31:55.228 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job buildBlock
+DEBUG 2019-12-10 07:31:55.230 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Checking transaction queue
+INFO  2019-12-10 07:31:55.231 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Chain: 84:00: Block is finalized: 2 ms, 0 net tps, 0 gross tps, height: 417, accepted txs: 0, rejected txs: 0, root-hash: 46AF9064F12528CAD6A7C377204ACD0AC38CDC6912903E7DAB3703764C8DD5E5, block-rid: E37761F7C020D5D42ACB616CFFB4C5421C8C3727D48721E91ADADDA6FDD20A52, prev-block-rid: 7296267CD76E98611ED3656FD7B992B9CCAF40BB32D78DB68D9A1027E2B227E1
+DEBUG 2019-12-10 07:31:55.231 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job buildBlock
+DEBUG 2019-12-10 07:31:55.254 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job commitBlock
+DEBUG 2019-12-10 07:31:55.254 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - start -------------------
+DEBUG 2019-12-10 07:31:55.256 [0-BaseBlockDatabaseWorker] ManualBlockchainConfigurationProvider - lastHeight: 417, currentConfigHeight: 0, nextConfigHeight: 0
+DEBUG 2019-12-10 07:31:55.256 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - end -------------------
+DEBUG 2019-12-10 07:31:55.256 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job commitBlock
+DEBUG 2019-12-10 07:31:55.475 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job buildBlock
+DEBUG 2019-12-10 07:31:55.478 [0-BaseBlockDatabaseWorker] BlockchainDependencies - Have height for dependency: name: filehub,  , 849D2CC55796785516386566F8F9BF827B426221AD0820A9B09AFAD391C89A00 ( height: 417, last_block_RID: E37761F7C020D5D42ACB616CFFB4C5421C8C3727D48721E91ADADDA6FDD20A52 )
+DEBUG 2019-12-10 07:31:55.478 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Checking transaction queue
+INFO  2019-12-10 07:31:55.479 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Chain: C7:BC: Block is finalized: 3 ms, 0 net tps, 0 gross tps, height: 401, accepted txs: 0, rejected txs: 0, root-hash: 46AF9064F12528CAD6A7C377204ACD0AC38CDC6912903E7DAB3703764C8DD5E5, block-rid: 9A8D895AD712BE3FEE0205178BB11DE9E9508E8719FB03EFE99A1F32DFC8D4A3, prev-block-rid: 4AB1D36FC8D61190CA39B7374AADAD6AD45B2DBEB0E2CB70A87F8027899C0FB9
+DEBUG 2019-12-10 07:31:55.479 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job buildBlock
+DEBUG 2019-12-10 07:31:55.496 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job commitBlock
+DEBUG 2019-12-10 07:31:55.496 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - start -------------------
+DEBUG 2019-12-10 07:31:55.500 [0-BaseBlockDatabaseWorker] ManualBlockchainConfigurationProvider - lastHeight: 401, currentConfigHeight: 0, nextConfigHeight: 0
+DEBUG 2019-12-10 07:31:55.500 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - end -------------------
+DEBUG 2019-12-10 07:31:55.500 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job commitBlock
+DEBUG 2019-12-10 07:32:05.042 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:402 ro:0 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:32:05.054 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:418 ro:0 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:32:15.042 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:402 ro:1 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:32:15.078 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:418 ro:1 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:32:25.053 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:402 ro:2 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:32:25.078 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:418 ro:2 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:32:25.236 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job buildBlock
+DEBUG 2019-12-10 07:32:25.237 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Checking transaction queue
+INFO  2019-12-10 07:32:25.238 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Chain: 84:00: Block is finalized: 2 ms, 0 net tps, 0 gross tps, height: 418, accepted txs: 0, rejected txs: 0, root-hash: 46AF9064F12528CAD6A7C377204ACD0AC38CDC6912903E7DAB3703764C8DD5E5, block-rid: EDE8162BEB279ADCD7A85994B46DD065495A7BFD4357EEABE7C14A47F5EA8683, prev-block-rid: E37761F7C020D5D42ACB616CFFB4C5421C8C3727D48721E91ADADDA6FDD20A52
+DEBUG 2019-12-10 07:32:25.238 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job buildBlock
+DEBUG 2019-12-10 07:32:25.261 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job commitBlock
+DEBUG 2019-12-10 07:32:25.261 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - start -------------------
+DEBUG 2019-12-10 07:32:25.263 [0-BaseBlockDatabaseWorker] ManualBlockchainConfigurationProvider - lastHeight: 418, currentConfigHeight: 0, nextConfigHeight: 0
+DEBUG 2019-12-10 07:32:25.263 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - end -------------------
+DEBUG 2019-12-10 07:32:25.263 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job commitBlock
+DEBUG 2019-12-10 07:32:25.502 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job buildBlock
+DEBUG 2019-12-10 07:32:25.505 [0-BaseBlockDatabaseWorker] BlockchainDependencies - Have height for dependency: name: filehub,  , 849D2CC55796785516386566F8F9BF827B426221AD0820A9B09AFAD391C89A00 ( height: 418, last_block_RID: EDE8162BEB279ADCD7A85994B46DD065495A7BFD4357EEABE7C14A47F5EA8683 )
+DEBUG 2019-12-10 07:32:25.505 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Checking transaction queue
+INFO  2019-12-10 07:32:25.505 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Chain: C7:BC: Block is finalized: 3 ms, 0 net tps, 0 gross tps, height: 402, accepted txs: 0, rejected txs: 0, root-hash: 46AF9064F12528CAD6A7C377204ACD0AC38CDC6912903E7DAB3703764C8DD5E5, block-rid: 7045410C0CC8851C4AD81DF358B583960D29F402AABCDB1C8878D85B7964A452, prev-block-rid: 9A8D895AD712BE3FEE0205178BB11DE9E9508E8719FB03EFE99A1F32DFC8D4A3
+DEBUG 2019-12-10 07:32:25.505 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job buildBlock
+DEBUG 2019-12-10 07:32:25.525 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job commitBlock
+DEBUG 2019-12-10 07:32:25.526 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - start -------------------
+DEBUG 2019-12-10 07:32:25.528 [0-BaseBlockDatabaseWorker] ManualBlockchainConfigurationProvider - lastHeight: 402, currentConfigHeight: 0, nextConfigHeight: 0
+DEBUG 2019-12-10 07:32:25.528 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - end -------------------
+DEBUG 2019-12-10 07:32:25.528 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job commitBlock
+DEBUG 2019-12-10 07:32:35.071 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:403 ro:0 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:32:35.085 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:419 ro:0 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:32:45.082 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:403 ro:1 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:32:45.090 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:419 ro:1 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:32:55.093 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:419 ro:2 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:32:55.093 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:403 ro:2 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:32:55.257 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job buildBlock
+DEBUG 2019-12-10 07:32:55.258 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Checking transaction queue
+INFO  2019-12-10 07:32:55.258 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Chain: 84:00: Block is finalized: 1 ms, 0 net tps, 0 gross tps, height: 419, accepted txs: 0, rejected txs: 0, root-hash: 46AF9064F12528CAD6A7C377204ACD0AC38CDC6912903E7DAB3703764C8DD5E5, block-rid: 244C6983D59D19367E52BB7C6759A36FBA746D62C7F4503D2DAE4B62B3914480, prev-block-rid: EDE8162BEB279ADCD7A85994B46DD065495A7BFD4357EEABE7C14A47F5EA8683
+DEBUG 2019-12-10 07:32:55.259 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job buildBlock
+DEBUG 2019-12-10 07:32:55.280 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job commitBlock
+DEBUG 2019-12-10 07:32:55.280 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - start -------------------
+DEBUG 2019-12-10 07:32:55.291 [0-BaseBlockDatabaseWorker] ManualBlockchainConfigurationProvider - lastHeight: 419, currentConfigHeight: 0, nextConfigHeight: 0
+DEBUG 2019-12-10 07:32:55.291 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - end -------------------
+DEBUG 2019-12-10 07:32:55.291 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job commitBlock
+DEBUG 2019-12-10 07:32:55.506 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job buildBlock
+DEBUG 2019-12-10 07:32:55.510 [0-BaseBlockDatabaseWorker] BlockchainDependencies - Have height for dependency: name: filehub,  , 849D2CC55796785516386566F8F9BF827B426221AD0820A9B09AFAD391C89A00 ( height: 419, last_block_RID: 244C6983D59D19367E52BB7C6759A36FBA746D62C7F4503D2DAE4B62B3914480 )
+DEBUG 2019-12-10 07:32:55.510 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Checking transaction queue
+INFO  2019-12-10 07:32:55.510 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Chain: C7:BC: Block is finalized: 4 ms, 0 net tps, 0 gross tps, height: 403, accepted txs: 0, rejected txs: 0, root-hash: 46AF9064F12528CAD6A7C377204ACD0AC38CDC6912903E7DAB3703764C8DD5E5, block-rid: 5FCC27F6B270F0AB21ACE811812911044876866C04E3397FDA0EBCE5E29E6524, prev-block-rid: 7045410C0CC8851C4AD81DF358B583960D29F402AABCDB1C8878D85B7964A452
+DEBUG 2019-12-10 07:32:55.511 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job buildBlock
+DEBUG 2019-12-10 07:32:55.530 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job commitBlock
+DEBUG 2019-12-10 07:32:55.530 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - start -------------------
+DEBUG 2019-12-10 07:32:55.533 [0-BaseBlockDatabaseWorker] ManualBlockchainConfigurationProvider - lastHeight: 403, currentConfigHeight: 0, nextConfigHeight: 0
+DEBUG 2019-12-10 07:32:55.533 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - end -------------------
+DEBUG 2019-12-10 07:32:55.533 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job commitBlock
+DEBUG 2019-12-10 07:33:05.106 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:404 ro:0 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:33:05.106 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:420 ro:0 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:33:15.106 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:420 ro:1 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:33:15.127 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:404 ro:1 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:33:25.127 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:420 ro:2 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:33:25.133 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:404 ro:2 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:33:25.265 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job buildBlock
+DEBUG 2019-12-10 07:33:25.267 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Checking transaction queue
+INFO  2019-12-10 07:33:25.268 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Chain: 84:00: Block is finalized: 2 ms, 0 net tps, 0 gross tps, height: 420, accepted txs: 0, rejected txs: 0, root-hash: 46AF9064F12528CAD6A7C377204ACD0AC38CDC6912903E7DAB3703764C8DD5E5, block-rid: 52C34FD5F3A5F5D69E655E9BD67FF61FA08C58DE2A9413FFED055BC72FF3A89D, prev-block-rid: 244C6983D59D19367E52BB7C6759A36FBA746D62C7F4503D2DAE4B62B3914480
+DEBUG 2019-12-10 07:33:25.268 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job buildBlock
+DEBUG 2019-12-10 07:33:25.289 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job commitBlock
+DEBUG 2019-12-10 07:33:25.289 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - start -------------------
+DEBUG 2019-12-10 07:33:25.292 [0-BaseBlockDatabaseWorker] ManualBlockchainConfigurationProvider - lastHeight: 420, currentConfigHeight: 0, nextConfigHeight: 0
+DEBUG 2019-12-10 07:33:25.292 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - end -------------------
+DEBUG 2019-12-10 07:33:25.292 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job commitBlock
+DEBUG 2019-12-10 07:33:25.530 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job buildBlock
+DEBUG 2019-12-10 07:33:25.532 [0-BaseBlockDatabaseWorker] BlockchainDependencies - Have height for dependency: name: filehub,  , 849D2CC55796785516386566F8F9BF827B426221AD0820A9B09AFAD391C89A00 ( height: 420, last_block_RID: 52C34FD5F3A5F5D69E655E9BD67FF61FA08C58DE2A9413FFED055BC72FF3A89D )
+DEBUG 2019-12-10 07:33:25.532 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Checking transaction queue
+INFO  2019-12-10 07:33:25.532 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Chain: C7:BC: Block is finalized: 2 ms, 0 net tps, 0 gross tps, height: 404, accepted txs: 0, rejected txs: 0, root-hash: 46AF9064F12528CAD6A7C377204ACD0AC38CDC6912903E7DAB3703764C8DD5E5, block-rid: B42576F0CFA8BBA621E4D6EEF8DF3BB74D482056A63D6A63EE5CB55A3CC8338E, prev-block-rid: 5FCC27F6B270F0AB21ACE811812911044876866C04E3397FDA0EBCE5E29E6524
+DEBUG 2019-12-10 07:33:25.533 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job buildBlock
+DEBUG 2019-12-10 07:33:25.550 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job commitBlock
+DEBUG 2019-12-10 07:33:25.550 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - start -------------------
+DEBUG 2019-12-10 07:33:25.551 [0-BaseBlockDatabaseWorker] ManualBlockchainConfigurationProvider - lastHeight: 404, currentConfigHeight: 0, nextConfigHeight: 0
+DEBUG 2019-12-10 07:33:25.551 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - end -------------------
+DEBUG 2019-12-10 07:33:25.551 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job commitBlock
+DEBUG 2019-12-10 07:33:35.131 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:421 ro:0 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:33:35.143 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:405 ro:0 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:33:45.131 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:421 ro:1 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:33:45.152 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:405 ro:1 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:33:55.154 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:421 ro:2 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:33:55.162 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:405 ro:2 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:33:55.271 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job buildBlock
+DEBUG 2019-12-10 07:33:55.274 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Checking transaction queue
+INFO  2019-12-10 07:33:55.274 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Chain: 84:00: Block is finalized: 3 ms, 0 net tps, 0 gross tps, height: 421, accepted txs: 0, rejected txs: 0, root-hash: 46AF9064F12528CAD6A7C377204ACD0AC38CDC6912903E7DAB3703764C8DD5E5, block-rid: 407A331845F7035D127A3F692678707A90546D72756B40B9F59E108EBAA83B3F, prev-block-rid: 52C34FD5F3A5F5D69E655E9BD67FF61FA08C58DE2A9413FFED055BC72FF3A89D
+DEBUG 2019-12-10 07:33:55.275 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job buildBlock
+DEBUG 2019-12-10 07:33:55.292 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job commitBlock
+DEBUG 2019-12-10 07:33:55.292 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - start -------------------
+DEBUG 2019-12-10 07:33:55.294 [0-BaseBlockDatabaseWorker] ManualBlockchainConfigurationProvider - lastHeight: 421, currentConfigHeight: 0, nextConfigHeight: 0
+DEBUG 2019-12-10 07:33:55.294 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - end -------------------
+DEBUG 2019-12-10 07:33:55.294 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job commitBlock
+DEBUG 2019-12-10 07:33:55.552 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job buildBlock
+DEBUG 2019-12-10 07:33:55.556 [0-BaseBlockDatabaseWorker] BlockchainDependencies - Have height for dependency: name: filehub,  , 849D2CC55796785516386566F8F9BF827B426221AD0820A9B09AFAD391C89A00 ( height: 421, last_block_RID: 407A331845F7035D127A3F692678707A90546D72756B40B9F59E108EBAA83B3F )
+DEBUG 2019-12-10 07:33:55.556 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Checking transaction queue
+INFO  2019-12-10 07:33:55.557 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Chain: C7:BC: Block is finalized: 4 ms, 0 net tps, 0 gross tps, height: 405, accepted txs: 0, rejected txs: 0, root-hash: 46AF9064F12528CAD6A7C377204ACD0AC38CDC6912903E7DAB3703764C8DD5E5, block-rid: 36EA39F7DDDC8C871C50E6DB51CA9D1F0EBC0F665442A10728D794B6E12D8D4C, prev-block-rid: B42576F0CFA8BBA621E4D6EEF8DF3BB74D482056A63D6A63EE5CB55A3CC8338E
+DEBUG 2019-12-10 07:33:55.557 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job buildBlock
+DEBUG 2019-12-10 07:33:55.574 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job commitBlock
+DEBUG 2019-12-10 07:33:55.574 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - start -------------------
+DEBUG 2019-12-10 07:33:55.577 [0-BaseBlockDatabaseWorker] ManualBlockchainConfigurationProvider - lastHeight: 405, currentConfigHeight: 0, nextConfigHeight: 0
+DEBUG 2019-12-10 07:33:55.577 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - end -------------------
+DEBUG 2019-12-10 07:33:55.577 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job commitBlock
+DEBUG 2019-12-10 07:34:05.166 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:422 ro:0 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:34:05.181 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:406 ro:0 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:34:15.180 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:422 ro:1 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:34:15.181 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:406 ro:1 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:34:25.194 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:406 ro:2 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:34:25.197 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:422 ro:2 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:34:25.289 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job buildBlock
+DEBUG 2019-12-10 07:34:25.291 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Checking transaction queue
+INFO  2019-12-10 07:34:25.292 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Chain: 84:00: Block is finalized: 2 ms, 0 net tps, 0 gross tps, height: 422, accepted txs: 0, rejected txs: 0, root-hash: 46AF9064F12528CAD6A7C377204ACD0AC38CDC6912903E7DAB3703764C8DD5E5, block-rid: 18CB4113FA95315D8BDB4F76E4024A37BDE3B047226FC04CA654225B9A640E01, prev-block-rid: 407A331845F7035D127A3F692678707A90546D72756B40B9F59E108EBAA83B3F
+DEBUG 2019-12-10 07:34:25.294 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job buildBlock
+DEBUG 2019-12-10 07:34:25.310 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job commitBlock
+DEBUG 2019-12-10 07:34:25.310 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - start -------------------
+DEBUG 2019-12-10 07:34:25.312 [0-BaseBlockDatabaseWorker] ManualBlockchainConfigurationProvider - lastHeight: 422, currentConfigHeight: 0, nextConfigHeight: 0
+DEBUG 2019-12-10 07:34:25.312 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - end -------------------
+DEBUG 2019-12-10 07:34:25.312 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job commitBlock
+DEBUG 2019-12-10 07:34:25.569 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job buildBlock
+DEBUG 2019-12-10 07:34:25.572 [0-BaseBlockDatabaseWorker] BlockchainDependencies - Have height for dependency: name: filehub,  , 849D2CC55796785516386566F8F9BF827B426221AD0820A9B09AFAD391C89A00 ( height: 422, last_block_RID: 18CB4113FA95315D8BDB4F76E4024A37BDE3B047226FC04CA654225B9A640E01 )
+DEBUG 2019-12-10 07:34:25.572 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Checking transaction queue
+INFO  2019-12-10 07:34:25.572 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Chain: C7:BC: Block is finalized: 2 ms, 0 net tps, 0 gross tps, height: 406, accepted txs: 0, rejected txs: 0, root-hash: 46AF9064F12528CAD6A7C377204ACD0AC38CDC6912903E7DAB3703764C8DD5E5, block-rid: 819652B9EC9A3126B9959FEDE235BBC699157EE603567BA24D12973E119D20C7, prev-block-rid: 36EA39F7DDDC8C871C50E6DB51CA9D1F0EBC0F665442A10728D794B6E12D8D4C
+DEBUG 2019-12-10 07:34:25.573 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job buildBlock
+DEBUG 2019-12-10 07:34:25.590 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job commitBlock
+DEBUG 2019-12-10 07:34:25.590 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - start -------------------
+DEBUG 2019-12-10 07:34:25.593 [0-BaseBlockDatabaseWorker] ManualBlockchainConfigurationProvider - lastHeight: 406, currentConfigHeight: 0, nextConfigHeight: 0
+DEBUG 2019-12-10 07:34:25.593 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - end -------------------
+DEBUG 2019-12-10 07:34:25.593 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job commitBlock
+DEBUG 2019-12-10 07:34:35.199 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:423 ro:0 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:34:35.207 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:407 ro:0 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:34:45.212 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:407 ro:1 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:34:45.212 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:423 ro:1 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:34:55.221 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:407 ro:2 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:34:55.222 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:423 ro:2 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:34:55.309 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job buildBlock
+DEBUG 2019-12-10 07:34:55.311 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Checking transaction queue
+INFO  2019-12-10 07:34:55.311 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Chain: 84:00: Block is finalized: 2 ms, 0 net tps, 0 gross tps, height: 423, accepted txs: 0, rejected txs: 0, root-hash: 46AF9064F12528CAD6A7C377204ACD0AC38CDC6912903E7DAB3703764C8DD5E5, block-rid: FED3F590B6E55D6D4C9734213F5013EADE7CBE4FFC7519F0D4854774313A059B, prev-block-rid: 18CB4113FA95315D8BDB4F76E4024A37BDE3B047226FC04CA654225B9A640E01
+DEBUG 2019-12-10 07:34:55.312 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job buildBlock
+DEBUG 2019-12-10 07:34:55.334 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job commitBlock
+DEBUG 2019-12-10 07:34:55.334 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - start -------------------
+DEBUG 2019-12-10 07:34:55.336 [0-BaseBlockDatabaseWorker] ManualBlockchainConfigurationProvider - lastHeight: 423, currentConfigHeight: 0, nextConfigHeight: 0
+DEBUG 2019-12-10 07:34:55.336 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - end -------------------
+DEBUG 2019-12-10 07:34:55.336 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job commitBlock
+DEBUG 2019-12-10 07:34:55.575 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job buildBlock
+DEBUG 2019-12-10 07:34:55.578 [0-BaseBlockDatabaseWorker] BlockchainDependencies - Have height for dependency: name: filehub,  , 849D2CC55796785516386566F8F9BF827B426221AD0820A9B09AFAD391C89A00 ( height: 423, last_block_RID: FED3F590B6E55D6D4C9734213F5013EADE7CBE4FFC7519F0D4854774313A059B )
+DEBUG 2019-12-10 07:34:55.578 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Checking transaction queue
+INFO  2019-12-10 07:34:55.579 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Chain: C7:BC: Block is finalized: 3 ms, 0 net tps, 0 gross tps, height: 407, accepted txs: 0, rejected txs: 0, root-hash: 46AF9064F12528CAD6A7C377204ACD0AC38CDC6912903E7DAB3703764C8DD5E5, block-rid: F8B064726954BEF9EAEE69CF1420141ADD5E4280189EE04E3244C85255DB4345, prev-block-rid: 819652B9EC9A3126B9959FEDE235BBC699157EE603567BA24D12973E119D20C7
+DEBUG 2019-12-10 07:34:55.580 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job buildBlock
+DEBUG 2019-12-10 07:34:55.600 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job commitBlock
+DEBUG 2019-12-10 07:34:55.600 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - start -------------------
+DEBUG 2019-12-10 07:34:55.603 [0-BaseBlockDatabaseWorker] ManualBlockchainConfigurationProvider - lastHeight: 407, currentConfigHeight: 0, nextConfigHeight: 0
+DEBUG 2019-12-10 07:34:55.603 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - end -------------------
+DEBUG 2019-12-10 07:34:55.603 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job commitBlock
+DEBUG 2019-12-10 07:35:05.222 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:408 ro:0 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:35:05.222 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:424 ro:0 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:35:15.237 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:408 ro:1 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:35:15.245 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:424 ro:1 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:35:25.240 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:408 ro:2 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:35:25.262 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:424 ro:2 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:35:25.331 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job buildBlock
+DEBUG 2019-12-10 07:35:25.334 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Checking transaction queue
+INFO  2019-12-10 07:35:25.334 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Chain: 84:00: Block is finalized: 3 ms, 0 net tps, 0 gross tps, height: 424, accepted txs: 0, rejected txs: 0, root-hash: 46AF9064F12528CAD6A7C377204ACD0AC38CDC6912903E7DAB3703764C8DD5E5, block-rid: 0581A501727A92881DCFE766EE91FB310EAD579A12A477353E3455542492B9C8, prev-block-rid: FED3F590B6E55D6D4C9734213F5013EADE7CBE4FFC7519F0D4854774313A059B
+DEBUG 2019-12-10 07:35:25.335 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job buildBlock
+DEBUG 2019-12-10 07:35:25.355 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job commitBlock
+DEBUG 2019-12-10 07:35:25.355 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - start -------------------
+DEBUG 2019-12-10 07:35:25.357 [0-BaseBlockDatabaseWorker] ManualBlockchainConfigurationProvider - lastHeight: 424, currentConfigHeight: 0, nextConfigHeight: 0
+DEBUG 2019-12-10 07:35:25.357 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - end -------------------
+DEBUG 2019-12-10 07:35:25.357 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job commitBlock
+DEBUG 2019-12-10 07:35:25.599 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job buildBlock
+DEBUG 2019-12-10 07:35:25.604 [0-BaseBlockDatabaseWorker] BlockchainDependencies - Have height for dependency: name: filehub,  , 849D2CC55796785516386566F8F9BF827B426221AD0820A9B09AFAD391C89A00 ( height: 424, last_block_RID: 0581A501727A92881DCFE766EE91FB310EAD579A12A477353E3455542492B9C8 )
+DEBUG 2019-12-10 07:35:25.604 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Checking transaction queue
+INFO  2019-12-10 07:35:25.604 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Chain: C7:BC: Block is finalized: 4 ms, 0 net tps, 0 gross tps, height: 408, accepted txs: 0, rejected txs: 0, root-hash: 46AF9064F12528CAD6A7C377204ACD0AC38CDC6912903E7DAB3703764C8DD5E5, block-rid: C644830B25EDF0D0844A1532EC49BC5E2FF579796856A4DA87600F33F9F0B543, prev-block-rid: F8B064726954BEF9EAEE69CF1420141ADD5E4280189EE04E3244C85255DB4345
+DEBUG 2019-12-10 07:35:25.605 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job buildBlock
+DEBUG 2019-12-10 07:35:25.621 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job commitBlock
+DEBUG 2019-12-10 07:35:25.622 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - start -------------------
+DEBUG 2019-12-10 07:35:25.624 [0-BaseBlockDatabaseWorker] ManualBlockchainConfigurationProvider - lastHeight: 408, currentConfigHeight: 0, nextConfigHeight: 0
+DEBUG 2019-12-10 07:35:25.624 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - end -------------------
+DEBUG 2019-12-10 07:35:25.624 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job commitBlock
+DEBUG 2019-12-10 07:35:35.261 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:409 ro:0 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:35:35.280 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:425 ro:0 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:35:45.277 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:409 ro:1 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:35:45.294 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:425 ro:1 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:35:55.290 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:409 ro:2 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:35:55.308 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:425 ro:2 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:35:55.354 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job buildBlock
+DEBUG 2019-12-10 07:35:55.355 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Checking transaction queue
+INFO  2019-12-10 07:35:55.356 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Chain: 84:00: Block is finalized: 2 ms, 0 net tps, 0 gross tps, height: 425, accepted txs: 0, rejected txs: 0, root-hash: 46AF9064F12528CAD6A7C377204ACD0AC38CDC6912903E7DAB3703764C8DD5E5, block-rid: F614188B295DD7B4F559A88575856E2B08F7D36FA6F7EB3BD9487FF7C3303DA7, prev-block-rid: 0581A501727A92881DCFE766EE91FB310EAD579A12A477353E3455542492B9C8
+DEBUG 2019-12-10 07:35:55.356 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job buildBlock
+DEBUG 2019-12-10 07:35:55.379 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job commitBlock
+DEBUG 2019-12-10 07:35:55.379 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - start -------------------
+DEBUG 2019-12-10 07:35:55.382 [0-BaseBlockDatabaseWorker] ManualBlockchainConfigurationProvider - lastHeight: 425, currentConfigHeight: 0, nextConfigHeight: 0
+DEBUG 2019-12-10 07:35:55.382 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - end -------------------
+DEBUG 2019-12-10 07:35:55.382 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job commitBlock
+DEBUG 2019-12-10 07:35:55.623 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job buildBlock
+DEBUG 2019-12-10 07:35:55.624 [0-BaseBlockDatabaseWorker] BlockchainDependencies - Have height for dependency: name: filehub,  , 849D2CC55796785516386566F8F9BF827B426221AD0820A9B09AFAD391C89A00 ( height: 425, last_block_RID: F614188B295DD7B4F559A88575856E2B08F7D36FA6F7EB3BD9487FF7C3303DA7 )
+DEBUG 2019-12-10 07:35:55.625 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Checking transaction queue
+INFO  2019-12-10 07:35:55.625 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Chain: C7:BC: Block is finalized: 1 ms, 0 net tps, 0 gross tps, height: 409, accepted txs: 0, rejected txs: 0, root-hash: 46AF9064F12528CAD6A7C377204ACD0AC38CDC6912903E7DAB3703764C8DD5E5, block-rid: EE0F7C419465E15F280D34FA3FD261F4445AAE4A804CFE3834D11ACBC91E45C3, prev-block-rid: C644830B25EDF0D0844A1532EC49BC5E2FF579796856A4DA87600F33F9F0B543
+DEBUG 2019-12-10 07:35:55.625 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job buildBlock
+DEBUG 2019-12-10 07:35:55.645 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job commitBlock
+DEBUG 2019-12-10 07:35:55.645 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - start -------------------
+DEBUG 2019-12-10 07:35:55.648 [0-BaseBlockDatabaseWorker] ManualBlockchainConfigurationProvider - lastHeight: 409, currentConfigHeight: 0, nextConfigHeight: 0
+DEBUG 2019-12-10 07:35:55.648 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - end -------------------
+DEBUG 2019-12-10 07:35:55.648 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job commitBlock
+DEBUG 2019-12-10 07:36:05.301 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:410 ro:0 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:36:05.317 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:426 ro:0 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:36:15.311 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:410 ro:1 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:36:15.331 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:426 ro:1 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:36:25.319 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:410 ro:2 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:36:25.337 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:426 ro:2 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:36:25.357 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job buildBlock
+DEBUG 2019-12-10 07:36:25.359 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Checking transaction queue
+INFO  2019-12-10 07:36:25.359 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Chain: 84:00: Block is finalized: 2 ms, 0 net tps, 0 gross tps, height: 426, accepted txs: 0, rejected txs: 0, root-hash: 46AF9064F12528CAD6A7C377204ACD0AC38CDC6912903E7DAB3703764C8DD5E5, block-rid: 085CB2EDA5A366A68176E3D4D98D39D1BCB766735D91ADB3F94189CD34E51024, prev-block-rid: F614188B295DD7B4F559A88575856E2B08F7D36FA6F7EB3BD9487FF7C3303DA7
+DEBUG 2019-12-10 07:36:25.360 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job buildBlock
+DEBUG 2019-12-10 07:36:25.382 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job commitBlock
+DEBUG 2019-12-10 07:36:25.382 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - start -------------------
+DEBUG 2019-12-10 07:36:25.385 [0-BaseBlockDatabaseWorker] ManualBlockchainConfigurationProvider - lastHeight: 426, currentConfigHeight: 0, nextConfigHeight: 0
+DEBUG 2019-12-10 07:36:25.385 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - end -------------------
+DEBUG 2019-12-10 07:36:25.385 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job commitBlock
+DEBUG 2019-12-10 07:36:25.641 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job buildBlock
+DEBUG 2019-12-10 07:36:25.644 [0-BaseBlockDatabaseWorker] BlockchainDependencies - Have height for dependency: name: filehub,  , 849D2CC55796785516386566F8F9BF827B426221AD0820A9B09AFAD391C89A00 ( height: 426, last_block_RID: 085CB2EDA5A366A68176E3D4D98D39D1BCB766735D91ADB3F94189CD34E51024 )
+DEBUG 2019-12-10 07:36:25.644 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Checking transaction queue
+INFO  2019-12-10 07:36:25.644 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Chain: C7:BC: Block is finalized: 3 ms, 0 net tps, 0 gross tps, height: 410, accepted txs: 0, rejected txs: 0, root-hash: 46AF9064F12528CAD6A7C377204ACD0AC38CDC6912903E7DAB3703764C8DD5E5, block-rid: CAACB54687233F77E0078B392F877BD8D1FCD4DA10D3766F09641E71D138CC72, prev-block-rid: EE0F7C419465E15F280D34FA3FD261F4445AAE4A804CFE3834D11ACBC91E45C3
+DEBUG 2019-12-10 07:36:25.645 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job buildBlock
+DEBUG 2019-12-10 07:36:25.665 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job commitBlock
+DEBUG 2019-12-10 07:36:25.665 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - start -------------------
+DEBUG 2019-12-10 07:36:25.668 [0-BaseBlockDatabaseWorker] ManualBlockchainConfigurationProvider - lastHeight: 410, currentConfigHeight: 0, nextConfigHeight: 0
+DEBUG 2019-12-10 07:36:25.668 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - end -------------------
+DEBUG 2019-12-10 07:36:25.668 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job commitBlock
+DEBUG 2019-12-10 07:36:35.336 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:411 ro:0 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:36:35.356 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:427 ro:0 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:36:45.343 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:411 ro:1 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:36:45.361 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:427 ro:1 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:36:55.351 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:411 ro:2 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:36:55.379 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job buildBlock
+DEBUG 2019-12-10 07:36:55.379 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:427 ro:2 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:36:55.380 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Checking transaction queue
+INFO  2019-12-10 07:36:55.380 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Chain: 84:00: Block is finalized: 1 ms, 0 net tps, 0 gross tps, height: 427, accepted txs: 0, rejected txs: 0, root-hash: 46AF9064F12528CAD6A7C377204ACD0AC38CDC6912903E7DAB3703764C8DD5E5, block-rid: DA8B68304A2E78459FF8EDE6EFE562649250F1F1B63AA77F06948D54E8C268D8, prev-block-rid: 085CB2EDA5A366A68176E3D4D98D39D1BCB766735D91ADB3F94189CD34E51024
+DEBUG 2019-12-10 07:36:55.381 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job buildBlock
+DEBUG 2019-12-10 07:36:55.403 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job commitBlock
+DEBUG 2019-12-10 07:36:55.403 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - start -------------------
+DEBUG 2019-12-10 07:36:55.407 [0-BaseBlockDatabaseWorker] ManualBlockchainConfigurationProvider - lastHeight: 427, currentConfigHeight: 0, nextConfigHeight: 0
+DEBUG 2019-12-10 07:36:55.407 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - end -------------------
+DEBUG 2019-12-10 07:36:55.407 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job commitBlock
+DEBUG 2019-12-10 07:36:55.649 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job buildBlock
+DEBUG 2019-12-10 07:36:55.652 [0-BaseBlockDatabaseWorker] BlockchainDependencies - Have height for dependency: name: filehub,  , 849D2CC55796785516386566F8F9BF827B426221AD0820A9B09AFAD391C89A00 ( height: 427, last_block_RID: DA8B68304A2E78459FF8EDE6EFE562649250F1F1B63AA77F06948D54E8C268D8 )
+DEBUG 2019-12-10 07:36:55.652 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Checking transaction queue
+INFO  2019-12-10 07:36:55.652 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Chain: C7:BC: Block is finalized: 3 ms, 0 net tps, 0 gross tps, height: 411, accepted txs: 0, rejected txs: 0, root-hash: 46AF9064F12528CAD6A7C377204ACD0AC38CDC6912903E7DAB3703764C8DD5E5, block-rid: 981F468112FE7BC197C5A02754180C8D207B644B26CBF5DB6BEAB603396F12AF, prev-block-rid: CAACB54687233F77E0078B392F877BD8D1FCD4DA10D3766F09641E71D138CC72
+DEBUG 2019-12-10 07:36:55.653 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job buildBlock
+DEBUG 2019-12-10 07:36:55.672 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job commitBlock
+DEBUG 2019-12-10 07:36:55.672 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - start -------------------
+DEBUG 2019-12-10 07:36:55.675 [0-BaseBlockDatabaseWorker] ManualBlockchainConfigurationProvider - lastHeight: 411, currentConfigHeight: 0, nextConfigHeight: 0
+DEBUG 2019-12-10 07:36:55.675 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - end -------------------
+DEBUG 2019-12-10 07:36:55.675 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job commitBlock
+DEBUG 2019-12-10 07:37:05.360 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:412 ro:0 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:37:05.383 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:428 ro:0 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:37:15.361 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:412 ro:1 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:37:15.383 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:428 ro:1 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:37:25.364 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:412 ro:2 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:37:25.381 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job buildBlock
+DEBUG 2019-12-10 07:37:25.385 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Checking transaction queue
+INFO  2019-12-10 07:37:25.386 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Chain: 84:00: Block is finalized: 4 ms, 0 net tps, 0 gross tps, height: 428, accepted txs: 0, rejected txs: 0, root-hash: 46AF9064F12528CAD6A7C377204ACD0AC38CDC6912903E7DAB3703764C8DD5E5, block-rid: 608EAE4DA97BCDEA8F690F728F5795C0E2E1895B284ED6F59F9DEC68BCC1175C, prev-block-rid: DA8B68304A2E78459FF8EDE6EFE562649250F1F1B63AA77F06948D54E8C268D8
+DEBUG 2019-12-10 07:37:25.386 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job buildBlock
+DEBUG 2019-12-10 07:37:25.405 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job commitBlock
+DEBUG 2019-12-10 07:37:25.405 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - start -------------------
+DEBUG 2019-12-10 07:37:25.405 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:428 ro:2 st:Prepared blockRID:608EAE4DA97BCDEA8F690F728F5795C0E2E1895B284ED6F59F9DEC68BCC1175C havesig:true
+DEBUG 2019-12-10 07:37:25.408 [0-BaseBlockDatabaseWorker] ManualBlockchainConfigurationProvider - lastHeight: 428, currentConfigHeight: 0, nextConfigHeight: 0
+DEBUG 2019-12-10 07:37:25.408 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - end -------------------
+DEBUG 2019-12-10 07:37:25.408 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job commitBlock
+DEBUG 2019-12-10 07:37:25.657 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job buildBlock
+DEBUG 2019-12-10 07:37:25.660 [0-BaseBlockDatabaseWorker] BlockchainDependencies - Have height for dependency: name: filehub,  , 849D2CC55796785516386566F8F9BF827B426221AD0820A9B09AFAD391C89A00 ( height: 428, last_block_RID: 608EAE4DA97BCDEA8F690F728F5795C0E2E1895B284ED6F59F9DEC68BCC1175C )
+DEBUG 2019-12-10 07:37:25.660 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Checking transaction queue
+INFO  2019-12-10 07:37:25.660 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Chain: C7:BC: Block is finalized: 3 ms, 0 net tps, 0 gross tps, height: 412, accepted txs: 0, rejected txs: 0, root-hash: 46AF9064F12528CAD6A7C377204ACD0AC38CDC6912903E7DAB3703764C8DD5E5, block-rid: D68FE3D0BFE5CD0458E5EFBCF987F063381D76C44AF05C1DB984E13064D638EC, prev-block-rid: 981F468112FE7BC197C5A02754180C8D207B644B26CBF5DB6BEAB603396F12AF
+DEBUG 2019-12-10 07:37:25.661 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job buildBlock
+DEBUG 2019-12-10 07:37:25.678 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job commitBlock
+DEBUG 2019-12-10 07:37:25.678 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - start -------------------
+DEBUG 2019-12-10 07:37:25.684 [0-BaseBlockDatabaseWorker] ManualBlockchainConfigurationProvider - lastHeight: 412, currentConfigHeight: 0, nextConfigHeight: 0
+DEBUG 2019-12-10 07:37:25.684 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - end -------------------
+DEBUG 2019-12-10 07:37:25.684 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job commitBlock
+DEBUG 2019-12-10 07:37:35.370 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:413 ro:0 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:37:35.415 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:429 ro:0 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:37:45.389 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:413 ro:1 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:37:45.428 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:429 ro:1 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:37:55.404 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job buildBlock
+DEBUG 2019-12-10 07:37:55.404 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:413 ro:2 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:37:55.407 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Checking transaction queue
+INFO  2019-12-10 07:37:55.408 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Chain: 84:00: Block is finalized: 3 ms, 0 net tps, 0 gross tps, height: 429, accepted txs: 0, rejected txs: 0, root-hash: 46AF9064F12528CAD6A7C377204ACD0AC38CDC6912903E7DAB3703764C8DD5E5, block-rid: D2A1429FD29B6E54566C7208ECB04BADFDC67EDD020471FA4F1F3C29BE0BB3C0, prev-block-rid: 608EAE4DA97BCDEA8F690F728F5795C0E2E1895B284ED6F59F9DEC68BCC1175C
+DEBUG 2019-12-10 07:37:55.408 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job buildBlock
+DEBUG 2019-12-10 07:37:55.424 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job commitBlock
+DEBUG 2019-12-10 07:37:55.424 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - start -------------------
+DEBUG 2019-12-10 07:37:55.426 [0-BaseBlockDatabaseWorker] ManualBlockchainConfigurationProvider - lastHeight: 429, currentConfigHeight: 0, nextConfigHeight: 0
+DEBUG 2019-12-10 07:37:55.426 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - end -------------------
+DEBUG 2019-12-10 07:37:55.426 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job commitBlock
+DEBUG 2019-12-10 07:37:55.448 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:430 ro:0 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:37:55.672 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job buildBlock
+DEBUG 2019-12-10 07:37:55.676 [0-BaseBlockDatabaseWorker] BlockchainDependencies - Have height for dependency: name: filehub,  , 849D2CC55796785516386566F8F9BF827B426221AD0820A9B09AFAD391C89A00 ( height: 429, last_block_RID: D2A1429FD29B6E54566C7208ECB04BADFDC67EDD020471FA4F1F3C29BE0BB3C0 )
+DEBUG 2019-12-10 07:37:55.676 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Checking transaction queue
+INFO  2019-12-10 07:37:55.676 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Chain: C7:BC: Block is finalized: 3 ms, 0 net tps, 0 gross tps, height: 413, accepted txs: 0, rejected txs: 0, root-hash: 46AF9064F12528CAD6A7C377204ACD0AC38CDC6912903E7DAB3703764C8DD5E5, block-rid: 4902DA337972143591B90011F970C7BFE3E05651BA6A6D072C064FD4FC34649D, prev-block-rid: D68FE3D0BFE5CD0458E5EFBCF987F063381D76C44AF05C1DB984E13064D638EC
+DEBUG 2019-12-10 07:37:55.677 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job buildBlock
+DEBUG 2019-12-10 07:37:55.695 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job commitBlock
+DEBUG 2019-12-10 07:37:55.695 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - start -------------------
+DEBUG 2019-12-10 07:37:55.698 [0-BaseBlockDatabaseWorker] ManualBlockchainConfigurationProvider - lastHeight: 413, currentConfigHeight: 0, nextConfigHeight: 0
+DEBUG 2019-12-10 07:37:55.698 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - end -------------------
+DEBUG 2019-12-10 07:37:55.698 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job commitBlock
+DEBUG 2019-12-10 07:38:05.408 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:414 ro:0 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:38:05.454 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:430 ro:1 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:38:15.423 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:414 ro:1 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:38:15.458 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:430 ro:1 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:38:25.420 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job buildBlock
+DEBUG 2019-12-10 07:38:25.422 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Checking transaction queue
+INFO  2019-12-10 07:38:25.422 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Chain: 84:00: Block is finalized: 2 ms, 0 net tps, 0 gross tps, height: 430, accepted txs: 0, rejected txs: 0, root-hash: 46AF9064F12528CAD6A7C377204ACD0AC38CDC6912903E7DAB3703764C8DD5E5, block-rid: E8E8DA105225A1507B6D225FA64B8A63823B129589243213CDF4B926381C6844, prev-block-rid: D2A1429FD29B6E54566C7208ECB04BADFDC67EDD020471FA4F1F3C29BE0BB3C0
+DEBUG 2019-12-10 07:38:25.423 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job buildBlock
+DEBUG 2019-12-10 07:38:25.431 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:414 ro:2 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:38:25.445 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job commitBlock
+DEBUG 2019-12-10 07:38:25.445 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - start -------------------
+DEBUG 2019-12-10 07:38:25.448 [0-BaseBlockDatabaseWorker] ManualBlockchainConfigurationProvider - lastHeight: 430, currentConfigHeight: 0, nextConfigHeight: 0
+DEBUG 2019-12-10 07:38:25.448 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - end -------------------
+DEBUG 2019-12-10 07:38:25.448 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job commitBlock
+DEBUG 2019-12-10 07:38:25.469 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:431 ro:0 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:38:25.694 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job buildBlock
+DEBUG 2019-12-10 07:38:25.696 [0-BaseBlockDatabaseWorker] BlockchainDependencies - Have height for dependency: name: filehub,  , 849D2CC55796785516386566F8F9BF827B426221AD0820A9B09AFAD391C89A00 ( height: 430, last_block_RID: E8E8DA105225A1507B6D225FA64B8A63823B129589243213CDF4B926381C6844 )
+DEBUG 2019-12-10 07:38:25.696 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Checking transaction queue
+INFO  2019-12-10 07:38:25.697 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Chain: C7:BC: Block is finalized: 2 ms, 0 net tps, 0 gross tps, height: 414, accepted txs: 0, rejected txs: 0, root-hash: 46AF9064F12528CAD6A7C377204ACD0AC38CDC6912903E7DAB3703764C8DD5E5, block-rid: 5BC2AB625A83AF11DCBDC31007450445DFC412A2D1638AB87820599EA94E5012, prev-block-rid: 4902DA337972143591B90011F970C7BFE3E05651BA6A6D072C064FD4FC34649D
+DEBUG 2019-12-10 07:38:25.697 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job buildBlock
+DEBUG 2019-12-10 07:38:25.719 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job commitBlock
+DEBUG 2019-12-10 07:38:25.719 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - start -------------------
+DEBUG 2019-12-10 07:38:25.722 [0-BaseBlockDatabaseWorker] ManualBlockchainConfigurationProvider - lastHeight: 414, currentConfigHeight: 0, nextConfigHeight: 0
+DEBUG 2019-12-10 07:38:25.722 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - end -------------------
+DEBUG 2019-12-10 07:38:25.722 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job commitBlock
+DEBUG 2019-12-10 07:38:35.438 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:415 ro:0 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:38:35.473 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:431 ro:1 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:38:45.458 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:415 ro:1 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:38:45.478 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:431 ro:1 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:38:55.423 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job buildBlock
+DEBUG 2019-12-10 07:38:55.427 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Checking transaction queue
+INFO  2019-12-10 07:38:55.428 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Chain: 84:00: Block is finalized: 4 ms, 0 net tps, 0 gross tps, height: 431, accepted txs: 0, rejected txs: 0, root-hash: 46AF9064F12528CAD6A7C377204ACD0AC38CDC6912903E7DAB3703764C8DD5E5, block-rid: 5A1F2036943BE905A9ABF12517D62E6DAB557D25EC1D0140508FF786F517B033, prev-block-rid: E8E8DA105225A1507B6D225FA64B8A63823B129589243213CDF4B926381C6844
+DEBUG 2019-12-10 07:38:55.428 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job buildBlock
+DEBUG 2019-12-10 07:38:55.444 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job commitBlock
+DEBUG 2019-12-10 07:38:55.444 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - start -------------------
+DEBUG 2019-12-10 07:38:55.448 [0-BaseBlockDatabaseWorker] ManualBlockchainConfigurationProvider - lastHeight: 431, currentConfigHeight: 0, nextConfigHeight: 0
+DEBUG 2019-12-10 07:38:55.448 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - end -------------------
+DEBUG 2019-12-10 07:38:55.448 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job commitBlock
+DEBUG 2019-12-10 07:38:55.466 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:415 ro:2 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:38:55.491 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:432 ro:0 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:38:55.713 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job buildBlock
+DEBUG 2019-12-10 07:38:55.717 [0-BaseBlockDatabaseWorker] BlockchainDependencies - Have height for dependency: name: filehub,  , 849D2CC55796785516386566F8F9BF827B426221AD0820A9B09AFAD391C89A00 ( height: 431, last_block_RID: 5A1F2036943BE905A9ABF12517D62E6DAB557D25EC1D0140508FF786F517B033 )
+DEBUG 2019-12-10 07:38:55.717 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Checking transaction queue
+INFO  2019-12-10 07:38:55.717 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Chain: C7:BC: Block is finalized: 4 ms, 0 net tps, 0 gross tps, height: 415, accepted txs: 0, rejected txs: 0, root-hash: 46AF9064F12528CAD6A7C377204ACD0AC38CDC6912903E7DAB3703764C8DD5E5, block-rid: 5AD8EEE83DD8DF71C187CDE332EF27050B0FE9C9FECF95E21C19776E59904682, prev-block-rid: 5BC2AB625A83AF11DCBDC31007450445DFC412A2D1638AB87820599EA94E5012
+DEBUG 2019-12-10 07:38:55.718 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job buildBlock
+DEBUG 2019-12-10 07:38:55.735 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job commitBlock
+DEBUG 2019-12-10 07:38:55.735 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - start -------------------
+DEBUG 2019-12-10 07:38:55.738 [0-BaseBlockDatabaseWorker] ManualBlockchainConfigurationProvider - lastHeight: 415, currentConfigHeight: 0, nextConfigHeight: 0
+DEBUG 2019-12-10 07:38:55.738 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - end -------------------
+DEBUG 2019-12-10 07:38:55.738 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job commitBlock
+DEBUG 2019-12-10 07:39:05.472 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:416 ro:0 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:39:05.514 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:432 ro:1 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:39:15.475 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:416 ro:1 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:39:15.514 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:432 ro:1 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:39:25.434 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job buildBlock
+DEBUG 2019-12-10 07:39:25.436 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Checking transaction queue
+INFO  2019-12-10 07:39:25.437 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Chain: 84:00: Block is finalized: 2 ms, 0 net tps, 0 gross tps, height: 432, accepted txs: 0, rejected txs: 0, root-hash: 46AF9064F12528CAD6A7C377204ACD0AC38CDC6912903E7DAB3703764C8DD5E5, block-rid: AFC5D54ABEF7E8C48EE2301575F1A3A2435BF227F342DB502ECCA3E807346A49, prev-block-rid: 5A1F2036943BE905A9ABF12517D62E6DAB557D25EC1D0140508FF786F517B033
+DEBUG 2019-12-10 07:39:25.437 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job buildBlock
+DEBUG 2019-12-10 07:39:25.457 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job commitBlock
+DEBUG 2019-12-10 07:39:25.457 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - start -------------------
+DEBUG 2019-12-10 07:39:25.459 [0-BaseBlockDatabaseWorker] ManualBlockchainConfigurationProvider - lastHeight: 432, currentConfigHeight: 0, nextConfigHeight: 0
+DEBUG 2019-12-10 07:39:25.459 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - end -------------------
+DEBUG 2019-12-10 07:39:25.459 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job commitBlock
+DEBUG 2019-12-10 07:39:25.493 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:416 ro:2 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:39:25.523 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:433 ro:0 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:39:25.725 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job buildBlock
+DEBUG 2019-12-10 07:39:25.728 [0-BaseBlockDatabaseWorker] BlockchainDependencies - Have height for dependency: name: filehub,  , 849D2CC55796785516386566F8F9BF827B426221AD0820A9B09AFAD391C89A00 ( height: 432, last_block_RID: AFC5D54ABEF7E8C48EE2301575F1A3A2435BF227F342DB502ECCA3E807346A49 )
+DEBUG 2019-12-10 07:39:25.728 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Checking transaction queue
+INFO  2019-12-10 07:39:25.728 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Chain: C7:BC: Block is finalized: 3 ms, 0 net tps, 0 gross tps, height: 416, accepted txs: 0, rejected txs: 0, root-hash: 46AF9064F12528CAD6A7C377204ACD0AC38CDC6912903E7DAB3703764C8DD5E5, block-rid: 3475CE6C3810EF145081A238A9C3D0F35B8A366C98A2848D0AEFE30C97AF997A, prev-block-rid: 5AD8EEE83DD8DF71C187CDE332EF27050B0FE9C9FECF95E21C19776E59904682
+DEBUG 2019-12-10 07:39:25.729 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job buildBlock
+DEBUG 2019-12-10 07:39:25.746 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job commitBlock
+DEBUG 2019-12-10 07:39:25.746 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - start -------------------
+DEBUG 2019-12-10 07:39:25.748 [0-BaseBlockDatabaseWorker] ManualBlockchainConfigurationProvider - lastHeight: 416, currentConfigHeight: 0, nextConfigHeight: 0
+DEBUG 2019-12-10 07:39:25.748 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - end -------------------
+DEBUG 2019-12-10 07:39:25.748 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job commitBlock
+DEBUG 2019-12-10 07:39:35.501 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:417 ro:0 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:39:35.541 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:433 ro:1 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:39:45.525 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:417 ro:1 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:39:45.543 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:433 ro:2 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:39:55.456 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job buildBlock
+DEBUG 2019-12-10 07:39:55.458 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Checking transaction queue
+INFO  2019-12-10 07:39:55.459 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Chain: 84:00: Block is finalized: 2 ms, 0 net tps, 0 gross tps, height: 433, accepted txs: 0, rejected txs: 0, root-hash: 46AF9064F12528CAD6A7C377204ACD0AC38CDC6912903E7DAB3703764C8DD5E5, block-rid: 9C889F61B45DA67A780DF5784485A719F0F794B5E4F953BF552E3E756337F53D, prev-block-rid: AFC5D54ABEF7E8C48EE2301575F1A3A2435BF227F342DB502ECCA3E807346A49
+DEBUG 2019-12-10 07:39:55.460 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job buildBlock
+DEBUG 2019-12-10 07:39:55.480 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job commitBlock
+DEBUG 2019-12-10 07:39:55.480 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - start -------------------
+DEBUG 2019-12-10 07:39:55.482 [0-BaseBlockDatabaseWorker] ManualBlockchainConfigurationProvider - lastHeight: 433, currentConfigHeight: 0, nextConfigHeight: 0
+DEBUG 2019-12-10 07:39:55.482 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - end -------------------
+DEBUG 2019-12-10 07:39:55.482 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job commitBlock
+DEBUG 2019-12-10 07:39:55.544 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:417 ro:2 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:39:55.553 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:434 ro:0 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:39:55.731 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job buildBlock
+DEBUG 2019-12-10 07:39:55.734 [0-BaseBlockDatabaseWorker] BlockchainDependencies - Have height for dependency: name: filehub,  , 849D2CC55796785516386566F8F9BF827B426221AD0820A9B09AFAD391C89A00 ( height: 433, last_block_RID: 9C889F61B45DA67A780DF5784485A719F0F794B5E4F953BF552E3E756337F53D )
+DEBUG 2019-12-10 07:39:55.734 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Checking transaction queue
+INFO  2019-12-10 07:39:55.734 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Chain: C7:BC: Block is finalized: 3 ms, 0 net tps, 0 gross tps, height: 417, accepted txs: 0, rejected txs: 0, root-hash: 46AF9064F12528CAD6A7C377204ACD0AC38CDC6912903E7DAB3703764C8DD5E5, block-rid: F5D5275C213424894F773D153E43E871E2C0B88FEA32FA4B871C760FD9F8242F, prev-block-rid: 3475CE6C3810EF145081A238A9C3D0F35B8A366C98A2848D0AEFE30C97AF997A
+DEBUG 2019-12-10 07:39:55.735 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job buildBlock
+DEBUG 2019-12-10 07:39:55.755 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job commitBlock
+DEBUG 2019-12-10 07:39:55.755 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - start -------------------
+DEBUG 2019-12-10 07:39:55.758 [0-BaseBlockDatabaseWorker] ManualBlockchainConfigurationProvider - lastHeight: 417, currentConfigHeight: 0, nextConfigHeight: 0
+DEBUG 2019-12-10 07:39:55.758 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - end -------------------
+DEBUG 2019-12-10 07:39:55.758 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job commitBlock
+DEBUG 2019-12-10 07:40:05.556 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:434 ro:1 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:40:05.563 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:418 ro:0 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:40:15.566 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:418 ro:1 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:40:15.579 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:434 ro:2 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:40:25.474 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job buildBlock
+DEBUG 2019-12-10 07:40:25.476 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Checking transaction queue
+INFO  2019-12-10 07:40:25.476 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Chain: 84:00: Block is finalized: 2 ms, 0 net tps, 0 gross tps, height: 434, accepted txs: 0, rejected txs: 0, root-hash: 46AF9064F12528CAD6A7C377204ACD0AC38CDC6912903E7DAB3703764C8DD5E5, block-rid: 03B543D40AB81A8634BA09A457E1BB970E5C0467D68D7354321628F2C41C0809, prev-block-rid: 9C889F61B45DA67A780DF5784485A719F0F794B5E4F953BF552E3E756337F53D
+DEBUG 2019-12-10 07:40:25.477 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job buildBlock
+DEBUG 2019-12-10 07:40:25.499 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job commitBlock
+DEBUG 2019-12-10 07:40:25.499 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - start -------------------
+DEBUG 2019-12-10 07:40:25.500 [0-BaseBlockDatabaseWorker] ManualBlockchainConfigurationProvider - lastHeight: 434, currentConfigHeight: 0, nextConfigHeight: 0
+DEBUG 2019-12-10 07:40:25.500 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - end -------------------
+DEBUG 2019-12-10 07:40:25.501 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job commitBlock
+DEBUG 2019-12-10 07:40:25.583 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:435 ro:0 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:40:25.583 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:418 ro:2 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:40:25.747 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job buildBlock
+DEBUG 2019-12-10 07:40:25.749 [0-BaseBlockDatabaseWorker] BlockchainDependencies - Have height for dependency: name: filehub,  , 849D2CC55796785516386566F8F9BF827B426221AD0820A9B09AFAD391C89A00 ( height: 434, last_block_RID: 03B543D40AB81A8634BA09A457E1BB970E5C0467D68D7354321628F2C41C0809 )
+DEBUG 2019-12-10 07:40:25.749 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Checking transaction queue
+INFO  2019-12-10 07:40:25.749 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Chain: C7:BC: Block is finalized: 2 ms, 0 net tps, 0 gross tps, height: 418, accepted txs: 0, rejected txs: 0, root-hash: 46AF9064F12528CAD6A7C377204ACD0AC38CDC6912903E7DAB3703764C8DD5E5, block-rid: 617CE072950FFAAF60B5193588E88D3058E71E52D58E2BA56C223238BB8398EB, prev-block-rid: F5D5275C213424894F773D153E43E871E2C0B88FEA32FA4B871C760FD9F8242F
+DEBUG 2019-12-10 07:40:25.749 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job buildBlock
+DEBUG 2019-12-10 07:40:25.776 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job commitBlock
+DEBUG 2019-12-10 07:40:25.776 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - start -------------------
+DEBUG 2019-12-10 07:40:25.779 [0-BaseBlockDatabaseWorker] ManualBlockchainConfigurationProvider - lastHeight: 418, currentConfigHeight: 0, nextConfigHeight: 0
+DEBUG 2019-12-10 07:40:25.780 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - end -------------------
+DEBUG 2019-12-10 07:40:25.780 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job commitBlock
+DEBUG 2019-12-10 07:40:35.587 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:419 ro:0 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 07:40:35.592 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:435 ro:1 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 16:11:56.444 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:419 ro:2 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 16:11:56.444 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:435 ro:2 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 16:11:56.445 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job buildBlock
+DEBUG 2019-12-10 16:11:56.445 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job buildBlock
+DEBUG 2019-12-10 16:11:56.456 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Checking transaction queue
+INFO  2019-12-10 16:11:56.456 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Chain: 84:00: Block is finalized: 10 ms, 0 net tps, 0 gross tps, height: 435, accepted txs: 0, rejected txs: 0, root-hash: 46AF9064F12528CAD6A7C377204ACD0AC38CDC6912903E7DAB3703764C8DD5E5, block-rid: 653C8D5DBD986F4CB4C3FA48AF88217A77632B464DAB5FAF5B689F6BA15750CB, prev-block-rid: 03B543D40AB81A8634BA09A457E1BB970E5C0467D68D7354321628F2C41C0809
+DEBUG 2019-12-10 16:11:56.457 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job buildBlock
+DEBUG 2019-12-10 16:11:56.470 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job commitBlock
+DEBUG 2019-12-10 16:11:56.470 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - start -------------------
+DEBUG 2019-12-10 16:11:56.506 [0-BaseBlockDatabaseWorker] ManualBlockchainConfigurationProvider - lastHeight: 435, currentConfigHeight: 0, nextConfigHeight: 0
+DEBUG 2019-12-10 16:11:56.506 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - end -------------------
+DEBUG 2019-12-10 16:11:56.506 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job commitBlock
+DEBUG 2019-12-10 16:11:56.506 [0-BaseBlockDatabaseWorker] BlockchainDependencies - Have height for dependency: name: filehub,  , 849D2CC55796785516386566F8F9BF827B426221AD0820A9B09AFAD391C89A00 ( height: 434, last_block_RID: 03B543D40AB81A8634BA09A457E1BB970E5C0467D68D7354321628F2C41C0809 )
+DEBUG 2019-12-10 16:11:56.506 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Checking transaction queue
+INFO  2019-12-10 16:11:56.520 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Chain: C7:BC: Block is finalized: 75 ms, 0 net tps, 0 gross tps, height: 419, accepted txs: 0, rejected txs: 0, root-hash: 46AF9064F12528CAD6A7C377204ACD0AC38CDC6912903E7DAB3703764C8DD5E5, block-rid: 293039F0640E9C1F51CC0F50FE780F14F6917FA67618DAFC9C324637C49B6C7D, prev-block-rid: 617CE072950FFAAF60B5193588E88D3058E71E52D58E2BA56C223238BB8398EB
+DEBUG 2019-12-10 16:11:56.521 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job buildBlock
+DEBUG 2019-12-10 16:11:56.528 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job commitBlock
+DEBUG 2019-12-10 16:11:56.528 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - start -------------------
+DEBUG 2019-12-10 16:11:56.539 [0-BaseBlockDatabaseWorker] ManualBlockchainConfigurationProvider - lastHeight: 419, currentConfigHeight: 0, nextConfigHeight: 0
+DEBUG 2019-12-10 16:11:56.539 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - end -------------------
+DEBUG 2019-12-10 16:11:56.539 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job commitBlock
+DEBUG 2019-12-10 16:12:06.460 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:436 ro:0 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 16:12:06.460 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:420 ro:0 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 16:12:57.435 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:436 ro:2 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 16:12:57.436 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:420 ro:2 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 16:12:57.440 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job buildBlock
+DEBUG 2019-12-10 16:12:57.440 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job buildBlock
+DEBUG 2019-12-10 16:12:57.501 [0-BaseBlockDatabaseWorker] BlockchainDependencies - Have height for dependency: name: filehub,  , 849D2CC55796785516386566F8F9BF827B426221AD0820A9B09AFAD391C89A00 ( height: 435, last_block_RID: 653C8D5DBD986F4CB4C3FA48AF88217A77632B464DAB5FAF5B689F6BA15750CB )
+DEBUG 2019-12-10 16:12:57.502 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Checking transaction queue
+INFO  2019-12-10 16:12:57.502 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Chain: C7:BC: Block is finalized: 56 ms, 0 net tps, 0 gross tps, height: 420, accepted txs: 0, rejected txs: 0, root-hash: 46AF9064F12528CAD6A7C377204ACD0AC38CDC6912903E7DAB3703764C8DD5E5, block-rid: 5FDE57A5BC704495D21D3EBDE1D42ED1C4D3D472DE046AC47CE53A9FF22052D5, prev-block-rid: 293039F0640E9C1F51CC0F50FE780F14F6917FA67618DAFC9C324637C49B6C7D
+DEBUG 2019-12-10 16:12:57.502 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Checking transaction queue
+DEBUG 2019-12-10 16:12:57.502 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job buildBlock
+INFO  2019-12-10 16:12:57.502 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Chain: 84:00: Block is finalized: 54 ms, 0 net tps, 0 gross tps, height: 436, accepted txs: 0, rejected txs: 0, root-hash: 46AF9064F12528CAD6A7C377204ACD0AC38CDC6912903E7DAB3703764C8DD5E5, block-rid: D7C95538B8E52D58C73A22BC3FB9E5BCCCCD6C4061AC471D4392A9B0AC460211, prev-block-rid: 653C8D5DBD986F4CB4C3FA48AF88217A77632B464DAB5FAF5B689F6BA15750CB
+DEBUG 2019-12-10 16:12:57.503 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job buildBlock
+DEBUG 2019-12-10 16:12:57.511 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job commitBlock
+DEBUG 2019-12-10 16:12:57.511 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - start -------------------
+DEBUG 2019-12-10 16:12:57.514 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job commitBlock
+DEBUG 2019-12-10 16:12:57.514 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - start -------------------
+DEBUG 2019-12-10 16:12:57.533 [0-BaseBlockDatabaseWorker] ManualBlockchainConfigurationProvider - lastHeight: 420, currentConfigHeight: 0, nextConfigHeight: 0
+DEBUG 2019-12-10 16:12:57.533 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - end -------------------
+DEBUG 2019-12-10 16:12:57.533 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job commitBlock
+DEBUG 2019-12-10 16:12:57.536 [0-BaseBlockDatabaseWorker] ManualBlockchainConfigurationProvider - lastHeight: 436, currentConfigHeight: 0, nextConfigHeight: 0
+DEBUG 2019-12-10 16:12:57.536 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - end -------------------
+DEBUG 2019-12-10 16:12:57.536 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job commitBlock
+DEBUG 2019-12-10 16:13:07.461 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:437 ro:0 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 16:13:07.461 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:421 ro:0 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 16:13:17.462 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:421 ro:1 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 16:13:17.468 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:437 ro:1 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 16:13:27.478 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:437 ro:2 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 16:13:27.478 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:421 ro:2 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 16:13:27.524 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job buildBlock
+DEBUG 2019-12-10 16:13:27.524 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job buildBlock
+DEBUG 2019-12-10 16:13:27.527 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Checking transaction queue
+INFO  2019-12-10 16:13:27.528 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Chain: 84:00: Block is finalized: 3 ms, 0 net tps, 0 gross tps, height: 437, accepted txs: 0, rejected txs: 0, root-hash: 46AF9064F12528CAD6A7C377204ACD0AC38CDC6912903E7DAB3703764C8DD5E5, block-rid: 56DDE93879CA238A33A25894F4EAD97E957C3FCE62B6EC5D3CD6B7FE6934A84C, prev-block-rid: D7C95538B8E52D58C73A22BC3FB9E5BCCCCD6C4061AC471D4392A9B0AC460211
+DEBUG 2019-12-10 16:13:27.529 [0-BaseBlockDatabaseWorker] BlockchainDependencies - Have height for dependency: name: filehub,  , 849D2CC55796785516386566F8F9BF827B426221AD0820A9B09AFAD391C89A00 ( height: 436, last_block_RID: D7C95538B8E52D58C73A22BC3FB9E5BCCCCD6C4061AC471D4392A9B0AC460211 )
+DEBUG 2019-12-10 16:13:27.529 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job buildBlock
+DEBUG 2019-12-10 16:13:27.529 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Checking transaction queue
+INFO  2019-12-10 16:13:27.529 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Chain: C7:BC: Block is finalized: 4 ms, 0 net tps, 0 gross tps, height: 421, accepted txs: 0, rejected txs: 0, root-hash: 46AF9064F12528CAD6A7C377204ACD0AC38CDC6912903E7DAB3703764C8DD5E5, block-rid: 64C734F01C5F904B372CFDA7E64803BDCCA00AE9B1457EF0912A0BCDC4653C07, prev-block-rid: 5FDE57A5BC704495D21D3EBDE1D42ED1C4D3D472DE046AC47CE53A9FF22052D5
+DEBUG 2019-12-10 16:13:27.530 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job buildBlock
+DEBUG 2019-12-10 16:13:27.548 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job commitBlock
+DEBUG 2019-12-10 16:13:27.548 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job commitBlock
+DEBUG 2019-12-10 16:13:27.548 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - start -------------------
+DEBUG 2019-12-10 16:13:27.548 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - start -------------------
+DEBUG 2019-12-10 16:13:27.550 [0-BaseBlockDatabaseWorker] ManualBlockchainConfigurationProvider - lastHeight: 437, currentConfigHeight: 0, nextConfigHeight: 0
+DEBUG 2019-12-10 16:13:27.550 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - end -------------------
+DEBUG 2019-12-10 16:13:27.550 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job commitBlock
+DEBUG 2019-12-10 16:13:27.580 [0-BaseBlockDatabaseWorker] ManualBlockchainConfigurationProvider - lastHeight: 421, currentConfigHeight: 0, nextConfigHeight: 0
+DEBUG 2019-12-10 16:13:27.581 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - end -------------------
+DEBUG 2019-12-10 16:13:27.581 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job commitBlock
+DEBUG 2019-12-10 16:13:37.478 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:422 ro:0 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 16:13:37.488 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:438 ro:0 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 16:13:47.497 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:422 ro:1 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 16:13:47.497 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:438 ro:1 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 16:13:57.510 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:438 ro:2 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 16:13:57.515 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:422 ro:2 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 16:13:57.532 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job buildBlock
+DEBUG 2019-12-10 16:13:57.534 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Checking transaction queue
+INFO  2019-12-10 16:13:57.534 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Chain: 84:00: Block is finalized: 1 ms, 0 net tps, 0 gross tps, height: 438, accepted txs: 0, rejected txs: 0, root-hash: 46AF9064F12528CAD6A7C377204ACD0AC38CDC6912903E7DAB3703764C8DD5E5, block-rid: F6E2CF546C39555A822B70D045C4B57DF082935CDA6A51D5BA1B2F02751FF210, prev-block-rid: 56DDE93879CA238A33A25894F4EAD97E957C3FCE62B6EC5D3CD6B7FE6934A84C
+DEBUG 2019-12-10 16:13:57.534 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job buildBlock
+DEBUG 2019-12-10 16:13:57.540 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job buildBlock
+DEBUG 2019-12-10 16:13:57.542 [0-BaseBlockDatabaseWorker] BlockchainDependencies - Have height for dependency: name: filehub,  , 849D2CC55796785516386566F8F9BF827B426221AD0820A9B09AFAD391C89A00 ( height: 437, last_block_RID: 56DDE93879CA238A33A25894F4EAD97E957C3FCE62B6EC5D3CD6B7FE6934A84C )
+DEBUG 2019-12-10 16:13:57.542 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Checking transaction queue
+INFO  2019-12-10 16:13:57.547 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Chain: C7:BC: Block is finalized: 7 ms, 0 net tps, 0 gross tps, height: 422, accepted txs: 0, rejected txs: 0, root-hash: 46AF9064F12528CAD6A7C377204ACD0AC38CDC6912903E7DAB3703764C8DD5E5, block-rid: 314B40A6E1475AE3F5CA50463A680A0175C46C9CDE8D7AA7C3C4EC5CCBB320EF, prev-block-rid: 64C734F01C5F904B372CFDA7E64803BDCCA00AE9B1457EF0912A0BCDC4653C07
+DEBUG 2019-12-10 16:13:57.547 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job buildBlock
+DEBUG 2019-12-10 16:13:57.552 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job commitBlock
+DEBUG 2019-12-10 16:13:57.552 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - start -------------------
+DEBUG 2019-12-10 16:13:57.560 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job commitBlock
+DEBUG 2019-12-10 16:13:57.560 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - start -------------------
+DEBUG 2019-12-10 16:13:57.576 [0-BaseBlockDatabaseWorker] ManualBlockchainConfigurationProvider - lastHeight: 422, currentConfigHeight: 0, nextConfigHeight: 0
+DEBUG 2019-12-10 16:13:57.576 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - end -------------------
+DEBUG 2019-12-10 16:13:57.576 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job commitBlock
+DEBUG 2019-12-10 16:13:57.577 [0-BaseBlockDatabaseWorker] ManualBlockchainConfigurationProvider - lastHeight: 438, currentConfigHeight: 0, nextConfigHeight: 0
+DEBUG 2019-12-10 16:13:57.577 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - end -------------------
+DEBUG 2019-12-10 16:13:57.577 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job commitBlock
+DEBUG 2019-12-10 16:14:07.520 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:423 ro:0 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 16:14:07.520 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:439 ro:0 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 16:14:17.528 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:439 ro:1 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 16:14:17.537 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:423 ro:1 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 16:14:27.540 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:423 ro:2 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 16:14:27.546 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job buildBlock
+DEBUG 2019-12-10 16:14:27.546 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:439 ro:2 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 16:14:27.547 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Checking transaction queue
+INFO  2019-12-10 16:14:27.547 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Chain: 84:00: Block is finalized: 1 ms, 0 net tps, 0 gross tps, height: 439, accepted txs: 0, rejected txs: 0, root-hash: 46AF9064F12528CAD6A7C377204ACD0AC38CDC6912903E7DAB3703764C8DD5E5, block-rid: A238611B4B8E45DF008121EB1EF7BFB974ED4FA550F13A8803EF991177D63D16, prev-block-rid: F6E2CF546C39555A822B70D045C4B57DF082935CDA6A51D5BA1B2F02751FF210
+DEBUG 2019-12-10 16:14:27.547 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job buildBlock
+DEBUG 2019-12-10 16:14:27.563 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job buildBlock
+DEBUG 2019-12-10 16:14:27.564 [0-BaseBlockDatabaseWorker] BlockchainDependencies - Have height for dependency: name: filehub,  , 849D2CC55796785516386566F8F9BF827B426221AD0820A9B09AFAD391C89A00 ( height: 438, last_block_RID: F6E2CF546C39555A822B70D045C4B57DF082935CDA6A51D5BA1B2F02751FF210 )
+DEBUG 2019-12-10 16:14:27.564 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Checking transaction queue
+DEBUG 2019-12-10 16:14:27.567 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job commitBlock
+DEBUG 2019-12-10 16:14:27.567 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - start -------------------
+INFO  2019-12-10 16:14:27.567 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Chain: C7:BC: Block is finalized: 4 ms, 0 net tps, 0 gross tps, height: 423, accepted txs: 0, rejected txs: 0, root-hash: 46AF9064F12528CAD6A7C377204ACD0AC38CDC6912903E7DAB3703764C8DD5E5, block-rid: 4CAB07241ECD186B5D23F62D2BB36B008FB7206E3BBAEFA58DA8558C0D09D97A, prev-block-rid: 314B40A6E1475AE3F5CA50463A680A0175C46C9CDE8D7AA7C3C4EC5CCBB320EF
+DEBUG 2019-12-10 16:14:27.568 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job buildBlock
+DEBUG 2019-12-10 16:14:27.569 [0-BaseBlockDatabaseWorker] ManualBlockchainConfigurationProvider - lastHeight: 439, currentConfigHeight: 0, nextConfigHeight: 0
+DEBUG 2019-12-10 16:14:27.569 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - end -------------------
+DEBUG 2019-12-10 16:14:27.569 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job commitBlock
+DEBUG 2019-12-10 16:14:27.584 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job commitBlock
+DEBUG 2019-12-10 16:14:27.584 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - start -------------------
+DEBUG 2019-12-10 16:14:27.586 [0-BaseBlockDatabaseWorker] ManualBlockchainConfigurationProvider - lastHeight: 423, currentConfigHeight: 0, nextConfigHeight: 0
+DEBUG 2019-12-10 16:14:27.586 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - end -------------------
+DEBUG 2019-12-10 16:14:27.586 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job commitBlock
+DEBUG 2019-12-10 16:14:37.555 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:440 ro:0 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 16:14:37.557 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:424 ro:0 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 16:14:47.558 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:424 ro:1 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 16:14:47.565 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:440 ro:1 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 16:14:57.571 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job buildBlock
+DEBUG 2019-12-10 16:14:57.572 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:440 ro:2 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 16:14:57.572 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job buildBlock
+DEBUG 2019-12-10 16:14:57.572 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:424 ro:2 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 16:14:57.575 [0-BaseBlockDatabaseWorker] BlockchainDependencies - Have height for dependency: name: filehub,  , 849D2CC55796785516386566F8F9BF827B426221AD0820A9B09AFAD391C89A00 ( height: 439, last_block_RID: A238611B4B8E45DF008121EB1EF7BFB974ED4FA550F13A8803EF991177D63D16 )
+DEBUG 2019-12-10 16:14:57.575 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Checking transaction queue
+DEBUG 2019-12-10 16:14:57.575 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Checking transaction queue
+INFO  2019-12-10 16:14:57.576 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Chain: 84:00: Block is finalized: 4 ms, 0 net tps, 0 gross tps, height: 440, accepted txs: 0, rejected txs: 0, root-hash: 46AF9064F12528CAD6A7C377204ACD0AC38CDC6912903E7DAB3703764C8DD5E5, block-rid: 80C04EB1AA1817A152DB026EDE9D390D83A5C4E2DB94A0AEA2C39AC00A64E04F, prev-block-rid: A238611B4B8E45DF008121EB1EF7BFB974ED4FA550F13A8803EF991177D63D16
+INFO  2019-12-10 16:14:57.577 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Chain: C7:BC: Block is finalized: 4 ms, 0 net tps, 0 gross tps, height: 424, accepted txs: 0, rejected txs: 0, root-hash: 46AF9064F12528CAD6A7C377204ACD0AC38CDC6912903E7DAB3703764C8DD5E5, block-rid: CCD0595F7297BF8162EFEB24E7965AC0A191CF393C344BD29C64C4858719EACF, prev-block-rid: 4CAB07241ECD186B5D23F62D2BB36B008FB7206E3BBAEFA58DA8558C0D09D97A
+DEBUG 2019-12-10 16:14:57.577 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job buildBlock
+DEBUG 2019-12-10 16:14:57.577 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job buildBlock
+DEBUG 2019-12-10 16:14:57.593 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job commitBlock
+DEBUG 2019-12-10 16:14:57.593 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - start -------------------
+DEBUG 2019-12-10 16:14:57.593 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job commitBlock
+DEBUG 2019-12-10 16:14:57.593 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - start -------------------
+DEBUG 2019-12-10 16:14:57.599 [0-BaseBlockDatabaseWorker] ManualBlockchainConfigurationProvider - lastHeight: 424, currentConfigHeight: 0, nextConfigHeight: 0
+DEBUG 2019-12-10 16:14:57.599 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - end -------------------
+DEBUG 2019-12-10 16:14:57.599 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job commitBlock
+DEBUG 2019-12-10 16:14:57.600 [0-BaseBlockDatabaseWorker] ManualBlockchainConfigurationProvider - lastHeight: 440, currentConfigHeight: 0, nextConfigHeight: 0
+DEBUG 2019-12-10 16:14:57.600 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - end -------------------
+DEBUG 2019-12-10 16:14:57.600 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job commitBlock
+DEBUG 2019-12-10 16:15:07.572 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:425 ro:0 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 16:15:07.580 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:441 ro:0 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 16:15:17.587 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:425 ro:1 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 16:15:17.591 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:441 ro:1 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 16:15:27.588 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job buildBlock
+DEBUG 2019-12-10 16:15:27.588 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:425 ro:2 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 16:15:27.588 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job buildBlock
+DEBUG 2019-12-10 16:15:27.591 [0-BaseBlockDatabaseWorker] BlockchainDependencies - Have height for dependency: name: filehub,  , 849D2CC55796785516386566F8F9BF827B426221AD0820A9B09AFAD391C89A00 ( height: 440, last_block_RID: 80C04EB1AA1817A152DB026EDE9D390D83A5C4E2DB94A0AEA2C39AC00A64E04F )
+DEBUG 2019-12-10 16:15:27.591 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Checking transaction queue
+INFO  2019-12-10 16:15:27.591 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Chain: C7:BC: Block is finalized: 2 ms, 0 net tps, 0 gross tps, height: 425, accepted txs: 0, rejected txs: 0, root-hash: 46AF9064F12528CAD6A7C377204ACD0AC38CDC6912903E7DAB3703764C8DD5E5, block-rid: 242FF113195BF2BB3FF7537E7EB76287AA4967C831F168AB6340DC9433F8F38D, prev-block-rid: CCD0595F7297BF8162EFEB24E7965AC0A191CF393C344BD29C64C4858719EACF
+DEBUG 2019-12-10 16:15:27.592 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job buildBlock
+DEBUG 2019-12-10 16:15:27.595 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Checking transaction queue
+INFO  2019-12-10 16:15:27.595 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Chain: 84:00: Block is finalized: 6 ms, 0 net tps, 0 gross tps, height: 441, accepted txs: 0, rejected txs: 0, root-hash: 46AF9064F12528CAD6A7C377204ACD0AC38CDC6912903E7DAB3703764C8DD5E5, block-rid: 7F63B0B2479FB832151E9DC8D75494F85767706D8C69608BD0F780C0195FDFA5, prev-block-rid: 80C04EB1AA1817A152DB026EDE9D390D83A5C4E2DB94A0AEA2C39AC00A64E04F
+DEBUG 2019-12-10 16:15:27.595 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job buildBlock
+DEBUG 2019-12-10 16:15:27.608 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job commitBlock
+DEBUG 2019-12-10 16:15:27.608 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - start -------------------
+DEBUG 2019-12-10 16:15:27.608 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:441 ro:2 st:Prepared blockRID:7F63B0B2479FB832151E9DC8D75494F85767706D8C69608BD0F780C0195FDFA5 havesig:true
+DEBUG 2019-12-10 16:15:27.609 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job commitBlock
+DEBUG 2019-12-10 16:15:27.609 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - start -------------------
+DEBUG 2019-12-10 16:15:27.611 [0-BaseBlockDatabaseWorker] ManualBlockchainConfigurationProvider - lastHeight: 441, currentConfigHeight: 0, nextConfigHeight: 0
+DEBUG 2019-12-10 16:15:27.611 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - end -------------------
+DEBUG 2019-12-10 16:15:27.611 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job commitBlock
+DEBUG 2019-12-10 16:15:27.613 [0-BaseBlockDatabaseWorker] ManualBlockchainConfigurationProvider - lastHeight: 425, currentConfigHeight: 0, nextConfigHeight: 0
+DEBUG 2019-12-10 16:15:27.613 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - end -------------------
+DEBUG 2019-12-10 16:15:27.613 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job commitBlock
+DEBUG 2019-12-10 16:15:37.598 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:426 ro:0 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 16:15:37.613 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:442 ro:0 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 16:15:47.615 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:426 ro:1 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 16:15:47.624 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:442 ro:1 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 16:15:57.598 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job buildBlock
+DEBUG 2019-12-10 16:15:57.600 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job buildBlock
+DEBUG 2019-12-10 16:15:57.601 [0-BaseBlockDatabaseWorker] BlockchainDependencies - Have height for dependency: name: filehub,  , 849D2CC55796785516386566F8F9BF827B426221AD0820A9B09AFAD391C89A00 ( height: 441, last_block_RID: 7F63B0B2479FB832151E9DC8D75494F85767706D8C69608BD0F780C0195FDFA5 )
+DEBUG 2019-12-10 16:15:57.601 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Checking transaction queue
+INFO  2019-12-10 16:15:57.602 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Chain: C7:BC: Block is finalized: 3 ms, 0 net tps, 0 gross tps, height: 426, accepted txs: 0, rejected txs: 0, root-hash: 46AF9064F12528CAD6A7C377204ACD0AC38CDC6912903E7DAB3703764C8DD5E5, block-rid: 9720589739A88B987C49311A9112248D971AA8F3975EF29082650A9D8FDED163, prev-block-rid: 242FF113195BF2BB3FF7537E7EB76287AA4967C831F168AB6340DC9433F8F38D
+DEBUG 2019-12-10 16:15:57.602 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job buildBlock
+DEBUG 2019-12-10 16:15:57.604 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Checking transaction queue
+DEBUG 2019-12-10 16:15:57.619 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job commitBlock
+DEBUG 2019-12-10 16:15:57.619 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - start -------------------
+DEBUG 2019-12-10 16:15:57.619 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:426 ro:2 st:Prepared blockRID:9720589739A88B987C49311A9112248D971AA8F3975EF29082650A9D8FDED163 havesig:true
+INFO  2019-12-10 16:15:57.622 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Chain: 84:00: Block is finalized: 20 ms, 0 net tps, 0 gross tps, height: 442, accepted txs: 0, rejected txs: 0, root-hash: 46AF9064F12528CAD6A7C377204ACD0AC38CDC6912903E7DAB3703764C8DD5E5, block-rid: E5E22D1A2CF0A1CDEB52ABEEB7F1D08E334AAFEB203C4A55128F2411CC139959, prev-block-rid: 7F63B0B2479FB832151E9DC8D75494F85767706D8C69608BD0F780C0195FDFA5
+DEBUG 2019-12-10 16:15:57.622 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job buildBlock
+DEBUG 2019-12-10 16:15:57.627 [0-BaseBlockDatabaseWorker] ManualBlockchainConfigurationProvider - lastHeight: 426, currentConfigHeight: 0, nextConfigHeight: 0
+DEBUG 2019-12-10 16:15:57.627 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - end -------------------
+DEBUG 2019-12-10 16:15:57.627 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job commitBlock
+DEBUG 2019-12-10 16:15:57.644 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job commitBlock
+DEBUG 2019-12-10 16:15:57.644 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - start -------------------
+DEBUG 2019-12-10 16:15:57.644 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:442 ro:2 st:Prepared blockRID:E5E22D1A2CF0A1CDEB52ABEEB7F1D08E334AAFEB203C4A55128F2411CC139959 havesig:true
+DEBUG 2019-12-10 16:15:57.651 [0-BaseBlockDatabaseWorker] ManualBlockchainConfigurationProvider - lastHeight: 442, currentConfigHeight: 0, nextConfigHeight: 0
+DEBUG 2019-12-10 16:15:57.651 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - end -------------------
+DEBUG 2019-12-10 16:15:57.651 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job commitBlock
+DEBUG 2019-12-10 16:16:07.625 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:427 ro:0 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 16:16:07.660 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:443 ro:0 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 16:16:17.641 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:427 ro:1 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 16:16:17.673 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:443 ro:1 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 16:16:27.613 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job buildBlock
+DEBUG 2019-12-10 16:16:27.616 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Checking transaction queue
+INFO  2019-12-10 16:16:27.616 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Chain: 84:00: Block is finalized: 2 ms, 0 net tps, 0 gross tps, height: 443, accepted txs: 0, rejected txs: 0, root-hash: 46AF9064F12528CAD6A7C377204ACD0AC38CDC6912903E7DAB3703764C8DD5E5, block-rid: 64BAACCEF711165AE7C4D3ABE734BD54D7637F944BA87703EFF2AE619E11CF58, prev-block-rid: E5E22D1A2CF0A1CDEB52ABEEB7F1D08E334AAFEB203C4A55128F2411CC139959
+DEBUG 2019-12-10 16:16:27.617 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job buildBlock
+DEBUG 2019-12-10 16:16:27.626 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job buildBlock
+DEBUG 2019-12-10 16:16:27.630 [0-BaseBlockDatabaseWorker] BlockchainDependencies - Have height for dependency: name: filehub,  , 849D2CC55796785516386566F8F9BF827B426221AD0820A9B09AFAD391C89A00 ( height: 442, last_block_RID: E5E22D1A2CF0A1CDEB52ABEEB7F1D08E334AAFEB203C4A55128F2411CC139959 )
+DEBUG 2019-12-10 16:16:27.630 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Checking transaction queue
+INFO  2019-12-10 16:16:27.630 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Chain: C7:BC: Block is finalized: 4 ms, 0 net tps, 0 gross tps, height: 427, accepted txs: 0, rejected txs: 0, root-hash: 46AF9064F12528CAD6A7C377204ACD0AC38CDC6912903E7DAB3703764C8DD5E5, block-rid: D87FA60470CB58F5506DCF101D7565B654CA869A0D317A87D994042B75EA4406, prev-block-rid: 9720589739A88B987C49311A9112248D971AA8F3975EF29082650A9D8FDED163
+DEBUG 2019-12-10 16:16:27.631 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job buildBlock
+DEBUG 2019-12-10 16:16:27.641 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job commitBlock
+DEBUG 2019-12-10 16:16:27.641 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - start -------------------
+DEBUG 2019-12-10 16:16:27.643 [0-BaseBlockDatabaseWorker] ManualBlockchainConfigurationProvider - lastHeight: 443, currentConfigHeight: 0, nextConfigHeight: 0
+DEBUG 2019-12-10 16:16:27.643 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - end -------------------
+DEBUG 2019-12-10 16:16:27.643 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job commitBlock
+DEBUG 2019-12-10 16:16:27.654 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job commitBlock
+DEBUG 2019-12-10 16:16:27.655 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - start -------------------
+DEBUG 2019-12-10 16:16:27.655 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:427 ro:2 st:Prepared blockRID:D87FA60470CB58F5506DCF101D7565B654CA869A0D317A87D994042B75EA4406 havesig:true
+DEBUG 2019-12-10 16:16:27.656 [0-BaseBlockDatabaseWorker] ManualBlockchainConfigurationProvider - lastHeight: 427, currentConfigHeight: 0, nextConfigHeight: 0
+DEBUG 2019-12-10 16:16:27.656 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - end -------------------
+DEBUG 2019-12-10 16:16:27.656 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job commitBlock
+DEBUG 2019-12-10 16:16:27.696 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:444 ro:0 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 16:16:37.674 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:428 ro:0 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 16:16:37.702 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:444 ro:1 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 16:34:56.918 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:444 ro:2 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 16:34:56.918 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:428 ro:2 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 16:34:56.919 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job buildBlock
+DEBUG 2019-12-10 16:34:56.920 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job buildBlock
+DEBUG 2019-12-10 16:34:56.983 [0-BaseBlockDatabaseWorker] BlockchainDependencies - Have height for dependency: name: filehub,  , 849D2CC55796785516386566F8F9BF827B426221AD0820A9B09AFAD391C89A00 ( height: 443, last_block_RID: 64BAACCEF711165AE7C4D3ABE734BD54D7637F944BA87703EFF2AE619E11CF58 )
+DEBUG 2019-12-10 16:34:56.984 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Checking transaction queue
+INFO  2019-12-10 16:34:56.985 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Chain: C7:BC: Block is finalized: 65 ms, 0 net tps, 0 gross tps, height: 428, accepted txs: 0, rejected txs: 0, root-hash: 46AF9064F12528CAD6A7C377204ACD0AC38CDC6912903E7DAB3703764C8DD5E5, block-rid: E0EF59557EC618FBA6AA3929E603612F89A45C0C4F3B5C415A0B3F0CDE69D73B, prev-block-rid: D87FA60470CB58F5506DCF101D7565B654CA869A0D317A87D994042B75EA4406
+DEBUG 2019-12-10 16:34:56.986 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job buildBlock
+DEBUG 2019-12-10 16:34:56.993 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Checking transaction queue
+INFO  2019-12-10 16:34:56.994 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Chain: 84:00: Block is finalized: 74 ms, 0 net tps, 0 gross tps, height: 444, accepted txs: 0, rejected txs: 0, root-hash: 46AF9064F12528CAD6A7C377204ACD0AC38CDC6912903E7DAB3703764C8DD5E5, block-rid: 48C618E68EB9890C9E07A90680B4D8E3019470E950C1ABF27ECF451AABDE2B39, prev-block-rid: 64BAACCEF711165AE7C4D3ABE734BD54D7637F944BA87703EFF2AE619E11CF58
+DEBUG 2019-12-10 16:34:56.994 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job buildBlock
+DEBUG 2019-12-10 16:34:57.010 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job commitBlock
+DEBUG 2019-12-10 16:34:57.010 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job commitBlock
+DEBUG 2019-12-10 16:34:57.010 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - start -------------------
+DEBUG 2019-12-10 16:34:57.010 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - start -------------------
+DEBUG 2019-12-10 16:34:57.020 [0-BaseBlockDatabaseWorker] ManualBlockchainConfigurationProvider - lastHeight: 428, currentConfigHeight: 0, nextConfigHeight: 0
+DEBUG 2019-12-10 16:34:57.020 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - end -------------------
+DEBUG 2019-12-10 16:34:57.020 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job commitBlock
+DEBUG 2019-12-10 16:34:57.042 [0-BaseBlockDatabaseWorker] ManualBlockchainConfigurationProvider - lastHeight: 444, currentConfigHeight: 0, nextConfigHeight: 0
+DEBUG 2019-12-10 16:34:57.042 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - end -------------------
+DEBUG 2019-12-10 16:34:57.042 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job commitBlock
+DEBUG 2019-12-10 16:35:06.930 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:445 ro:0 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 16:35:06.930 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:429 ro:0 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 16:35:16.943 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:445 ro:1 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 16:35:16.945 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:429 ro:1 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 16:35:26.944 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:445 ro:2 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 16:35:26.949 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:429 ro:2 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 16:35:26.995 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job buildBlock
+DEBUG 2019-12-10 16:35:26.998 [0-BaseBlockDatabaseWorker] BlockchainDependencies - Have height for dependency: name: filehub,  , 849D2CC55796785516386566F8F9BF827B426221AD0820A9B09AFAD391C89A00 ( height: 444, last_block_RID: 48C618E68EB9890C9E07A90680B4D8E3019470E950C1ABF27ECF451AABDE2B39 )
+DEBUG 2019-12-10 16:35:26.998 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Checking transaction queue
+INFO  2019-12-10 16:35:26.998 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Chain: C7:BC: Block is finalized: 2 ms, 0 net tps, 0 gross tps, height: 429, accepted txs: 0, rejected txs: 0, root-hash: 46AF9064F12528CAD6A7C377204ACD0AC38CDC6912903E7DAB3703764C8DD5E5, block-rid: 9EC8A3E066370E1C31D1A2D79CA6E64C5E4D8C6859DAFA39BE010036A5ABD7D8, prev-block-rid: E0EF59557EC618FBA6AA3929E603612F89A45C0C4F3B5C415A0B3F0CDE69D73B
+DEBUG 2019-12-10 16:35:26.999 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job buildBlock
+DEBUG 2019-12-10 16:35:27.006 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job buildBlock
+DEBUG 2019-12-10 16:35:27.008 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Checking transaction queue
+INFO  2019-12-10 16:35:27.009 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Chain: 84:00: Block is finalized: 2 ms, 0 net tps, 0 gross tps, height: 445, accepted txs: 0, rejected txs: 0, root-hash: 46AF9064F12528CAD6A7C377204ACD0AC38CDC6912903E7DAB3703764C8DD5E5, block-rid: 9EE1CBA970A373E668F4EE82EE630057876B22A08D0B55CE65FA93AF5E0F01B4, prev-block-rid: 48C618E68EB9890C9E07A90680B4D8E3019470E950C1ABF27ECF451AABDE2B39
+DEBUG 2019-12-10 16:35:27.009 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job buildBlock
+DEBUG 2019-12-10 16:35:27.016 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job commitBlock
+DEBUG 2019-12-10 16:35:27.016 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - start -------------------
+DEBUG 2019-12-10 16:35:27.018 [0-BaseBlockDatabaseWorker] ManualBlockchainConfigurationProvider - lastHeight: 429, currentConfigHeight: 0, nextConfigHeight: 0
+DEBUG 2019-12-10 16:35:27.018 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - end -------------------
+DEBUG 2019-12-10 16:35:27.018 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job commitBlock
+DEBUG 2019-12-10 16:35:27.029 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job commitBlock
+DEBUG 2019-12-10 16:35:27.030 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - start -------------------
+DEBUG 2019-12-10 16:35:27.031 [0-BaseBlockDatabaseWorker] ManualBlockchainConfigurationProvider - lastHeight: 445, currentConfigHeight: 0, nextConfigHeight: 0
+DEBUG 2019-12-10 16:35:27.031 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - end -------------------
+DEBUG 2019-12-10 16:35:27.031 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job commitBlock
+DEBUG 2019-12-10 16:35:36.950 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:430 ro:0 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 16:35:36.960 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:446 ro:0 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 16:35:46.958 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:430 ro:1 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 16:35:46.979 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:446 ro:1 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 16:35:56.969 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:430 ro:2 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 16:35:56.986 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:446 ro:2 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 16:35:57.014 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job buildBlock
+DEBUG 2019-12-10 16:35:57.017 [0-BaseBlockDatabaseWorker] BlockchainDependencies - Have height for dependency: name: filehub,  , 849D2CC55796785516386566F8F9BF827B426221AD0820A9B09AFAD391C89A00 ( height: 445, last_block_RID: 9EE1CBA970A373E668F4EE82EE630057876B22A08D0B55CE65FA93AF5E0F01B4 )
+DEBUG 2019-12-10 16:35:57.017 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Checking transaction queue
+INFO  2019-12-10 16:35:57.017 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Chain: C7:BC: Block is finalized: 2 ms, 0 net tps, 0 gross tps, height: 430, accepted txs: 0, rejected txs: 0, root-hash: 46AF9064F12528CAD6A7C377204ACD0AC38CDC6912903E7DAB3703764C8DD5E5, block-rid: 9649144D7900EC0BB85B921D0487B0F113CF7A678F80B237F2EA9FE725AE3412, prev-block-rid: 9EC8A3E066370E1C31D1A2D79CA6E64C5E4D8C6859DAFA39BE010036A5ABD7D8
+DEBUG 2019-12-10 16:35:57.018 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job buildBlock
+DEBUG 2019-12-10 16:35:57.032 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job buildBlock
+DEBUG 2019-12-10 16:35:57.034 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Checking transaction queue
+DEBUG 2019-12-10 16:35:57.034 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job commitBlock
+DEBUG 2019-12-10 16:35:57.034 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - start -------------------
+INFO  2019-12-10 16:35:57.035 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Chain: 84:00: Block is finalized: 2 ms, 0 net tps, 0 gross tps, height: 446, accepted txs: 0, rejected txs: 0, root-hash: 46AF9064F12528CAD6A7C377204ACD0AC38CDC6912903E7DAB3703764C8DD5E5, block-rid: 07F5488C96F5E571FB59EE523EFADDC9AFFF4F71620D5C60F595EDD142AF4D05, prev-block-rid: 9EE1CBA970A373E668F4EE82EE630057876B22A08D0B55CE65FA93AF5E0F01B4
+DEBUG 2019-12-10 16:35:57.035 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job buildBlock
+DEBUG 2019-12-10 16:35:57.036 [0-BaseBlockDatabaseWorker] ManualBlockchainConfigurationProvider - lastHeight: 430, currentConfigHeight: 0, nextConfigHeight: 0
+DEBUG 2019-12-10 16:35:57.036 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - end -------------------
+DEBUG 2019-12-10 16:35:57.036 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job commitBlock
+DEBUG 2019-12-10 16:35:57.056 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job commitBlock
+DEBUG 2019-12-10 16:35:57.056 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - start -------------------
+DEBUG 2019-12-10 16:35:57.058 [0-BaseBlockDatabaseWorker] ManualBlockchainConfigurationProvider - lastHeight: 446, currentConfigHeight: 0, nextConfigHeight: 0
+DEBUG 2019-12-10 16:35:57.058 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - end -------------------
+DEBUG 2019-12-10 16:35:57.058 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job commitBlock
+DEBUG 2019-12-10 16:36:06.970 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:431 ro:0 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 16:36:06.998 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:447 ro:0 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 16:36:16.970 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:431 ro:1 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 16:36:17.013 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:447 ro:1 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 16:36:26.980 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:431 ro:2 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 16:36:27.014 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:447 ro:2 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 16:36:27.021 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job buildBlock
+DEBUG 2019-12-10 16:36:27.023 [0-BaseBlockDatabaseWorker] BlockchainDependencies - Have height for dependency: name: filehub,  , 849D2CC55796785516386566F8F9BF827B426221AD0820A9B09AFAD391C89A00 ( height: 446, last_block_RID: 07F5488C96F5E571FB59EE523EFADDC9AFFF4F71620D5C60F595EDD142AF4D05 )
+DEBUG 2019-12-10 16:36:27.023 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Checking transaction queue
+INFO  2019-12-10 16:36:27.023 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Chain: C7:BC: Block is finalized: 2 ms, 0 net tps, 0 gross tps, height: 431, accepted txs: 0, rejected txs: 0, root-hash: 46AF9064F12528CAD6A7C377204ACD0AC38CDC6912903E7DAB3703764C8DD5E5, block-rid: 9A6BC412D4E64838936C694E6C2CCE58BA3D96E099FB92F924B9254FCAA38BD0, prev-block-rid: 9649144D7900EC0BB85B921D0487B0F113CF7A678F80B237F2EA9FE725AE3412
+DEBUG 2019-12-10 16:36:27.024 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job buildBlock
+DEBUG 2019-12-10 16:36:27.037 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job buildBlock
+DEBUG 2019-12-10 16:36:27.038 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Checking transaction queue
+INFO  2019-12-10 16:36:27.039 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Chain: 84:00: Block is finalized: 1 ms, 0 net tps, 0 gross tps, height: 447, accepted txs: 0, rejected txs: 0, root-hash: 46AF9064F12528CAD6A7C377204ACD0AC38CDC6912903E7DAB3703764C8DD5E5, block-rid: BBC583D85B56D6F861B4D0B20C6BEE1A0047E352A2E6AA8DA6A60A53E3094BE1, prev-block-rid: 07F5488C96F5E571FB59EE523EFADDC9AFFF4F71620D5C60F595EDD142AF4D05
+DEBUG 2019-12-10 16:36:27.039 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job buildBlock
+DEBUG 2019-12-10 16:36:27.041 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job commitBlock
+DEBUG 2019-12-10 16:36:27.041 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - start -------------------
+DEBUG 2019-12-10 16:36:27.044 [0-BaseBlockDatabaseWorker] ManualBlockchainConfigurationProvider - lastHeight: 431, currentConfigHeight: 0, nextConfigHeight: 0
+DEBUG 2019-12-10 16:36:27.044 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - end -------------------
+DEBUG 2019-12-10 16:36:27.044 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job commitBlock
+DEBUG 2019-12-10 16:36:27.058 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job commitBlock
+DEBUG 2019-12-10 16:36:27.058 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - start -------------------
+DEBUG 2019-12-10 16:36:27.063 [0-BaseBlockDatabaseWorker] ManualBlockchainConfigurationProvider - lastHeight: 447, currentConfigHeight: 0, nextConfigHeight: 0
+DEBUG 2019-12-10 16:36:27.063 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - end -------------------
+DEBUG 2019-12-10 16:36:27.063 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job commitBlock
+DEBUG 2019-12-10 16:36:36.990 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:432 ro:0 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 16:36:37.020 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:448 ro:0 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 16:36:47.009 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:432 ro:1 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 16:36:47.040 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:448 ro:1 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 16:36:57.013 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:432 ro:2 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 16:36:57.033 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job buildBlock
+DEBUG 2019-12-10 16:36:57.036 [0-BaseBlockDatabaseWorker] BlockchainDependencies - Have height for dependency: name: filehub,  , 849D2CC55796785516386566F8F9BF827B426221AD0820A9B09AFAD391C89A00 ( height: 447, last_block_RID: BBC583D85B56D6F861B4D0B20C6BEE1A0047E352A2E6AA8DA6A60A53E3094BE1 )
+DEBUG 2019-12-10 16:36:57.036 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Checking transaction queue
+INFO  2019-12-10 16:36:57.037 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Chain: C7:BC: Block is finalized: 3 ms, 0 net tps, 0 gross tps, height: 432, accepted txs: 0, rejected txs: 0, root-hash: 46AF9064F12528CAD6A7C377204ACD0AC38CDC6912903E7DAB3703764C8DD5E5, block-rid: 51D49602E11F6D12D5ED4B1800BE4913844CD6BF1A4D551260BB951FE80EF9F9, prev-block-rid: 9A6BC412D4E64838936C694E6C2CCE58BA3D96E099FB92F924B9254FCAA38BD0
+DEBUG 2019-12-10 16:36:57.037 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job buildBlock
+DEBUG 2019-12-10 16:36:57.043 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job buildBlock
+DEBUG 2019-12-10 16:36:57.043 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:448 ro:2 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 16:36:57.046 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Checking transaction queue
+INFO  2019-12-10 16:36:57.047 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Chain: 84:00: Block is finalized: 3 ms, 0 net tps, 0 gross tps, height: 448, accepted txs: 0, rejected txs: 0, root-hash: 46AF9064F12528CAD6A7C377204ACD0AC38CDC6912903E7DAB3703764C8DD5E5, block-rid: C1E0C7DC5256E109F8EB11ECFF022AC92D8889759D9013ADAB0E231D3569A9A6, prev-block-rid: BBC583D85B56D6F861B4D0B20C6BEE1A0047E352A2E6AA8DA6A60A53E3094BE1
+DEBUG 2019-12-10 16:36:57.047 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job buildBlock
+DEBUG 2019-12-10 16:36:57.058 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job commitBlock
+DEBUG 2019-12-10 16:36:57.058 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - start -------------------
+DEBUG 2019-12-10 16:36:57.059 [0-BaseBlockDatabaseWorker] ManualBlockchainConfigurationProvider - lastHeight: 432, currentConfigHeight: 0, nextConfigHeight: 0
+DEBUG 2019-12-10 16:36:57.059 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - end -------------------
+DEBUG 2019-12-10 16:36:57.059 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job commitBlock
+DEBUG 2019-12-10 16:36:57.067 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job commitBlock
+DEBUG 2019-12-10 16:36:57.067 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - start -------------------
+DEBUG 2019-12-10 16:36:57.068 [0-BaseBlockDatabaseWorker] ManualBlockchainConfigurationProvider - lastHeight: 448, currentConfigHeight: 0, nextConfigHeight: 0
+DEBUG 2019-12-10 16:36:57.069 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - end -------------------
+DEBUG 2019-12-10 16:36:57.069 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job commitBlock
+DEBUG 2019-12-10 16:37:07.018 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:433 ro:0 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 16:37:07.045 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:449 ro:0 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 16:37:17.038 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:433 ro:1 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 16:37:17.059 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:449 ro:1 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 16:37:27.050 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job buildBlock
+DEBUG 2019-12-10 16:37:27.051 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:433 ro:2 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 16:37:27.053 [0-BaseBlockDatabaseWorker] BlockchainDependencies - Have height for dependency: name: filehub,  , 849D2CC55796785516386566F8F9BF827B426221AD0820A9B09AFAD391C89A00 ( height: 448, last_block_RID: C1E0C7DC5256E109F8EB11ECFF022AC92D8889759D9013ADAB0E231D3569A9A6 )
+DEBUG 2019-12-10 16:37:27.054 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Checking transaction queue
+INFO  2019-12-10 16:37:27.055 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Chain: C7:BC: Block is finalized: 4 ms, 0 net tps, 0 gross tps, height: 433, accepted txs: 0, rejected txs: 0, root-hash: 46AF9064F12528CAD6A7C377204ACD0AC38CDC6912903E7DAB3703764C8DD5E5, block-rid: AA7E293AACEEEC79E619DF9A13651F41381431AE03860A9C7EFB083558641319, prev-block-rid: 51D49602E11F6D12D5ED4B1800BE4913844CD6BF1A4D551260BB951FE80EF9F9
+DEBUG 2019-12-10 16:37:27.056 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job buildBlock
+DEBUG 2019-12-10 16:37:27.061 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job buildBlock
+DEBUG 2019-12-10 16:37:27.061 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:449 ro:2 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 16:37:27.062 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Checking transaction queue
+INFO  2019-12-10 16:37:27.062 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Chain: 84:00: Block is finalized: 1 ms, 0 net tps, 0 gross tps, height: 449, accepted txs: 0, rejected txs: 0, root-hash: 46AF9064F12528CAD6A7C377204ACD0AC38CDC6912903E7DAB3703764C8DD5E5, block-rid: 81F554F7ACD9D9D481551F5DEA080CEF9C36CF2BF1BDFA6897DB223AA893D7D9, prev-block-rid: C1E0C7DC5256E109F8EB11ECFF022AC92D8889759D9013ADAB0E231D3569A9A6
+DEBUG 2019-12-10 16:37:27.063 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job buildBlock
+DEBUG 2019-12-10 16:37:27.071 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job commitBlock
+DEBUG 2019-12-10 16:37:27.071 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - start -------------------
+DEBUG 2019-12-10 16:37:27.073 [0-BaseBlockDatabaseWorker] ManualBlockchainConfigurationProvider - lastHeight: 433, currentConfigHeight: 0, nextConfigHeight: 0
+DEBUG 2019-12-10 16:37:27.073 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - end -------------------
+DEBUG 2019-12-10 16:37:27.073 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job commitBlock
+DEBUG 2019-12-10 16:37:27.085 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job commitBlock
+DEBUG 2019-12-10 16:37:27.085 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - start -------------------
+DEBUG 2019-12-10 16:37:27.092 [0-BaseBlockDatabaseWorker] ManualBlockchainConfigurationProvider - lastHeight: 449, currentConfigHeight: 0, nextConfigHeight: 0
+DEBUG 2019-12-10 16:37:27.092 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - end -------------------
+DEBUG 2019-12-10 16:37:27.092 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job commitBlock
+DEBUG 2019-12-10 16:37:37.062 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:434 ro:0 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 16:37:37.072 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:450 ro:0 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 16:37:47.065 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:434 ro:1 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 16:37:47.079 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:450 ro:1 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 16:37:57.070 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job buildBlock
+DEBUG 2019-12-10 16:37:57.071 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job buildBlock
+DEBUG 2019-12-10 16:37:57.071 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:434 ro:2 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 16:37:57.074 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Checking transaction queue
+DEBUG 2019-12-10 16:37:57.074 [0-BaseBlockDatabaseWorker] BlockchainDependencies - Have height for dependency: name: filehub,  , 849D2CC55796785516386566F8F9BF827B426221AD0820A9B09AFAD391C89A00 ( height: 449, last_block_RID: 81F554F7ACD9D9D481551F5DEA080CEF9C36CF2BF1BDFA6897DB223AA893D7D9 )
+DEBUG 2019-12-10 16:37:57.074 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Checking transaction queue
+INFO  2019-12-10 16:37:57.074 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Chain: 84:00: Block is finalized: 3 ms, 0 net tps, 0 gross tps, height: 450, accepted txs: 0, rejected txs: 0, root-hash: 46AF9064F12528CAD6A7C377204ACD0AC38CDC6912903E7DAB3703764C8DD5E5, block-rid: FD75ACC18BF853C5DF68A7F8FA798A8AEAB45048CD12E78C5E745FF61248A2CC, prev-block-rid: 81F554F7ACD9D9D481551F5DEA080CEF9C36CF2BF1BDFA6897DB223AA893D7D9
+INFO  2019-12-10 16:37:57.074 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Chain: C7:BC: Block is finalized: 3 ms, 0 net tps, 0 gross tps, height: 434, accepted txs: 0, rejected txs: 0, root-hash: 46AF9064F12528CAD6A7C377204ACD0AC38CDC6912903E7DAB3703764C8DD5E5, block-rid: 443887B236B66236190A608562F7B3E3A4108B1E6D3034DDAAF3B32EB9BC859A, prev-block-rid: AA7E293AACEEEC79E619DF9A13651F41381431AE03860A9C7EFB083558641319
+DEBUG 2019-12-10 16:37:57.074 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job buildBlock
+DEBUG 2019-12-10 16:37:57.074 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job buildBlock
+DEBUG 2019-12-10 16:37:57.091 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job commitBlock
+DEBUG 2019-12-10 16:37:57.091 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job commitBlock
+DEBUG 2019-12-10 16:37:57.091 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - start -------------------
+DEBUG 2019-12-10 16:37:57.091 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - start -------------------
+DEBUG 2019-12-10 16:37:57.091 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:450 ro:2 st:Prepared blockRID:FD75ACC18BF853C5DF68A7F8FA798A8AEAB45048CD12E78C5E745FF61248A2CC havesig:true
+DEBUG 2019-12-10 16:37:57.094 [0-BaseBlockDatabaseWorker] ManualBlockchainConfigurationProvider - lastHeight: 450, currentConfigHeight: 0, nextConfigHeight: 0
+DEBUG 2019-12-10 16:37:57.094 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - end -------------------
+DEBUG 2019-12-10 16:37:57.094 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job commitBlock
+DEBUG 2019-12-10 16:37:57.095 [0-BaseBlockDatabaseWorker] ManualBlockchainConfigurationProvider - lastHeight: 434, currentConfigHeight: 0, nextConfigHeight: 0
+DEBUG 2019-12-10 16:37:57.095 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - end -------------------
+DEBUG 2019-12-10 16:37:57.095 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job commitBlock
+DEBUG 2019-12-10 16:38:07.072 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:435 ro:0 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 16:38:07.102 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:451 ro:0 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 16:38:17.084 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:435 ro:1 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 16:38:17.111 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:451 ro:1 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 16:38:27.077 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job buildBlock
+DEBUG 2019-12-10 16:38:27.077 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job buildBlock
+DEBUG 2019-12-10 16:38:27.079 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Checking transaction queue
+INFO  2019-12-10 16:38:27.079 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Chain: 84:00: Block is finalized: 1 ms, 0 net tps, 0 gross tps, height: 451, accepted txs: 0, rejected txs: 0, root-hash: 46AF9064F12528CAD6A7C377204ACD0AC38CDC6912903E7DAB3703764C8DD5E5, block-rid: 36CD6C5808A11BBC8813A7F6661514278A0F8C02D92E978931CCDD78DD486B6D, prev-block-rid: FD75ACC18BF853C5DF68A7F8FA798A8AEAB45048CD12E78C5E745FF61248A2CC
+DEBUG 2019-12-10 16:38:27.080 [0-BaseBlockDatabaseWorker] BlockchainDependencies - Have height for dependency: name: filehub,  , 849D2CC55796785516386566F8F9BF827B426221AD0820A9B09AFAD391C89A00 ( height: 450, last_block_RID: FD75ACC18BF853C5DF68A7F8FA798A8AEAB45048CD12E78C5E745FF61248A2CC )
+DEBUG 2019-12-10 16:38:27.080 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Checking transaction queue
+DEBUG 2019-12-10 16:38:27.080 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job buildBlock
+INFO  2019-12-10 16:38:27.080 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Chain: C7:BC: Block is finalized: 2 ms, 0 net tps, 0 gross tps, height: 435, accepted txs: 0, rejected txs: 0, root-hash: 46AF9064F12528CAD6A7C377204ACD0AC38CDC6912903E7DAB3703764C8DD5E5, block-rid: 7E38F4FFA064B9C9555CBAD542CB44BC67DF08FCF54ECC3D844EB7729F5F9178, prev-block-rid: 443887B236B66236190A608562F7B3E3A4108B1E6D3034DDAAF3B32EB9BC859A
+DEBUG 2019-12-10 16:38:27.081 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job buildBlock
+DEBUG 2019-12-10 16:38:27.098 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job commitBlock
+DEBUG 2019-12-10 16:38:27.098 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - start -------------------
+DEBUG 2019-12-10 16:38:27.098 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:435 ro:2 st:Prepared blockRID:7E38F4FFA064B9C9555CBAD542CB44BC67DF08FCF54ECC3D844EB7729F5F9178 havesig:true
+DEBUG 2019-12-10 16:38:27.100 [0-BaseBlockDatabaseWorker] ManualBlockchainConfigurationProvider - lastHeight: 435, currentConfigHeight: 0, nextConfigHeight: 0
+DEBUG 2019-12-10 16:38:27.100 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - end -------------------
+DEBUG 2019-12-10 16:38:27.100 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job commitBlock
+DEBUG 2019-12-10 16:38:27.100 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job commitBlock
+DEBUG 2019-12-10 16:38:27.100 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - start -------------------
+DEBUG 2019-12-10 16:38:27.104 [0-BaseBlockDatabaseWorker] ManualBlockchainConfigurationProvider - lastHeight: 451, currentConfigHeight: 0, nextConfigHeight: 0
+DEBUG 2019-12-10 16:38:27.104 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - end -------------------
+DEBUG 2019-12-10 16:38:27.104 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job commitBlock
+DEBUG 2019-12-10 16:38:27.123 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:452 ro:0 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 16:38:37.102 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:436 ro:0 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 16:38:37.127 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:452 ro:1 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 16:38:47.116 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:436 ro:1 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 16:38:47.128 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:452 ro:1 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 16:38:57.092 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job buildBlock
+DEBUG 2019-12-10 16:38:57.092 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job buildBlock
+DEBUG 2019-12-10 16:38:57.094 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Checking transaction queue
+INFO  2019-12-10 16:38:57.094 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Chain: 84:00: Block is finalized: 1 ms, 0 net tps, 0 gross tps, height: 452, accepted txs: 0, rejected txs: 0, root-hash: 46AF9064F12528CAD6A7C377204ACD0AC38CDC6912903E7DAB3703764C8DD5E5, block-rid: 54AA96ED153AC3DC380E4254E47B0035DAD50851997D2C8EBAEDD22075F69AAC, prev-block-rid: 36CD6C5808A11BBC8813A7F6661514278A0F8C02D92E978931CCDD78DD486B6D
+DEBUG 2019-12-10 16:38:57.094 [0-BaseBlockDatabaseWorker] BlockchainDependencies - Have height for dependency: name: filehub,  , 849D2CC55796785516386566F8F9BF827B426221AD0820A9B09AFAD391C89A00 ( height: 451, last_block_RID: 36CD6C5808A11BBC8813A7F6661514278A0F8C02D92E978931CCDD78DD486B6D )
+DEBUG 2019-12-10 16:38:57.094 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Checking transaction queue
+DEBUG 2019-12-10 16:38:57.095 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job buildBlock
+INFO  2019-12-10 16:38:57.095 [0-BaseBlockDatabaseWorker] BaseBlockchainEngine - Chain: C7:BC: Block is finalized: 2 ms, 0 net tps, 0 gross tps, height: 436, accepted txs: 0, rejected txs: 0, root-hash: 46AF9064F12528CAD6A7C377204ACD0AC38CDC6912903E7DAB3703764C8DD5E5, block-rid: 759D71C7EAEC52832B362FDD0A98B4B2E52DA69302CB8ACD817F7857C9FE1262, prev-block-rid: 7E38F4FFA064B9C9555CBAD542CB44BC67DF08FCF54ECC3D844EB7729F5F9178
+DEBUG 2019-12-10 16:38:57.095 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job buildBlock
+DEBUG 2019-12-10 16:38:57.112 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job commitBlock
+DEBUG 2019-12-10 16:38:57.112 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - start -------------------
+DEBUG 2019-12-10 16:38:57.114 [0-BaseBlockDatabaseWorker] ManualBlockchainConfigurationProvider - lastHeight: 452, currentConfigHeight: 0, nextConfigHeight: 0
+DEBUG 2019-12-10 16:38:57.114 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - end -------------------
+DEBUG 2019-12-10 16:38:57.114 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job commitBlock
+DEBUG 2019-12-10 16:38:57.115 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Starting job commitBlock
+DEBUG 2019-12-10 16:38:57.115 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - start -------------------
+DEBUG 2019-12-10 16:38:57.117 [0-BaseBlockDatabaseWorker] ManualBlockchainConfigurationProvider - lastHeight: 436, currentConfigHeight: 0, nextConfigHeight: 0
+DEBUG 2019-12-10 16:38:57.117 [0-BaseBlockDatabaseWorker] BaseManagedBlockBuilder - -1 committing block - end -------------------
+DEBUG 2019-12-10 16:38:57.117 [0-BaseBlockDatabaseWorker] BaseBlockDatabase - Finish job commitBlock
+DEBUG 2019-12-10 16:38:57.133 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:453 ro:0 st:WaitBlock blockRID:null havesig:false
+DEBUG 2019-12-10 16:38:57.136 [updateLoop-03:57] ValidatorSyncManager - [03:57]: node:0 he:437 ro:0 st:WaitBlock blockRID:null havesig:false

@@ -1,4 +1,4 @@
-import filehub.ft3_config;
+import ft3_config;
 
 object blockchain {
     mutable name: text = ft3_config.ft3_config.blockchain_name;

@@ -5,14 +5,13 @@
     <chains>
     	<chain name="filehub" iid="1">
     		<config height="0">
-    			<app module="filehub" />
+    			<app module="" />
     		</config>
     	</chain>
         <chain name="filechain" iid="2">
             <config height="0">
-                <app module="filechain" />
                 <dependencies>
-			        <dependency name="filehub" chain="filehub" />
+			        <dependency name="filehub" brid="FILECHAIN_BRID" />
 			    </dependencies>
             </config>
         </chain>

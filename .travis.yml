@@ -12,9 +12,11 @@ before_script:
   - sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 762E3157
   - npm i yarn
   - bash rell/install-postgres-10.sh
-  - psql -c "create database filestorage;" -U postgres
   - psql -c "create role postchain LOGIN ENCRYPTED PASSWORD 'postchain';" -U postgres
-  - psql -c "grant ALL ON DATABASE filestorage TO postchain;" -U postgres
+  - psql -c "create database filechain;" -U postgres
+  - psql -c "grant ALL ON DATABASE filechain TO postchain;" -U postgres
+  - psql -c "create database filehub;" -U postgres
+  - psql -c "grant ALL ON DATABASE filehub TO postchain;" -U postgres
 
 cache:
   pip: true
@@ -22,8 +24,13 @@ cache:
     - test/node_modules
 
 script:
-  - cd rell
+  - cd filechain/rell
   - ./download-binaries.sh
+  - ./build.sh
+  - ./run-dev-node.sh &
+  - cd ../filehub/rell
+  - ./download-binaries.sh
+  - sed 's/FILECHAIN_BRID/"$FILECHAIN_BRID"/g' run.xml
   - ./build.sh
   - ./run-dev-node.sh &
   - cd ../test

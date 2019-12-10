@@ -1,0 +1,12 @@
+<run wipe-db="false">
+    <nodes>
+        <config src="config/node-config.properties" add-signers="true" />
+    </nodes>
+    <chains>
+    	<chain name="filechain" iid="1">
+    		<config height="0">
+    			<app module="" />
+    		</config>
+    	</chain>
+    </chains>
+</run>
