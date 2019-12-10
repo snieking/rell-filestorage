@@ -28,11 +28,11 @@ script:
   - ./download-binaries.sh
   - ./build.sh
   - ./run-dev-node.sh &
-  - cd ../filehub/rell
+  - cd ../../filehub/rell
   - ./download-binaries.sh
   - sed 's/FILECHAIN_BRID/"$FILECHAIN_BRID"/g' run.xml
   - ./build.sh
   - ./run-dev-node.sh &
-  - cd ../test
+  - cd ../../test
   - npm install
   - npm run test
