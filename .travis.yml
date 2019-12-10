@@ -30,7 +30,8 @@ script:
   - ./run-dev-node.sh &
   - cd ../../filehub/rell
   - ./download-binaries.sh
-  - sed 's/FILECHAIN_BRID/"$FILECHAIN_BRID"/g' run.xml
+  - echo "Filechain BRID: $FILECHAIN_BRID"
+  - sed 's/FILECHAIN_BRID/"$(cat ../../filechain/rell/target/blockchains/1/brid.txt)"/g' run.xml
   - ./build.sh
   - ./run-dev-node.sh &
   - cd ../../test
