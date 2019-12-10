@@ -1,4 +1,5 @@
 # Rell Filestorage
+[![Build Status](https://travis-ci.org/snieking/rell-filestorage.svg?branch=master)](https://travis-ci.org/snieking/rell-filestorage)
 
 ## Introduction
 The idea is to provide a s3-like service dapp. 
