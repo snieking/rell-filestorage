@@ -13,10 +13,8 @@ before_script:
   - npm i yarn
   - bash filechain/rell/install-postgres-10.sh
   - psql -c "create role postchain LOGIN ENCRYPTED PASSWORD 'postchain';" -U postgres
-  - psql -c "create database filechain;" -U postgres
-  - psql -c "grant ALL ON DATABASE filechain TO postchain;" -U postgres
-  - psql -c "create database filehub;" -U postgres
-  - psql -c "grant ALL ON DATABASE filehub TO postchain;" -U postgres
+  - psql -c "create database filestorage;" -U postgres
+  - psql -c "grant ALL ON DATABASE filestorage TO postchain;" -U postgres
 
 cache:
   pip: true
