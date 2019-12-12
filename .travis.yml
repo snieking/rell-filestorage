@@ -24,13 +24,13 @@ cache:
     - test/node_modules
 
 script:
-  - cd filechain/rell
+  - cd filehub/rell
   - ./download-binaries.sh
   - ./build.sh
   - ./run-dev-node.sh &
-  - cd ../../filehub/rell
+  - cd ../../filechain/rell
   - ./download-binaries.sh
-  - sed -i "s/FILECHAIN_BRID/$(cat ../../filechain/rell/target/blockchains/1/brid.txt)/g" run.xml
+  - sed -i "s/FILEHUB_BRID/$(cat ../../filehub/rell/target/blockchains/1/brid.txt)/g" run.xml
   - ./build.sh
   - ./run-dev-node.sh &
   - cd ../../test

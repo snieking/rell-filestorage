@@ -3,9 +3,12 @@
         <config src="config/node-config.properties" add-signers="true" />
     </nodes>
     <chains>
-    	<chain name="filechain" iid="1">
+    	<chain name="filechain" iid="2">
     		<config height="0">
     			<app module="" />
+                <dependencies>
+                    <dependency name="filehub" brid="FILEHUB_BRID"/>
+                </dependencies>
     		</config>
     	</chain>
     </chains>

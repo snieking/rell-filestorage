@@ -8,12 +8,5 @@
     			<app module="" />
     		</config>
     	</chain>
-        <chain name="filechain" iid="2">
-            <config height="0">
-                <dependencies>
-			        <dependency name="filehub" brid="FILECHAIN_BRID" />
-			    </dependencies>
-            </config>
-        </chain>
     </chains>
 </run>

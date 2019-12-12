@@ -4,9 +4,9 @@
 .env
 
 # rell
-rell/logs/*
-rell/target/*
+**/target/**
 postchain-node/
+run.xml
 
 # dependencies
 node_modules
