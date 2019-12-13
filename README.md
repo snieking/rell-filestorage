@@ -1,5 +1,4 @@
 # Rell Filestorage
-[![Build Status](https://travis-ci.org/snieking/rell-filestorage.svg?branch=master)](https://travis-ci.org/snieking/rell-filestorage)
 [![CI Build Status](https://github.com/snieking/rell-filestorage/workflows/Continuous%20Integration/badge.svg)](https://github.com/snieking/rell-filestorage/actions)
 
 ## Introduction

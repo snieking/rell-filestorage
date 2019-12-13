@@ -58,14 +58,14 @@ export const allocateChunk = async (user: User, data: string): Promise<any> => {
 
 export const addChunkData = (user: User, data: string): Promise<any> => {
   const tx = FILECHAIN_GTX.newTransaction([user.keyPair.pubKey]);
-  tx.addOperation("add_chunk_data", Buffer.from(data));
+  tx.addOperation("add_chunk_data", Buffer.from(data, "utf8"));
   tx.sign(user.keyPair.privKey, user.keyPair.pubKey);
   return tx.postAndWaitConfirmation();
 };
 
 export const removeChunkData = (user: User, data: string): Promise<any> => {
   const tx = FILECHAIN_GTX.newTransaction([user.keyPair.pubKey]);
-  tx.addOperation("remove_chunk_data", Buffer.from(data));
+  tx.addOperation("remove_chunk_data", Buffer.from(data, "utf8"));
   tx.sign(user.keyPair.privKey, user.keyPair.pubKey);
   return tx.postAndWaitConfirmation();
 };
