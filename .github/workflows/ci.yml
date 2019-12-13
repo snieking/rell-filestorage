@@ -22,31 +22,34 @@ jobs:
           postgresql password: postchain
 
       # Build and deploy the Filehub
-      - name: Open filehub directory
-        run: cd filehub/rell
       - name: Download Postchain and Rell binaries
         run: ./download-binaries.sh
+        working-directory: filehub/rell
       - name: Build Filehub
         run: ./build.sh
+        working-directory: filehub/rell
       - name: Run Filehub
         run: ./run-dev-node.sh &
+        working-directory: filehub/rell
       
       # Build and deploy the Filechain
-      - name: Open Filechain directory
-        run: cd ../../filechain/rell
       - name: Download Postchain and Rell Binaries 
         run: ./download-binaries.sh
+        working-directory: filechain/rell
       - name: Add Filehub BRID to run.xml
         run: sed -i "s/FILEHUB_BRID/$(cat ../../filehub/rell/target/blockchains/1/brid.txt)/g" run.xml
+        working-directory: filechain/rell
       - name: Build Filechain
         run: ./build.sh
+        working-directory: filechain/rell
       - name: Run Filechain
         run: ./run-dev-node.sh &
+        working-directory: filechain/rell
       
       # Run test client
-      - name: Open test directory
-        run: cd ../../test
       - name: Install dependencies
         run: npm install
+        working-directory: test
       - name: Run tests
         run: npm run test
+        working-directory: test
