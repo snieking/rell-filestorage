@@ -5,7 +5,7 @@ import {Blockchain} from "ft3-lib";
 
 // Filehub chain
 const FILEHUB_NODE_API_URL = config.filehubNodeApiUrl;
-const FILEHUB_BLOCKCHAIN_RID = config.filehubRID;
+export const FILEHUB_BLOCKCHAIN_RID = config.filehubRID;
 export const FILEHUB_BLOCKCHAIN = Blockchain.initialize(
   Buffer.from(FILEHUB_BLOCKCHAIN_RID, "hex"),
   new DirectoryService(FILEHUB_BLOCKCHAIN_RID, FILEHUB_NODE_API_URL)

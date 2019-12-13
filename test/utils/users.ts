@@ -4,6 +4,7 @@ import * as crypto from 'crypto'
 import { FlagsType, KeyPair, SingleSignatureAuthDescriptor, User } from "ft3-lib";
 
 import { FILEHUB_BLOCKCHAIN } from "../blockchain/Postchain";
+import {addBalance} from "./utils";
 
 export const registerAdmin = async (ft3User: User): Promise<void> => {
 	const bc = await FILEHUB_BLOCKCHAIN;

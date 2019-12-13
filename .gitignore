@@ -7,6 +7,7 @@
 **/target/**
 postchain-node/
 run.xml
+logs
 
 # dependencies
 node_modules

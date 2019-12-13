@@ -1,0 +1,5 @@
+import ft3_acc: lib.ft3.account;
+
+entity admin {
+    account: ft3_acc.account;
+}

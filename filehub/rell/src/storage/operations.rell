@@ -1,29 +1,18 @@
 import ft3_acc: lib.ft3.account;
-
-operation register_admin(descriptor_id: byte_array) {
-    if (admin@?{} == null) {
-        val account = get_account_by_descriptor_id(descriptor_id);
-        create admin(account);
-    }
-}
-
-operation add_blockchain(descriptor_id: byte_array, rid: byte_array) {
-    val account = get_account_by_descriptor_id(descriptor_id);
-
-    if (admin@?{ account } != null and blockchain@?{ rid } == null) {
-        create blockchain(rid);
-	}
-}
+import ft3_core: lib.ft3.core;
+import util;
 
 operation allocate_chunk(descriptor_id: byte_array, hash: byte_array, pubkey) {
-    val account = get_account_by_descriptor_id(descriptor_id);
+    val account = util.get_account_by_descriptor_id(descriptor_id);
 	ft3_acc.require_auth(account, descriptor_id, ["A"]);
-	// Check if user has sufficient funds & take funds
 	
 	val blockchain = blockchain@{}; // choose a blockchain
+	
+	// Check if user has sufficient funds & take funds
+	val asset_id = ("CHR", chain_context.blockchain_rid).hash();
+	val token_cost = 1;
+	
+	ft3_core.deduct_balance(account, ft3_core.asset@{ .id == asset_id }, token_cost);
+	
 	create chunk(hash, pubkey, blockchain);
-}
-
-function get_account_by_descriptor_id(descriptor_id: byte_array): ft3_acc.account {
-    return ft3_acc.account_auth_descriptor@{ .descriptor_id == descriptor_id } ( .account );
 }
