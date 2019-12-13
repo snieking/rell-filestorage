@@ -1,0 +1,52 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: Setup PostgreSQL
+        uses: Harmon758/postgresql-action@v1.0.0
+        with:
+          # Version of PostgreSQL to use
+          postgresql version: 10
+          # POSTGRES_DB - name for the default database that is created
+          postgresql db: filestorage 
+          # POSTGRES_USER - create the specified user with superuser power
+          postgresql user: postchain 
+          # POSTGRES_PASSWORD - superuser password
+          postgresql password: postchain
+
+      # Build and deploy the Filehub
+      - name: Open filehub directory
+        run: cd filehub/rell
+      - name: Download Postchain and Rell binaries
+        run: ./download-binaries.sh
+      - name: Build Filehub
+        run: ./build.sh
+      - name: Run Filehub
+        run: ./run-dev-node.sh &
+      
+      # Build and deploy the Filechain
+      - name: Open Filechain directory
+        run: cd ../../filechain/rell
+      - name: Download Postchain and Rell Binaries 
+        run: ./download-binaries.sh
+      - name: Add Filehub BRID to run.xml
+        run: sed -i "s/FILEHUB_BRID/$(cat ../../filehub/rell/target/blockchains/1/brid.txt)/g" run.xml
+      - name: Build Filechain
+        run: ./build.sh
+      - name: Run Filechain
+        run: ./run-dev-node.sh &
+      
+      # Run test client
+      - name: Open test directory
+        run: cd ../../test
+      - name: Install dependencies
+        run: npm install
+      - name: Run tests
+        run: npm run test
