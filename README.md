@@ -1,5 +1,6 @@
 # Rell Filestorage
 [![Build Status](https://travis-ci.org/snieking/rell-filestorage.svg?branch=master)](https://travis-ci.org/snieking/rell-filestorage)
+[!CI Build Status](https://github.com/snieking/rell-filestorage/workflows/CI/badge.svg)](https://github.com/snieking/rell-filestorage/actions)
 
 ## Introduction
 The idea is to provide a s3-like service dapp. 
