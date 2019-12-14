@@ -45,7 +45,15 @@ jobs:
       - name: Run Filechain
         run: ./run-dev-node.sh &
         working-directory: filechain/rell
-      
+
+      # Build File Storage Client (fs-client)
+      - name: Install dependencies for fs-client
+        run: npm install
+        working-directory: client
+      - name: Build fs-client
+        run: npm run build
+        working-directory: client
+
       # Run test client
       - name: Install dependencies
         run: npm install
