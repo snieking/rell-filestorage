@@ -2,7 +2,7 @@
   "name": "test",
   "version": "1.0.0",
   "private": true,
-  "description": "Test project for filestorege dapps",
+  "description": "Test project for the file storage dapp",
   "scripts": {
     "test": "jest --setupFiles dotenv/config"
   },
@@ -12,7 +12,7 @@
   "dependencies": {
     "@types/node": "12.7.1",
     "@types/secp256k1": "3.5.0",
-    "ft3-lib": "^1.0.2",
+    "ft3-lib": "^2.1.0",
     "fs-client": "file:../client",
     "dotenv": "^8.2.0"
   },

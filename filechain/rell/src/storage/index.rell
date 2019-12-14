@@ -5,13 +5,13 @@ entity blockchain {
 
 @external('filehub') @log
 entity chunk {
-	key hash: byte_array;
-	pubkey;
+	key hash: byte_array, pubkey;
+	index name;
 	blockchain;
 }
 
 entity stored_file {
-	key hash: byte_array;
+	key hash: byte_array, pubkey;
 	transaction;
 }
 

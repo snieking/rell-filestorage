@@ -5,7 +5,7 @@ entity blockchain {
 
 @log
 entity chunk {
-	key hash: byte_array;
-	pubkey;
+	key hash: byte_array, pubkey;
+	index name;
 	blockchain;
 }

@@ -1,0 +1,15 @@
+query get_chunk(hash: byte_array, pubkey) {
+	return chunk@{ .hash == hash, pubkey } (
+		.hash,
+		.name,
+		brid = .blockchain.rid
+	);
+}
+
+query get_chunks(pubkey) {
+	return chunk@*{ pubkey } (
+		.hash,
+		.name,
+		brid = .blockchain.rid
+	);
+}
