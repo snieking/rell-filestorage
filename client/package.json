@@ -1,0 +1,42 @@
+{
+  "name": "fs-client",
+  "version": "1.0.0",
+  "description": "Client for communicating with Filehubs and Filechains in the Chromia blockchain",
+  "main": "src/index.ts",
+  "files": [
+    "lib/**/*"
+  ],
+  "dependencies": {
+    "@types/node": "^12.12.17",
+    "ft3-lib": "^1.0.2",
+    "postchain-client": "0.9.2"
+  },
+  "scripts": {
+    "build": "tsc",
+    "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
+    "lint": "tslint -p tsconfig.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/snieking/rell-filestorage.git"
+  },
+  "keywords": [
+    "chromia",
+    "blockchain",
+    "filestorage",
+    "filehub",
+    "filechain"
+  ],
+  "author": "snieking",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/snieking/rell-filestorage/issues"
+  },
+  "homepage": "https://github.com/snieking/rell-filestorage#readme",
+  "devDependencies": {
+    "prettier": "^1.19.1",
+    "tslint": "^5.20.1",
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "^3.7.3"
+  }
+}

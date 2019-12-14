@@ -13,8 +13,8 @@
     "@types/node": "12.7.1",
     "@types/secp256k1": "3.5.0",
     "ft3-lib": "^1.0.2",
-    "postchain-client": "0.9.2",
-	"dotenv": "^8.2.0"
+    "fs-client": "file:../client",
+    "dotenv": "^8.2.0"
   },
   "devDependencies": {
     "@types/jest": "^24.0.16",

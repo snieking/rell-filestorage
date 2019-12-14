@@ -1,7 +1,8 @@
 import * as pcl from "postchain-client";
 import * as config from "./config.js";
-import DirectoryService from "./DirectoryService";
+import DirectoryService from "../../client/src/clients/DirectoryService";
 import {Blockchain} from "ft3-lib";
+import Filehub from "fs-client/lib/clients/Filehub";
 
 // Filehub chain
 const FILEHUB_NODE_API_URL = config.filehubNodeApiUrl;
@@ -10,6 +11,8 @@ export const FILEHUB_BLOCKCHAIN = Blockchain.initialize(
   Buffer.from(FILEHUB_BLOCKCHAIN_RID, "hex"),
   new DirectoryService(FILEHUB_BLOCKCHAIN_RID, FILEHUB_NODE_API_URL)
 );
+
+export const FILEHUB = new Filehub(FILEHUB_NODE_API_URL, FILEHUB_BLOCKCHAIN_RID);
 
 // Filechain chain
 const FILECHAIN_NODE_API_URL = config.filechainNodeApiUrl;

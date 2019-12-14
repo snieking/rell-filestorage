@@ -2,7 +2,7 @@ import ft3_acc: lib.ft3.account;
 import ft3_core: lib.ft3.core;
 import util;
 
-operation allocate_chunk(descriptor_id: byte_array, hash: byte_array, pubkey) {
+operation allocate_chunk(descriptor_id: byte_array, name, hash: byte_array, pubkey) {
     val account = util.get_account_by_descriptor_id(descriptor_id);
 	ft3_acc.require_auth(account, descriptor_id, ["A"]);
 	

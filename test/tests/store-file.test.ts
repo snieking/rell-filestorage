@@ -1,6 +1,6 @@
 import {createFt3User, registerAdmin} from "../utils/users";
 import {generateRandomString, registerFilechainInFilehub, hashData, registerAsset, addBalance} from "../utils/utils";
-import {FILECHAIN_GTX, FILEHUB_BLOCKCHAIN} from "../blockchain/Postchain";
+import {FILECHAIN_GTX, FILEHUB, FILEHUB_BLOCKCHAIN} from "../blockchain/Postchain";
 import {User} from "ft3-lib";
 
 describe("Storing files tests", () => {
@@ -16,20 +16,20 @@ describe("Storing files tests", () => {
   });
 
   it("Allocate chunk", async () => {
-    await allocateChunk(user, generateRandomString(36));
+    await FILEHUB.allocateChunk(user, generateRandomString(36));
   });
 
   it("Allocate chunk and store data", async () => {
     const data = generateRandomString(36);
 
-    await allocateChunk(user, data);
+    await FILEHUB.allocateChunk(user, data);
     await addChunkData(user, data);
   });
 
   it("Allocate chunk, store and remove data", async () => {
     const data = generateRandomString(36);
 
-    await allocateChunk(user, data);
+    await FILEHUB.allocateChunk(user, data);
     await addChunkData(user, data);
     await removeChunkData(user, data);
   });
@@ -38,7 +38,7 @@ describe("Storing files tests", () => {
     const data = generateRandomString(36);
     const hash = hashData(data);
 
-    await allocateChunk(user, data);
+    await FILEHUB.allocateChunk(user, data);
     await addChunkData(user, data);
     await removeChunkDataByHash(user, hash);
   });
@@ -46,23 +46,11 @@ describe("Storing files tests", () => {
   it("Allocate chunk, insufficient funds", async () => {
     const poorUser = await createFt3User();
     const data = generateRandomString(36);
-    await allocateChunk(poorUser, data).catch(error => expect(error).toBeDefined());
+    await FILEHUB.allocateChunk(poorUser, data).catch(error => expect(error).toBeDefined());
     expect.assertions(1);
   });
 
 });
-
-const allocateChunk = (user: User, data: string): Promise<any> => {
-  const hash = hashData(data);
-
-  return FILEHUB_BLOCKCHAIN.then(bc => bc.call(
-    user,
-    "allocate_chunk",
-    user.authDescriptor.hash().toString("hex"),
-    hash,
-    user.keyPair.pubKey
-  ));
-};
 
 const addChunkData = (user: User, data: string): Promise<any> => {
   const tx = FILECHAIN_GTX.newTransaction([user.keyPair.pubKey]);
