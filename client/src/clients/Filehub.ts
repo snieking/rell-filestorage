@@ -36,7 +36,7 @@ export default class Filehub {
       .then(chunk => this.getFilechain(chunk.brid).storeChunkData(user, data));
   }
 
-  public async getMyFiles(user: User): Promise<File[]> {
+  public async getMyFiles(user: User): Promise<Buffer[]> {
     return this.getChunks(user).then(chunks => Promise.all(chunks.map(chunk => this.getFile(user, chunk))));
   };
 
@@ -46,9 +46,7 @@ export default class Filehub {
     const operation: Operation = new Operation(
       "allocate_chunk",
       user.authDescriptor.hash().toString("hex"),
-      name,
-      hash,
-      user.keyPair.pubKey
+      hash
     );
 
     return this.blockchain.then(bc => bc.call(operation, user));
@@ -56,21 +54,19 @@ export default class Filehub {
 
   private getChunk(user: User, hash: Buffer): Promise<Chunk> {
     return this.blockchain.then(bc => bc.query("get_chunk", {
-      hash: hash.toString("hex"),
-      pubkey: user.keyPair.pubKey.toString("hex")
+      hash: hash.toString("hex")
     }));
   }
 
   private getChunks(user: User): Promise<Chunk[]> {
     return this.blockchain.then(bc => bc.query("get_chunks", {
-      pubkey: user.keyPair.pubKey.toString("hex")
+      descriptor_id: user.authDescriptor.hash().toString("hex")
     }));
   };
 
-  private async getFile(user: User, chunk: Chunk): Promise<File> {
+  private async getFile(user: User, chunk: Chunk): Promise<Buffer> {
     const filechain: Filechain = this.getFilechain(chunk.brid);
-    return filechain.getFileByHash(user, chunk.hash)
-      .then(data => new File(chunk.name, data));
+    return filechain.getFileByHash(user, chunk.hash);
   }
 
   private getFilechain(brid: Buffer): Filechain {

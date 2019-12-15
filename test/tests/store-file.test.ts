@@ -18,13 +18,10 @@ describe("Storing files tests", () => {
   it("Store file", async () => {
     const s = generateRandomString(36);
     const data = Buffer.from(s, "utf8");
-    const name = s;
 
     await FILEHUB.storeFile(user, s, data);
     const files = await FILEHUB.getMyFiles(user);
-
-    const file = files.find(f => f.name === s);
-    expect(bufferToHex(file.data)).toEqual(bufferToHex(data));
+    expect(files.map(data => bufferToHex(data)).includes(bufferToHex(data))).toBeTruthy();
   });
 
   it("Store file, insufficient funds", async () => {

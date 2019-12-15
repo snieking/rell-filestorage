@@ -1,15 +1,20 @@
-query get_chunk(hash: byte_array, pubkey) {
-	return chunk@{ .hash == hash, pubkey } (
+import util;
+
+query get_chunk(hash: byte_array) {
+	return chunk@{ .hash == hash } (
 		.hash,
-		.name,
 		brid = .blockchain.rid
 	);
 }
 
-query get_chunks(pubkey) {
-	return chunk@*{ pubkey } (
-		.hash,
-		.name,
-		brid = .blockchain.rid
+query get_chunks(descriptor_id: byte_array) {
+	val account = util.get_account_by_descriptor_id(descriptor_id);
+	
+	return (chunk_holder, chunk)@*{ 
+		chunk_holder.account == account,
+		chunk_holder.chunk == chunk
+	} (
+		chunk.hash,
+		brid = chunk.blockchain.rid
 	);
 }

@@ -13,27 +13,27 @@ export default class Filechain {
 
   public storeChunkData(user: User, data: Buffer): Promise<any> {
     const tx = this.gtxClient.newTransaction([user.keyPair.pubKey]);
-    tx.addOperation("add_chunk_data", data, user.keyPair.pubKey);
+    tx.addOperation("add_chunk_data", data);
     tx.sign(user.keyPair.privKey, user.keyPair.pubKey);
     return tx.postAndWaitConfirmation();
   };
 
   public removeChunkData(user: User, data: string): Promise<any> {
     const tx = this.gtxClient.newTransaction([user.keyPair.pubKey]);
-    tx.addOperation("remove_chunk_data", Buffer.from(data, "utf8"), user.keyPair.pubKey);
+    tx.addOperation("remove_chunk_data", Buffer.from(data, "utf8"));
     tx.sign(user.keyPair.privKey, user.keyPair.pubKey);
     return tx.postAndWaitConfirmation();
   };
 
   public removeChunkDataByHash(user: User, hash: Buffer): Promise<any> {
     const tx = this.gtxClient.newTransaction([user.keyPair.pubKey]);
-    tx.addOperation("remove_chunk_data_by_hash", hash, user.keyPair.pubKey);
+    tx.addOperation("remove_chunk_data_by_hash", hash);
     tx.sign(user.keyPair.privKey, user.keyPair.pubKey);
     return tx.postAndWaitConfirmation();
   }
 
   public getFileByHash(user: User, hash: Buffer): Promise<Buffer> {
-    return this.restClient.query("get_file", { hash: hash.toString("hex"), pubkey: user.keyPair.pubKey.toString("hex") });
+    return this.restClient.query("get_file", { hash: hash.toString("hex") });
   }
 
 }

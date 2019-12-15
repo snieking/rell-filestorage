@@ -1,3 +1,5 @@
+import ft3_acc: lib.ft3.account;
+
 @log
 entity blockchain {
 	key rid: byte_array;
@@ -5,7 +7,10 @@ entity blockchain {
 
 @log
 entity chunk {
-	key hash: byte_array, pubkey;
-	index name;
+	key hash: byte_array;
 	blockchain;
+}
+
+entity chunk_holder {
+	key ft3_acc.account, chunk;
 }
