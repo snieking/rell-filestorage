@@ -1,2 +1,2 @@
 export * from "./clients/Filehub";
-export * from "./models/File";
+export * from "./models/FsFile";

@@ -2,6 +2,7 @@ import {createFt3User, registerAdmin} from "../utils/users";
 import {generateRandomString, registerFilechainInFilehub, registerAsset, addBalance} from "../utils/utils";
 import {FILEHUB} from "../blockchain/Postchain";
 import {User} from "ft3-lib";
+import FsFile from "../../client/src/models/FsFile";
 
 describe("Storing files tests", () => {
 
@@ -15,21 +16,34 @@ describe("Storing files tests", () => {
     await addBalance(user, 20);
   });
 
+  it("Store data", async () => {
+    const s = generateRandomString(36);
+    const data = Buffer.from(s, "utf8");
+
+    await FILEHUB.storeFile(user, new FsFile(s, data));
+    const files = await FILEHUB.getUserData(user);
+    console.log("Found files: ", files);
+    const file = files.find(f => f.path == s);
+    expect(bufferToHex(file.data)).toEqual(bufferToHex(data));
+  });
+
   it("Store file", async () => {
     const s = generateRandomString(36);
     const data = Buffer.from(s, "utf8");
 
-    await FILEHUB.storeFile(user, s, data);
-    const files = await FILEHUB.getMyFiles(user);
-    expect(files.map(data => bufferToHex(data)).includes(bufferToHex(data))).toBeTruthy();
+    await FILEHUB.storeFile(user, new FsFile(s, data));
+    const files = await FILEHUB.getUserData(user);
+
+    const file = files.find(f => f.path == s);
+    expect(bufferToHex(file.data)).toEqual(bufferToHex(data));
   });
 
-  it("Store file, insufficient funds", async () => {
+  it("Store data, insufficient funds", async () => {
     const poorUser = await createFt3User();
     const s = generateRandomString(36);
     const data = Buffer.from(s, "utf8");
 
-    await FILEHUB.storeFile(poorUser, s, data).catch(error => expect(error).toBeDefined());
+    await FILEHUB.storeFile(poorUser, new FsFile(s, data)).catch(error => expect(error).toBeDefined());
     expect.assertions(1);
   });
 

@@ -1,20 +1,28 @@
 import util;
 
-query get_chunk(hash: byte_array) {
-	return chunk@{ .hash == hash } (
-		.hash,
-		brid = .blockchain.rid
+query get_chunk(hash: byte_array, descriptor_id: byte_array) {
+	val account = util.get_account_by_descriptor_id(descriptor_id);
+	
+	return (chunk, chunk_meta)@{
+		chunk.hash == hash,
+		chunk_meta.account == account,
+		chunk == chunk_meta.chunk
+	} (
+		chunk.hash,
+		brid = chunk.blockchain.rid,
+		path = chunk_meta.path
 	);
 }
 
 query get_chunks(descriptor_id: byte_array) {
 	val account = util.get_account_by_descriptor_id(descriptor_id);
 	
-	return (chunk_holder, chunk)@*{ 
-		chunk_holder.account == account,
-		chunk_holder.chunk == chunk
+	return (chunk_meta, chunk)@*{ 
+		chunk_meta.account == account,
+		chunk_meta.chunk == chunk
 	} (
 		chunk.hash,
-		brid = chunk.blockchain.rid
+		brid = chunk.blockchain.rid,
+		path = chunk_meta.path
 	);
 }

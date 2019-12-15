@@ -11,6 +11,7 @@ entity chunk {
 	blockchain;
 }
 
-entity chunk_holder {
+entity chunk_meta {
 	key ft3_acc.account, chunk;
+	path: text;
 }
