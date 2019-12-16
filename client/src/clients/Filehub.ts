@@ -25,27 +25,49 @@ export default class Filehub {
     );
   }
 
-  public registerAdmin(ft3User: User): Promise<void> {
-    const operation = new Operation("register_admin", ft3User.authDescriptor.hash().toString("hex"));
-    return this.blockchain.then(bc => bc.call(operation, ft3User));
+  /**
+   * Registers the admin user, this operation is only valid when there are no other admins.
+   *
+   * @param user that is to become admin.
+   */
+  public registerAdmin(user: User): Promise<void> {
+    const operation = new Operation("register_admin", user.authDescriptor.hash().toString("hex"));
+    return this.blockchain.then(bc => bc.call(operation, user));
   };
 
-  public registerFilechain(user: User, brid: string): Promise<any> {
-      const operation = new Operation("add_filechain", user.authDescriptor.hash().toString("hex"), brid);
+  /**
+   * Registers a filechain to persist files in.
+   *
+   * @param user that is an admin of the filehub.
+   * @param rid of the filechain.
+   */
+  public registerFilechain(user: User, rid: string): Promise<any> {
+      const operation = new Operation("add_filechain", user.authDescriptor.hash().toString("hex"), rid);
       return this.blockchain.then(bc => bc.call(operation, user));
   };
 
+  /**
+   * Stores a file. Contacts the filehub and allocates a chunk, and then persists the data in the correct filechain.
+   *
+   * @param user that should be billed for the storage.
+   * @param file that is to be stored.
+   */
   public storeFile(user: User, file: FsFile): Promise<any> {
     return this.allocateChunk(user, file)
       .then(() => this.getChunk(user, hashData(file.data)))
       .then(chunk => this.getFilechain(chunk.brid).storeChunkData(user, file.data));
   }
 
-  public async storeDataEncrypted(user: User, file: FsFile) {
+  public async storeFileEncrypted(user: User, file: FsFile) {
 
   }
 
-  public async getUserData(user: User): Promise<FsFile[]> {
+  /**
+   * Gets all the files persisted by the user.
+   *
+   * @param user that has persisted previous files.
+   */
+  public async getUserFiles(user: User): Promise<FsFile[]> {
     return this.getChunks(user).then(chunks => Promise.all(chunks.map(chunk => this.getFullFile(user, chunk))));
   };
 

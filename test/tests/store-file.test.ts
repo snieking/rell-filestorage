@@ -21,7 +21,7 @@ describe("Storing files tests", () => {
     const data = Buffer.from(s, "utf8");
 
     await FILEHUB.storeFile(user, new FsFile(s, data));
-    const files = await FILEHUB.getUserData(user);
+    const files = await FILEHUB.getUserFiles(user);
     console.log("Found files: ", files);
     const file = files.find(f => f.path == s);
     expect(bufferToHex(file.data)).toEqual(bufferToHex(data));
@@ -32,7 +32,7 @@ describe("Storing files tests", () => {
     const data = Buffer.from(s, "utf8");
 
     await FILEHUB.storeFile(user, new FsFile(s, data));
-    const files = await FILEHUB.getUserData(user);
+    const files = await FILEHUB.getUserFiles(user);
 
     const file = files.find(f => f.path == s);
     expect(bufferToHex(file.data)).toEqual(bufferToHex(data));
