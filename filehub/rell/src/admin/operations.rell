@@ -1,11 +1,11 @@
 import util;
 import storage;
 
-operation add_blockchain(descriptor_id: byte_array, rid: byte_array) {
+operation add_filechain(descriptor_id: byte_array, rid: byte_array) {
     val account = util.get_account_by_descriptor_id(descriptor_id);
 
-    if (admin@?{ account } != null and storage.blockchain@?{ rid } == null) {
-        create storage.blockchain(rid);
+    if (admin@?{ account } != null and storage.filechain@?{ rid } == null) {
+        create storage.filechain(rid);
 	}
 }
 

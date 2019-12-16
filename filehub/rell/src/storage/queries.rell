@@ -9,7 +9,7 @@ query get_chunk(hash: byte_array, descriptor_id: byte_array) {
 		chunk == chunk_meta.chunk
 	} (
 		chunk.hash,
-		brid = chunk.blockchain.rid,
+		brid = chunk.filechain.rid,
 		path = chunk_meta.path
 	);
 }
@@ -22,7 +22,7 @@ query get_chunks(descriptor_id: byte_array) {
 		chunk_meta.chunk == chunk
 	} (
 		chunk.hash,
-		brid = chunk.blockchain.rid,
+		brid = chunk.filechain.rid,
 		path = chunk_meta.path
 	);
 }

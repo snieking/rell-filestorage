@@ -4,13 +4,6 @@ import * as crypto from 'crypto'
 import { FlagsType, KeyPair, SingleSignatureAuthDescriptor, User } from "ft3-lib";
 
 import { FILEHUB_BLOCKCHAIN } from "../blockchain/Postchain";
-import Operation from "ft3-lib/dist/lib/ft3/operation";
-
-export const registerAdmin = async (ft3User: User): Promise<void> => {
-	const bc = await FILEHUB_BLOCKCHAIN;
-	const operation = new Operation("register_admin", ft3User.authDescriptor.hash().toString("hex"));
-	await bc.call(operation, ft3User);
-};
 
 export const createFt3User = async (): Promise<User> => {
 	const walletKeyPair = new KeyPair(makeKeyPair().privKey.toString("hex"));

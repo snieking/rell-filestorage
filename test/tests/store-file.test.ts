@@ -1,4 +1,4 @@
-import {createFt3User, registerAdmin} from "../utils/users";
+import {createFt3User} from "../utils/users";
 import {generateRandomString, registerFilechainInFilehub, registerAsset, addBalance} from "../utils/utils";
 import {FILEHUB} from "../blockchain/Postchain";
 import {User} from "ft3-lib";
@@ -10,7 +10,7 @@ describe("Storing files tests", () => {
 
   beforeAll(async () => {
     user = await createFt3User();
-    await registerAdmin(user);
+    await FILEHUB.registerAdmin(user);
     await registerFilechainInFilehub(user);
     await registerAsset(user);
     await addBalance(user, 20);

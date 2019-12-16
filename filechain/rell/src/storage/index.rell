@@ -1,12 +1,12 @@
 @external('filehub') @log
-entity blockchain { 
+entity filechain { 
 	key rid: byte_array;
 }
 
 @external('filehub') @log
 entity chunk {
 	key hash: byte_array;
-	blockchain;
+	filechain;
 }
 
 entity stored_file {

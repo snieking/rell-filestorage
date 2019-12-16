@@ -9,7 +9,7 @@ operation allocate_chunk(descriptor_id: byte_array, path: text, hash: byte_array
 	var chunk = chunk@?{ hash };
 	
 	if (chunk == null) {
-	    val blockchain = blockchain@{}; // choose a blockchain
+	    val filechain = filechain@{}; // choose a blockchain
 		
 		// Check if user has sufficient funds & take funds
 		val asset_id = ("CHR", chain_context.blockchain_rid).hash();
@@ -17,7 +17,7 @@ operation allocate_chunk(descriptor_id: byte_array, path: text, hash: byte_array
 		
 		ft3_core.deduct_balance(account, ft3_core.asset@{ .id == asset_id }, token_cost);
 		
-		chunk = create chunk(hash, blockchain);
+		chunk = create chunk(hash, filechain);
 	}
 	
 	create chunk_meta(account, chunk, path);

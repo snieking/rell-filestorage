@@ -6,7 +6,6 @@
 # rell
 **/target/**
 postchain-node/
-run.xml
 logs
 
 # client

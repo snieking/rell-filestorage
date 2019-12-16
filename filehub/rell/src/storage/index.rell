@@ -1,14 +1,14 @@
 import ft3_acc: lib.ft3.account;
 
 @log
-entity blockchain {
+entity filechain {
 	key rid: byte_array;
 }
 
 @log
 entity chunk {
 	key hash: byte_array;
-	blockchain;
+	filechain;
 }
 
 entity chunk_meta {

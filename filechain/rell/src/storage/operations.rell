@@ -1,7 +1,7 @@
 operation add_chunk_data(data: byte_array) {
    val hash = data.sha256();
    val chunk = chunk @ { hash };
-   require(chunk.blockchain.rid == chain_context.blockchain_rid);
+   require(chunk.filechain.rid == chain_context.blockchain_rid);
    
    val stored_file = stored_file@?{ hash };
    if (stored_file == null) {

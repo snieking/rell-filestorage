@@ -7,6 +7,7 @@ import ChainConnectionInfo from "ft3-lib/dist/lib/ft3/chain-connection-info";
 import ChunkMeta from "../models/ChunkMeta";
 import FsFile from "../models/FsFile";
 import Operation from "ft3-lib/dist/lib/ft3/operation";
+import {FILEHUB_BLOCKCHAIN} from "../../../test/blockchain/Postchain";
 
 export default class Filehub {
 
@@ -25,12 +26,17 @@ export default class Filehub {
     );
   }
 
+  public registerAdmin(ft3User: User): Promise<void> {
+    const operation = new Operation("register_admin", ft3User.authDescriptor.hash().toString("hex"));
+    return this.blockchain.then(bc => bc.call(operation, ft3User));
+  };
+
   public registerFilechain(user: User, brid: string): Promise<any> {
-      const operation = new Operation("add_blockchain", user.authDescriptor.hash().toString("hex"), brid);
+      const operation = new Operation("add_filechain", user.authDescriptor.hash().toString("hex"), brid);
       return this.blockchain.then(bc => bc.call(operation, user));
   };
 
-  public async storeFile(user: User, file: FsFile): Promise<any> {
+  public storeFile(user: User, file: FsFile): Promise<any> {
     return this.allocateChunk(user, file)
       .then(() => this.getChunk(user, hashData(file.data)))
       .then(chunk => this.getFilechain(chunk.brid).storeChunkData(user, file.data));
