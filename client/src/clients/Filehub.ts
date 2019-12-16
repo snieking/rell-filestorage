@@ -1,4 +1,4 @@
-import {Blockchain, op, User} from "ft3-lib";
+import {Blockchain, User} from "ft3-lib";
 import DirectoryService from "./DirectoryService";
 import {hashData} from "../utils/crypto";
 
@@ -7,7 +7,6 @@ import ChainConnectionInfo from "ft3-lib/dist/lib/ft3/chain-connection-info";
 import ChunkMeta from "../models/ChunkMeta";
 import FsFile from "../models/FsFile";
 import Operation from "ft3-lib/dist/lib/ft3/operation";
-import {FILEHUB_BLOCKCHAIN} from "../../../test/blockchain/Postchain";
 
 export default class Filehub {
 
