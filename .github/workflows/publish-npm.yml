@@ -13,12 +13,14 @@ jobs:
       - name: Check if version has been updated
         id: check
         uses: EndBug/version-check@v1.1.0
-        working-directory: client
+        with:
+          working-directory: client
 
       - name: Publish to npm
         uses: pascalgn/npm-publish-action@1.1.0
         if: steps.check.outputs.changed == 'true'
         with:
+          working-directory: client
           tag_name: "client-v%s"
           tag_message: "^Client Release (\\S+)"
         env: # More info about the environment variables in the README
