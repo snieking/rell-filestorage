@@ -7,7 +7,7 @@ on: [push]
 
 jobs:
   build:
-    needs: continuous-integration
+#    needs: continuous-integration
     runs-on: ubuntu-latest
 
     steps:
