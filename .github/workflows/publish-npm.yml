@@ -1,0 +1,26 @@
+name: Publish NPM
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Check if version has been updated
+        id: check
+        uses: EndBug/version-check@v1.1.0
+        working-directory: client
+
+      - name: Publish to npm
+        uses: pascalgn/npm-publish-action@1.1.0
+        if: steps.check.outputs.changed == 'true'
+        with:
+          tag_name: "client-v%s"
+          tag_message: "^Client Release (\\S+)"
+        env: # More info about the environment variables in the README
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Leave this as is, it's automatically generated
+          NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }} # You need to set this in your repo settings

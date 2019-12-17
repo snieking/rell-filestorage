@@ -1,6 +1,6 @@
 {
-  "name": "filestore-client",
-  "version": "1.0.0",
+  "name": "@snieking/fs-client",
+  "version": "0.0.1",
   "description": "Client for communicating with Filehubs and Filechains in the Chromia blockchain",
   "main": "src/index.ts",
   "files": [
