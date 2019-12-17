@@ -7,11 +7,15 @@ on: [push]
 
 jobs:
   build:
-#    needs: continuous-integration
+    needs: continuous-integration
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v1
+
+      - name: Build npm package
+        run: npm run build
+        working-directory: client
 
       - name: Publish to npm
         run: npm publish --dry-run
