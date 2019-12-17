@@ -7,7 +7,7 @@
     		<config height="0">
     			<app module="" />
                 <dependencies>
-                    <dependency name="filehub" brid="031944A11A94C635DC572DF872CD1E62E8129E06C29EB4A013C0F4178FD87DCD"/>
+                    <dependency name="filehub" brid="277A8FD628E24D502089E21AA2474EB4F2915D18B2B7B87352A78C91F48537D8"/>
                 </dependencies>
     		</config>
     	</chain>

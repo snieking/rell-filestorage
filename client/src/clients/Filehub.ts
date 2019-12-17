@@ -7,6 +7,7 @@ import ChainConnectionInfo from "ft3-lib/dist/lib/ft3/chain-connection-info";
 import ChunkMeta from "../models/ChunkMeta";
 import FsFile from "../models/FsFile";
 import Operation from "ft3-lib/dist/lib/ft3/operation";
+import {Voucher} from "../models/Voucher";
 
 export default class Filehub {
 
@@ -70,6 +71,29 @@ export default class Filehub {
   public async getUserFiles(user: User): Promise<FsFile[]> {
     return this.getChunks(user).then(chunks => Promise.all(chunks.map(chunk => this.getFullFile(user, chunk))));
   };
+
+  /**
+   * Retrieves all the vouchers for the specific user.
+   *
+   * @param user who may or may not hold vouchers.
+   */
+  public getVouchers(user: User): Promise<Voucher[]> {
+    return this.blockchain
+      .then(bc => bc.query("get_vouchers", { descriptor_id: user.authDescriptor.hash().toString("hex") }));
+  }
+
+  /**
+   * Checks if the user has an active voucher.
+   *
+   * @param user to check if an active voucher exists for.
+   */
+  public hasActiveVoucher(user: User): Promise<boolean> {
+    return this.blockchain
+      .then(bc => bc.query("has_active_voucher_for_timestamp", {
+        descriptor_id: user.authDescriptor.hash().toString("hex"),
+        timestamp: Date.now()
+      }))
+  }
 
   private allocateChunk(user: User, file: FsFile): Promise<any> {
     const hash = hashData(file.data);

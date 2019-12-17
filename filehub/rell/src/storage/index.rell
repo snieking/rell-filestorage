@@ -1,4 +1,5 @@
 import ft3_acc: lib.ft3.account;
+import ft3_core: lib.ft3.core;
 
 @log
 entity filechain {

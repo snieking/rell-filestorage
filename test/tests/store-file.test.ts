@@ -14,6 +14,8 @@ describe("Storing files tests", () => {
     await registerFilechainInFilehub(user);
     await registerAsset(user);
     await addBalance(user, 20);
+
+    expect(await FILEHUB.hasActiveVoucher(user)).toBeFalsy();
   });
 
   it("Store data", async () => {
@@ -45,6 +47,11 @@ describe("Storing files tests", () => {
 
     await FILEHUB.storeFile(poorUser, new FsFile(s, data)).catch(error => expect(error).toBeDefined());
     expect.assertions(1);
+  });
+
+  afterAll(async () => {
+    const vouchers = await FILEHUB.getVouchers(user);
+    expect(vouchers.length).toEqual(1);
   });
 
 });

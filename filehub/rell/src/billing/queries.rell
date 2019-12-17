@@ -1,0 +1,18 @@
+import util;
+
+query get_vouchers(descriptor_id: byte_array) {
+	val account = util.get_account_by_descriptor_id(descriptor_id);
+	return voucher@*{ account } (
+		.timestamp,
+		.plan,
+		asset = .asset.name,
+		.amount
+	);
+}
+
+query has_active_voucher_for_timestamp(descriptor_id: byte_array, timestamp): boolean {
+	val account = util.get_account_by_descriptor_id(descriptor_id);
+	val MONTH_MILLIS = 1000 * 60 * 60 * 24 * 30;
+	
+	return get_active_invoice(account, timestamp) != null;
+}
