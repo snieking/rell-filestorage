@@ -1,9 +1,9 @@
-name: Publish NPM
+name: publish-fs-client
 
-on:
-  push:
-    tags:
-      - client-v*
+on: [push]
+#  push:
+#    tags:
+#      - client-v*
 
 jobs:
   build:
