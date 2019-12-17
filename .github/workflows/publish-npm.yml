@@ -1,13 +1,12 @@
 name: publish-fs-client
 
-on: [push]
-#  push:
-#    tags:
-#      - client-v*
+on:
+  push:
+    tags:
+      - client-v*
 
 jobs:
   build:
-    needs: continuous-integration
     runs-on: ubuntu-latest
 
     steps:
@@ -18,7 +17,7 @@ jobs:
         working-directory: client
 
       - name: Publish to npm
-        run: npm publish --dry-run
+        run: npm publish
         working-directory: client
         env: # More info about the environment variables in the README
           NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }} # You need to set this in your repo settings
