@@ -1,4 +1,5 @@
 import ft3_acc: lib.ft3.account;
+import util;
 
 function get_voucher_price(billing_plan: plan): integer {
 	if (plan.STANDARD == billing_plan) {
@@ -9,6 +10,6 @@ function get_voucher_price(billing_plan: plan): integer {
 }
 
 function get_active_invoice(account: ft3_acc.account, timestamp): voucher? {
-	val MONTH_MILLIS = 1000 * 60 * 60 * 24 * 30;
+	val MONTH_MILLIS = util.get_period_in_millis("month");
 	return voucher@?{ account, .timestamp > timestamp + MONTH_MILLIS } limit 1;
 }
