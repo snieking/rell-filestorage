@@ -50,6 +50,8 @@ jobs:
       - name: Install dependencies for fs-client
         run: npm install
         working-directory: client
+        env:
+          NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
       - name: Build fs-client
         run: npm run build
         working-directory: client
@@ -58,6 +60,8 @@ jobs:
       - name: Install dependencies
         run: npm install
         working-directory: test
+        env:
+          NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
       - name: Run tests
         run: npm run test
         working-directory: test
