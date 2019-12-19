@@ -12,5 +12,10 @@ query get_vouchers(descriptor_id: byte_array) {
 
 query has_active_voucher_for_timestamp(descriptor_id: byte_array, timestamp): boolean {
 	val account = util.get_account_by_descriptor_id(descriptor_id);	
-	return get_active_invoice(account, timestamp) != null;
+	return (voucher@?{ account, .timestamp >= timestamp } (
+		@sort_desc .timestamp,
+		.plan,
+		.asset,
+		.amount
+	) limit 1) != null;
 }

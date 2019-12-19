@@ -8,6 +8,7 @@ import ChunkMeta from "../models/ChunkMeta";
 import FsFile from "../models/FsFile";
 import Operation from "ft3-lib/dist/lib/ft3/operation";
 import {Voucher} from "../models/Voucher";
+import {uniqueId} from "../utils/utils";
 
 export default class Filehub {
 
@@ -61,6 +62,18 @@ export default class Filehub {
 
   public async storeFileEncrypted(user: User, file: FsFile) {
 
+  }
+
+  /**
+   * Purchases a new voucher if possible.
+   * It is only possible to buy a new voucher when there is less than a day left on your current one.
+   *
+   * @param user that should purchase the voucher.
+   */
+  public purchaseVoucher(user: User): Promise<any> {
+    const operation = new Operation("create_voucher", user.authDescriptor.hash().toString("hex"));
+    const nop = new Operation("nop", Date.now());
+    return this.blockchain.then(bc => bc.transactionBuilder().add(nop).add(operation).buildAndSign(user).post());
   }
 
   /**

@@ -36,7 +36,7 @@ export const addBalance = async (user: User, balance: number) => {
   const accounts = await bc.getAccountsByAuthDescriptorId(user.authDescriptor.hash(), user);
 
   const operation = new Operation("ft3.dev_give_balance", assetId, accounts[0].id_, balance);
-  await bc.call(operation, user);
+  await bc.transactionBuilder().add(operation).add(new Operation("nop", Date.now())).buildAndSign(user).post();
 };
 
 export const generateRandomString = (length: number) => {

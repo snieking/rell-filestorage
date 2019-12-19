@@ -1,5 +1,4 @@
 import ft3_acc: lib.ft3.account;
-import ft3_core: lib.ft3.core;
 import util;
 import billing;
 
@@ -14,19 +13,20 @@ operation allocate_chunk(descriptor_id: byte_array, path: text, hash: byte_array
 		
 		// Check if user has active voucher
 		val current_timestamp = op_context.last_block_time;
-		val active_invoice = billing.get_active_invoice(account, current_timestamp);
 		
-		// If no active voucher, then create a voucher and deduct balance
-		if (active_invoice == null) {
-			val asset = ft3_core.asset@{ .id == ("CHR", chain_context.blockchain_rid).hash() };
-			val token_cost = billing.get_voucher_price(billing.plan.STANDARD);
-			
-			ft3_core.deduct_balance(account, asset, token_cost);
-			create billing.voucher(account, timestamp = current_timestamp, asset, amount = token_cost);
+		val active_invoice = billing.voucher@?{ account, .timestamp > current_timestamp } (
+			@sort_desc .timestamp,
+			.plan,
+			.asset,
+			.amount
+		) limit 1;
+		
+		if (active_invoice != null) {
+			chunk = create chunk(hash, filechain);
+			create chunk_meta(account, chunk, path);
 		}
-
-		chunk = create chunk(hash, filechain);
+			
+	} else {
+		create chunk_meta(account, chunk, path);
 	}
-	
-	create chunk_meta(account, chunk, path);
 }

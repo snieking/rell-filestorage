@@ -14,8 +14,7 @@ describe("Storing files tests", () => {
     await registerFilechainInFilehub(user);
     await registerAsset(user);
     await addBalance(user, 20);
-
-    expect(await FILEHUB.hasActiveVoucher(user)).toBeFalsy();
+    await FILEHUB.purchaseVoucher(user);
   });
 
   it("Store data", async () => {
@@ -40,12 +39,12 @@ describe("Storing files tests", () => {
     expect(bufferToHex(file.data)).toEqual(bufferToHex(data));
   });
 
-  it("Store data, insufficient funds", async () => {
-    const poorUser = await createFt3User();
+  it("Store data, no voucher", async () => {
+    const userWithoutVoucher = await createFt3User();
     const s = generateRandomString(36);
     const data = Buffer.from(s, "utf8");
 
-    await FILEHUB.storeFile(poorUser, new FsFile(s, data)).catch(error => expect(error).toBeDefined());
+    await FILEHUB.storeFile(userWithoutVoucher, new FsFile(s, data)).catch(error => expect(error).toBeDefined());
     expect.assertions(1);
   });
 

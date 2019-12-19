@@ -8,8 +8,3 @@ function get_voucher_price(billing_plan: plan): integer {
 		return 2;
 	}
 }
-
-function get_active_invoice(account: ft3_acc.account, timestamp): voucher? {
-	val MONTH_MILLIS = util.get_period_in_millis("month");
-	return voucher@?{ account, .timestamp > timestamp + MONTH_MILLIS } limit 1;
-}
