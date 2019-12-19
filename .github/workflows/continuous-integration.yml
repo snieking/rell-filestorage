@@ -55,6 +55,8 @@ jobs:
       - name: Build fs-client
         run: npm run build
         working-directory: client
+        env:
+          NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
 
       # Run test client
       - name: Install dependencies
