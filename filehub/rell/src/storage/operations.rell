@@ -2,9 +2,10 @@ import ft3_acc: lib.ft3.account;
 import util;
 import billing;
 
-operation allocate_chunk(descriptor_id: byte_array, path: text, hash: byte_array) {
+operation allocate_chunk(descriptor_id: byte_array, name, hash: byte_array) {
 	val account = util.get_account_by_descriptor_id(descriptor_id);
 	ft3_acc.require_auth(account, descriptor_id, ["A"]);
+	require(name.size() < 256, "Length of a name isn't allowed to be longer than 256");
 	
 	var chunk = chunk@?{ hash };
 	
@@ -23,10 +24,10 @@ operation allocate_chunk(descriptor_id: byte_array, path: text, hash: byte_array
 		
 		if (active_invoice != null) {
 			chunk = create chunk(hash, filechain);
-			create chunk_meta(account, chunk, path);
+			create chunk_meta(account, chunk, name);
 		}
 			
 	} else {
-		create chunk_meta(account, chunk, path);
+		create chunk_meta(account, chunk, name);
 	}
 }

@@ -7,7 +7,7 @@ import ChainConnectionInfo from "ft3-lib/dist/lib/ft3/chain-connection-info";
 import ChunkMeta from "../models/ChunkMeta";
 import FsFile from "../models/FsFile";
 import Operation from "ft3-lib/dist/lib/ft3/operation";
-import {Voucher} from "../models/Voucher";
+import {Voucher} from "..";
 
 export default class Filehub {
 
@@ -113,7 +113,7 @@ export default class Filehub {
     const operation: Operation = new Operation(
       "allocate_chunk",
       user.authDescriptor.id,
-      file.path,
+      file.name,
       hash
     );
 
@@ -135,7 +135,7 @@ export default class Filehub {
 
   private async getFullFile(user: User, chunk: ChunkMeta): Promise<FsFile> {
     const filechain: Filechain = this.getFilechain(chunk.brid);
-    return filechain.getFileByHash(user, chunk.hash).then(data => new FsFile(chunk.path, data));
+    return filechain.getFileByHash(user, chunk.hash).then(data => new FsFile(chunk.name, data));
   }
 
   private getFilechain(brid: Buffer): Filechain {

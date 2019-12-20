@@ -1,11 +1,11 @@
 import { readFileSync } from 'fs';
 
 export default class FsFile {
-  readonly path: string;
+  readonly name: string;
   readonly data: Buffer;
 
-  public constructor(path: string, data: Buffer) {
-    this.path = path;
+  public constructor(name: string, data: Buffer) {
+    this.name = name;
     this.data = data;
   }
 

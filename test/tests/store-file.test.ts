@@ -18,13 +18,12 @@ describe("Storing files tests", () => {
   });
 
   it("Store data", async () => {
-    const s = generateRandomString(36);
-    const data = Buffer.from(s, "utf8");
+    const name = generateRandomString(36);
+    const data = generateData(36)
 
-    await FILEHUB.storeFile(user, new FsFile(s, data));
+    await storeData(name, data, user);
     const files = await FILEHUB.getUserFiles(user);
-    console.log("Found files: ", files);
-    const file = files.find(f => f.path == s);
+    const file = files.find(f => f.name == name);
     expect(bufferToHex(file.data)).toEqual(bufferToHex(data));
   });
 
@@ -35,16 +34,37 @@ describe("Storing files tests", () => {
     await FILEHUB.storeFile(user, new FsFile(s, data));
     const files = await FILEHUB.getUserFiles(user);
 
-    const file = files.find(f => f.path == s);
+    const file = files.find(f => f.name == s);
     expect(bufferToHex(file.data)).toEqual(bufferToHex(data));
+  });
+
+  it("File name below 256 length allowewd", async () => {
+    const name = generateRandomString(255);
+    const data = generateData(36);
+
+    await storeData(name, data, user);
+    const files = await FILEHUB.getUserFiles(user);
+
+    const file = files.find(f => f.name == name);
+    expect(bufferToHex(file.data)).toEqual(bufferToHex(data));
+  });
+
+  it("File name with 256 length not allowewd", async () => {
+    await storeGeneratedData(generateRandomString(256), 36, user)
+      .catch(error => expect(error).toBeDefined());
+    expect.assertions(1);
+  });
+
+  it("File name above 256 length not allowewd", async () => {
+    await storeGeneratedData(generateRandomString(257), 36, user)
+      .catch(error => expect(error).toBeDefined());
+    expect.assertions(1);
   });
 
   it("Store data, no voucher", async () => {
     const userWithoutVoucher = await createFt3User();
-    const s = generateRandomString(36);
-    const data = Buffer.from(s, "utf8");
-
-    await FILEHUB.storeFile(userWithoutVoucher, new FsFile(s, data)).catch(error => expect(error).toBeDefined());
+    await storeGeneratedData(generateRandomString(36), 36, userWithoutVoucher)
+      .catch(error => expect(error).toBeDefined());
     expect.assertions(1);
   });
 
@@ -54,6 +74,19 @@ describe("Storing files tests", () => {
   });
 
 });
+
+const storeGeneratedData = (name: string, dataLength: number, user: User) => {
+  const data = Buffer.from(generateRandomString(dataLength), "utf8");
+  return FILEHUB.storeFile(user, new FsFile(name, data));
+};
+
+const generateData = (length: number) => {
+  return Buffer.from(generateRandomString(length), "utf8");
+};
+
+const storeData = (name: string, data: Buffer, user: User) => {
+  return FILEHUB.storeFile(user, new FsFile(name, data));
+};
 
 const bufferToHex = (buffer: Buffer) => {
   return buffer.toString("hex").toLocaleUpperCase();

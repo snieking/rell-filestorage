@@ -10,7 +10,7 @@ query get_chunk(hash: byte_array, descriptor_id: byte_array) {
 	} (
 		chunk.hash,
 		brid = chunk.filechain.rid,
-		path = chunk_meta.path
+		name = chunk_meta.name
 	);
 }
 
@@ -23,6 +23,6 @@ query get_chunks(descriptor_id: byte_array) {
 	} (
 		chunk.hash,
 		brid = chunk.filechain.rid,
-		path = chunk_meta.path
+		name = chunk_meta.name
 	);
 }
