@@ -114,7 +114,7 @@ export default class Filehub {
    */
   public getAllocatedBytes(user: User): Promise<number> {
     return this.blockchain
-      .then(bc => bc.query("get_stored_bytes", { descriptor_id: user.authDescriptor.hash().toString("hex") }));
+      .then(bc => bc.query("get_allocated_bytes", { descriptor_id: user.authDescriptor.hash().toString("hex") }));
   }
 
   private allocateChunk(user: User, file: FsFile): Promise<any> {
