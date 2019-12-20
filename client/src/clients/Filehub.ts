@@ -91,7 +91,7 @@ export default class Filehub {
    */
   public getVouchers(user: User): Promise<Voucher[]> {
     return this.blockchain
-      .then(bc => bc.query("get_vouchers", { descriptor_id: user.authDescriptor.id }));
+      .then(bc => bc.query("get_vouchers", { descriptor_id: user.authDescriptor.hash().toString("hex") }));
   }
 
   /**
@@ -102,7 +102,7 @@ export default class Filehub {
   public hasActiveVoucher(user: User): Promise<boolean> {
     return this.blockchain
       .then(bc => bc.query("has_active_voucher_for_timestamp", {
-        descriptor_id: user.authDescriptor.id,
+        descriptor_id: user.authDescriptor.hash().toString("hex"),
         timestamp: Date.now()
       }))
   }
@@ -129,7 +129,7 @@ export default class Filehub {
 
   private getChunks(user: User): Promise<ChunkMeta[]> {
     return this.blockchain.then(bc => bc.query("get_chunks", {
-      descriptor_id: user.authDescriptor.id
+      descriptor_id: user.authDescriptor.hash().toString("hex")
     }));
   };
 
