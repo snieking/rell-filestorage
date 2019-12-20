@@ -1,0 +1,15 @@
+import ft3_acc: lib.ft3.account;
+
+function _get_allocated_bytes(ft3_acc.account): integer {
+	val stored_item_sizes = (chunk_meta, chunk_size)@*{ 
+		chunk_meta.account == account,
+		chunk_meta.chunk == chunk_size.chunk
+	} ( .size );
+	
+	var total_size = 0;
+	for (size in stored_item_sizes) {
+		total_size += size;
+	}
+	
+	return total_size;
+}

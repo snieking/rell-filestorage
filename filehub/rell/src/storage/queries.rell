@@ -28,3 +28,8 @@ query get_chunks(descriptor_id: byte_array) {
 		name = chunk_meta.name
 	);
 }
+
+query get_allocated_bytes(descriptor_id: byte_array) {
+	val account = util.get_account_by_descriptor_id(descriptor_id);
+	return _get_allocated_bytes(account);
+}

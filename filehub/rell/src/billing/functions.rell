@@ -1,7 +1,4 @@
-import ft3_acc: lib.ft3.account;
-import util;
-
-function get_voucher_price(billing_plan: plan): integer {
+function _get_voucher_price(billing_plan: plan): integer {
 	if (plan.STANDARD == billing_plan) {
 		return 1;
 	} else {

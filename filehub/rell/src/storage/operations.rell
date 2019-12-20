@@ -23,6 +23,7 @@ operation allocate_chunk(descriptor_id: byte_array, name, hash: byte_array, file
 		) limit 1;
 		
 		require(active_voucher, "User must have an active invoice");
+		require(util._get_allowed_storage_bytes(active_voucher.plan) >= _get_allocated_bytes(account) + file_size, "Not enough storage left for user");
 		chunk = create chunk(hash, filechain);			
 	}
 	

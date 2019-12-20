@@ -1,8 +1,8 @@
 import {createFt3User} from "../utils/users";
-import {generateRandomString, registerFilechainInFilehub, registerAsset, addBalance} from "../utils/utils";
 import {FILEHUB} from "../blockchain/Postchain";
 import {User} from "ft3-lib";
 import FsFile from "../../client/src/models/FsFile";
+import {addBalance, generateRandomString, registerAsset, registerFilechainInFilehub} from "../utils/utils";
 
 describe("Storing files tests", () => {
 
@@ -66,6 +66,18 @@ describe("Storing files tests", () => {
     await storeGeneratedData(generateRandomString(36), 36, userWithoutVoucher)
       .catch(error => expect(error).toBeDefined());
     expect.assertions(1);
+  });
+
+  it("Store file, correct amount of allocated bytes", async () => {
+    const user2 = await createFt3User();
+    await addBalance(user2, 20);
+    await FILEHUB.purchaseVoucher(user2);
+
+    const dataSize = 1000;
+    await storeGeneratedData(generateRandomString(36), dataSize, user2);
+    const allocatedBytes = await FILEHUB.getAllocatedBytes(user2);
+
+    expect(allocatedBytes).toBe(dataSize);
   });
 
   afterAll(async () => {

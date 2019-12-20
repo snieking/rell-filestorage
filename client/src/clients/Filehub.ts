@@ -107,6 +107,16 @@ export default class Filehub {
       }))
   }
 
+  /**
+   * Returns how many bytes the user has allocated.
+   *
+   * @param user to check allocation for.
+   */
+  public getAllocatedBytes(user: User): Promise<number> {
+    return this.blockchain
+      .then(bc => bc.query("get_stored_bytes", { descriptor_id: user.authDescriptor.hash().toString("hex") }));
+  }
+
   private allocateChunk(user: User, file: FsFile): Promise<any> {
     const hash = hashData(file.data);
 
