@@ -1,4 +1,4 @@
-import {Blockchain, User} from "ft3-lib";
+import {Blockchain, nop, op, User} from "ft3-lib";
 import DirectoryService from "./DirectoryService";
 import {hashData} from "../utils/crypto";
 
@@ -8,7 +8,6 @@ import ChunkMeta from "../models/ChunkMeta";
 import FsFile from "../models/FsFile";
 import Operation from "ft3-lib/dist/lib/ft3/operation";
 import {Voucher} from "../models/Voucher";
-import {uniqueId} from "../utils/utils";
 
 export default class Filehub {
 
@@ -33,8 +32,7 @@ export default class Filehub {
    * @param user that is to become admin.
    */
   public registerAdmin(user: User): Promise<void> {
-    const operation = new Operation("register_admin", user.authDescriptor.hash().toString("hex"));
-    return this.blockchain.then(bc => bc.call(operation, user));
+    return this.blockchain.then(bc => bc.call(op("register_admin", user.authDescriptor.id), user));
   };
 
   /**
@@ -44,8 +42,7 @@ export default class Filehub {
    * @param rid of the filechain.
    */
   public registerFilechain(user: User, rid: string): Promise<any> {
-      const operation = new Operation("add_filechain", user.authDescriptor.hash().toString("hex"), rid);
-      return this.blockchain.then(bc => bc.call(operation, user));
+      return this.blockchain.then(bc => bc.call(op("add_filechain", user.authDescriptor.id, rid), user));
   };
 
   /**
@@ -71,9 +68,11 @@ export default class Filehub {
    * @param user that should purchase the voucher.
    */
   public purchaseVoucher(user: User): Promise<any> {
-    const operation = new Operation("create_voucher", user.authDescriptor.hash().toString("hex"));
-    const nop = new Operation("nop", Date.now());
-    return this.blockchain.then(bc => bc.transactionBuilder().add(nop).add(operation).buildAndSign(user).post());
+    return this.blockchain.then(bc => bc.transactionBuilder()
+      .add(nop())
+      .add(op("create_voucher", user.authDescriptor.id))
+      .buildAndSign(user)
+      .post());
   }
 
   /**
@@ -92,7 +91,7 @@ export default class Filehub {
    */
   public getVouchers(user: User): Promise<Voucher[]> {
     return this.blockchain
-      .then(bc => bc.query("get_vouchers", { descriptor_id: user.authDescriptor.hash().toString("hex") }));
+      .then(bc => bc.query("get_vouchers", { descriptor_id: user.authDescriptor.id }));
   }
 
   /**
@@ -103,7 +102,7 @@ export default class Filehub {
   public hasActiveVoucher(user: User): Promise<boolean> {
     return this.blockchain
       .then(bc => bc.query("has_active_voucher_for_timestamp", {
-        descriptor_id: user.authDescriptor.hash().toString("hex"),
+        descriptor_id: user.authDescriptor.id,
         timestamp: Date.now()
       }))
   }
@@ -113,7 +112,7 @@ export default class Filehub {
 
     const operation: Operation = new Operation(
       "allocate_chunk",
-      user.authDescriptor.hash().toString("hex"),
+      user.authDescriptor.id,
       file.path,
       hash
     );
@@ -130,7 +129,7 @@ export default class Filehub {
 
   private getChunks(user: User): Promise<ChunkMeta[]> {
     return this.blockchain.then(bc => bc.query("get_chunks", {
-      descriptor_id: user.authDescriptor.hash().toString("hex")
+      descriptor_id: user.authDescriptor.id
     }));
   };
 
