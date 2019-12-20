@@ -2,7 +2,7 @@ import ft3_acc: lib.ft3.account;
 import util;
 import billing;
 
-operation allocate_chunk(descriptor_id: byte_array, name, hash: byte_array) {
+operation allocate_chunk(descriptor_id: byte_array, name, hash: byte_array, file_size: integer) {
 	val account = util.get_account_by_descriptor_id(descriptor_id);
 	ft3_acc.require_auth(account, descriptor_id, ["A"]);
 	require(name.size() < 256, "Length of a name isn't allowed to be longer than 256");
@@ -15,19 +15,30 @@ operation allocate_chunk(descriptor_id: byte_array, name, hash: byte_array) {
 		// Check if user has active voucher
 		val current_timestamp = op_context.last_block_time;
 		
-		val active_invoice = billing.voucher@?{ account, .timestamp > current_timestamp } (
+		val active_voucher = billing.voucher@?{ account, .timestamp > current_timestamp } (
 			@sort_desc .timestamp,
 			.plan,
 			.asset,
 			.amount
 		) limit 1;
 		
-		if (active_invoice != null) {
-			chunk = create chunk(hash, filechain);
-			create chunk_meta(account, chunk, name);
-		}
-			
-	} else {
-		create chunk_meta(account, chunk, name);
+		require(active_voucher, "User must have an active invoice");
+		chunk = create chunk(hash, filechain);			
 	}
+	
+	create chunk_meta(account, chunk, name);
+	
+	val chunk_size = chunk_size@?{ .chunk == chunk };
+	
+	if (chunk_size != null) {
+		require(chunk_size.size == file_size, "Chunk size doesn't match provided file_size");
+	} else {
+		create chunk_size(chunk, file_size);
+	}
+}
+
+operation deallocate_chunk(descriptor_id: byte_array, hash: byte_array) {
+	val account = util.get_account_by_descriptor_id(descriptor_id);
+	ft3_acc.require_auth(account, descriptor_id, ["A"]);
+	delete chunk_meta@{ account, chunk@{ hash } };
 }

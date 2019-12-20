@@ -9,6 +9,11 @@ entity chunk {
 	filechain;
 }
 
+@external('filehub') @log
+entity chunk_size {
+	key chunk, size: integer;
+}
+
 entity stored_file {
 	key hash: byte_array;
 	transaction;

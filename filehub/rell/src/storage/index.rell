@@ -8,8 +8,12 @@ entity filechain {
 
 @log
 entity chunk {
-	key hash: byte_array;
-	filechain;
+	key hash: byte_array, filechain;
+}
+
+@log
+entity chunk_size {
+	key chunk, size: integer;
 }
 
 entity chunk_meta {

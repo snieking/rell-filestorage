@@ -8,6 +8,7 @@ query get_chunk(hash: byte_array, descriptor_id: byte_array) {
 		chunk_meta.account == account,
 		chunk == chunk_meta.chunk
 	} (
+		owner_id = chunk_meta.account.id,
 		chunk.hash,
 		brid = chunk.filechain.rid,
 		name = chunk_meta.name
@@ -21,6 +22,7 @@ query get_chunks(descriptor_id: byte_array) {
 		chunk_meta.account == account,
 		chunk_meta.chunk == chunk
 	} (
+		owner_id = chunk_meta.account.id,
 		chunk.hash,
 		brid = chunk.filechain.rid,
 		name = chunk_meta.name

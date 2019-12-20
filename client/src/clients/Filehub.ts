@@ -114,7 +114,8 @@ export default class Filehub {
       "allocate_chunk",
       user.authDescriptor.id,
       file.name,
-      hash
+      hash,
+      file.data.length
     );
 
     return this.blockchain.then(bc => bc.call(operation, user));
