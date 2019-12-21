@@ -1,12 +1,11 @@
 @external('filehub') @log
 entity filechain { 
-	key rid: byte_array;
+	key brid: byte_array;
 }
 
 @external('filehub') @log
 entity chunk {
 	key hash: byte_array;
-	filechain;
 }
 
 @external('filehub') @log

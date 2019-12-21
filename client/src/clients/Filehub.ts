@@ -4,10 +4,10 @@ import {hashData} from "../utils/crypto";
 
 import Filechain from "./Filechain";
 import ChainConnectionInfo from "ft3-lib/dist/lib/ft3/chain-connection-info";
-import ChunkMeta from "../models/ChunkMeta";
 import FsFile from "../models/FsFile";
 import Operation from "ft3-lib/dist/lib/ft3/operation";
 import {Voucher} from "..";
+import {ChunkHashIndex, ChunkIndex} from "../models/Chunk";
 
 export default class Filehub {
 
@@ -24,6 +24,20 @@ export default class Filehub {
       Buffer.from(brid, "hex"),
       new DirectoryService(chainConnectionInfo)
     );
+  }
+
+  /**
+   * Stores a file. Contacts the filehub and allocates a chunk, and then persists the data in the correct filechain.
+   *
+   * @param user that should be billed for the storage.
+   * @param file that is to be stored.
+   */
+  public storeFile(user: User, file: FsFile): Promise<any> {
+    return this.blockchain.then(bc => bc.call(op("allocate_file", user.authDescriptor.id, file.name, file.data.length), user))
+      .then(() => this.allocateChunks(user, file))
+      .then(() => this.getFileLocation(user, file.name))
+      .then(brid => this.getFilechain(brid))
+      .then(filechain => this.storeChunksInFilechain(user, filechain, file.chunks));
   }
 
   /**
@@ -45,20 +59,36 @@ export default class Filehub {
       return this.blockchain.then(bc => bc.call(op("add_filechain", user.authDescriptor.id, rid), user));
   };
 
-  /**
-   * Stores a file. Contacts the filehub and allocates a chunk, and then persists the data in the correct filechain.
-   *
-   * @param user that should be billed for the storage.
-   * @param file that is to be stored.
-   */
-  public storeFile(user: User, file: FsFile): Promise<any> {
-    return this.allocateChunk(user, file)
-      .then(() => this.getChunk(user, hashData(file.data)))
-      .then(chunk => this.getFilechain(chunk.brid).storeChunkData(user, file.data));
-  }
-
   public async storeFileEncrypted(user: User, file: FsFile) {
 
+  }
+
+  private storeChunksInFilechain(user: User, filechain: Filechain, chunks: Buffer[]): Promise<any> {
+    const promises: Promise<any>[] = [];
+
+    for (let i = 0; i < chunks.length; i++) {
+      promises.push(filechain.storeChunkData(user, chunks[i]));
+    }
+
+    return Promise.all(promises);
+  }
+
+  private getFileLocation(user: User, name: string): Promise<Buffer> {
+    return this.blockchain.then(bc => bc.query("get_file_location", {
+      descriptor_id: user.authDescriptor.hash().toString("hex"),
+      name: name
+    }))
+  }
+
+  private allocateChunks(user: User, file: FsFile): Promise<any> {
+    const promises: Promise<any>[] = [];
+
+    const chunks = file.chunks;
+    for (let i = 0; i < chunks.length; i++) {
+      promises.push(this.allocateChunk(user, chunks[i], file.name, i));
+    }
+
+    return Promise.all(chunks);
   }
 
   /**
@@ -75,14 +105,30 @@ export default class Filehub {
       .post());
   }
 
-  /**
-   * Gets all the files persisted by the user.
-   *
-   * @param user that has persisted previous files.
-   */
-  public async getUserFiles(user: User): Promise<FsFile[]> {
-    return this.getChunks(user).then(chunks => Promise.all(chunks.map(chunk => this.getFullFile(user, chunk))));
-  };
+  public getUserFileNames(user: User): Promise<string[]> {
+    return this.blockchain.then(bc => bc.query("get_file_names", {
+      descriptor_id: user.authDescriptor.hash().toString("hex")
+    }));
+  }
+
+  public async getFileByName(user: User, name: string): Promise<FsFile> {
+    const brid = await this.getFileLocation(user, name);
+    const chunkHashes: ChunkHashIndex[] = await this.blockchain.then(bc => bc.query("get_file_chunks", {
+      descriptor_id: user.authDescriptor.hash().toString("hex"),
+      name: name
+    }));
+
+    const filechain = this.getFilechain(brid);
+
+    const promises: Promise<ChunkIndex>[] = [];
+
+    for (let i = 0; i < chunkHashes.length; i++) {
+      promises.push(this.getChunk(user, filechain, chunkHashes[i]));
+    }
+
+    const chunkIndexes = await Promise.all(promises);
+    return new Promise(resolve => resolve(FsFile.fromChunks(name, chunkIndexes)));
+  }
 
   /**
    * Retrieves all the vouchers for the specific user.
@@ -117,37 +163,29 @@ export default class Filehub {
       .then(bc => bc.query("get_allocated_bytes", { descriptor_id: user.authDescriptor.hash().toString("hex") }));
   }
 
-  private allocateChunk(user: User, file: FsFile): Promise<any> {
-    const hash = hashData(file.data);
+  private getChunk(user: User, filechain: Filechain, chunkHash: ChunkHashIndex): Promise<ChunkIndex> {
+    return this.getFileByHash(user, filechain, chunkHash.hash)
+      .then((data: string) => new ChunkIndex(Buffer.from(data, "hex"), chunkHash.idx));
+  }
+
+  private getFileByHash(user: User, filechain: Filechain, hash: Buffer): Promise<string> {
+    return filechain.getFileByHash(user, hash);
+  }
+
+  private allocateChunk(user: User, chunk: Buffer, name: string, index: number): Promise<any> {
+    const hash = hashData(chunk);
 
     const operation: Operation = new Operation(
       "allocate_chunk",
       user.authDescriptor.id,
-      file.name,
+      name,
       hash,
-      file.data.length
+      chunk.length,
+      index
     );
 
     return this.blockchain.then(bc => bc.call(operation, user));
   };
-
-  private getChunk(user: User, hash: Buffer): Promise<ChunkMeta> {
-    return this.blockchain.then(bc => bc.query("get_chunk", {
-      hash: hash.toString("hex"),
-      descriptor_id: user.authDescriptor.hash().toString("hex")
-    }));
-  }
-
-  private getChunks(user: User): Promise<ChunkMeta[]> {
-    return this.blockchain.then(bc => bc.query("get_chunks", {
-      descriptor_id: user.authDescriptor.hash().toString("hex")
-    }));
-  };
-
-  private async getFullFile(user: User, chunk: ChunkMeta): Promise<FsFile> {
-    const filechain: Filechain = this.getFilechain(chunk.brid);
-    return filechain.getFileByHash(user, chunk.hash).then(data => new FsFile(chunk.name, data));
-  }
 
   private getFilechain(brid: Buffer): Filechain {
     const chain = this.chains.find(c => c.chainId.toString("hex").toLocaleUpperCase() === brid.toString("hex").toLocaleUpperCase());

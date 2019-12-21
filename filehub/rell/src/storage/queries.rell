@@ -1,32 +1,18 @@
 import util;
 
-query get_chunk(hash: byte_array, descriptor_id: byte_array) {
+query get_file_location(descriptor_id: byte_array, name): byte_array {
 	val account = util.get_account_by_descriptor_id(descriptor_id);
-	
-	return (chunk, chunk_meta)@{
-		chunk.hash == hash,
-		chunk_meta.account == account,
-		chunk == chunk_meta.chunk
-	} (
-		owner_id = chunk_meta.account.id,
-		chunk.hash,
-		brid = chunk.filechain.rid,
-		name = chunk_meta.name
-	);
+	return file@{ name, account } ( .filechain.brid );
 }
 
-query get_chunks(descriptor_id: byte_array) {
+query get_file_chunks(descriptor_id: byte_array, name) {
 	val account = util.get_account_by_descriptor_id(descriptor_id);
-	
-	return (chunk_meta, chunk)@*{ 
-		chunk_meta.account == account,
-		chunk_meta.chunk == chunk
-	} (
-		owner_id = chunk_meta.account.id,
-		chunk.hash,
-		brid = chunk.filechain.rid,
-		name = chunk_meta.name
-	);
+	return file_chunk@*{ .file.name == name, .file.account == account } ( hash = .chunk.hash, @sort idx = .idx );
+}
+
+query get_file_names(descriptor_id: byte_array) {
+	val account = util.get_account_by_descriptor_id(descriptor_id);
+	return file@*{ account } ( .name );
 }
 
 query get_allocated_bytes(descriptor_id: byte_array) {

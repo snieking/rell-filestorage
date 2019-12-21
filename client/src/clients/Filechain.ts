@@ -32,7 +32,7 @@ export default class Filechain {
     return tx.postAndWaitConfirmation();
   }
 
-  public getFileByHash(user: User, hash: Buffer): Promise<Buffer> {
+  public getFileByHash(user: User, hash: Buffer): Promise<string> {
     return this.restClient.query("get_file", { hash: hash.toString("hex") });
   }
 

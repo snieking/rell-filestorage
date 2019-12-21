@@ -3,12 +3,12 @@ import ft3_core: lib.ft3.core;
 
 @log
 entity filechain {
-	key rid: byte_array;
+	key brid: byte_array;
 }
 
 @log
 entity chunk {
-	key hash: byte_array, filechain;
+	key hash: byte_array;
 }
 
 @log
@@ -16,7 +16,12 @@ entity chunk_size {
 	key chunk, size: integer;
 }
 
-entity chunk_meta {
-	key ft3_acc.account, chunk;
-	name;
+entity file {
+	key name, ft3_acc.account;
+	filechain;
+}
+
+entity file_chunk {
+	key file, idx: integer;
+	chunk;
 }

@@ -1,8 +1,10 @@
 import {createFt3User} from "../utils/users";
 import {FILEHUB} from "../blockchain/Postchain";
 import {User} from "ft3-lib";
-import FsFile from "../../client/src/models/FsFile";
 import {addBalance, generateRandomString, registerAsset, registerFilechainInFilehub} from "../utils/utils";
+import FsFile from "../../client/lib/models/FsFile";
+
+jest.setTimeout(60000);
 
 describe("Storing files tests", () => {
 
@@ -19,11 +21,15 @@ describe("Storing files tests", () => {
 
   it("Store data", async () => {
     const name = generateRandomString(36);
-    const data = generateData(36)
+    const data = generateData(36);
 
     await storeData(name, data, user);
-    const files = await FILEHUB.getUserFiles(user);
-    const file = files.find(f => f.name == name);
+
+    const fileNames = await FILEHUB.getUserFileNames(user);
+    const found = fileNames.includes(name);
+    expect(found).toBeTruthy();
+
+    const file = await FILEHUB.getFileByName(user, name);
     expect(bufferToHex(file.data)).toEqual(bufferToHex(data));
   });
 
@@ -32,9 +38,12 @@ describe("Storing files tests", () => {
     const data = Buffer.from(s, "utf8");
 
     await FILEHUB.storeFile(user, new FsFile(s, data));
-    const files = await FILEHUB.getUserFiles(user);
 
-    const file = files.find(f => f.name == s);
+    const fileNames = await FILEHUB.getUserFileNames(user);
+    const found = fileNames.includes(s);
+    expect(found).toBeTruthy();
+
+    const file = await FILEHUB.getFileByName(user, s);
     expect(bufferToHex(file.data)).toEqual(bufferToHex(data));
   });
 
@@ -43,9 +52,11 @@ describe("Storing files tests", () => {
     const data = generateData(36);
 
     await storeData(name, data, user);
-    const files = await FILEHUB.getUserFiles(user);
+    const fileNames = await FILEHUB.getUserFileNames(user);
+    const found = fileNames.includes(name);
+    expect(found).toBeTruthy();
 
-    const file = files.find(f => f.name == name);
+    const file = await FILEHUB.getFileByName(user, name);
     expect(bufferToHex(file.data)).toEqual(bufferToHex(data));
   });
 
@@ -78,6 +89,25 @@ describe("Storing files tests", () => {
     const allocatedBytes = await FILEHUB.getAllocatedBytes(user2);
 
     expect(allocatedBytes).toBe(dataSize);
+  });
+
+  it("Store file, large file split into multiple chunks", async () => {
+    const user2 = await createFt3User();
+    await addBalance(user2, 20);
+    await FILEHUB.purchaseVoucher(user2);
+
+    const name = generateRandomString(36);
+
+    const dataSize = 1024 * 1024 * 3 + 1;
+    const data = generateData(dataSize);
+
+    await storeData(name, data, user2);
+
+    const allocatedBytes = await FILEHUB.getAllocatedBytes(user2);
+    expect(allocatedBytes).toBe(dataSize);
+
+    const file = await FILEHUB.getFileByName(user2, name);
+    expect(bufferToHex(file.data)).toEqual(bufferToHex(data));
   });
 
   afterAll(async () => {

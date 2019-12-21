@@ -1,7 +1,7 @@
 operation add_chunk_data(data: byte_array) {
    val hash = data.sha256();
    val chunk = chunk @ { hash };
-   require(chunk.filechain.rid == chain_context.blockchain_rid);
+   //require(chunk.filechain.rid == chain_context.blockchain_rid);
    
    val chunk_size = chunk_size@?{ chunk, data.size() };
    require(chunk_size, "No chunk with the correct size found, no one has accurately paid for it");
