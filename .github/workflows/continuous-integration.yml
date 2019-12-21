@@ -69,6 +69,14 @@ jobs:
         working-directory: test
 
       # Collect logs
-      - name: Output filehub logs
-        run: cat filehub.log
+      - name: Read filehub logs
+        uses: pCYSl5EDgo/cat@master
+        id: hello
+        with:
+          path: filehub.log
         working-directory: filehub/rell
+
+      - name: Output filehub logs
+        run: echo $TEXT
+        env:
+          TEXT: ${{ steps.hello.outputs.text }}
