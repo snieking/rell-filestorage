@@ -69,6 +69,10 @@ jobs:
         working-directory: test
 
       # Collect logs
+      - name: Check files
+        run: ls -ln
+        working-directory: filehub/rell
+
       - name: Read filehub logs
         uses: pCYSl5EDgo/cat@master
         id: hello
