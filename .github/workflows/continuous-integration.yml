@@ -28,9 +28,9 @@ jobs:
       - name: Build Filehub
         run: ./build.sh
         working-directory: filehub/rell
-#      - name: Run Filehub
-#        run: ./run-dev-node.sh &
-#        working-directory: filehub/rell
+      - name: Run Filehub
+        run: ./run-dev-node.sh &
+        working-directory: filehub/rell
       
       # Build and deploy the Filechain
       - name: Download Postchain and Rell Binaries 
@@ -42,9 +42,9 @@ jobs:
       - name: Build Filechain
         run: ./build.sh
         working-directory: filechain/rell
-#      - name: Run Filechain
-#        run: ./run-dev-node.sh &
-#        working-directory: filechain/rell
+      - name: Run Filechain
+        run: ./run-dev-node.sh &
+        working-directory: filechain/rell
 
       # Build File Storage Client (fs-client)
       - name: Install dependencies for fs-client
@@ -65,5 +65,5 @@ jobs:
         env:
           NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
       - name: Run tests
-        run: ../filehub/rell/run-dev-node.sh && ../filechain/rell/run-dev-node.sh && npm run silent-test
+        run: npm run silent-test
         working-directory: test
