@@ -65,5 +65,5 @@ jobs:
         env:
           NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
       - name: Run tests
-        run: npm run test
+        run: npm run silent-test
         working-directory: test
