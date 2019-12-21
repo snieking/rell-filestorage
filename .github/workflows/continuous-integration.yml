@@ -73,8 +73,7 @@ jobs:
         uses: pCYSl5EDgo/cat@master
         id: hello
         with:
-          path: filehub.log
-        working-directory: filehub/rell
+          path: filehub/rell/filehub.log
 
       - name: Output filehub logs
         run: echo $TEXT
