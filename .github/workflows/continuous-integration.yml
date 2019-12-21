@@ -29,7 +29,7 @@ jobs:
         run: ./build.sh
         working-directory: filehub/rell
       - name: Run Filehub
-        run: ./run-dev-node.sh &
+        run: ./run-dev-node.sh > filehub.log &
         working-directory: filehub/rell
       
       # Build and deploy the Filechain
@@ -43,7 +43,7 @@ jobs:
         run: ./build.sh
         working-directory: filechain/rell
       - name: Run Filechain
-        run: ./run-dev-node.sh &
+        run: ./run-dev-node.sh > filechain.log &
         working-directory: filechain/rell
 
       # Build File Storage Client (fs-client)
@@ -67,3 +67,8 @@ jobs:
       - name: Run tests
         run: npm run silent-test
         working-directory: test
+
+      # Collect logs
+      - name: Output filehub logs
+        run: cat filehub.log
+        working-directory: filehub/rell
