@@ -96,6 +96,25 @@ describe("Storing files tests", () => {
     expect(bufferToHex(file.data)).toEqual(bufferToHex(data));
   });
 
+  it("Store file, by two users", async () => {
+    const user2 = await createFt3User();
+    await addBalance(user2, 20);
+    await FILEHUB.purchaseVoucher(user2);
+
+    const name = generateRandomString(16);
+    const data = generateData(1024);
+
+    await storeData(name, data, user);
+    await storeData(name, data, user2);
+
+    const user1File = await FILEHUB.getFileByName(user, name);
+    const user2File = await FILEHUB.getFileByName(user2, name);
+
+    expect(bufferToHex(user1File.data)).toEqual(bufferToHex(data));
+    expect(bufferToHex(user2File.data)).toEqual(bufferToHex(data));
+    expect(bufferToHex(user1File.data)).toEqual(bufferToHex(user2File.data));
+  });
+
   afterAll(async () => {
     const vouchers = await FILEHUB.getVouchers(user);
     expect(vouchers.length).toEqual(1);

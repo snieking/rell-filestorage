@@ -67,6 +67,7 @@ jobs:
       - name: Run tests
         run: npm run silent-test
         working-directory: test
+        continue-on-error: ${{ secrets.CONTINUE_ON_ERROR }}
 
       # Collect logs
       - name: Read filehub logs
