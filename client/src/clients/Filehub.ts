@@ -80,7 +80,7 @@ export default class Filehub {
     }))
   }
 
-  private allocateChunks(user: User, file: FsFile): Promise<any> {
+  private async allocateChunks(user: User, file: FsFile): Promise<any> {
     const promises: Promise<any>[] = [];
 
     const chunks = file.chunks;
@@ -88,7 +88,7 @@ export default class Filehub {
       promises.push(this.allocateChunk(user, chunks[i], file.name, i));
     }
 
-    return Promise.all(chunks);
+    return await Promise.all(chunks);
   }
 
   /**

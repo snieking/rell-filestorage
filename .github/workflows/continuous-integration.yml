@@ -29,7 +29,7 @@ jobs:
         run: ./build.sh
         working-directory: filehub/rell
       - name: Run Filehub
-        run: ./run-dev-node.sh > filehub.log &
+        run: ./run-dev-node.sh WIPE_DB > filehub.log &
         working-directory: filehub/rell
       
       # Build and deploy the Filechain
