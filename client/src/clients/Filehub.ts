@@ -88,7 +88,8 @@ export default class Filehub {
       promises.push(this.allocateChunk(user, chunks[i], file.name, i));
     }
 
-    return await Promise.all(chunks);
+    const results = await Promise.all(promises);
+    return results;
   }
 
   /**
