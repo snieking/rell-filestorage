@@ -33,6 +33,24 @@ describe("Storing files tests", () => {
     expect(bufferToHex(file.data)).toEqual(bufferToHex(data));
   });
 
+  it("Store file, encrypted", async () => {
+    const user2 = await createFt3User();
+    await addBalance(user, 20);
+    await FILEHUB.purchaseVoucher(user2);
+
+    const s = generateRandomString(36);
+    const data = Buffer.from(s, "utf8");
+
+    await FILEHUB.storeFileEncrypted(user2, new FsFile(s, data), "test");
+
+    const fileNames = await FILEHUB.getUserFileNames(user2);
+    const found = fileNames.includes(s);
+    expect(found).toBeTruthy();
+
+    const file = await FILEHUB.getEncryptedFileByName(user2, s, "test");
+    expect(bufferToHex(file.data)).toEqual(bufferToHex(data));
+  });
+
   it("File name below 256 length allowed", async () => {
     const name = generateRandomString(255);
     const data = generateData(36);
@@ -115,11 +133,6 @@ describe("Storing files tests", () => {
     expect(bufferToHex(user1File.data)).toEqual(bufferToHex(user2File.data));
   });
 
-  afterAll(async () => {
-    const vouchers = await FILEHUB.getVouchers(user);
-    expect(vouchers.length).toEqual(1);
-  });
-
 });
 
 const storeGeneratedData = (name: string, dataLength: number, user: User) => {
@@ -128,7 +141,7 @@ const storeGeneratedData = (name: string, dataLength: number, user: User) => {
 };
 
 const generateData = (length: number) => {
-  return Buffer.from(generateRandomString(length), "utf8");
+  return Buffer.from("Encrypted file: " + generateRandomString(length), "utf8");
 };
 
 const storeData = (name: string, data: Buffer, user: User) => {

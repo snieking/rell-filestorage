@@ -1,6 +1,7 @@
 import {Blockchain, nop, op, User} from "ft3-lib";
 import DirectoryService from "./DirectoryService";
 import {hashData} from "../utils/crypto";
+import { AES, enc } from 'crypto-ts';
 
 import Filechain from "./Filechain";
 import ChainConnectionInfo from "ft3-lib/dist/lib/ft3/chain-connection-info";
@@ -58,8 +59,9 @@ export default class Filehub {
       return this.blockchain.then(bc => bc.call(op("add_filechain", user.authDescriptor.id, rid), user));
   };
 
-  public async storeFileEncrypted(user: User, file: FsFile) {
-
+  public async storeFileEncrypted(user: User, file: FsFile, passphrase: string) {
+    const encryptedData = AES.encrypt(file.data.toString(), passphrase).toString();
+    return this.storeFile(user, new FsFile(file.name, Buffer.from(encryptedData, "utf8")));
   }
 
   /**
@@ -104,6 +106,11 @@ export default class Filehub {
 
     const chunkIndexes = await Promise.all(promises);
     return new Promise(resolve => resolve(FsFile.fromChunks(name, chunkIndexes)));
+  }
+
+  public async getEncryptedFileByName(user: User, name: string, passphrase: string): Promise<FsFile> {
+    return this.getFileByName(user, name)
+      .then(file => new FsFile(file.name, Buffer.from(AES.decrypt(file.data.toString(), passphrase).toString(enc.Utf8))));
   }
 
   /**
