@@ -67,24 +67,23 @@ jobs:
       - name: Run tests
         run: npm run silent-test
         working-directory: test
+        continue-on-error: true
 
       # Collect logs
-      - name: Check files
-        run: ls -ln
-        working-directory: filehub/rell
-
-      # Collect logs
-      - name: Output file
-        run: echo < filehub.log
-        working-directory: filehub/rell
-
       - name: Read filehub logs
         uses: pCYSl5EDgo/cat@master
-        id: hello
+#        id: hello
         with:
           path: filehub/rell/filehub.log
 
-      - name: Output filehub logs
-        run: echo $TEXT
-        env:
-          TEXT: ${{ steps.hello.outputs.text }}
+
+      - name: Read filechain logs
+        uses: pCYSl5EDgo/cat@master
+        #        id: hello
+        with:
+          path: filechain/rell/filechain.log
+
+#      - name: Output filehub logs
+#        run: echo $TEXT
+#        env:
+#          TEXT: ${{ steps.hello.outputs.text }}
