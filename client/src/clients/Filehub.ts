@@ -28,22 +28,21 @@ export default class Filehub {
 
   /**
    * Stores a file. Contacts the filehub and allocates a chunk, and then persists the data in the correct filechain.
-   *
-   * @param user that should be billed for the storage.
-   * @param file that is to be stored.
    */
-  public storeFile(user: User, file: FsFile): Promise<any> {
-    return this.blockchain.then(bc => bc.call(op("allocate_file", user.authDescriptor.id, file.name, file.data.length), user))
-      .then(() => this.allocateChunks(user, file))
-      .then(() => this.getFileLocation(user, file.name))
-      .then(brid => this.getFilechain(brid))
-      .then(filechain => this.storeChunksInFilechain(user, filechain, file.chunks));
+  public async storeFile(user: User, file: FsFile): Promise<any> {
+    const bc = await this.blockchain;
+
+    await bc.call(op("allocate_file", user.authDescriptor.id, file.name, file.data.length), user);
+    await this.allocateChunks(user, file);
+
+    const brid: Buffer = await this.getFileLocation(user, file.name);
+    const filechain: Filechain = this.getFilechain(brid);
+
+    return await Filehub.storeChunksInFilechain(user, filechain, file.chunks);
   }
 
   /**
    * Registers the admin user, this operation is only valid when there are no other admins.
-   *
-   * @param user that is to become admin.
    */
   public registerAdmin(user: User): Promise<void> {
     return this.blockchain.then(bc => bc.call(op("register_admin", user.authDescriptor.id), user));
@@ -63,7 +62,79 @@ export default class Filehub {
 
   }
 
-  private storeChunksInFilechain(user: User, filechain: Filechain, chunks: Buffer[]): Promise<any> {
+  /**
+   * Purchases a new voucher if possible.
+   * It is only possible to buy a new voucher when there is less than a day left on your current one.
+   */
+  public async purchaseVoucher(user: User): Promise<any> {
+    const bc = await this.blockchain;
+    return await bc.transactionBuilder()
+      .add(nop())
+      .add(op("create_voucher", user.authDescriptor.id))
+      .buildAndSign(user)
+      .post();
+  }
+
+  /**
+   * Get file names stored by a user.
+   */
+  public getUserFileNames(user: User): Promise<string[]> {
+    return this.blockchain.then(bc => bc.query("get_file_names", {
+      descriptor_id: user.authDescriptor.hash().toString("hex")
+    }));
+  }
+
+  /**
+   * Retrieves a file by its name.
+   */
+  public async getFileByName(user: User, name: string): Promise<FsFile> {
+    const brid = await this.getFileLocation(user, name);
+    const chunkHashes: ChunkHashIndex[] = await this.blockchain.then(bc => bc.query("get_file_chunks", {
+      descriptor_id: user.authDescriptor.hash().toString("hex"),
+      name: name
+    }));
+
+    const filechain = this.getFilechain(brid);
+
+    const promises: Promise<ChunkIndex>[] = [];
+
+    for (let i = 0; i < chunkHashes.length; i++) {
+      promises.push(this.getChunk(user, filechain, chunkHashes[i]));
+    }
+
+    const chunkIndexes = await Promise.all(promises);
+    return new Promise(resolve => resolve(FsFile.fromChunks(name, chunkIndexes)));
+  }
+
+  /**
+   * Retrieves all the vouchers for the specific user.
+   */
+  public getVouchers(user: User): Promise<Voucher[]> {
+    return this.blockchain.then(bc => bc.query("get_vouchers", {
+      descriptor_id: user.authDescriptor.hash().toString("hex")
+    }));
+  }
+
+  /**
+   * Checks if the user has an active voucher.
+   */
+  public hasActiveVoucher(user: User): Promise<boolean> {
+    return this.blockchain.then(bc => bc.query("has_active_voucher_for_timestamp", {
+      descriptor_id: user.authDescriptor.hash().toString("hex"),
+      timestamp: Date.now()
+    }));
+  }
+
+  /**
+   * Returns how many bytes the user has allocated.
+   */
+  public getAllocatedBytes(user: User): Promise<number> {
+    return this.blockchain.then(bc => bc.query("get_allocated_bytes", {
+      descriptor_id: user.authDescriptor.hash().toString("hex")
+    }));
+  }
+
+  private static storeChunksInFilechain(user: User, filechain: Filechain, chunks: Buffer[]): Promise<any> {
     const promises: Promise<any>[] = [];
 
     for (let i = 0; i < chunks.length; i++) {
@@ -88,88 +159,15 @@ export default class Filehub {
       promises.push(this.allocateChunk(user, chunks[i], file.name, i));
     }
 
-    const results = await Promise.all(promises);
-    return results;
-  }
-
-  /**
-   * Purchases a new voucher if possible.
-   * It is only possible to buy a new voucher when there is less than a day left on your current one.
-   *
-   * @param user that should purchase the voucher.
-   */
-  public purchaseVoucher(user: User): Promise<any> {
-    return this.blockchain.then(bc => bc.transactionBuilder()
-      .add(nop())
-      .add(op("create_voucher", user.authDescriptor.id))
-      .buildAndSign(user)
-      .post());
-  }
-
-  public getUserFileNames(user: User): Promise<string[]> {
-    return this.blockchain.then(bc => bc.query("get_file_names", {
-      descriptor_id: user.authDescriptor.hash().toString("hex")
-    }));
-  }
-
-  public async getFileByName(user: User, name: string): Promise<FsFile> {
-    const brid = await this.getFileLocation(user, name);
-    const chunkHashes: ChunkHashIndex[] = await this.blockchain.then(bc => bc.query("get_file_chunks", {
-      descriptor_id: user.authDescriptor.hash().toString("hex"),
-      name: name
-    }));
-
-    const filechain = this.getFilechain(brid);
-
-    const promises: Promise<ChunkIndex>[] = [];
-
-    for (let i = 0; i < chunkHashes.length; i++) {
-      promises.push(this.getChunk(user, filechain, chunkHashes[i]));
-    }
-
-    const chunkIndexes = await Promise.all(promises);
-    return new Promise(resolve => resolve(FsFile.fromChunks(name, chunkIndexes)));
-  }
-
-  /**
-   * Retrieves all the vouchers for the specific user.
-   *
-   * @param user who may or may not hold vouchers.
-   */
-  public getVouchers(user: User): Promise<Voucher[]> {
-    return this.blockchain
-      .then(bc => bc.query("get_vouchers", { descriptor_id: user.authDescriptor.hash().toString("hex") }));
-  }
-
-  /**
-   * Checks if the user has an active voucher.
-   *
-   * @param user to check if an active voucher exists for.
-   */
-  public hasActiveVoucher(user: User): Promise<boolean> {
-    return this.blockchain
-      .then(bc => bc.query("has_active_voucher_for_timestamp", {
-        descriptor_id: user.authDescriptor.hash().toString("hex"),
-        timestamp: Date.now()
-      }))
-  }
-
-  /**
-   * Returns how many bytes the user has allocated.
-   *
-   * @param user to check allocation for.
-   */
-  public getAllocatedBytes(user: User): Promise<number> {
-    return this.blockchain
-      .then(bc => bc.query("get_allocated_bytes", { descriptor_id: user.authDescriptor.hash().toString("hex") }));
+    return await Promise.all(promises);
   }
 
   private getChunk(user: User, filechain: Filechain, chunkHash: ChunkHashIndex): Promise<ChunkIndex> {
-    return this.getFileByHash(user, filechain, chunkHash.hash)
+    return Filehub.getFileByHash(user, filechain, chunkHash.hash)
       .then((data: string) => new ChunkIndex(Buffer.from(data, "hex"), chunkHash.idx));
   }
 
-  private getFileByHash(user: User, filechain: Filechain, hash: Buffer): Promise<string> {
+  private static getFileByHash(user: User, filechain: Filechain, hash: Buffer): Promise<string> {
     return filechain.getFileByHash(user, hash);
   }
 
@@ -189,7 +187,8 @@ export default class Filehub {
   };
 
   private getFilechain(brid: Buffer): Filechain {
-    const chain = this.chains.find(c => c.chainId.toString("hex").toLocaleUpperCase() === brid.toString("hex").toLocaleUpperCase());
+    const chain = this.chains
+      .find(c => c.chainId.toString("hex").toLocaleUpperCase() === brid.toString("hex").toLocaleUpperCase());
 
     if (chain == null) {
       throw new Error("Expected filechain not found in directory service");
