@@ -35,7 +35,7 @@ describe("Storing files tests", () => {
 
   it("Store file, encrypted", async () => {
     const user2 = await createFt3User();
-    await addBalance(user, 20);
+    await addBalance(user2, 20);
     await FILEHUB.purchaseVoucher(user2);
 
     const s = generateRandomString(36);
