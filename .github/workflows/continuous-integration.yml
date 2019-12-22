@@ -5,8 +5,7 @@ on: [push]
 jobs:
   build:
 
-    #runs-on: ubuntu-latest
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v1
@@ -72,6 +71,11 @@ jobs:
       # Collect logs
       - name: Check files
         run: ls -ln
+        working-directory: filehub/rell
+
+      # Collect logs
+      - name: Output file
+        run: echo < filehub.log
         working-directory: filehub/rell
 
       - name: Read filehub logs
