@@ -19,20 +19,6 @@ describe("Storing files tests", () => {
     await FILEHUB.purchaseVoucher(user);
   });
 
-  it("Store data", async () => {
-    const name = generateRandomString(36);
-    const data = generateData(36);
-
-    await storeData(name, data, user);
-
-    const fileNames = await FILEHUB.getUserFileNames(user);
-    const found = fileNames.includes(name);
-    expect(found).toBeTruthy();
-
-    const file = await FILEHUB.getFileByName(user, name);
-    expect(bufferToHex(file.data)).toEqual(bufferToHex(data));
-  });
-
   it("Store file", async () => {
     const s = generateRandomString(36);
     const data = Buffer.from(s, "utf8");
