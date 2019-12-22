@@ -141,7 +141,7 @@ const storeGeneratedData = (name: string, dataLength: number, user: User) => {
 };
 
 const generateData = (length: number) => {
-  return Buffer.from("Encrypted file: " + generateRandomString(length), "utf8");
+  return Buffer.from(generateRandomString(length), "utf8");
 };
 
 const storeData = (name: string, data: Buffer, user: User) => {
