@@ -5,7 +5,7 @@ entity filechain {
 
 @external('filehub') @log
 entity chunk {
-	key hash: byte_array;
+	key hash: byte_array, filechain;
 }
 
 @external('filehub') @log

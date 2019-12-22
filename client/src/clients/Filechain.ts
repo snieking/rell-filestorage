@@ -1,5 +1,6 @@
 import * as pcl from "postchain-client";
 import {User} from "ft3-lib";
+import {hashData} from "../utils/crypto";
 
 export default class Filechain {
 
@@ -15,7 +16,16 @@ export default class Filechain {
     const tx = this.gtxClient.newTransaction([user.keyPair.pubKey]);
     tx.addOperation("add_chunk_data", data);
     tx.sign(user.keyPair.privKey, user.keyPair.pubKey);
-    return tx.postAndWaitConfirmation();
+    return tx.postAndWaitConfirmation().catch((error: Error) => {
+      return this.restClient.query("file_hash_exists", { hash: hashData(data).toString("hex") })
+        .then((exists: boolean) => {
+          if (!exists) {
+            throw error;
+          } else {
+            console.log("Chunk already existed");
+          }
+        });
+    });
   };
 
   public removeChunkData(user: User, data: string): Promise<any> {

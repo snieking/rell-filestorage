@@ -1,15 +1,14 @@
 operation add_chunk_data(data: byte_array) {
    val hash = data.sha256();
    val chunk = chunk @ { hash };
-   //require(chunk.filechain.rid == chain_context.blockchain_rid);
+   require(chunk.filechain.brid == chain_context.blockchain_rid);
    
    val chunk_size = chunk_size@?{ chunk, data.size() };
    require(chunk_size, "No chunk with the correct size found, no one has accurately paid for it");
    
    val stored_file = stored_file@?{ hash };
-   if (stored_file == null) {
-       create stored_file(hash, op_context.transaction);
-   }
+   require(stored_file == null, "[FC-00]: Chunk already exists");
+   create stored_file(hash, op_context.transaction);
 }
 
 operation remove_chunk_data(data: byte_array, pubkey) {

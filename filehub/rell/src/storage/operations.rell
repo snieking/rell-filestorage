@@ -21,13 +21,15 @@ operation allocate_chunk(descriptor_id: byte_array, name, hash: byte_array, chun
 	require(name.size() < 256, "Length of a name isn't allowed to be longer than 256");
 	require(chunk_size < 1024 * 1024, "Chunk must be less than a mb");
 	
+	val file = file@{ name, account };
+	
 	var chunk = chunk@?{ hash };
 	
 	if (chunk == null) {
 		val current_timestamp = op_context.last_block_time;
 		
 		verify_voucher(account, current_timestamp, chunk_size);
-		chunk = create chunk(hash);			
+		chunk = create chunk(hash, file.filechain);			
 	}
 	
 	create file_chunk(file@{ name, account }, chunk, idx);

@@ -5,3 +5,7 @@ query get_file(hash: byte_array): gtv {
 	val gtx_tx = gtx_transaction.from_bytes(tx_data);
 	return gtx_tx.body.operations[0].args[0];	
 }
+
+query file_hash_exists(hash: byte_array): boolean {
+	return stored_file@?{ .hash == hash } != null;
+}

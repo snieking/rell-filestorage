@@ -8,7 +8,7 @@ entity filechain {
 
 @log
 entity chunk {
-	key hash: byte_array;
+	key hash: byte_array, filechain;
 }
 
 @log
@@ -17,8 +17,7 @@ entity chunk_size {
 }
 
 entity file {
-	key name, ft3_acc.account;
-	filechain;
+	key name, ft3_acc.account, filechain;
 }
 
 entity file_chunk {

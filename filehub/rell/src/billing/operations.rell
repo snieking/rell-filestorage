@@ -26,13 +26,12 @@ operation create_voucher(descriptor_id: byte_array) {
 		val active_invoice_expires_in = active_invoice.timestamp - current_timestamp;
 		val day_in_millis = util._get_period_in_millis("day");
 		
-		if (active_invoice_expires_in <= day_in_millis) {
-			_create_voucher(
-				chain_context.blockchain_rid, 
-				account, 
-				current_timestamp + month_in_millis + active_invoice_expires_in
-			);
-		}
+		require(active_invoice_expires_in <= day_in_millis, "[FH-00]: Not eligible for a new voucher yet");
+		_create_voucher(
+			chain_context.blockchain_rid, 
+			account, 
+			current_timestamp + month_in_millis + active_invoice_expires_in
+		);
 	}
 }
 
