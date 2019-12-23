@@ -1,7 +1,7 @@
 import {Blockchain, nop, op, User} from "ft3-lib";
 import DirectoryService from "./DirectoryService";
 import {hashData} from "../utils/crypto";
-import { AES, enc } from 'crypto-ts';
+import { AES, enc } from 'crypto-js';
 
 import Filechain from "./Filechain";
 import ChainConnectionInfo from "ft3-lib/dist/lib/ft3/chain-connection-info";
