@@ -4,6 +4,7 @@ import {User} from "ft3-lib";
 import {addBalance, generateRandomString, registerAsset, registerFilechainInFilehub} from "../utils/utils";
 import FsFile from "../../client/lib/models/FsFile";
 import * as path from "path";
+import * as fs from "fs";
 
 jest.setTimeout(30000);
 
@@ -37,7 +38,7 @@ describe("Storing files tests", () => {
     const found = fileNames.includes(s);
     expect(found).toBeTruthy();
 
-    const file = await FILEHUB.getFileByName(user, s);
+    const file = await FILEHUB.getFileByPath(user, s);
     expect(bufferToHex(file.readFullData())).toEqual(bufferToHex(data));
   });
 
@@ -51,8 +52,32 @@ describe("Storing files tests", () => {
     const found = fileNames.includes(filepath);
     expect(found).toBeTruthy();
 
-    const readFile = await FILEHUB.getFileByName(user, filepath);
+    const readFile = await FILEHUB.getFileByPath(user, filepath);
     expect(bufferToHex(file.readFullData())).toEqual(bufferToHex(file.readFullData()));
+  });
+
+  it("Store actual file, delete and re-create from blockchain", async () => {
+    const srcFile = path.resolve("./tests/files/large.txt");
+    const filepath = path.resolve("./tests/files/large-to-be-recreated.txt");
+    fs.copyFileSync(srcFile, filepath);
+
+    const file = FsFile.fromPath(filepath);
+
+    await FILEHUB.storeFile(user, file);
+    const dataBeforeDelete = file.readFullData();
+
+    fs.unlinkSync(filepath);
+
+    const fileNames = await FILEHUB.getUserFileNames(user);
+    const found = fileNames.includes(filepath);
+    expect(found).toBeTruthy();
+
+    await FILEHUB.downloadFileByPath(user, filepath);
+
+    const fileAfterDownload = FsFile.fromPath(filepath);
+    const dataAfterDownload = fileAfterDownload.readFullData();
+
+    expect(bufferToHex(dataAfterDownload)).toEqual(bufferToHex(dataBeforeDelete));
   });
 
   it("Store actual file, large", async () => {
@@ -65,7 +90,7 @@ describe("Storing files tests", () => {
     const found = fileNames.includes(filepath);
     expect(found).toBeTruthy();
 
-    const readFile = await FILEHUB.getFileByName(user, filepath);
+    const readFile = await FILEHUB.getFileByPath(user, filepath);
     expect(bufferToHex(file.readFullData())).toEqual(bufferToHex(file.readFullData()));
   });
 
@@ -83,7 +108,7 @@ describe("Storing files tests", () => {
     const found = fileNames.includes(s);
     expect(found).toBeTruthy();
 
-    const file = await FILEHUB.getFileByName(user2, s, "test");
+    const file = await FILEHUB.getFileByPath(user2, s, "test");
     expect(bufferToHex(file.readFullData())).toEqual(bufferToHex(data));
   });
 
@@ -96,7 +121,7 @@ describe("Storing files tests", () => {
     const found = fileNames.includes(name);
     expect(found).toBeTruthy();
 
-    const file = await FILEHUB.getFileByName(user, name);
+    const file = await FILEHUB.getFileByPath(user, name);
     expect(bufferToHex(file.readFullData())).toEqual(bufferToHex(data));
   });
 
@@ -146,7 +171,7 @@ describe("Storing files tests", () => {
     const allocatedBytes = await FILEHUB.getAllocatedBytes(user2);
     expect(allocatedBytes).toBe(dataSize);
 
-    const file = await FILEHUB.getFileByName(user2, name);
+    const file = await FILEHUB.getFileByPath(user2, name);
     expect(bufferToHex(file.readFullData())).toEqual(bufferToHex(data));
   });
 
@@ -161,8 +186,8 @@ describe("Storing files tests", () => {
     await storeData(name, data, user);
     await storeData(name, data, user2);
 
-    const user1File = await FILEHUB.getFileByName(user, name);
-    const user2File = await FILEHUB.getFileByName(user2, name);
+    const user1File = await FILEHUB.getFileByPath(user, name);
+    const user2File = await FILEHUB.getFileByPath(user2, name);
 
     expect(bufferToHex(user1File.readFullData())).toEqual(bufferToHex(data));
     expect(bufferToHex(user2File.readFullData())).toEqual(bufferToHex(data));

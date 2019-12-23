@@ -9,6 +9,7 @@ import FsFile from "../models/FsFile";
 import Operation from "ft3-lib/dist/lib/ft3/operation";
 import {Voucher} from "..";
 import {ChunkHashIndex, ChunkIndex} from "../models/Chunk";
+import * as fs from "fs";
 
 export default class Filehub {
 
@@ -95,11 +96,11 @@ export default class Filehub {
    *
    * @param passphrase optional parameter to decrypt the read file with a passphrase.
    */
-  public async getFileByName(user: User, name: string, passphrase?: string): Promise<FsFile> {
-    const brid = await this.getFileLocation(user, name);
+  public async getFileByPath(user: User, path: string, passphrase?: string): Promise<FsFile> {
+    const brid = await this.getFileLocation(user, path);
     const chunkHashes: ChunkHashIndex[] = await this.blockchain.then(bc => bc.query("get_file_chunks", {
       descriptor_id: user.authDescriptor.hash().toString("hex"),
-      name: name
+      name: path
     }));
 
     const filechain = this.getFilechain(brid);
@@ -113,11 +114,66 @@ export default class Filehub {
     const chunkIndexes = await Promise.all(promises);
 
     if (passphrase == null) {
-      return new Promise(resolve => resolve(FsFile.fromChunks(name, chunkIndexes)));
+      return new Promise(resolve => resolve(FsFile.fromChunks(path, chunkIndexes)));
     } else {
-      return new Promise(resolve => resolve(FsFile.fromChunks(name, chunkIndexes
-        .map(chunk => new ChunkIndex(Buffer.from(this.decrypt(chunk.data.toString(), passphrase), "utf8"), chunk.idx)))));
+      return new Promise(resolve => resolve(FsFile.fromChunks(path, chunkIndexes
+        .map(chunk => new ChunkIndex(Buffer.from(this.decrypt(chunk.data.toString("utf8"), passphrase), "utf8"), chunk.idx)))));
     }
+  }
+
+  public async downloadFileByPath(user: User, path: string, passphrase?: string) {
+    const brid = await this.getFileLocation(user, path);
+    const chunkHashes: ChunkHashIndex[] = await this.blockchain.then(bc => bc.query("get_file_chunks", {
+      descriptor_id: user.authDescriptor.hash().toString("hex"),
+      name: path
+    }));
+
+    console.log("1111 Chunk hashes: ", chunkHashes);
+
+    const filechain = this.getFilechain(brid);
+
+    const sortedArray = chunkHashes.sort((a, b) => a.idx - b.idx);
+    console.log("2222 Sorted array: ", sortedArray);
+    const bufferedArray: ChunkHashIndex[][] = this.bufferArray(sortedArray, 10);
+
+    console.log("*** Buffered Array: ", bufferedArray);
+    fs.writeFileSync(path, [], "utf8");
+
+    for (let i = 0; i < bufferedArray.length; i++) {
+      const promises: Promise<ChunkIndex>[] = [];
+      const chunks = bufferedArray[i];
+
+      for (let j = 0; j < chunks.length; j++) {
+        promises.push(this.getChunk(user, filechain, chunks[j]));
+      }
+
+      const chunkIndexes = await Promise.all(promises);
+      console.log("Chunk indexes: ", chunkIndexes);
+      const deletePromises: Promise<void>[] = [];
+      for (let k = 0; k < chunkIndexes.length; k++) {
+        const data = chunkIndexes[k].data;
+        console.log("Appending chunk: ", k, " length of data is: ", data.length);
+
+        deletePromises.push(
+          new Promise<void>(resolve => resolve(fs.appendFileSync(
+            path, passphrase != null
+              ? this.decrypt(data.toString(), passphrase)
+              : data.toString())
+            ))
+        );
+      }
+
+      await Promise.all(deletePromises);
+    }
+  }
+
+  private bufferArray(array: any[], buffer: number): any[][] {
+    const arrayOfArrays: any[][] = [];
+    for (let i=0; i<array.length; i+=buffer) {
+      arrayOfArrays.push(array.slice(i, i+buffer));
+    }
+
+    return arrayOfArrays;
   }
 
   /**
@@ -150,7 +206,7 @@ export default class Filehub {
 
   private storeChunk(user: User, filechain: Filechain, chunkIndex: ChunkIndex, name: string, passphrase?: string) {
     const chunkToStore = passphrase != null
-      ? Buffer.from(this.encrypt(chunkIndex.data.toString(), passphrase), "utf8")
+      ? Buffer.from(this.encrypt(chunkIndex.data.toString("utf8"), passphrase), "utf8")
       : chunkIndex.data;
 
     return this.allocateChunk(user, chunkToStore, name, chunkIndex.idx)
@@ -165,6 +221,7 @@ export default class Filehub {
   }
 
   private getChunk(user: User, filechain: Filechain, chunkHash: ChunkHashIndex): Promise<ChunkIndex> {
+    console.log("Getting chunk hash: ", chunkHash);
     return Filehub.getFileByHash(user, filechain, chunkHash.hash)
       .then((data: string) => new ChunkIndex(Buffer.from(data, "hex"), chunkHash.idx));
   }

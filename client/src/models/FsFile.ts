@@ -31,16 +31,15 @@ export default class FsFile {
         ? resolve(this.chunks[index])
         : error("Chunks undefined"));
     } else {
-      return chunkReader(this.name, index, FsFile.BYTES);
+      return chunkReader(this.name, index * FsFile.BYTES, FsFile.BYTES);
     }
   }
 
   public readChunkSync(index: number): Buffer {
-    console.log("Reading chunk sync by index: ", index);
     if (this.chunks != null) {
       return this.chunks[index];
     } else {
-      return chunkReader.sync(this.name, index, FsFile.BYTES);
+      return chunkReader.sync(this.name, index * FsFile.BYTES, FsFile.BYTES);
     }
   }
 
