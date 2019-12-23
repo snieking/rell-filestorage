@@ -3,6 +3,7 @@ import util;
 import billing;
 
 operation allocate_file(descriptor_id: byte_array, name, total_bytes: integer) {
+	log("allocate_file");
 	val account = util.get_account_by_descriptor_id(descriptor_id);
 	
 	ft3_acc.require_auth(account, descriptor_id, ["A"]);
@@ -15,6 +16,7 @@ operation allocate_file(descriptor_id: byte_array, name, total_bytes: integer) {
 }
 
 operation allocate_chunk(descriptor_id: byte_array, name, hash: byte_array, chunk_size: integer, idx: integer) {
+	log("allocate_chunk");
 	val account = util.get_account_by_descriptor_id(descriptor_id);
 	
 	ft3_acc.require_auth(account, descriptor_id, ["A"]);

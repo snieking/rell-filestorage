@@ -1,4 +1,5 @@
 operation add_chunk_data(data: byte_array) {
+   log("add_chunk_data");
    val hash = data.sha256();
    val chunk = chunk @ { hash };
    require(chunk.filechain.brid == chain_context.blockchain_rid);

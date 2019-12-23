@@ -29,17 +29,26 @@ export default class Filehub {
 
   /**
    * Stores a file. Contacts the filehub and allocates a chunk, and then persists the data in the correct filechain.
+   *
+   * @param passphrase optional parameter to have the file stored encrypted with a passphrase.
    */
-  public async storeFile(user: User, file: FsFile): Promise<any> {
+  public async storeFile(user: User, file: FsFile, passphrase?: string): Promise<any> {
+    console.log("Storing file: ", file);
     const bc = await this.blockchain;
 
-    await bc.call(op("allocate_file", user.authDescriptor.id, file.name, file.data.length), user);
-    await this.allocateChunks(user, file);
+    await bc.call(op("allocate_file", user.authDescriptor.id, file.name, file.size), user);
 
     const brid: Buffer = await this.getFileLocation(user, file.name);
     const filechain: Filechain = this.getFilechain(brid);
 
-    return await Filehub.storeChunksInFilechain(user, filechain, file.chunks);
+    const promises: Promise<any>[] = [];
+    for (let i = 0; i < file.numberOfChunks(); i++) {
+      promises.push(
+        file.readChunk(i).then(chunk => this.storeChunk(user, filechain, new ChunkIndex(chunk, i), file.name, passphrase))
+      )
+    }
+
+    return Promise.all(promises);
   }
 
   /**
@@ -58,11 +67,6 @@ export default class Filehub {
   public registerFilechain(user: User, rid: string): Promise<any> {
       return this.blockchain.then(bc => bc.call(op("add_filechain", user.authDescriptor.id, rid), user));
   };
-
-  public async storeFileEncrypted(user: User, file: FsFile, passphrase: string) {
-    const encryptedData = AES.encrypt(file.data.toString(), passphrase).toString();
-    return this.storeFile(user, new FsFile(file.name, Buffer.from(encryptedData, "utf8")));
-  }
 
   /**
    * Purchases a new voucher if possible.
@@ -88,8 +92,10 @@ export default class Filehub {
 
   /**
    * Retrieves a file by its name.
+   *
+   * @param passphrase optional parameter to decrypt the read file with a passphrase.
    */
-  public async getFileByName(user: User, name: string): Promise<FsFile> {
+  public async getFileByName(user: User, name: string, passphrase?: string): Promise<FsFile> {
     const brid = await this.getFileLocation(user, name);
     const chunkHashes: ChunkHashIndex[] = await this.blockchain.then(bc => bc.query("get_file_chunks", {
       descriptor_id: user.authDescriptor.hash().toString("hex"),
@@ -105,12 +111,13 @@ export default class Filehub {
     }
 
     const chunkIndexes = await Promise.all(promises);
-    return new Promise(resolve => resolve(FsFile.fromChunks(name, chunkIndexes)));
-  }
 
-  public async getEncryptedFileByName(user: User, name: string, passphrase: string): Promise<FsFile> {
-    return this.getFileByName(user, name)
-      .then(file => new FsFile(file.name, Buffer.from(AES.decrypt(file.data.toString(), passphrase).toString(enc.Utf8))));
+    if (passphrase == null) {
+      return new Promise(resolve => resolve(FsFile.fromChunks(name, chunkIndexes)));
+    } else {
+      return new Promise(resolve => resolve(FsFile.fromChunks(name, chunkIndexes
+        .map(chunk => new ChunkIndex(Buffer.from(this.decrypt(chunk.data.toString(), passphrase), "utf8"), chunk.idx)))));
+    }
   }
 
   /**
@@ -141,14 +148,13 @@ export default class Filehub {
     }));
   }
 
-  private static storeChunksInFilechain(user: User, filechain: Filechain, chunks: Buffer[]): Promise<any> {
-    const promises: Promise<any>[] = [];
+  private storeChunk(user: User, filechain: Filechain, chunkIndex: ChunkIndex, name: string, passphrase?: string) {
+    const chunkToStore = passphrase != null
+      ? Buffer.from(this.encrypt(chunkIndex.data.toString(), passphrase), "utf8")
+      : chunkIndex.data;
 
-    for (let i = 0; i < chunks.length; i++) {
-      promises.push(filechain.storeChunkData(user, chunks[i]));
-    }
-
-    return Promise.all(promises);
+    return this.allocateChunk(user, chunkToStore, name, chunkIndex.idx)
+      .then(() => filechain.storeChunkData(user, chunkToStore));
   }
 
   private getFileLocation(user: User, name: string): Promise<Buffer> {
@@ -158,28 +164,14 @@ export default class Filehub {
     }))
   }
 
-  private async allocateChunks(user: User, file: FsFile): Promise<any> {
-    const promises: Promise<any>[] = [];
-
-    const chunks = file.chunks;
-    for (let i = 0; i < chunks.length; i++) {
-      promises.push(this.allocateChunk(user, chunks[i], file.name, i));
-    }
-
-    return await Promise.all(promises);
-  }
-
   private getChunk(user: User, filechain: Filechain, chunkHash: ChunkHashIndex): Promise<ChunkIndex> {
     return Filehub.getFileByHash(user, filechain, chunkHash.hash)
       .then((data: string) => new ChunkIndex(Buffer.from(data, "hex"), chunkHash.idx));
   }
 
-  private static getFileByHash(user: User, filechain: Filechain, hash: Buffer): Promise<string> {
-    return filechain.getFileByHash(user, hash);
-  }
-
   private allocateChunk(user: User, chunk: Buffer, name: string, index: number): Promise<any> {
     const hash = hashData(chunk);
+    console.log("Allocating hash: ", hash.toString("hex"));
 
     const operation: Operation = new Operation(
       "allocate_chunk",
@@ -202,6 +194,18 @@ export default class Filehub {
     }
 
     return new Filechain(chain.url, chain.chainId.toString("hex"));
+  }
+
+  private encrypt(data: string, passphrase: string): string {
+    return AES.encrypt(data, passphrase).toString();
+  }
+
+  private decrypt(data: string, passphrase: string): string {
+    return AES.decrypt(data, passphrase).toString(enc.Utf8);
+  }
+
+  private static getFileByHash(user: User, filechain: Filechain, hash: Buffer): Promise<string> {
+    return filechain.getFileByHash(user, hash);
   }
 
 }

@@ -13,6 +13,8 @@ export default class Filechain {
   }
 
   public storeChunkData(user: User, data: Buffer): Promise<any> {
+    console.log("Hash of what we are about to store: ", hashData(data).toString("hex"));
+
     const tx = this.gtxClient.newTransaction([user.keyPair.pubKey]);
     tx.addOperation("add_chunk_data", data);
     tx.sign(user.keyPair.privKey, user.keyPair.pubKey);

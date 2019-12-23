@@ -3,8 +3,9 @@ import {FILEHUB} from "../blockchain/Postchain";
 import {User} from "ft3-lib";
 import {addBalance, generateRandomString, registerAsset, registerFilechainInFilehub} from "../utils/utils";
 import FsFile from "../../client/lib/models/FsFile";
+import * as path from "path";
 
-jest.setTimeout(60000);
+jest.setTimeout(30000);
 
 describe("Storing files tests", () => {
 
@@ -19,18 +20,53 @@ describe("Storing files tests", () => {
     await FILEHUB.purchaseVoucher(user);
   });
 
+  it("Create file", async () => {
+    const data = generateData(12);
+    const file = FsFile.fromData(generateRandomString(36), data);
+    expect(file.numberOfChunks()).toEqual(1);
+    expect(bufferToHex(file.readFullData())).toEqual(bufferToHex(data));
+  });
+
   it("Store file", async () => {
     const s = generateRandomString(36);
     const data = Buffer.from(s, "utf8");
 
-    await FILEHUB.storeFile(user, new FsFile(s, data));
+    await FILEHUB.storeFile(user, FsFile.fromData(s, data));
 
     const fileNames = await FILEHUB.getUserFileNames(user);
     const found = fileNames.includes(s);
     expect(found).toBeTruthy();
 
     const file = await FILEHUB.getFileByName(user, s);
-    expect(bufferToHex(file.data)).toEqual(bufferToHex(data));
+    expect(bufferToHex(file.readFullData())).toEqual(bufferToHex(data));
+  });
+
+  it("Store actual file", async () => {
+    const filepath = path.resolve("./tests/files/small.txt");
+    const file = FsFile.fromPath(filepath);
+
+    await FILEHUB.storeFile(user, file);
+
+    const fileNames = await FILEHUB.getUserFileNames(user);
+    const found = fileNames.includes(filepath);
+    expect(found).toBeTruthy();
+
+    const readFile = await FILEHUB.getFileByName(user, filepath);
+    expect(bufferToHex(file.readFullData())).toEqual(bufferToHex(file.readFullData()));
+  });
+
+  it("Store actual file, large", async () => {
+    const filepath = path.resolve("./tests/files/large.txt");
+    const file = FsFile.fromPath(filepath);
+
+    await FILEHUB.storeFile(user, file);
+
+    const fileNames = await FILEHUB.getUserFileNames(user);
+    const found = fileNames.includes(filepath);
+    expect(found).toBeTruthy();
+
+    const readFile = await FILEHUB.getFileByName(user, filepath);
+    expect(bufferToHex(file.readFullData())).toEqual(bufferToHex(file.readFullData()));
   });
 
   it("Store file, encrypted", async () => {
@@ -41,14 +77,14 @@ describe("Storing files tests", () => {
     const s = generateRandomString(36);
     const data = Buffer.from(s, "utf8");
 
-    await FILEHUB.storeFileEncrypted(user2, new FsFile(s, data), "test");
+    await FILEHUB.storeFile(user2, FsFile.fromData(s, data), "test");
 
     const fileNames = await FILEHUB.getUserFileNames(user2);
     const found = fileNames.includes(s);
     expect(found).toBeTruthy();
 
-    const file = await FILEHUB.getEncryptedFileByName(user2, s, "test");
-    expect(bufferToHex(file.data)).toEqual(bufferToHex(data));
+    const file = await FILEHUB.getFileByName(user2, s, "test");
+    expect(bufferToHex(file.readFullData())).toEqual(bufferToHex(data));
   });
 
   it("File name below 256 length allowed", async () => {
@@ -61,7 +97,7 @@ describe("Storing files tests", () => {
     expect(found).toBeTruthy();
 
     const file = await FILEHUB.getFileByName(user, name);
-    expect(bufferToHex(file.data)).toEqual(bufferToHex(data));
+    expect(bufferToHex(file.readFullData())).toEqual(bufferToHex(data));
   });
 
   it("File name with 256 length not allowewd", async () => {
@@ -111,7 +147,7 @@ describe("Storing files tests", () => {
     expect(allocatedBytes).toBe(dataSize);
 
     const file = await FILEHUB.getFileByName(user2, name);
-    expect(bufferToHex(file.data)).toEqual(bufferToHex(data));
+    expect(bufferToHex(file.readFullData())).toEqual(bufferToHex(data));
   });
 
   it("Store file, by two users", async () => {
@@ -128,16 +164,16 @@ describe("Storing files tests", () => {
     const user1File = await FILEHUB.getFileByName(user, name);
     const user2File = await FILEHUB.getFileByName(user2, name);
 
-    expect(bufferToHex(user1File.data)).toEqual(bufferToHex(data));
-    expect(bufferToHex(user2File.data)).toEqual(bufferToHex(data));
-    expect(bufferToHex(user1File.data)).toEqual(bufferToHex(user2File.data));
+    expect(bufferToHex(user1File.readFullData())).toEqual(bufferToHex(data));
+    expect(bufferToHex(user2File.readFullData())).toEqual(bufferToHex(data));
+    expect(bufferToHex(user1File.readFullData())).toEqual(bufferToHex(user2File.readFullData()));
   });
 
 });
 
 const storeGeneratedData = (name: string, dataLength: number, user: User) => {
   const data = Buffer.from(generateRandomString(dataLength), "utf8");
-  return FILEHUB.storeFile(user, new FsFile(name, data));
+  return FILEHUB.storeFile(user, FsFile.fromData(name, data));
 };
 
 const generateData = (length: number) => {
@@ -145,7 +181,7 @@ const generateData = (length: number) => {
 };
 
 const storeData = (name: string, data: Buffer, user: User) => {
-  return FILEHUB.storeFile(user, new FsFile(name, data));
+  return FILEHUB.storeFile(user, FsFile.fromData(name, data));
 };
 
 const bufferToHex = (buffer: Buffer) => {

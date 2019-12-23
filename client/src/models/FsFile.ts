@@ -1,21 +1,68 @@
-import { readFileSync } from 'fs';
 import {ChunkIndex} from "./Chunk";
+import * as chunkReader from "read-chunk";
+import * as fs from "fs";
 
 export default class FsFile {
   private static BYTES: number = 1000000;
 
   readonly name: string;
-  readonly data: Buffer;
-  readonly chunks: Buffer[];
+  readonly chunks?: Buffer[];
+  readonly size: number;
 
-  public constructor(name: string, data: Buffer) {
+  private readonly data?: Buffer;
+
+  private constructor(name: string, data?: Buffer) {
     this.name = name;
-    this.data = data;
-    this.chunks = FsFile.sliceIntoChunks(data);
+
+    if (data != null) {
+      this.data = data;
+      this.chunks = FsFile.sliceIntoChunks(data);
+      this.size = data.length;
+    } else {
+      const stats = fs.statSync(name);
+      this.size = stats["size"];
+    }
   }
 
-  public static fromPath(path: string) {
-    return new FsFile(path, readFileSync(path));
+  public readChunk(index: number): Promise<Buffer> {
+    console.log("Reading chunk by index: ", index);
+    if (this.data != null) {
+      return new Promise<Buffer>((resolve, error) => this.chunks != null
+        ? resolve(this.chunks[index])
+        : error("Chunks undefined"));
+    } else {
+      return chunkReader(this.name, index, FsFile.BYTES);
+    }
+  }
+
+  public readChunkSync(index: number): Buffer {
+    console.log("Reading chunk sync by index: ", index);
+    if (this.chunks != null) {
+      return this.chunks[index];
+    } else {
+      return chunkReader.sync(this.name, index, FsFile.BYTES);
+    }
+  }
+
+  public numberOfChunks(): number {
+    return Math.ceil(this.size / FsFile.BYTES);
+  }
+
+  public readFullData(): Buffer {
+    const dataChunks: Buffer[] = [];
+    for (let i = 0; i < this.numberOfChunks(); i++) {
+      dataChunks.push(this.readChunkSync(i));
+    }
+
+    return Buffer.concat(dataChunks);
+  }
+
+  public static fromPath(name: string) {
+    return new FsFile(name, undefined);
+  }
+
+  public static fromData(name: string, data: Buffer) {
+    return new FsFile(name, data);
   }
 
   public static fromChunks(name: string, chunks: ChunkIndex[]) {
