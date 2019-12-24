@@ -3,7 +3,7 @@ import * as chunkReader from "read-chunk";
 import * as fs from "fs";
 
 export default class FsFile {
-  private static BYTES: number = 800000;
+  private static BYTES: number = 100000;
 
   readonly name: string;
   readonly chunks?: Buffer[];
