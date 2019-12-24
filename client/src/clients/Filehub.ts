@@ -31,7 +31,7 @@ export default class Filehub {
   /**
    * Stores a file. Contacts the filehub and allocates a chunk, and then persists the data in the correct filechain.
    *
-   * @param passphrase optional parameter to have the file stored encrypted with a passphrase.
+   * @param passphrase optional parameter to have the file stored encrypted with a passphrase. Note that storing the file encrypted may require extra bytes allocated.
    */
   public async storeFile(user: User, file: FsFile, passphrase?: string): Promise<any> {
     console.log("Storing file: ", file);

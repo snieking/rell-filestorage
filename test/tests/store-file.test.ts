@@ -80,6 +80,34 @@ describe("Storing files tests", () => {
     expect(bufferToHex(dataAfterDownload)).toEqual(bufferToHex(dataBeforeDelete));
   });
 
+  it("Store actual file, encrypted & delete and re-create from blockchain", async () => {
+    const user = await createFt3User();
+    await addBalance(user, 20);
+    await FILEHUB.purchaseVoucher(user);
+
+    const srcFile = path.resolve("./tests/files/large.txt");
+    const filepath = path.resolve("./tests/files/large-to-be-recreated.txt");
+    fs.copyFileSync(srcFile, filepath);
+
+    const file = FsFile.fromPath(filepath);
+
+    await FILEHUB.storeFile(user, file, "password");
+    const dataBeforeDelete = file.readFullData();
+
+    fs.unlinkSync(filepath);
+
+    const fileNames = await FILEHUB.getUserFileNames(user);
+    const found = fileNames.includes(filepath);
+    expect(found).toBeTruthy();
+
+    await FILEHUB.downloadFileByPath(user, filepath, "password");
+
+    const fileAfterDownload = FsFile.fromPath(filepath);
+    const dataAfterDownload = fileAfterDownload.readFullData();
+
+    expect(bufferToHex(dataAfterDownload)).toEqual(bufferToHex(dataBeforeDelete));
+  });
+
   it("Store actual file, large", async () => {
     const filepath = path.resolve("./tests/files/large.txt");
     const file = FsFile.fromPath(filepath);
