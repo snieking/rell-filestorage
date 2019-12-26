@@ -10,6 +10,7 @@ import Operation from "ft3-lib/dist/lib/ft3/operation";
 import {Voucher} from "..";
 import {ChunkHashIndex, ChunkIndex} from "../models/Chunk";
 import * as fs from "fs";
+import {FileStoringOptions} from "../models/FileStoringOptions";
 
 export default class Filehub {
 
@@ -31,21 +32,25 @@ export default class Filehub {
   /**
    * Stores a file. Contacts the filehub and allocates a chunk, and then persists the data in the correct filechain.
    *
-   * @param passphrase optional parameter to have the file stored encrypted with a passphrase. Note that storing the file encrypted may require extra bytes allocated.
+   * @param passphrase optional options for storing the file.
    */
-  public async storeFile(user: User, file: FsFile, passphrase?: string): Promise<any> {
+  public async storeFile(user: User, file: FsFile, options?: FileStoringOptions): Promise<any> {
     console.log("Storing file: ", file);
     const bc = await this.blockchain;
 
-    await bc.call(op("allocate_file", user.authDescriptor.id, file.name, file.size), user);
+    const fileName = options != undefined && options && options.passphrase != undefined && options.filenameEncrypted
+      ? this.encrypt(file.name, options.passphrase)
+      : file.name;
 
-    const brid: Buffer = await this.getFileLocation(user, file.name);
+    await bc.call(op("allocate_file", user.authDescriptor.id, fileName, file.size), user);
+
+    const brid: Buffer = await this.getFileLocation(user, fileName);
     const filechain: Filechain = this.getFilechain(brid);
 
     const promises: Promise<any>[] = [];
     for (let i = 0; i < file.numberOfChunks(); i++) {
       promises.push(
-        file.readChunk(i).then(chunk => this.storeChunk(user, filechain, new ChunkIndex(chunk, i), file.name, passphrase))
+        file.readChunk(i).then(chunk => this.storeChunk(user, filechain, new ChunkIndex(chunk, i), fileName, options))
       )
     }
 
@@ -94,9 +99,9 @@ export default class Filehub {
   /**
    * Retrieves a file by its name.
    *
-   * @param passphrase optional parameter to decrypt the read file with a passphrase.
+   * @param passphrase optional options for retrieving file.
    */
-  public async getFileByPath(user: User, path: string, passphrase?: string): Promise<FsFile> {
+  public async getFileByPath(user: User, path: string, options?: FileStoringOptions): Promise<FsFile> {
     const brid = await this.getFileLocation(user, path);
     const chunkHashes: ChunkHashIndex[] = await this.blockchain.then(bc => bc.query("get_file_chunks", {
       descriptor_id: user.authDescriptor.hash().toString("hex"),
@@ -113,15 +118,18 @@ export default class Filehub {
 
     const chunkIndexes = await Promise.all(promises);
 
-    if (passphrase == null) {
+    if (!options || !options.passphrase) {
       return new Promise(resolve => resolve(FsFile.fromChunks(path, chunkIndexes)));
     } else {
-      return new Promise(resolve => resolve(FsFile.fromChunks(path, chunkIndexes
-        .map(chunk => new ChunkIndex(Buffer.from(this.decrypt(chunk.data.toString("utf8"), passphrase), "utf8"), chunk.idx)))));
+      return new Promise(resolve => resolve(FsFile.fromChunks(
+        options.filenameEncrypted
+          ? this.decrypt(path, options.passphrase!)
+          : path,
+        chunkIndexes.map(chunk => new ChunkIndex(Buffer.from(this.decrypt(chunk.data.toString("utf8"), options.passphrase!), "utf8"), chunk.idx)))));
     }
   }
 
-  public async downloadFileByPath(user: User, path: string, passphrase?: string) {
+  public async downloadFileByPath(user: User, path: string, options?: FileStoringOptions) {
     const brid = await this.getFileLocation(user, path);
     const chunkHashes: ChunkHashIndex[] = await this.blockchain.then(bc => bc.query("get_file_chunks", {
       descriptor_id: user.authDescriptor.hash().toString("hex"),
@@ -137,7 +145,9 @@ export default class Filehub {
     const bufferedArray: ChunkHashIndex[][] = this.bufferArray(sortedArray, 10);
 
     console.log("*** Buffered Array: ", bufferedArray);
-    fs.writeFileSync(path, [], "utf8");
+    fs.writeFileSync(options && options.passphrase && options.filenameEncrypted
+      ? this.decrypt(path, options.passphrase)
+      : path, [], "utf8");
 
     for (let i = 0; i < bufferedArray.length; i++) {
       const promises: Promise<ChunkIndex>[] = [];
@@ -156,8 +166,8 @@ export default class Filehub {
 
         deletePromises.push(
           new Promise<void>(resolve => resolve(fs.appendFileSync(
-            path, passphrase != null
-              ? this.decrypt(data.toString(), passphrase)
+            path, options && options.passphrase
+              ? this.decrypt(data.toString(), options.passphrase)
               : data.toString())
             ))
         );
@@ -204,9 +214,9 @@ export default class Filehub {
     }));
   }
 
-  private storeChunk(user: User, filechain: Filechain, chunkIndex: ChunkIndex, name: string, passphrase?: string) {
-    const chunkToStore = passphrase != null
-      ? Buffer.from(this.encrypt(chunkIndex.data.toString("utf8"), passphrase), "utf8")
+  private storeChunk(user: User, filechain: Filechain, chunkIndex: ChunkIndex, name: string, options?: FileStoringOptions) {
+    const chunkToStore = options != undefined && options.passphrase != null
+      ? Buffer.from(this.encrypt(chunkIndex.data.toString("utf8"), options.passphrase), "utf8")
       : chunkIndex.data;
 
     return this.allocateChunk(user, chunkToStore, name, chunkIndex.idx)

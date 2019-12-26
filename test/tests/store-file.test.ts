@@ -91,7 +91,7 @@ describe("Storing files tests", () => {
 
     const file = FsFile.fromPath(filepath);
 
-    await FILEHUB.storeFile(user, file, "password");
+    await FILEHUB.storeFile(user, file, { passphrase: "password" });
     const dataBeforeDelete = file.readFullData();
 
     fs.unlinkSync(filepath);
@@ -100,7 +100,7 @@ describe("Storing files tests", () => {
     const found = fileNames.includes(filepath);
     expect(found).toBeTruthy();
 
-    await FILEHUB.downloadFileByPath(user, filepath, "password");
+    await FILEHUB.downloadFileByPath(user, filepath, { passphrase: "password" });
 
     const fileAfterDownload = FsFile.fromPath(filepath);
     const dataAfterDownload = fileAfterDownload.readFullData();
@@ -130,14 +130,33 @@ describe("Storing files tests", () => {
     const s = generateRandomString(36);
     const data = Buffer.from(s, "utf8");
 
-    await FILEHUB.storeFile(user2, FsFile.fromData(s, data), "test");
+    await FILEHUB.storeFile(user2, FsFile.fromData(s, data), { passphrase: "test" });
 
     const fileNames = await FILEHUB.getUserFileNames(user2);
     const found = fileNames.includes(s);
     expect(found).toBeTruthy();
 
-    const file = await FILEHUB.getFileByPath(user2, s, "test");
+    const file = await FILEHUB.getFileByPath(user2, s, { passphrase: "test" });
     expect(bufferToHex(file.readFullData())).toEqual(bufferToHex(data));
+  });
+
+  it("Store file & path, encrypted", async () => {
+    const user2 = await createFt3User();
+    await addBalance(user2, 20);
+    await FILEHUB.purchaseVoucher(user2);
+
+    const s = generateRandomString(36);
+    const data = Buffer.from(s, "utf8");
+
+    await FILEHUB.storeFile(user2, FsFile.fromData(s, data), { passphrase: "test", filenameEncrypted: true });
+
+    const fileNames = await FILEHUB.getUserFileNames(user2);
+    const found = fileNames.includes(s);
+    expect(found).toBeFalsy();
+
+    const file = await FILEHUB.getFileByPath(user2, fileNames[0], { passphrase: "test", filenameEncrypted: true });
+    expect(bufferToHex(file.readFullData())).toEqual(bufferToHex(data));
+    expect(file.name).toEqual(s);
   });
 
   it("File name below 256 length allowed", async () => {
@@ -153,13 +172,13 @@ describe("Storing files tests", () => {
     expect(bufferToHex(file.readFullData())).toEqual(bufferToHex(data));
   });
 
-  it("File name with 256 length not allowewd", async () => {
+  it("File name with 256 length not allowed", async () => {
     await storeGeneratedData(generateRandomString(256), 36, user)
       .catch(error => expect(error).toBeDefined());
     expect.assertions(1);
   });
 
-  it("File name above 256 length not allowewd", async () => {
+  it("File name above 256 length not allowed", async () => {
     await storeGeneratedData(generateRandomString(257), 36, user)
       .catch(error => expect(error).toBeDefined());
     expect.assertions(1);
