@@ -8,7 +8,7 @@ export default class Filechain {
   private readonly gtxClient: any;
 
   public constructor(nodeApiUrl: string, brid: string) {
-    this.restClient = pcl.restClient.createRestClient(nodeApiUrl, brid, 5);
+    this.restClient = pcl.restClient.createRestClient(nodeApiUrl, brid, 10);
     this.gtxClient = pcl.gtxClient.createClient(this.restClient, Buffer.from(brid, "hex"), []);
   }
 
@@ -22,7 +22,11 @@ export default class Filechain {
       return this.restClient.query("file_hash_exists", { hash: hashData(data).toString("hex") })
         .then((exists: boolean) => {
           if (!exists) {
-            throw error;
+            if (error.message.includes("500")) {
+              console.log("Unable to store chunk data, it may be due to a transaction is already pending with the exact same data which means no more action is required", error);
+            } else {
+              throw error;
+            }
           } else {
             console.log("Chunk already existed");
           }
