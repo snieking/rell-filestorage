@@ -72,12 +72,20 @@ jobs:
       # Collect logs
       - name: Read filehub logs
         uses: pCYSl5EDgo/cat@master
-        id: hello
+        id: filehub
         with:
           path: filehub/rell/filehub.log
 
       - name: Read filechain logs
         uses: pCYSl5EDgo/cat@master
-        id: hello
+        id: filechain
         with:
           path: filechain/rell/filechain.log
+
+      - run: echo $TEXT
+          env:
+            TEXT: ${{ steps.filehub.outputs.text }}
+
+      - run: echo $TEXT
+          env:
+            TEXT: ${{ steps.filechain.outputs.text }}
