@@ -101,11 +101,11 @@ export default class Filehub {
    *
    * @param passphrase optional options for retrieving file.
    */
-  public async getFileByPath(user: User, path: string, options?: FileStoringOptions): Promise<FsFile> {
-    const brid = await this.getFileLocation(user, path);
+  public async getFileByName(user: User, name: string, options?: FileStoringOptions): Promise<FsFile> {
+    const brid = await this.getFileLocation(user, name);
     const chunkHashes: ChunkHashIndex[] = await this.blockchain.then(bc => bc.query("get_file_chunks", {
       descriptor_id: user.authDescriptor.hash().toString("hex"),
-      name: path
+      name: name
     }));
 
     const filechain = this.getFilechain(brid);
@@ -119,21 +119,21 @@ export default class Filehub {
     const chunkIndexes = await Promise.all(promises);
 
     if (!options || !options.passphrase) {
-      return new Promise(resolve => resolve(FsFile.fromChunks(path, chunkIndexes)));
+      return new Promise(resolve => resolve(FsFile.fromChunks(name, chunkIndexes)));
     } else {
       return new Promise(resolve => resolve(FsFile.fromChunks(
         options.filenameEncrypted
-          ? this.decrypt(path, options.passphrase!)
-          : path,
+          ? this.decrypt(name, options.passphrase!)
+          : name,
         chunkIndexes.map(chunk => new ChunkIndex(Buffer.from(this.decrypt(chunk.data.toString("utf8"), options.passphrase!), "utf8"), chunk.idx)))));
     }
   }
 
-  public async downloadFileByPath(user: User, path: string, options?: FileStoringOptions) {
-    const brid = await this.getFileLocation(user, path);
+  public async downloadFileByName(user: User, name: string, path?: string, options?: FileStoringOptions) {
+    const brid = await this.getFileLocation(user, name);
     const chunkHashes: ChunkHashIndex[] = await this.blockchain.then(bc => bc.query("get_file_chunks", {
       descriptor_id: user.authDescriptor.hash().toString("hex"),
-      name: path
+      name: name
     }));
 
     console.log("1111 Chunk hashes: ", chunkHashes);
@@ -142,12 +142,15 @@ export default class Filehub {
 
     const sortedArray = chunkHashes.sort((a, b) => a.idx - b.idx);
     console.log("2222 Sorted array: ", sortedArray);
-    const bufferedArray: ChunkHashIndex[][] = this.bufferArray(sortedArray, 10);
+    const bufferedArray: ChunkHashIndex[][] = Filehub.bufferArray(sortedArray, 10);
 
     console.log("*** Buffered Array: ", bufferedArray);
-    fs.writeFileSync(options && options.passphrase && options.filenameEncrypted
-      ? this.decrypt(path, options.passphrase)
-      : path, [], "utf8");
+
+    const location = path
+      ? path
+      : (options && options.passphrase && options.filenameEncrypted ? this.decrypt(name, options.passphrase) : name);
+
+    fs.writeFileSync(location, [], "utf8");
 
     for (let i = 0; i < bufferedArray.length; i++) {
       const promises: Promise<ChunkIndex>[] = [];
@@ -166,7 +169,7 @@ export default class Filehub {
 
         deletePromises.push(
           new Promise<void>(resolve => resolve(fs.appendFileSync(
-            path, options && options.passphrase
+            location, options && options.passphrase
               ? this.decrypt(data.toString(), options.passphrase)
               : data.toString())
             ))
@@ -175,15 +178,6 @@ export default class Filehub {
 
       await Promise.all(deletePromises);
     }
-  }
-
-  private bufferArray(array: any[], buffer: number): any[][] {
-    const arrayOfArrays: any[][] = [];
-    for (let i=0; i<array.length; i+=buffer) {
-      arrayOfArrays.push(array.slice(i, i+buffer));
-    }
-
-    return arrayOfArrays;
   }
 
   /**
@@ -273,6 +267,15 @@ export default class Filehub {
 
   private static getFileByHash(user: User, filechain: Filechain, hash: Buffer): Promise<string> {
     return filechain.getFileByHash(user, hash);
+  }
+
+  private static bufferArray(array: any[], buffer: number): any[][] {
+    const arrayOfArrays: any[][] = [];
+    for (let i=0; i<array.length; i+=buffer) {
+      arrayOfArrays.push(array.slice(i, i+buffer));
+    }
+
+    return arrayOfArrays;
   }
 
 }

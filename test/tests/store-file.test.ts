@@ -38,7 +38,7 @@ describe("Storing files tests", () => {
     const found = fileNames.includes(s);
     expect(found).toBeTruthy();
 
-    const file = await FILEHUB.getFileByPath(user, s);
+    const file = await FILEHUB.getFileByName(user, s);
     expect(bufferToHex(file.readFullData())).toEqual(bufferToHex(data));
   });
 
@@ -52,7 +52,7 @@ describe("Storing files tests", () => {
     const found = fileNames.includes(filepath);
     expect(found).toBeTruthy();
 
-    const readFile = await FILEHUB.getFileByPath(user, filepath);
+    const readFile = await FILEHUB.getFileByName(user, filepath);
     expect(bufferToHex(file.readFullData())).toEqual(bufferToHex(file.readFullData()));
   });
 
@@ -72,9 +72,34 @@ describe("Storing files tests", () => {
     const found = fileNames.includes(filepath);
     expect(found).toBeTruthy();
 
-    await FILEHUB.downloadFileByPath(user, filepath);
+    await FILEHUB.downloadFileByName(user, filepath, undefined);
 
     const fileAfterDownload = FsFile.fromPath(filepath);
+    const dataAfterDownload = fileAfterDownload.readFullData();
+
+    expect(bufferToHex(dataAfterDownload)).toEqual(bufferToHex(dataBeforeDelete));
+  });
+
+  it("Store actual file, delete and re-create on new path from blockchain", async () => {
+    const user = await createFt3User();
+    await addBalance(user, 20);
+    await FILEHUB.purchaseVoucher(user);
+
+    const srcPath = path.resolve("./tests/files/large.txt");
+
+    const file = FsFile.fromPath(srcPath);
+
+    await FILEHUB.storeFile(user, file);
+    const dataBeforeDelete = file.readFullData();
+
+    const fileNames = await FILEHUB.getUserFileNames(user);
+    const found = fileNames.includes(srcPath);
+    expect(found).toBeTruthy();
+
+    const filepath = path.resolve("./tests/files/large-on-other-path.txt");
+    await FILEHUB.downloadFileByName(user, srcPath, filepath);
+
+    const fileAfterDownload = FsFile.fromPath(srcPath);
     const dataAfterDownload = fileAfterDownload.readFullData();
 
     expect(bufferToHex(dataAfterDownload)).toEqual(bufferToHex(dataBeforeDelete));
@@ -100,7 +125,7 @@ describe("Storing files tests", () => {
     const found = fileNames.includes(filepath);
     expect(found).toBeTruthy();
 
-    await FILEHUB.downloadFileByPath(user, filepath, { passphrase: "password" });
+    await FILEHUB.downloadFileByName(user, fileNames[0], undefined, { passphrase: "password" });
 
     const fileAfterDownload = FsFile.fromPath(filepath);
     const dataAfterDownload = fileAfterDownload.readFullData();
@@ -118,7 +143,7 @@ describe("Storing files tests", () => {
     const found = fileNames.includes(filepath);
     expect(found).toBeTruthy();
 
-    const readFile = await FILEHUB.getFileByPath(user, filepath);
+    const readFile = await FILEHUB.getFileByName(user, filepath);
     expect(bufferToHex(file.readFullData())).toEqual(bufferToHex(file.readFullData()));
   });
 
@@ -136,7 +161,7 @@ describe("Storing files tests", () => {
     const found = fileNames.includes(s);
     expect(found).toBeTruthy();
 
-    const file = await FILEHUB.getFileByPath(user2, s, { passphrase: "test" });
+    const file = await FILEHUB.getFileByName(user2, s, { passphrase: "test" });
     expect(bufferToHex(file.readFullData())).toEqual(bufferToHex(data));
   });
 
@@ -154,7 +179,7 @@ describe("Storing files tests", () => {
     const found = fileNames.includes(s);
     expect(found).toBeFalsy();
 
-    const file = await FILEHUB.getFileByPath(user2, fileNames[0], { passphrase: "test", filenameEncrypted: true });
+    const file = await FILEHUB.getFileByName(user2, fileNames[0], { passphrase: "test", filenameEncrypted: true });
     expect(bufferToHex(file.readFullData())).toEqual(bufferToHex(data));
     expect(file.name).toEqual(s);
   });
@@ -168,7 +193,7 @@ describe("Storing files tests", () => {
     const found = fileNames.includes(name);
     expect(found).toBeTruthy();
 
-    const file = await FILEHUB.getFileByPath(user, name);
+    const file = await FILEHUB.getFileByName(user, name);
     expect(bufferToHex(file.readFullData())).toEqual(bufferToHex(data));
   });
 
@@ -218,7 +243,7 @@ describe("Storing files tests", () => {
     const allocatedBytes = await FILEHUB.getAllocatedBytes(user2);
     expect(allocatedBytes).toBe(dataSize);
 
-    const file = await FILEHUB.getFileByPath(user2, name);
+    const file = await FILEHUB.getFileByName(user2, name);
     expect(bufferToHex(file.readFullData())).toEqual(bufferToHex(data));
   });
 
@@ -233,8 +258,8 @@ describe("Storing files tests", () => {
     await storeData(name, data, user);
     await storeData(name, data, user2);
 
-    const user1File = await FILEHUB.getFileByPath(user, name);
-    const user2File = await FILEHUB.getFileByPath(user2, name);
+    const user1File = await FILEHUB.getFileByName(user, name);
+    const user2File = await FILEHUB.getFileByName(user2, name);
 
     expect(bufferToHex(user1File.readFullData())).toEqual(bufferToHex(data));
     expect(bufferToHex(user2File.readFullData())).toEqual(bufferToHex(data));
