@@ -83,9 +83,9 @@ jobs:
           path: filechain/rell/filechain.log
 
       - run: echo $TEXT
-          env:
-            TEXT: ${{ steps.filehub.outputs.text }}
+        env:
+          TEXT: ${{ steps.filehub.outputs.text }}
 
       - run: echo $TEXT
-          env:
-            TEXT: ${{ steps.filechain.outputs.text }}
+        env:
+          TEXT: ${{ steps.filechain.outputs.text }}
