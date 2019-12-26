@@ -8,7 +8,7 @@ export default class Filechain {
   private readonly gtxClient: any;
 
   public constructor(nodeApiUrl: string, brid: string) {
-    this.restClient = pcl.restClient.createRestClient(nodeApiUrl, brid, 10);
+    this.restClient = pcl.restClient.createRestClient(nodeApiUrl, brid, 5);
     this.gtxClient = pcl.gtxClient.createClient(this.restClient, Buffer.from(brid, "hex"), []);
   }
 

@@ -6,7 +6,7 @@ import FsFile from "../../client/lib/models/FsFile";
 import * as path from "path";
 import * as fs from "fs";
 
-jest.setTimeout(30000);
+jest.setTimeout(60000);
 
 describe("Storing files tests", () => {
 

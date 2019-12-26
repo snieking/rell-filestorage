@@ -69,23 +69,10 @@ jobs:
         working-directory: test
         continue-on-error: true
 
-      # Collect logs
-      - name: Read filehub logs
-        uses: pCYSl5EDgo/cat@master
-        id: filehub
-        with:
-          path: filehub/rell/filehub.log
+      - name: Output Filehub log
+        run: cat filehub.log
+        working-directory: filehub/rell
 
-      - name: Read filechain logs
-        uses: pCYSl5EDgo/cat@master
-        id: filechain
-        with:
-          path: filechain/rell/filechain.log
-
-      - run: echo $TEXT
-        env:
-          TEXT: ${{ steps.filehub.outputs.text }}
-
-      - run: echo $TEXT
-        env:
-          TEXT: ${{ steps.filechain.outputs.text }}
+      - name: Output Filechain log
+        run: cat filechain.log
+        working-directory: filechain/rell
