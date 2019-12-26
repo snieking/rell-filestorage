@@ -85,7 +85,7 @@ describe("Storing files tests", () => {
     await addBalance(user, 20);
     await FILEHUB.purchaseVoucher(user);
 
-    const srcPath = path.resolve("./tests/files/large.txt");
+    const srcPath = path.resolve("./tests/files/small.txt");
 
     const file = FsFile.fromPath(srcPath);
 
@@ -96,7 +96,7 @@ describe("Storing files tests", () => {
     const found = fileNames.includes(srcPath);
     expect(found).toBeTruthy();
 
-    const filepath = path.resolve("./tests/files/large-on-other-path.txt");
+    const filepath = path.resolve("./tests/files/small-on-other-path.txt");
     await FILEHUB.downloadFileByName(user, srcPath, filepath);
 
     const fileAfterDownload = FsFile.fromPath(srcPath);
