@@ -72,12 +72,12 @@ jobs:
       # Collect logs
       - name: Read filehub logs
         uses: pCYSl5EDgo/cat@master
-#        id: hello
+        id: hello
         with:
           path: filehub/rell/filehub.log
 
       - name: Read filechain logs
         uses: pCYSl5EDgo/cat@master
-        #        id: hello
+        id: hello
         with:
           path: filechain/rell/filechain.log
