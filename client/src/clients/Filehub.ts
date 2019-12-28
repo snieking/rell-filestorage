@@ -60,7 +60,7 @@ export default class Filehub {
       : file.name;
 
     let brid: Buffer;
-    if (options && !options.brid) {
+    if (options == null || options && !options.brid) {
       const bc = await this.blockchain;
 
       await this.executeOperation(user, op("allocate_file", user.authDescriptor.id, fileName, file.size));
