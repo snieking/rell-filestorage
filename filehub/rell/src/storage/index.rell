@@ -16,11 +16,18 @@ entity chunk_size {
 	key chunk, size: integer;
 }
 
+entity active_filechain {
+	key filechain;
+	index timestamp;
+}
+
 entity file {
 	key name, ft3_acc.account, filechain;
+	index timestamp;
 }
 
 entity file_chunk {
 	key file, idx: integer;
 	chunk;
+	index timestamp;
 }

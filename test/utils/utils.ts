@@ -1,17 +1,11 @@
-import {FILEHUB, FILEHUB_BLOCKCHAIN, FILEHUB_BLOCKCHAIN_RID} from "../blockchain/Postchain";
+import {FILEHUB_BLOCKCHAIN, FILEHUB_BLOCKCHAIN_RID} from "../blockchain/Postchain";
 import User from "ft3-lib/dist/lib/ft3/user";
-import * as config from "../blockchain/config.js";
-import * as crypto from "crypto";
 import {Asset} from "../domain/Asset";
 import Operation from "ft3-lib/dist/lib/ft3/operation";
 
 const TOKEN_NAME = "CHR";
 
 let assetId: Buffer = null;
-
-export const registerFilechainInFilehub = async (user: User) => {
-  await FILEHUB.registerFilechain(user, config.filechainRID);
-};
 
 export const registerAsset = async (user: User) => {
   if (assetId == null) {

@@ -67,7 +67,7 @@ jobs:
       - name: Run tests
         run: npm run silent-test
         working-directory: test
-        continue-on-error: true
+        continue-on-error: false
 
       - name: Output Filehub log
         run: cat filehub.log

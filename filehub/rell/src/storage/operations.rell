@@ -12,7 +12,7 @@ operation allocate_file(descriptor_id: byte_array, name, total_bytes: integer) {
 	val current_timestamp = op_context.last_block_time;	
 	verify_voucher(account, current_timestamp, total_bytes);
 	
-	create file(name, account, filechain@{});
+	create file(name, account, chain_selector(), current_timestamp);
 }
 
 operation allocate_chunk(descriptor_id: byte_array, name, hash: byte_array, chunk_size: integer, idx: integer) {
@@ -34,7 +34,7 @@ operation allocate_chunk(descriptor_id: byte_array, name, hash: byte_array, chun
 		chunk = create chunk(hash, file.filechain);			
 	}
 	
-	create file_chunk(file@{ name, account }, chunk, idx);
+	create file_chunk(file@{ name, account }, chunk, idx, timestamp = op_context.last_block_time);
 	
 	val stored_size = chunk_size@?{ .chunk == chunk };
 	
@@ -52,6 +52,31 @@ operation deallocate_file(descriptor_id: byte_array, name) {
 	val file = file@{ name, account };
 	delete file_chunk@*{ file };
 	delete file;
+}
+
+operation migrate_file(descriptor_id: byte_array, name) {
+	val account = util.get_account_by_descriptor_id(descriptor_id);
+	
+	val old_file = file@{ name, account };
+	val chunks = file_chunk@*{ old_file };
+	
+	val new_file = create file(old_file.name, old_file.account, chain_selector(), op_context.last_block_time);
+	
+	for (chunk in chunks) {
+		create file_chunk(new_file, idx = chunk.idx, chunk.chunk, timestamp = op_context.last_block_time);
+	}
+}
+
+operation mark_file_migrated(descriptor_id: byte_array, name) {
+	val account = util.get_account_by_descriptor_id(descriptor_id);
+	val file = file@{ name, account, .filechain != chain_selector() };
+	
+	delete file_chunk@* { file };
+	delete file;
+}
+
+function chain_selector(): filechain {
+	return active_filechain@{} ( .filechain, @omit @sort_desc .timestamp ) limit 1;
 }
 
 function verify_voucher(ft3_acc.account, timestamp, file_size: integer) {

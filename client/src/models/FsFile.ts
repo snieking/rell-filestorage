@@ -1,5 +1,5 @@
 import {ChunkIndex} from "./Chunk";
-import * as chunkReader from "read-chunk";
+import readChunk from "read-chunk";
 import * as fs from "fs";
 
 export default class FsFile {
@@ -24,14 +24,14 @@ export default class FsFile {
     }
   }
 
-  public readChunk(index: number): Promise<Buffer> {
+  public getChunk(index: number): Promise<Buffer> {
     console.log("Reading chunk by index: ", index);
     if (this.data != null) {
       return new Promise<Buffer>((resolve, error) => this.chunks != null
         ? resolve(this.chunks[index])
         : error("Chunks undefined"));
     } else {
-      return chunkReader(this.name, index * FsFile.BYTES, FsFile.BYTES);
+      return readChunk(this.name, index * FsFile.BYTES, FsFile.BYTES);
     }
   }
 
@@ -39,7 +39,7 @@ export default class FsFile {
     if (this.chunks != null) {
       return this.chunks[index];
     } else {
-      return chunkReader.sync(this.name, index * FsFile.BYTES, FsFile.BYTES);
+      return readChunk.sync(this.name, index * FsFile.BYTES, FsFile.BYTES);
     }
   }
 

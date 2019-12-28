@@ -1,13 +1,12 @@
 import {createFt3User} from "../utils/users";
-import {registerFilechainInFilehub, registerAsset, addBalance} from "../utils/utils";
-import {FILEHUB} from "../blockchain/Postchain";
+import {registerAsset, addBalance} from "../utils/utils";
+import {FILEHUB, initFilehub} from "../blockchain/Postchain";
 
 describe("Billing tests", () => {
 
   beforeAll(async () => {
+    await initFilehub();
     const admin = await createFt3User();
-    await FILEHUB.registerAdmin(admin);
-    await registerFilechainInFilehub(admin);
     await registerAsset(admin);
   });
 

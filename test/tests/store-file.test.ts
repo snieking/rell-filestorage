@@ -1,7 +1,7 @@
 import {createFt3User} from "../utils/users";
-import {FILEHUB} from "../blockchain/Postchain";
+import {FILEHUB, initFilehub} from "../blockchain/Postchain";
 import {User} from "ft3-lib";
-import {addBalance, generateRandomString, registerAsset, registerFilechainInFilehub} from "../utils/utils";
+import {addBalance, generateRandomString, registerAsset} from "../utils/utils";
 import FsFile from "../../client/lib/models/FsFile";
 import * as path from "path";
 import * as fs from "fs";
@@ -13,9 +13,9 @@ describe("Storing files tests", () => {
   let user: User;
 
   beforeAll(async () => {
+    await initFilehub();
+
     user = await createFt3User();
-    await FILEHUB.registerAdmin(user);
-    await registerFilechainInFilehub(user);
     await registerAsset(user);
     await addBalance(user, 20);
     await FILEHUB.purchaseVoucher(user);

@@ -5,7 +5,16 @@ operation add_filechain(descriptor_id: byte_array, rid: byte_array) {
     val account = util.get_account_by_descriptor_id(descriptor_id);
 
     if (admin@?{ account } != null and storage.filechain@?{ rid } == null) {
-        create storage.filechain(rid);
+        val filechain = create storage.filechain(rid);
+        create storage.active_filechain(filechain, op_context.last_block_time);
+	}
+}
+
+operation disable_filechain(descriptor_id: byte_array, rid: byte_array) {
+	val account = util.get_account_by_descriptor_id(descriptor_id);
+	
+	if (admin@?{ account } != null and storage.filechain@?{ rid } != null) {
+        delete storage.active_filechain@{ .filechain.brid == rid };
 	}
 }
 

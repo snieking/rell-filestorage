@@ -1,8 +1,9 @@
 import util;
+import billing;
 
-query get_file_location(descriptor_id: byte_array, name): byte_array {
+query get_file_location(descriptor_id: byte_array, name) {
 	val account = util.get_account_by_descriptor_id(descriptor_id);
-	return file@{ name, account } ( .filechain.brid );
+	return file@*{ name, account } ( .filechain.brid, @omit @sort .timestamp ) limit 1;
 }
 
 query get_file_chunks(descriptor_id: byte_array, name) {
@@ -18,4 +19,21 @@ query get_file_names(descriptor_id: byte_array) {
 query get_allocated_bytes(descriptor_id: byte_array) {
 	val account = util.get_account_by_descriptor_id(descriptor_id);
 	return _get_allocated_bytes(account);
+}
+
+query get_files_belonging_to_active_voucher_in_brid_after_timestamp(
+	brid: byte_array, 
+	stored_at: timestamp, 
+	current_time: timestamp, 
+	page_size: integer
+) {
+	return (file_chunk, billing.voucher)@*{
+		voucher.timestamp > current_time,
+		file_chunk.timestamp > stored_at,
+		file_chunk.file.filechain.brid == brid,
+		file_chunk.file.account == voucher.account
+	} (
+		file_chunk.file.name,
+		file_chunk.timestamp
+	) limit page_size;
 }
