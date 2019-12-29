@@ -1,7 +1,10 @@
-import {createFt3User} from "../utils/users";
-import {registerAsset, addBalance} from "../utils/utils";
+import {createFt3User} from "./utils/users";
+import {registerAsset, addBalance} from "./utils/utils";
 import {FILEHUB, initFilehub} from "../blockchain/Postchain";
 
+/**
+ * @group ci
+ */
 describe("Billing tests", () => {
 
   beforeAll(async () => {

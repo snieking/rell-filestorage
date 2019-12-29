@@ -8,9 +8,10 @@ import ChainConnectionInfo from "ft3-lib/dist/lib/ft3/chain-connection-info";
 import FsFile from "../models/FsFile";
 import Operation from "ft3-lib/dist/lib/ft3/operation";
 import {Voucher} from "..";
-import {ChunkHashIndex, ChunkIndex} from "../models/Chunk";
+import {ChunkHashFilechain, ChunkHashIndex, ChunkIndex} from "../models/Chunk";
 import * as fs from "fs";
 import {FileStoringOptions} from "../models/FileStoringOptions";
+import logger from "../utils/logger";
 
 export default class Filehub {
 
@@ -36,7 +37,10 @@ export default class Filehub {
    * @param operation to perform.
    */
   public executeOperation(user: User, operation: Operation): Promise<void> {
-    return this.blockchain.then(bc => bc.call(operation, user));
+    return this.blockchain.then(bc => {
+      logger.debug(`Operation: ${operation} on blockchain: ${bc} for user: ${user}`);
+      return bc.call(operation, user);
+    });
   }
 
   /**
@@ -46,7 +50,10 @@ export default class Filehub {
    * @param data to provide in the query.
    */
   public executeQuery(query: string, data: unknown) {
-    return this.blockchain.then(bc => bc.query(query, data));
+    return this.blockchain.then(bc => {
+      logger.debug(`Query: ${query} on blockchain: ${bc} with data: ${data}`);
+      return bc.query(query, data);
+    });
   }
 
   /**
@@ -59,23 +66,34 @@ export default class Filehub {
       ? Filehub.encrypt(file.name, options.passphrase)
       : file.name;
 
-    let brid: Buffer;
-    if (options == null || options && !options.brid) {
-      const bc = await this.blockchain;
+    const bc = await this.blockchain;
 
-      await this.executeOperation(user, op("allocate_file", user.authDescriptor.id, fileName, file.size));
+    await this.executeOperation(user, op("allocate_file", user.authDescriptor.id, fileName, file.size));
 
-      brid = await this.getFileLocation(user, fileName);
-    } else {
-      brid = new Buffer(options!.brid!, "utf8");
-    }
-    const filechain: Filechain = this.initFilechain(brid);
+    const brid = await this.getFileLocation(user, fileName);
+
+    return await this.storeChunks(user, file, brid.toString("hex"), fileName, options);
+  }
+
+  /**
+   * Store chunk in the provided BRID.
+   */
+  public async copyChunkDataToOtherBrid(user: User, chunkHash: ChunkHashFilechain, brid: string) {
+    const oldFilechain = this.initFilechainClient(chunkHash.brid);
+    const newFilechain = this.initFilechainClient(brid);
+
+    const data = await oldFilechain.getChunkDataByHash(chunkHash.hash);
+    return this.persistChunkDataInFilechain(user, newFilechain, Buffer.from(data, "hex"));
+  }
+
+  private storeChunks(user: User, file: FsFile, brid: string, fileName: string, options?: FileStoringOptions) {
+    const filechain: Filechain = this.initFilechainClient(brid);
 
     const promises: Promise<any>[] = [];
     for (let i = 0; i < file.numberOfChunks(); i++) {
       promises.push(
         file.getChunk(i).then(chunk => this.storeChunk(user, filechain, new ChunkIndex(chunk, i), fileName, options))
-      )
+      );
     }
 
     return Promise.all(promises);
@@ -116,12 +134,12 @@ export default class Filehub {
       name: name
     });
 
-    const filechain = this.initFilechain(brid);
+    const filechain = this.initFilechainClient(brid.toString("hex"));
 
     const promises: Promise<ChunkIndex>[] = [];
 
     for (let i = 0; i < chunkHashes.length; i++) {
-      promises.push(this.getChunk(user, filechain, chunkHashes[i]));
+      promises.push(this.getChunk(filechain, chunkHashes[i]));
     }
 
     const chunkIndexes = await Promise.all(promises);
@@ -145,7 +163,7 @@ export default class Filehub {
       name: name
     });
 
-    const filechain = this.initFilechain(brid);
+    const filechain = this.initFilechainClient(brid.toString("hex"));
 
     const sortedArray = chunkHashes.sort((a, b) => a.idx - b.idx);
     const bufferedArray: ChunkHashIndex[][] = Filehub.bufferArray(sortedArray, 10);
@@ -161,7 +179,7 @@ export default class Filehub {
       const chunks = bufferedArray[i];
 
       for (let j = 0; j < chunks.length; j++) {
-        promises.push(this.getChunk(user, filechain, chunks[j]));
+        promises.push(this.getChunk(filechain, chunks[j]));
       }
 
       const chunkIndexes = await Promise.all(promises);
@@ -216,7 +234,11 @@ export default class Filehub {
       : chunkIndex.data;
 
     return this.allocateChunk(user, chunkToStore, name, chunkIndex.idx)
-      .then(() => filechain.storeChunkData(user, chunkToStore));
+      .then(() => this.persistChunkDataInFilechain(user, filechain, chunkToStore));
+  }
+
+  private persistChunkDataInFilechain(user: User, filechain: Filechain, data: Buffer) {
+    return filechain.storeChunkData(user, data);
   }
 
   private getFileLocation(user: User, name: string): Promise<Buffer> {
@@ -226,8 +248,8 @@ export default class Filehub {
     });
   }
 
-  private getChunk(user: User, filechain: Filechain, chunkHash: ChunkHashIndex): Promise<ChunkIndex> {
-    return Filehub.getFileByHash(user, filechain, chunkHash.hash)
+  private getChunk(filechain: Filechain, chunkHash: ChunkHashIndex): Promise<ChunkIndex> {
+    return Filehub.getChunkDataByHash(filechain, chunkHash.hash)
       .then((data: string) => new ChunkIndex(Buffer.from(data, "hex"), chunkHash.idx));
   }
 
@@ -246,9 +268,15 @@ export default class Filehub {
     return this.executeOperation(user, operation);
   };
 
-  private initFilechain(brid: Buffer): Filechain {
+  private initFilechainClient(brid: string): Filechain {
+    logger.debug(`About to init filechain client with brid: ${brid}`);
     const chain = this.chains
-      .find(c => c.chainId.toString("hex").toLocaleUpperCase() === brid.toString("hex").toLocaleUpperCase());
+      .find(c => {
+        const directoryChain = c.chainId.toString("hex").toLocaleUpperCase();
+        logger.debug(`Found in DC: ${directoryChain}`);
+
+        return directoryChain === brid.toLocaleUpperCase();
+      });
 
     if (chain == null) {
       throw new Error("Expected filechain not found in directory service");
@@ -265,8 +293,8 @@ export default class Filehub {
     return AES.decrypt(data, passphrase).toString(enc.Utf8);
   }
 
-  private static getFileByHash(user: User, filechain: Filechain, hash: Buffer): Promise<string> {
-    return filechain.getFileByHash(user, hash);
+  private static getChunkDataByHash(filechain: Filechain, hash: Buffer): Promise<string> {
+    return filechain.getChunkDataByHash(hash);
   }
 
   private static bufferArray(array: any[], buffer: number): any[][] {

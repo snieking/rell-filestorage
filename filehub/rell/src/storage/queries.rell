@@ -27,13 +27,26 @@ query get_files_belonging_to_active_voucher_in_brid_after_timestamp(
 	current_time: timestamp, 
 	page_size: integer
 ) {
-	return (file_chunk, billing.voucher)@*{
+	return (file, billing.voucher)@*{
 		voucher.timestamp > current_time,
-		file_chunk.timestamp > stored_at,
+		file.timestamp >= stored_at,
+		file.filechain.brid == brid,
+		file.account == voucher.account
+	} (
+		name = file.name,
+		timestamp = file.timestamp
+	) limit page_size;
+}
+
+query get_all_migratable_chunks_by_file(brid: byte_array, name, timestamp, current_time: timestamp) {
+	return (file_chunk, billing.voucher)@*{
+		file_chunk.file.name == name,
+		file_chunk.file.timestamp == timestamp,
+		voucher.timestamp > current_time,
 		file_chunk.file.filechain.brid == brid,
 		file_chunk.file.account == voucher.account
 	} (
-		file_chunk.file.name,
-		file_chunk.timestamp
-	) limit page_size;
+		hash = file_chunk.chunk.hash,
+		brid = file_chunk.chunk.filechain.brid
+	);
 }

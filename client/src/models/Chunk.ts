@@ -3,6 +3,11 @@ export interface ChunkHashIndex {
   idx: number;
 }
 
+export interface ChunkHashFilechain {
+  hash: Buffer;
+  brid: string;
+}
+
 export class ChunkIndex {
 
   readonly data: Buffer;

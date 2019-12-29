@@ -3,10 +3,10 @@ import * as crypto from 'crypto'
 
 import { FlagsType, KeyPair, SingleSignatureAuthDescriptor, User } from "ft3-lib";
 
-import { FILEHUB_BLOCKCHAIN } from "../blockchain/Postchain";
+import { FILEHUB_BLOCKCHAIN } from "../../blockchain/Postchain";
 
-export const createFt3User = async (): Promise<User> => {
-	const walletKeyPair = new KeyPair(makeKeyPair().privKey.toString("hex"));
+export const createFt3User = async (privkey?: string): Promise<User> => {
+	const walletKeyPair = new KeyPair(privkey ? privkey : makeKeyPair().privKey.toString("hex"));
 	const walletAuthDescriptor = new SingleSignatureAuthDescriptor(walletKeyPair.pubKey, [
 		FlagsType.Account,
 		FlagsType.Transfer
@@ -14,10 +14,15 @@ export const createFt3User = async (): Promise<User> => {
 
 	const walletUser = new User(walletKeyPair, walletAuthDescriptor);
 
-	const bc = await FILEHUB_BLOCKCHAIN;
-	await bc.registerAccount(walletAuthDescriptor, walletUser);
+	try {
+		const bc = await FILEHUB_BLOCKCHAIN;
+		await bc.registerAccount(walletAuthDescriptor, walletUser);
+	} catch (error) {
+		console.log("User already registered");
+	}
 
 	return new Promise<User>(resolve => resolve(walletUser));
+
 };
 
 export function makeKeyPair() {

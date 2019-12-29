@@ -1,7 +1,10 @@
-import {createFt3User} from "../utils/users";
+import {createFt3User} from "./utils/users";
 
 jest.setTimeout(60000);
 
+/**
+ * @group ci
+ */
 describe("User tests", () => {
 
   it("Make user", async () => {

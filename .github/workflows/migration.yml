@@ -1,4 +1,4 @@
-name: continuous-integration
+name: migration
 
 on: [push]
 
@@ -15,9 +15,9 @@ jobs:
           # Version of PostgreSQL to use
           postgresql version: 10
           # POSTGRES_DB - name for the default database that is created
-          postgresql db: filestorage 
+          postgresql db: filestorage
           # POSTGRES_USER - create the specified user with superuser power
-          postgresql user: postchain 
+          postgresql user: postchain
           # POSTGRES_PASSWORD - superuser password
           postgresql password: postchain
 
@@ -31,9 +31,9 @@ jobs:
       - name: Run Filehub
         run: ./run-dev-node.sh WIPE_DB > filehub.log &
         working-directory: filehub/rell
-      
+
       # Build and deploy the Filechain
-      - name: Download Postchain and Rell Binaries 
+      - name: Download Postchain and Rell Binaries
         run: ./download-binaries.sh
         working-directory: filechain/rell
       - name: Add Filehub BRID to run.xml
@@ -45,6 +45,17 @@ jobs:
       - name: Run Filechain
         run: ./run-dev-node.sh > filechain.log &
         working-directory: filechain/rell
+
+      # Build and deploy new filechain
+      - name: Add Filehub BRID to run.xml
+        run: sed -i "s/FILEHUB_BRID/$(cat ../../filehub/rell/target/blockchains/1/brid.txt)/g" run.xml
+        working-directory: migration-filechain/rell
+      - name: Build new Filechain
+        run: ./build.sh
+        working-directory: migration-filechain/rell
+      - name: Run new Filechain
+        run: ./run-dev-node.sh > new-filechain.log &
+        working-directory: migration-filechain/rell
 
       # Build File Storage Client (fs-client)
       - name: Install dependencies for fs-client
@@ -64,8 +75,13 @@ jobs:
         working-directory: test
         env:
           NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
-      - name: Run tests
+      - name: Run tests to insert data
         run: npm run silent-test-ci
+        working-directory: test
+        continue-on-error: false
+
+      - name: Run migration
+        run: npm run silent-test-migration
         working-directory: test
         continue-on-error: false
 
@@ -76,3 +92,7 @@ jobs:
       - name: Output Filechain log
         run: cat filechain.log
         working-directory: filechain/rell
+
+      - name: Output new Filechain log
+        run: cat new-filechain.log
+        working-directory: migration-filechain/rell

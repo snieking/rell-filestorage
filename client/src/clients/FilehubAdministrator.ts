@@ -2,6 +2,8 @@ import ChainConnectionInfo from "ft3-lib/dist/lib/ft3/chain-connection-info";
 import Filehub from "./Filehub";
 import {op, User} from "ft3-lib";
 import {FileTimestamp} from "../models/FileTimestamp";
+import {ChunkHashFilechain} from "../models/Chunk";
+import logger from "../utils/logger";
 
 export default class FilehubAdministrator {
 
@@ -36,19 +38,39 @@ export default class FilehubAdministrator {
   }
 
   public async migrateFilechain(user: User, fromBrid: string, toBrid: string) {
+    logger.info("Registering new filechain", toBrid);
     await this.registerFilechain(user, toBrid);
+    logger.info("Disabling old filechain", user, fromBrid);
     await this.disableFilechain(user, fromBrid);
 
     let timestamp: number = FilehubAdministrator.FIRST_TIMESTAMP;
 
+    logger.info("Starting migration to filechain: ", toBrid);
     for (;;) {
       const fileTimestamps: FileTimestamp[] = await this.getFileTimestamps(fromBrid, FilehubAdministrator.FIRST_TIMESTAMP);
 
       for (const fileTimestamp of fileTimestamps) {
-        await this.filehub.executeOperation(user, op("migrate_file", user.authDescriptor.id, fileTimestamp.name));
-        const file = await this.filehub.getFileByName(user, fileTimestamp.name);
-        await this.filehub.storeFile(user, file, { brid: toBrid });
-        await this.filehub.executeOperation(user, op("mark_file_migrated", user.authDescriptor.id, fileTimestamp.name));
+        await this.filehub.executeOperation(user, op(
+          "migrate_file",
+          user.authDescriptor.hash().toString("hex"),
+          fileTimestamp.name,
+          fileTimestamp.timestamp,
+          fromBrid
+        ));
+        const chunkHashes: ChunkHashFilechain[] = await this.getMigratableChunkHashesByName(fromBrid, fileTimestamp);
+
+        for (const chunkHash of chunkHashes) {
+          await this.filehub.copyChunkDataToOtherBrid(user, chunkHash, toBrid);
+        }
+
+        await this.filehub.executeOperation(
+          user,
+          op("mark_file_migrated",
+            user.authDescriptor.hash().toString("hex"),
+            fileTimestamp.name,
+            fileTimestamp.timestamp,
+            fromBrid
+          ));
       }
 
       if (fileTimestamps.length < FilehubAdministrator.PAGE_SIZE) {
@@ -66,6 +88,15 @@ export default class FilehubAdministrator {
       stored_at: storedAt,
       current_time: Date.now(),
       page_size: FilehubAdministrator.PAGE_SIZE
+    });
+  }
+
+  private getMigratableChunkHashesByName(brid: string, filetimestamp: FileTimestamp): Promise<ChunkHashFilechain[]> {
+    return this.filehub.executeQuery("get_all_migratable_chunks_by_file", {
+      brid: brid,
+      name: filetimestamp.name,
+      timestamp: filetimestamp.timestamp,
+      current_time: Date.now()
     });
   }
 }

@@ -1,13 +1,16 @@
-import {createFt3User} from "../utils/users";
+import {createFt3User} from "./utils/users";
 import {FILEHUB, initFilehub} from "../blockchain/Postchain";
 import {User} from "ft3-lib";
-import {addBalance, generateRandomString, registerAsset} from "../utils/utils";
+import {addBalance, generateRandomString, registerAsset} from "./utils/utils";
 import FsFile from "../../client/lib/models/FsFile";
 import * as path from "path";
 import * as fs from "fs";
 
 jest.setTimeout(60000);
 
+/**
+ * @group ci
+ */
 describe("Storing files tests", () => {
 
   let user: User;

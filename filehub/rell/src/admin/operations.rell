@@ -3,8 +3,10 @@ import storage;
 
 operation add_filechain(descriptor_id: byte_array, rid: byte_array) {
     val account = util.get_account_by_descriptor_id(descriptor_id);
+    require(admin@?{ account } != null, "User not an admin");
+    log("Adding filechain with brid: ", rid);
 
-    if (admin@?{ account } != null and storage.filechain@?{ rid } == null) {
+    if (storage.filechain@?{ rid } == null) {
         val filechain = create storage.filechain(rid);
         create storage.active_filechain(filechain, op_context.last_block_time);
 	}
@@ -12,10 +14,10 @@ operation add_filechain(descriptor_id: byte_array, rid: byte_array) {
 
 operation disable_filechain(descriptor_id: byte_array, rid: byte_array) {
 	val account = util.get_account_by_descriptor_id(descriptor_id);
+	require(admin@?{ account } != null, "User not an admin");
+	log("Disabling filechain with brid: ", rid);
 	
-	if (admin@?{ account } != null and storage.filechain@?{ rid } != null) {
-        delete storage.active_filechain@{ .filechain.brid == rid };
-	}
+    delete storage.active_filechain@{ .filechain.brid == rid };
 }
 
 operation register_admin(descriptor_id: byte_array) {
