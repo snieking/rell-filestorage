@@ -30,7 +30,7 @@ export default class Filechain {
               throw error;
             }
           } else {
-            logger.info(`Chunk already existed for hash: ${hash}`);
+            logger.debug(`Chunk already existed for hash: ${hash}`);
           }
         });
     });

@@ -75,6 +75,14 @@ jobs:
         working-directory: test
         env:
           NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+
+      - name: Set fs-client log level
+        run: echo "REACT_APP_FS_LOG_LEVEL=debug" >> .env
+        working-directory: test
+      - name: Set test log level
+        run: echo "REACT_APP_TEST_LOG_LEVEL=debug" >> .env
+        working-directory: test
+
       - name: Run tests to insert data
         run: npm run silent-test-ci
         working-directory: test
