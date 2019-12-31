@@ -38,7 +38,7 @@ export default class Filehub {
    */
   public executeOperation(user: User, operation: Operation): Promise<void> {
     return this.blockchain.then(bc => {
-      logger.debug(`Operation: ${operation} on blockchain: ${bc} for user: ${user}`);
+      logger.debug("Operation: %O on blockchain: %O for user: %O", operation, bc, user);
       return bc.call(operation, user);
     });
   }
@@ -51,7 +51,7 @@ export default class Filehub {
    */
   public executeQuery(query: string, data: unknown) {
     return this.blockchain.then(bc => {
-      logger.debug(`Query: ${query} on blockchain: ${bc} with data: ${data}`);
+      logger.debug("Query: %s on blockchain: %O with data: %O", query, bc, data);
       return bc.query(query, data);
     });
   }
@@ -269,11 +269,11 @@ export default class Filehub {
   };
 
   private initFilechainClient(brid: string): Filechain {
-    logger.debug(`About to init filechain client with brid: ${brid}`);
+    logger.debug("About to init filechain client with brid: %s", brid);
     const chain = this.chains
       .find(c => {
         const directoryChain = c.chainId.toString("hex").toLocaleUpperCase();
-        logger.debug(`Found in DC: ${directoryChain}`);
+        logger.debug("Found in DC: %s", directoryChain);
 
         return directoryChain === brid.toLocaleUpperCase();
       });
