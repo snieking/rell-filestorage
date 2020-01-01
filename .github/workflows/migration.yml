@@ -2,7 +2,7 @@ name: migration
 
 on:
   schedule:
-    - cron: '* 1 * * *'
+    - cron: '49 1 * * *'
 
 jobs:
   build:
