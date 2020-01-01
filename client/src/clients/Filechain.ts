@@ -1,7 +1,7 @@
 import * as pcl from "postchain-client";
 import {User} from "ft3-lib";
 import {hashData} from "../utils/crypto";
-import logger from "../utils/logger";
+import logger from "../logger";
 
 export default class Filechain {
 

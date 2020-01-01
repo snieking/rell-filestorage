@@ -3,7 +3,7 @@ import Filehub from "./Filehub";
 import {op, User} from "ft3-lib";
 import {FileTimestamp} from "../models/FileTimestamp";
 import {ChunkHashFilechain} from "../models/Chunk";
-import logger from "../utils/logger";
+import logger from "../logger";
 
 export default class FilehubAdministrator {
 
@@ -38,14 +38,14 @@ export default class FilehubAdministrator {
   }
 
   public async migrateFilechain(user: User, fromBrid: string, toBrid: string) {
-    logger.info("Registering new filechain", toBrid);
+    logger.info("Registering filechain %s", toBrid);
     await this.registerFilechain(user, toBrid);
-    logger.info("Disabling old filechain", user, fromBrid);
+    logger.info("Disabling filechain %s", fromBrid);
     await this.disableFilechain(user, fromBrid);
 
     let timestamp: number = FilehubAdministrator.FIRST_TIMESTAMP;
 
-    logger.info("Starting migration to filechain: ", toBrid);
+    logger.info("Starting migration to filechain: %s", toBrid);
     for (;;) {
       const fileTimestamps: FileTimestamp[] = await this.getFileTimestamps(fromBrid, FilehubAdministrator.FIRST_TIMESTAMP);
 

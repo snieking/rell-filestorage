@@ -11,7 +11,7 @@ import {Voucher} from "..";
 import {ChunkHashFilechain, ChunkHashIndex, ChunkIndex} from "../models/Chunk";
 import * as fs from "fs";
 import {FileStoringOptions} from "../models/FileStoringOptions";
-import logger from "../utils/logger";
+import logger from "../logger";
 
 export default class Filehub {
 
@@ -38,7 +38,7 @@ export default class Filehub {
    */
   public executeOperation(user: User, operation: Operation): Promise<void> {
     return this.blockchain.then(bc => {
-      logger.debug("Executing operation: %O", operation);
+      logger.debug("Executing %O", operation);
       return bc.call(operation, user);
     });
   }
@@ -51,7 +51,7 @@ export default class Filehub {
    */
   public executeQuery(query: string, data: unknown) {
     return this.blockchain.then(bc => {
-      logger.debug("Executing query: '%s' with data: %O", query, data);
+      logger.debug("Executing query '%s' with data: %O", query, data);
       return bc.query(query, data);
     });
   }
