@@ -7,15 +7,17 @@ export default class Filechain {
 
   private readonly restClient: any;
   private readonly gtxClient: any;
+  private readonly brid: string;
 
   public constructor(nodeApiUrl: string, brid: string) {
     this.restClient = pcl.restClient.createRestClient(nodeApiUrl, brid, 10);
     this.gtxClient = pcl.gtxClient.createClient(this.restClient, Buffer.from(brid, "hex"), []);
+    this.brid = brid;
   }
 
   public storeChunkData(user: User, data: Buffer): Promise<any> {
     const hash = hashData(data).toString("hex");
-    logger.debug("Hash of what we are about to store: %s", hash);
+    logger.debug("Storing data for hash: %s, in filechain: %s", hash, this.brid);
 
     const tx = this.gtxClient.newTransaction([user.keyPair.pubKey]);
     tx.addOperation("add_chunk_data", data);
@@ -37,7 +39,7 @@ export default class Filechain {
   };
 
   public getChunkDataByHash(hash: string): Promise<string> {
-    logger.debug("Retrieving chunk data by hash %s", hash);
+    logger.debug("Retrieving chunk data by hash %s from filechain: %s", hash, this.brid);
     return this.restClient.query("get_file", { hash: hash });
   }
 
