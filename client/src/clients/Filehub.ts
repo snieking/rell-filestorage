@@ -82,7 +82,7 @@ export default class Filehub {
     const oldFilechain = this.initFilechainClient(chunkHash.brid);
     const newFilechain = this.initFilechainClient(brid);
 
-    const data = await oldFilechain.getChunkDataByHash(chunkHash.hash);
+    const data = await oldFilechain.getChunkDataByHash(chunkHash.hash.toString("hex"));
     return this.persistChunkDataInFilechain(user, newFilechain, Buffer.from(data, "hex"));
   }
 
@@ -269,11 +269,11 @@ export default class Filehub {
   };
 
   private initFilechainClient(brid: string): Filechain {
-    logger.debug("About to init filechain client with brid: %s", brid);
+    logger.debug("Initializing filechain client with brid: %s", brid);
     const chain = this.chains
       .find(c => {
         const directoryChain = c.chainId.toString("hex").toLocaleUpperCase();
-        logger.debug("Found in DC: %s", directoryChain);
+        logger.silly("Found in DC: %s", directoryChain);
 
         return directoryChain === brid.toLocaleUpperCase();
       });
@@ -294,7 +294,7 @@ export default class Filehub {
   }
 
   private static getChunkDataByHash(filechain: Filechain, hash: Buffer): Promise<string> {
-    return filechain.getChunkDataByHash(hash);
+    return filechain.getChunkDataByHash(hash.toString("hex"));
   }
 
   private static bufferArray(array: any[], buffer: number): any[][] {

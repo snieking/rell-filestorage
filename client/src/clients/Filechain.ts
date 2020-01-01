@@ -36,22 +36,9 @@ export default class Filechain {
     });
   };
 
-  public removeChunkData(user: User, data: string): Promise<any> {
-    const tx = this.gtxClient.newTransaction([user.keyPair.pubKey]);
-    tx.addOperation("remove_chunk_data", Buffer.from(data, "utf8"));
-    tx.sign(user.keyPair.privKey, user.keyPair.pubKey);
-    return tx.postAndWaitConfirmation();
-  };
-
-  public removeChunkDataByHash(user: User, hash: Buffer): Promise<any> {
-    const tx = this.gtxClient.newTransaction([user.keyPair.pubKey]);
-    tx.addOperation("remove_chunk_data_by_hash", hash);
-    tx.sign(user.keyPair.privKey, user.keyPair.pubKey);
-    return tx.postAndWaitConfirmation();
-  }
-
-  public getChunkDataByHash(hash: Buffer): Promise<string> {
-    return this.restClient.query("get_file", { hash: hash.toString("hex") });
+  public getChunkDataByHash(hash: string): Promise<string> {
+    logger.debug("Retrieving chunk data by hash %s", hash);
+    return this.restClient.query("get_file", { hash: hash });
   }
 
 }
