@@ -38,7 +38,7 @@ export default class Filehub {
    */
   public executeOperation(user: User, operation: Operation): Promise<void> {
     return this.blockchain.then(bc => {
-      logger.debug("Operation: %O on blockchain: %O for user: %O", operation, bc, user);
+      logger.debug("Operation: %O on blockchain: %s", operation, bc.connection.chainId);
       return bc.call(operation, user);
     });
   }
@@ -51,7 +51,7 @@ export default class Filehub {
    */
   public executeQuery(query: string, data: unknown) {
     return this.blockchain.then(bc => {
-      logger.debug("Query: %s on blockchain: %O with data: %O", query, bc, data);
+      logger.debug("Query: '%s' on blockchain: %s with data: %O", query, bc.connection.chainId, data);
       return bc.query(query, data);
     });
   }
