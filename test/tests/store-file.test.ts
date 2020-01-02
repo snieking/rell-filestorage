@@ -1,10 +1,12 @@
 import {createFt3User} from "./utils/users";
-import {FILEHUB, initFilehub} from "../blockchain/Postchain";
+import {FILEHUB, FILEHUB_ADMININISTRATOR, initFilehub} from "../blockchain/Postchain";
 import {User} from "ft3-lib";
 import {addBalance, generateRandomString, registerAsset} from "./utils/utils";
 import FsFile from "../../client/lib/models/FsFile";
 import * as path from "path";
 import * as fs from "fs";
+import * as config from "../blockchain/config";
+import logger from "../logger";
 
 jest.setTimeout(60000);
 
@@ -12,6 +14,8 @@ jest.setTimeout(60000);
  * @group ci
  */
 describe("Storing files tests", () => {
+
+  const BYTES_IN_MB = 1024 * 1024;
 
   let user: User;
 
@@ -56,7 +60,7 @@ describe("Storing files tests", () => {
     expect(found).toBeTruthy();
 
     const readFile = await FILEHUB.getFileByName(user, filepath);
-    expect(bufferToHex(file.readFullData())).toEqual(bufferToHex(file.readFullData()));
+    expect(bufferToHex(readFile.readFullData())).toEqual(bufferToHex(file.readFullData()));
   });
 
   it("Store actual file, delete and re-create from blockchain", async () => {
@@ -140,6 +144,9 @@ describe("Storing files tests", () => {
     const filepath = path.resolve("./tests/files/large.txt");
     const file = FsFile.fromPath(filepath);
 
+    const storedMegabytesPriorToLargeFile = await FILEHUB_ADMININISTRATOR.getAllocatedMbInFilechain(config.filechainRID);
+    const storedPaidMegabytesPriorToLargeFile = await FILEHUB_ADMININISTRATOR.getAllocatedMbInFilechain(config.filechainRID);
+
     await FILEHUB.storeFile(user, file);
 
     const fileNames = await FILEHUB.getUserFileNames(user);
@@ -147,7 +154,20 @@ describe("Storing files tests", () => {
     expect(found).toBeTruthy();
 
     const readFile = await FILEHUB.getFileByName(user, filepath);
-    expect(bufferToHex(file.readFullData())).toEqual(bufferToHex(file.readFullData()));
+    expect(bufferToHex(readFile.readFullData())).toEqual(bufferToHex(file.readFullData()));
+
+    const storedMegabytesAfterLargeFile = await FILEHUB_ADMININISTRATOR.getAllocatedMbInFilechain(config.filechainRID);
+    const storedPaidMegabytesAfterLargeFile = await FILEHUB_ADMININISTRATOR.getAllocatedMbInFilechain(config.filechainRID);
+
+    logger.debug("Stored MB before large file: %d, after: %d",
+      storedMegabytesPriorToLargeFile, storedMegabytesAfterLargeFile);
+    logger.debug("Stored paid-for MB before large file: %d, after: %d",
+      storedPaidMegabytesPriorToLargeFile, storedPaidMegabytesAfterLargeFile);
+
+    expect(storedMegabytesAfterLargeFile - storedMegabytesPriorToLargeFile)
+      .toBeGreaterThanOrEqual(readFile.size * BYTES_IN_MB);
+    expect(storedPaidMegabytesAfterLargeFile - storedPaidMegabytesPriorToLargeFile)
+      .toBeGreaterThanOrEqual(readFile.size * BYTES_IN_MB);
   });
 
   it("Store file, encrypted", async () => {

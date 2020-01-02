@@ -21,6 +21,33 @@ query get_allocated_bytes(descriptor_id: byte_array) {
 	return _get_allocated_bytes(account);
 }
 
+query get_allocated_mb_in_filechain(brid: byte_array) {
+	val sizes = chunk_size@*{ .chunk.filechain.brid == brid } ( .size );
+	
+	var mb = 0;
+	for (size in sizes) {
+		mb += (size * 1048576);
+	}
+	
+	return mb;
+}
+
+query get_paid_allocated_mb_in_filechain(brid: byte_array, current_time: timestamp) {
+	val sizes = (file_chunk, chunk_size, billing.voucher)@*{
+		file_chunk.file.filechain.brid == brid,
+		voucher.timestamp > current_time,
+		voucher.account == file_chunk.file.account,
+		file_chunk.chunk == chunk_size.chunk
+	} ( chunk_size.size );
+	
+	var mb = 0;
+	for (size in sizes) {
+		mb += (size * 1048576);
+	}
+	
+	return mb;
+}
+
 query get_files_belonging_to_active_voucher_in_brid_after_timestamp(
 	brid: byte_array, 
 	stored_at: timestamp, 

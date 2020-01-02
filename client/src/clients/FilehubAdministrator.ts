@@ -82,6 +82,20 @@ export default class FilehubAdministrator {
     }
   }
 
+  /**
+   * Retrieves allocated number of megabytes in filechain.
+   */
+  public getAllocatedMbInFilechain(brid: string): Promise<number> {
+    return this.filehub.executeQuery("get_allocated_mb_in_filechain", { brid: brid });
+  }
+
+  /**
+   * Retrieves paid-for allocated number of megabytes in filechain.
+   */
+  public getPaidAllocatedMbInFilechain(brid: string): Promise<number> {
+    return this.filehub.executeQuery("get_allocated_mb_in_filechain", { brid: brid });
+  }
+
   private getFileTimestamps(brid: string, storedAt: number): Promise<FileTimestamp[]> {
     return this.filehub.executeQuery("get_files_belonging_to_active_voucher_in_brid_after_timestamp", {
       brid: brid,
