@@ -24,9 +24,9 @@ query get_allocated_bytes(descriptor_id: byte_array) {
 query get_allocated_mb_in_filechain(brid: byte_array) {
 	val sizes = chunk_size@*{ .chunk.filechain.brid == brid } ( .size );
 	
-	var mb = 0;
+	var mb = 0.0;
 	for (size in sizes) {
-		mb += (size / 1048576);
+		mb += (decimal(size) / decimal(1048576));
 	}
 	
 	return mb;
@@ -40,9 +40,9 @@ query get_paid_allocated_mb_in_filechain(brid: byte_array, current_time: timesta
 		file_chunk.chunk == chunk_size.chunk
 	} ( chunk_size.size );
 	
-	var mb = 0;
+	var mb = 0.0;
 	for (size in sizes) {
-		mb += (size / 1048576);
+		mb += (decimal(size) / decimal(1048576));
 	}
 	
 	return mb;
