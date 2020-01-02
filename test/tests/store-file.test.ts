@@ -144,9 +144,6 @@ describe("Storing files tests", () => {
     const filepath = path.resolve("./tests/files/large.txt");
     const file = FsFile.fromPath(filepath);
 
-    const storedMegabytesPriorToLargeFile = await FILEHUB_ADMININISTRATOR.getAllocatedMbInFilechain(config.filechainRID);
-    const storedPaidMegabytesPriorToLargeFile = await FILEHUB_ADMININISTRATOR.getAllocatedMbInFilechain(config.filechainRID);
-
     await FILEHUB.storeFile(user, file);
 
     const fileNames = await FILEHUB.getUserFileNames(user);
@@ -155,6 +152,16 @@ describe("Storing files tests", () => {
 
     const readFile = await FILEHUB.getFileByName(user, filepath);
     expect(bufferToHex(readFile.readFullData())).toEqual(bufferToHex(file.readFullData()));
+  });
+
+  it("Allocated MB in filechain", async () => {
+    const storedMegabytesPriorToLargeFile = await FILEHUB_ADMININISTRATOR.getAllocatedMbInFilechain(config.filechainRID);
+    const storedPaidMegabytesPriorToLargeFile = await FILEHUB_ADMININISTRATOR.getAllocatedMbInFilechain(config.filechainRID);
+
+    const s = generateRandomString(36);
+    const data = Buffer.from(s, "utf8");
+
+    await FILEHUB.storeFile(user, FsFile.fromData(s, data));
 
     const storedMegabytesAfterLargeFile = await FILEHUB_ADMININISTRATOR.getAllocatedMbInFilechain(config.filechainRID);
     const storedPaidMegabytesAfterLargeFile = await FILEHUB_ADMININISTRATOR.getAllocatedMbInFilechain(config.filechainRID);
@@ -165,9 +172,9 @@ describe("Storing files tests", () => {
       storedPaidMegabytesPriorToLargeFile, storedPaidMegabytesAfterLargeFile);
 
     expect(storedMegabytesAfterLargeFile - storedMegabytesPriorToLargeFile)
-      .toBeGreaterThanOrEqual(readFile.size * BYTES_IN_MB);
+      .toBeGreaterThanOrEqual(data.length / BYTES_IN_MB);
     expect(storedPaidMegabytesAfterLargeFile - storedPaidMegabytesPriorToLargeFile)
-      .toBeGreaterThanOrEqual(readFile.size * BYTES_IN_MB);
+      .toBeGreaterThanOrEqual(data.length / BYTES_IN_MB);
   });
 
   it("Store file, encrypted", async () => {

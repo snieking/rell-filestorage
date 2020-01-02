@@ -26,7 +26,7 @@ query get_allocated_mb_in_filechain(brid: byte_array) {
 	
 	var mb = 0;
 	for (size in sizes) {
-		mb += (size * 1048576);
+		mb += (size / 1048576);
 	}
 	
 	return mb;
@@ -42,7 +42,7 @@ query get_paid_allocated_mb_in_filechain(brid: byte_array, current_time: timesta
 	
 	var mb = 0;
 	for (size in sizes) {
-		mb += (size * 1048576);
+		mb += (size / 1048576);
 	}
 	
 	return mb;
