@@ -1,5 +1,5 @@
 # Rell Filestorage
-[![CI Build Status](https://github.com/snieking/rell-filestorage/workflows/continuous-integration/badge.svg)](https://github.com/snieking/rell-filestorage/actions)[![Migration Build Status](https://github.com/snieking/rell-filestorage/workflows/migration/badge.svg)](https://github.com/snieking/rell-filestorage/actions)
+[![CI Build Status](https://github.com/snieking/rell-filestorage/workflows/continuous-integration/badge.svg)](https://github.com/snieking/rell-filestorage/actions) [![Migration Build Status](https://github.com/snieking/rell-filestorage/workflows/migration/badge.svg)](https://github.com/snieking/rell-filestorage/actions)
 
 ## Introduction
 The idea is to provide a s3-like service dapp. 
