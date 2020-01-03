@@ -4,16 +4,14 @@ import {op, User} from "ft3-lib";
 import {FileTimestamp} from "../models/FileTimestamp";
 import {ChunkHashFilechain} from "../models/Chunk";
 import logger from "../logger";
+import AbstractAdministrator from "./AbstractAdministrator";
 
-export default class FilehubAdministrator {
+export default class FilehubAdministrator extends AbstractAdministrator {
 
   private static FIRST_TIMESTAMP = Date.UTC(2019, 1);
-  private static PAGE_SIZE = 100;
 
-  private filehub: Filehub;
-
-  public constructor(nodeApiUrl: string, brid: string, chainConnectionInfo: ChainConnectionInfo[]) {
-    this.filehub = new Filehub(nodeApiUrl, brid, chainConnectionInfo);
+  public constructor(filehubNodeApiUrl: string, filehubBrid: string, chainConnectionInfo: ChainConnectionInfo[]) {
+    super(new Filehub(filehubNodeApiUrl, filehubBrid, chainConnectionInfo));
   }
 
   /**
@@ -30,11 +28,19 @@ export default class FilehubAdministrator {
    * @param rid of the filechain.
    */
   public registerFilechain(user: User, rid: string): Promise<any> {
-    return this.filehub.executeOperation(user, op("add_filechain", user.authDescriptor.id, rid));
+    return this.filehub.executeOperation(user, op("add_chromia_filechain", user.authDescriptor.id, rid));
   };
 
   public disableFilechain(user: User, brid: string): Promise<any> {
-    return this.filehub.executeOperation(user, op("disable_filechain", user.authDescriptor.id, brid));
+    return this.filehub.executeOperation(user, op("disable_chromia_filechain", user.authDescriptor.id, brid));
+  }
+
+  public approveCommonFilechainApplication(user: User, brid: string) {
+    return this.filehub.executeOperation(user, op("approve_filechain_application", user.authDescriptor.id, brid));
+  }
+
+  public rejectCommonFilechainApplication(user: User, brid: string) {
+    return this.filehub.executeOperation(user, op("reject_filechain_application", user.authDescriptor.id, brid));
   }
 
   public async migrateFilechain(user: User, fromBrid: string, toBrid: string) {
@@ -73,44 +79,12 @@ export default class FilehubAdministrator {
           ));
       }
 
-      if (fileTimestamps.length < FilehubAdministrator.PAGE_SIZE) {
+      if (fileTimestamps.length < AbstractAdministrator.PAGE_SIZE) {
         break;
       } else {
         timestamp = fileTimestamps[fileTimestamps.length - 1].timestamp;
       }
 
     }
-  }
-
-  /**
-   * Retrieves allocated number of megabytes in filechain.
-   */
-  public getAllocatedMbInFilechain(brid: string): Promise<number> {
-    return this.filehub.executeQuery("get_allocated_mb_in_filechain", { brid: brid });
-  }
-
-  /**
-   * Retrieves paid-for allocated number of megabytes in filechain.
-   */
-  public getPaidAllocatedMbInFilechain(brid: string): Promise<number> {
-    return this.filehub.executeQuery("get_allocated_mb_in_filechain", { brid: brid });
-  }
-
-  private getFileTimestamps(brid: string, storedAt: number): Promise<FileTimestamp[]> {
-    return this.filehub.executeQuery("get_files_belonging_to_active_voucher_in_brid_after_timestamp", {
-      brid: brid,
-      stored_at: storedAt,
-      current_time: Date.now(),
-      page_size: FilehubAdministrator.PAGE_SIZE
-    });
-  }
-
-  private getMigratableChunkHashesByName(brid: string, filetimestamp: FileTimestamp): Promise<ChunkHashFilechain[]> {
-    return this.filehub.executeQuery("get_all_migratable_chunks_by_file", {
-      brid: brid,
-      name: filetimestamp.name,
-      timestamp: filetimestamp.timestamp,
-      current_time: Date.now()
-    });
   }
 }

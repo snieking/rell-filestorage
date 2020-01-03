@@ -17,28 +17,29 @@ operation create_voucher(descriptor_id: byte_array) {
 	val month_in_millis = util._get_period_in_millis("month");
 	
 	if (active_invoice == null) {
-		_create_voucher(
-			chain_context.blockchain_rid, 
-			account, 
-			current_timestamp + month_in_millis
-		);
+		_create_voucher(account, current_timestamp + month_in_millis);
 	} else {
 		val active_invoice_expires_in = active_invoice.timestamp - current_timestamp;
 		val day_in_millis = util._get_period_in_millis("day");
 		
 		require(active_invoice_expires_in <= day_in_millis, "[FH-00]: Not eligible for a new voucher yet");
-		_create_voucher(
-			chain_context.blockchain_rid, 
-			account, 
-			current_timestamp + month_in_millis + active_invoice_expires_in
-		);
+		_create_voucher(account, current_timestamp + month_in_millis + active_invoice_expires_in);
 	}
 }
 
-function _create_voucher(brid: byte_array, account: ft3_acc.account, valid_until: integer) {
+function _create_voucher(account: ft3_acc.account, valid_until: integer) {
 	val asset = ft3_core.asset@{ .id == ("CHR", chain_context.blockchain_rid).hash() };
 	val token_cost = _get_voucher_price(plan.STANDARD);
 	
-	ft3_core.deduct_balance(account, asset, token_cost);
+	charge_chromia_tokens(account, token_cost);
 	create voucher(account, timestamp = valid_until, asset, amount = token_cost);
+}
+
+function charge_chromia_tokens(account: ft3_acc.account, amount: integer) {
+	val asset = ft3_core.asset@{ .id == ("CHR", chain_context.blockchain_rid).hash() };
+	ft3_core.deduct_balance(account, asset, amount);
+}
+
+function payout_chromia_tokens(account: ft3_acc.account, amount: integer) {
+	// TODO
 }

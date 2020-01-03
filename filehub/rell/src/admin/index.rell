@@ -3,3 +3,10 @@ import ft3_acc: lib.ft3.account;
 entity admin {
     account: ft3_acc.account;
 }
+
+entity filechain_application {
+	key brid: byte_array;
+	index ft3_acc.account;
+	node_url: text;
+	source_code: text;
+}

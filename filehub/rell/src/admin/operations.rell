@@ -1,7 +1,35 @@
 import util;
 import storage;
+import billing;
 
-operation add_filechain(descriptor_id: byte_array, rid: byte_array) {
+operation add_filechain_application(descriptor_id: byte_array, brid: byte_array, node_url: text, source_code: text) {
+	require(storage.filechain@?{ brid } == null, "Brid is already in-use");
+	
+	val account = util.get_account_by_descriptor_id(descriptor_id);
+	billing.charge_chromia_tokens(account, 20);
+	create filechain_application(account, brid, node_url = node_url, source_code = source_code);
+}
+
+operation approve_filechain_application(descriptor_id: byte_array, brid: byte_array) {
+	val account = util.get_account_by_descriptor_id(descriptor_id);
+    require(admin@?{ account } != null, "User not an admin");
+    
+    val application = filechain_application@{ brid };
+    val filechain = create storage.filechain(brid);
+    create storage.active_filechain(filechain, op_context.last_block_time);
+    delete application;
+}
+
+operation reject_filechain_application(descriptor_id: byte_array, brid: byte_array) {
+	val account = util.get_account_by_descriptor_id(descriptor_id);
+    require(admin@?{ account } != null, "User not an admin");
+    
+    val application = filechain_application@{ brid };
+    billing.payout_chromia_tokens(application.account, 20);
+    delete application;
+}
+
+operation add_chromia_filechain(descriptor_id: byte_array, rid: byte_array) {
     val account = util.get_account_by_descriptor_id(descriptor_id);
     require(admin@?{ account } != null, "User not an admin");
     log("Adding filechain with brid: ", rid);
@@ -12,7 +40,7 @@ operation add_filechain(descriptor_id: byte_array, rid: byte_array) {
 	}
 }
 
-operation disable_filechain(descriptor_id: byte_array, rid: byte_array) {
+operation disable_chromia_filechain(descriptor_id: byte_array, rid: byte_array) {
 	val account = util.get_account_by_descriptor_id(descriptor_id);
 	require(admin@?{ account } != null, "User not an admin");
 	log("Disabling filechain with brid: ", rid);
