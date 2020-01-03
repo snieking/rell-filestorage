@@ -1,0 +1,7 @@
+query list_filechain_applications() {
+	return filechain_application@*{} (
+		brid = .brid,
+		node_url = .node_url,
+		source_code = .source_code
+	);
+}

@@ -1,17 +1,17 @@
-import ChainConnectionInfo from "ft3-lib/dist/lib/ft3/chain-connection-info";
 import Filehub from "./Filehub";
 import {op, User} from "ft3-lib";
 import {FileTimestamp} from "../models/FileTimestamp";
 import {ChunkHashFilechain} from "../models/Chunk";
 import logger from "../logger";
 import AbstractAdministrator from "./AbstractAdministrator";
+import {FilechainApplication} from "../models/FilechainApplication";
 
 export default class FilehubAdministrator extends AbstractAdministrator {
 
   private static FIRST_TIMESTAMP = Date.UTC(2019, 1);
 
-  public constructor(filehubNodeApiUrl: string, filehubBrid: string, chainConnectionInfo: ChainConnectionInfo[]) {
-    super(new Filehub(filehubNodeApiUrl, filehubBrid, chainConnectionInfo));
+  public constructor(filehub: Filehub) {
+    super(filehub);
   }
 
   /**
@@ -33,6 +33,10 @@ export default class FilehubAdministrator extends AbstractAdministrator {
 
   public disableFilechain(user: User, brid: string): Promise<any> {
     return this.filehub.executeOperation(user, op("disable_chromia_filechain", user.authDescriptor.id, brid));
+  }
+
+  public listFilechainApplications(): Promise<FilechainApplication[]> {
+    return this.filehub.executeQuery("list_filechain_applications", {});
   }
 
   public approveCommonFilechainApplication(user: User, brid: string) {
