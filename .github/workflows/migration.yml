@@ -39,7 +39,7 @@ jobs:
         run: ./download-binaries.sh
         working-directory: filechain/rell
       - name: Add Filehub BRID to run.xml
-        run: sed -i "s/FILEHUB_BRID/$(cat ../../../../filehub/rell/target/blockchains/1/brid.txt)/g" run.xml
+        run: sed -i "s/FILEHUB_BRID/$(cat ../../filehub/rell/target/blockchains/1/brid.txt)/g" run.xml
         working-directory: filechain/rell
       - name: Build Filechain
         run: ./build.sh
