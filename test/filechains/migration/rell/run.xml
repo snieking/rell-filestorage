@@ -6,6 +6,9 @@
     	<chain name="filechain" iid="3">
     		<config height="0">
     			<app module="" />
+                <gtv path="gtx/filechain-id">
+                    <string>migration-filechain</string>
+                </gtv>
                 <dependencies>
                     <dependency name="filehub" brid="FILEHUB_BRID"/>
                 </dependencies>

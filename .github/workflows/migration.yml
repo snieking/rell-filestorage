@@ -39,7 +39,7 @@ jobs:
         run: ./download-binaries.sh
         working-directory: filechain/rell
       - name: Add Filehub BRID to run.xml
-        run: sed -i "s/FILEHUB_BRID/$(cat ../../filehub/rell/target/blockchains/1/brid.txt)/g" run.xml
+        run: sed -i "s/FILEHUB_BRID/$(cat ../../../../filehub/rell/target/blockchains/1/brid.txt)/g" run.xml
         working-directory: filechain/rell
       - name: Build Filechain
         run: ./build.sh
@@ -50,14 +50,14 @@ jobs:
 
       # Build and deploy new filechain
       - name: Add Filehub BRID to run.xml
-        run: sed -i "s/FILEHUB_BRID/$(cat ../../filehub/rell/target/blockchains/1/brid.txt)/g" run.xml
-        working-directory: migration-filechain/rell
+        run: sed -i "s/FILEHUB_BRID/$(cat ../../../../filehub/rell/target/blockchains/1/brid.txt)/g" run.xml
+        working-directory: test/filechains/migration/rell
       - name: Build new Filechain
         run: ./build.sh
-        working-directory: migration-filechain/rell
+        working-directory: test/filechains/migration/rell
       - name: Run new Filechain
         run: ./run-dev-node.sh > new-filechain.log &
-        working-directory: migration-filechain/rell
+        working-directory: test/filechains/migration/rell
 
       # Build File Storage Client (fs-client)
       - name: Install dependencies for fs-client
