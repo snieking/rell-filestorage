@@ -10,9 +10,10 @@ query get_vouchers(descriptor_id: byte_array) {
 	);
 }
 
-query has_active_voucher_for_timestamp(descriptor_id: byte_array, timestamp): boolean {
+query has_active_voucher_for_timestamp(descriptor_id: byte_array, timestamp, voucher_plan: text): boolean {
 	val account = util.get_account_by_descriptor_id(descriptor_id);	
-	return (voucher@?{ account, .timestamp >= timestamp } (
+	val plan = text_to_plan(voucher_plan);
+	return (voucher@?{ account, .timestamp >= timestamp, plan } (
 		@sort_desc .timestamp,
 		.plan,
 		.asset,

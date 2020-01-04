@@ -2,12 +2,17 @@ import ft3_acc: lib.ft3.account;
 import ft3_core: lib.ft3.core;
 import util;
 
-operation create_voucher(descriptor_id: byte_array) {
+operation create_voucher(descriptor_id: byte_array, plan_to_use: text) {
 	val account = util.get_account_by_descriptor_id(descriptor_id);
 	ft3_acc.require_auth(account, descriptor_id, ["A"]);
 	
+	val selected_plan: plan = text_to_plan(plan_to_use);
 	val current_timestamp = op_context.last_block_time;
-	val active_invoice = voucher@?{ account, .timestamp >= current_timestamp } (
+	val active_invoice = voucher@?{ 
+		account, 
+		selected_plan,
+		.timestamp >= current_timestamp
+	} (
 		@sort_desc .timestamp,
 		.plan,
 		.asset,
@@ -17,22 +22,22 @@ operation create_voucher(descriptor_id: byte_array) {
 	val month_in_millis = util._get_period_in_millis("month");
 	
 	if (active_invoice == null) {
-		_create_voucher(account, current_timestamp + month_in_millis);
+		_create_voucher(account, selected_plan, current_timestamp + month_in_millis);
 	} else {
 		val active_invoice_expires_in = active_invoice.timestamp - current_timestamp;
 		val day_in_millis = util._get_period_in_millis("day");
 		
 		require(active_invoice_expires_in <= day_in_millis, "[FH-00]: Not eligible for a new voucher yet");
-		_create_voucher(account, current_timestamp + month_in_millis + active_invoice_expires_in);
+		_create_voucher(account, selected_plan, current_timestamp + month_in_millis + active_invoice_expires_in);
 	}
 }
 
-function _create_voucher(account: ft3_acc.account, valid_until: integer) {
+function _create_voucher(account: ft3_acc.account, plan, valid_until: integer) {
 	val asset = ft3_core.asset@{ .id == ("CHR", chain_context.blockchain_rid).hash() };
-	val token_cost = _get_voucher_price(plan.STANDARD);
+	val token_cost = _get_voucher_price(plan);
 	
 	charge_chromia_tokens(account, token_cost);
-	create voucher(account, timestamp = valid_until, asset, amount = token_cost);
+	create voucher(account, timestamp = valid_until, asset, amount = token_cost, plan);
 }
 
 function charge_chromia_tokens(account: ft3_acc.account, amount: integer) {

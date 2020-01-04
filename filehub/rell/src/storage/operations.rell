@@ -3,17 +3,18 @@ import util;
 import billing;
 import admin;
 
-operation allocate_file(descriptor_id: byte_array, name, total_bytes: integer) {
-	log("allocate_file");
+operation allocate_file(descriptor_id: byte_array, name, total_bytes: integer, plan_to_use: text) {
+	log("allocate_file for plan: ", plan_to_use);
 	val account = util.get_account_by_descriptor_id(descriptor_id);
 	
 	ft3_acc.require_auth(account, descriptor_id, ["A"]);
 	require(name.size() < 256, "Length of a name isn't allowed to be longer than 256");
 	
+	val plan = billing.text_to_plan(plan_to_use);
 	val current_timestamp = op_context.last_block_time;	
-	verify_voucher(account, current_timestamp, total_bytes);
+	verify_voucher(account, plan, current_timestamp, total_bytes);
 	
-	create file(name, account, chain_selector(), current_timestamp);
+	create file(name, account, chain_selector(plan), current_timestamp, plan);
 }
 
 operation allocate_chunk(descriptor_id: byte_array, name, hash: byte_array, chunk_size: integer, idx: integer) {
@@ -31,7 +32,7 @@ operation allocate_chunk(descriptor_id: byte_array, name, hash: byte_array, chun
 	if (chunk == null) {
 		val current_timestamp = op_context.last_block_time;
 		
-		verify_voucher(account, current_timestamp, chunk_size);
+		verify_voucher(account, file.plan, current_timestamp, chunk_size);
 		chunk = create chunk(hash, file.filechain);			
 	}
 	
@@ -57,19 +58,19 @@ operation deallocate_file(descriptor_id: byte_array, name) {
 
 operation migrate_file(descriptor_id: byte_array, name, timestamp, from_chain: byte_array) {
 	val account = util.get_account_by_descriptor_id(descriptor_id);
-	require(admin.admin@?{ account } != null, "User not an admin");
+	val active_filechain = active_filechain@{ .filechain.brid == from_chain, account };	
 	
 	val old_files = file@*{ name, timestamp, .filechain.brid == from_chain };
 	
 	log("Old files for name: ", name, old_files);
 	
-	val filechain = chain_selector();
+	val filechain = chain_selector(active_filechain.plan);
 	
 	for (old_file in old_files) {
 		val file_chunks = file_chunk@*{ old_file };
 		log("File chunks for file", old_file);
 		
-		val new_file = create file(old_file.name, old_file.account, filechain, op_context.last_block_time);
+		val new_file = create file(old_file.name, old_file.account, filechain, op_context.last_block_time, old_file.plan);
 		
 		for (file_chunk in file_chunks) {
 			log("Creating chunk with hash: ", file_chunk.chunk.hash, " in filechain: ", filechain.brid, " for filename: ", name);
@@ -99,12 +100,17 @@ operation mark_file_migrated(descriptor_id: byte_array, name, timestamp, from_ch
 	}
 }
 
-function chain_selector(): filechain {
-	return active_filechain@{} ( .filechain, @omit @sort_desc .timestamp ) limit 1;
+function chain_selector(billing.plan): filechain {
+	log("Selecting chain for plan: ", plan);
+	return active_filechain@{ plan } ( .filechain, @omit @sort_desc .timestamp ) limit 1;
 }
 
-function verify_voucher(ft3_acc.account, timestamp, file_size: integer) {
-	val active_voucher = billing.voucher@?{ account, .timestamp > timestamp } (
+function verify_voucher(ft3_acc.account, billing.plan, timestamp, file_size: integer) {
+	val active_voucher = billing.voucher@?{ 
+		account, 
+		plan == plan,
+		.timestamp > timestamp
+	} (
 		@sort_desc .timestamp,
 		.plan,
 		.asset,

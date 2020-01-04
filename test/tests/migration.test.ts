@@ -15,6 +15,8 @@ const SUITE_NAME = "Migration tests";
  */
 describe(SUITE_NAME, () => {
 
+  const SUFFICIENT_BALANCE_FOR_CHROMIA_VOUCHER = 40;
+
   const MIGRATE_CHAIN = "Migrate chain";
 
   const filename = "file-to-be-migrated";
@@ -31,8 +33,8 @@ describe(SUITE_NAME, () => {
   it(MIGRATE_CHAIN, async () => {
     logger.info(`[${SUITE_NAME}]: Running ${MIGRATE_CHAIN}`);
     const user = await createFt3User();
-    await addBalance(user, 20);
-    await FILEHUB.purchaseVoucher(user);
+    await addBalance(user, SUFFICIENT_BALANCE_FOR_CHROMIA_VOUCHER);
+    await FILEHUB.purchaseVoucher(user, "CHROMIA");
     await FILEHUB.storeFile(user, FsFile.fromData(filename, Buffer.alloc(6)));
 
     await FILEHUB_ADMININISTRATOR.migrateFilechain(admin, config.filechainRID, config.newFilechainRID);

@@ -15,6 +15,9 @@ jest.setTimeout(60000);
  */
 describe("Storing files tests", () => {
 
+  const SUFFICIENT_BALANCE_FOR_CHROMIA_VOUCHER = 40;
+  const CHROMIA_PLAN = "CHROMIA";
+
   const BYTES_IN_MB = 1024 * 1024;
 
   let user: User;
@@ -24,8 +27,8 @@ describe("Storing files tests", () => {
 
     user = await createFt3User();
     await registerAsset(user);
-    await addBalance(user, 20);
-    await FILEHUB.purchaseVoucher(user);
+    await addBalance(user, SUFFICIENT_BALANCE_FOR_CHROMIA_VOUCHER);
+    await FILEHUB.purchaseVoucher(user, CHROMIA_PLAN);
   });
 
   it("Create file", async () => {
@@ -89,8 +92,8 @@ describe("Storing files tests", () => {
 
   it("Store actual file, delete and re-create on new path from blockchain", async () => {
     const user = await createFt3User();
-    await addBalance(user, 20);
-    await FILEHUB.purchaseVoucher(user);
+    await addBalance(user, SUFFICIENT_BALANCE_FOR_CHROMIA_VOUCHER);
+    await FILEHUB.purchaseVoucher(user, "CHROMIA");
 
     const srcPath = path.resolve("./tests/files/small.txt");
 
@@ -114,8 +117,8 @@ describe("Storing files tests", () => {
 
   it("Store actual file, encrypted & delete and re-create from blockchain", async () => {
     const user = await createFt3User();
-    await addBalance(user, 20);
-    await FILEHUB.purchaseVoucher(user);
+    await addBalance(user, SUFFICIENT_BALANCE_FOR_CHROMIA_VOUCHER);
+    await FILEHUB.purchaseVoucher(user, CHROMIA_PLAN);
 
     const srcFile = path.resolve("./tests/files/large.txt");
     const filepath = path.resolve("./tests/files/large-to-be-recreated.txt");
@@ -179,8 +182,8 @@ describe("Storing files tests", () => {
 
   it("Store file, encrypted", async () => {
     const user2 = await createFt3User();
-    await addBalance(user2, 20);
-    await FILEHUB.purchaseVoucher(user2);
+    await addBalance(user2, SUFFICIENT_BALANCE_FOR_CHROMIA_VOUCHER);
+    await FILEHUB.purchaseVoucher(user2, CHROMIA_PLAN);
 
     const s = generateRandomString(36);
     const data = Buffer.from(s, "utf8");
@@ -197,8 +200,8 @@ describe("Storing files tests", () => {
 
   it("Store file & path, encrypted", async () => {
     const user2 = await createFt3User();
-    await addBalance(user2, 20);
-    await FILEHUB.purchaseVoucher(user2);
+    await addBalance(user2, SUFFICIENT_BALANCE_FOR_CHROMIA_VOUCHER);
+    await FILEHUB.purchaseVoucher(user2, CHROMIA_PLAN);
 
     const s = generateRandomString(36);
     const data = Buffer.from(s, "utf8");
@@ -248,8 +251,8 @@ describe("Storing files tests", () => {
 
   it("Store file, correct amount of allocated bytes", async () => {
     const user2 = await createFt3User();
-    await addBalance(user2, 20);
-    await FILEHUB.purchaseVoucher(user2);
+    await addBalance(user2, SUFFICIENT_BALANCE_FOR_CHROMIA_VOUCHER);
+    await FILEHUB.purchaseVoucher(user2, CHROMIA_PLAN);
 
     const dataSize = 1000;
     await storeGeneratedData(generateRandomString(36), dataSize, user2);
@@ -260,8 +263,8 @@ describe("Storing files tests", () => {
 
   it("Store file, large file split into multiple chunks", async () => {
     const user2 = await createFt3User();
-    await addBalance(user2, 20);
-    await FILEHUB.purchaseVoucher(user2);
+    await addBalance(user2, SUFFICIENT_BALANCE_FOR_CHROMIA_VOUCHER);
+    await FILEHUB.purchaseVoucher(user2, CHROMIA_PLAN);
 
     const name = generateRandomString(36);
 
@@ -279,8 +282,8 @@ describe("Storing files tests", () => {
 
   it("Store file, by two users", async () => {
     const user2 = await createFt3User();
-    await addBalance(user2, 20);
-    await FILEHUB.purchaseVoucher(user2);
+    await addBalance(user2, SUFFICIENT_BALANCE_FOR_CHROMIA_VOUCHER);
+    await FILEHUB.purchaseVoucher(user2, CHROMIA_PLAN);
 
     const name = generateRandomString(16);
     const data = generateData(1024);

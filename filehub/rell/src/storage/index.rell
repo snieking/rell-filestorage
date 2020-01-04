@@ -1,5 +1,6 @@
 import ft3_acc: lib.ft3.account;
 import ft3_core: lib.ft3.core;
+import billing;
 
 @log
 entity filechain {
@@ -18,12 +19,15 @@ entity chunk_size {
 
 entity active_filechain {
 	key filechain;
+	index billing.plan;
 	index timestamp;
+	index ft3_acc.account;
 }
 
 entity file {
 	key name, ft3_acc.account, filechain;
 	index timestamp;
+	index billing.plan;
 }
 
 entity file_chunk {

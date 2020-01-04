@@ -3,11 +3,12 @@ import ft3_core: lib.ft3.core;
 
 entity voucher {
 	key account: ft3_acc.account, timestamp;
-	plan = plan.STANDARD;
+	plan;
 	ft3_core.asset;
 	amount: integer;
 }
 
 enum plan {
-	STANDARD
+	CHROMIA,
+	COMMON
 }

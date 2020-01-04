@@ -10,7 +10,8 @@ function _get_period_in_millis(period: text): integer {
 
 function _get_allowed_storage_bytes(plan: billing.plan): integer {
 	when {
-		billing.plan.STANDARD == plan -> return 1024 * 1024 * 1024;
+		billing.plan.CHROMIA == plan -> return 1024 * 1024 * 1024;
+		billing.plan.COMMON == plan -> return 1024 * 1024 * 1024;
 		else -> return 0;
 	}
 }

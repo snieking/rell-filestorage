@@ -56,6 +56,7 @@ query get_files_belonging_to_active_voucher_in_brid_after_timestamp(
 ) {
 	return (file, billing.voucher)@*{
 		voucher.timestamp > current_time,
+		file.plan == voucher.plan,
 		file.timestamp >= stored_at,
 		file.filechain.brid == brid,
 		file.account == voucher.account

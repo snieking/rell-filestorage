@@ -9,6 +9,9 @@ import * as crypto from "crypto";
  */
 describe("Administration of a common filechain", () => {
 
+  const SUFFICIENT_BALANCE = 100;
+  const INSUFFICIENT_BALANCE = 99;
+
   let admin: User;
 
   beforeAll(async () => {
@@ -19,7 +22,7 @@ describe("Administration of a common filechain", () => {
 
   it("Send application, insufficient balance", async () => {
     const user = await createFt3User();
-    await addBalance(user, 19);
+    await addBalance(user, INSUFFICIENT_BALANCE);
 
     const brid = createBrid();
     await COMMON_FILECHAIN_ADMINISTRATOR.sendFilechainApplication(user, brid, "localhost", "github.com")
@@ -33,7 +36,7 @@ describe("Administration of a common filechain", () => {
 
   it("Successfully rejected application", async () => {
     const user = await createFt3User();
-    await addBalance(user, 20);
+    await addBalance(user, SUFFICIENT_BALANCE);
 
     const brid = createBrid();
     await COMMON_FILECHAIN_ADMINISTRATOR.sendFilechainApplication(user, brid, "localhost", "github.com");
@@ -47,7 +50,7 @@ describe("Administration of a common filechain", () => {
 
   it("Only admin can approve application", async () => {
     const user = await createFt3User();
-    await addBalance(user, 20);
+    await addBalance(user, SUFFICIENT_BALANCE);
 
     // Send application
     const brid = createBrid();
@@ -70,7 +73,7 @@ describe("Administration of a common filechain", () => {
 
   it("Only admin can reject application", async () => {
     const user = await createFt3User();
-    await addBalance(user, 20);
+    await addBalance(user, SUFFICIENT_BALANCE);
 
     // Create application
     const brid = createBrid();

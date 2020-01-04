@@ -68,7 +68,13 @@ export default class Filehub {
 
     const bc = await this.blockchain;
 
-    await this.executeOperation(user, op("allocate_file", user.authDescriptor.id, fileName, file.size));
+    await this.executeOperation(user, op(
+      "allocate_file",
+      user.authDescriptor.id,
+      fileName,
+      file.size,
+      options && options.plan ? options.plan : "CHROMIA"
+    ));
 
     const brid = await this.getFileLocation(user, fileName);
 
@@ -103,11 +109,11 @@ export default class Filehub {
    * Purchases a new voucher if possible.
    * It is only possible to buy a new voucher when there is less than a day left on your current one.
    */
-  public async purchaseVoucher(user: User): Promise<any> {
+  public async purchaseVoucher(user: User, plan: string): Promise<any> {
     const bc = await this.blockchain;
     return await bc.transactionBuilder()
       .add(nop())
-      .add(op("create_voucher", user.authDescriptor.id))
+      .add(op("create_voucher", user.authDescriptor.id, plan))
       .buildAndSign(user)
       .post();
   }
@@ -212,10 +218,11 @@ export default class Filehub {
   /**
    * Checks if the user has an active voucher.
    */
-  public hasActiveVoucher(user: User): Promise<boolean> {
+  public hasActiveVoucher(user: User, plan: string): Promise<boolean> {
     return this.executeQuery("has_active_voucher_for_timestamp", {
       descriptor_id: user.authDescriptor.hash().toString("hex"),
-      timestamp: Date.now()
+      timestamp: Date.now(),
+      voucher_plan: plan
     });
   }
 
