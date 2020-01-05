@@ -24,6 +24,13 @@ entity active_filechain {
 	index ft3_acc.account;
 }
 
+entity disabled_filechain {
+	key filechain;
+	index billing.plan;
+	index ft3_acc.account;
+	timestamp;
+}
+
 entity file {
 	key name, ft3_acc.account, filechain;
 	index timestamp;

@@ -67,11 +67,12 @@ query get_files_belonging_to_active_voucher_in_brid_after_timestamp(
 }
 
 query get_all_migratable_chunks_by_file(brid: byte_array, name, timestamp, current_time: timestamp) {
-	return (file_chunk, billing.voucher)@*{
+	return (file_chunk, billing.voucher, disabled_filechain)@*{
+		disabled_filechain.filechain.brid == brid,
+		file_chunk.file.filechain == disabled_filechain.filechain,
 		file_chunk.file.name == name,
 		file_chunk.file.timestamp == timestamp,
 		voucher.timestamp > current_time,
-		file_chunk.file.filechain.brid == brid,
 		file_chunk.file.account == voucher.account
 	} (
 		hash = file_chunk.chunk.hash,

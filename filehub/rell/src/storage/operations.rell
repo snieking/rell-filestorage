@@ -65,13 +65,13 @@ operation migrate_file(descriptor_id: byte_array, name, timestamp, from_chain: b
 		log("Found filechain with brid: ", chain.filechain.brid, " with account owner: ", chain.account.id);
 	}
 	
-	val active_filechain = active_filechain@{ .filechain.brid == from_chain, account };	
+	val disabled_filechain = disabled_filechain@{ .filechain.brid == from_chain, account };	
 	
-	val old_files = file@*{ name, timestamp, active_filechain.filechain };
+	val old_files = file@*{ name, timestamp, disabled_filechain.filechain };
 	
 	log("Old files for name: ", name, old_files);
 	
-	val filechain = chain_selector(active_filechain.plan);
+	val filechain = chain_selector(disabled_filechain.plan);
 	
 	for (old_file in old_files) {
 		val file_chunks = file_chunk@*{ old_file };

@@ -45,7 +45,16 @@ operation disable_chromia_filechain(descriptor_id: byte_array, rid: byte_array) 
 	require(admin@?{ account } != null, "User not an admin");
 	log("Disabling filechain with brid: ", rid);
 	
-    delete storage.active_filechain@{ .filechain.brid == rid };
+	val active_filechain = storage.active_filechain@{ .filechain.brid == rid };
+	
+	create storage.disabled_filechain(
+		active_filechain.filechain, 
+		active_filechain.plan, 
+		active_filechain.account, 
+		op_context.last_block_time
+	);
+	
+    delete active_filechain;
 }
 
 operation register_admin(descriptor_id: byte_array) {
