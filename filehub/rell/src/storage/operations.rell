@@ -90,9 +90,9 @@ operation migrate_file(descriptor_id: byte_array, name, timestamp, from_chain: b
 
 operation mark_file_migrated(descriptor_id: byte_array, name, timestamp, from_chain: byte_array) {
 	val account = util.get_account_by_descriptor_id(descriptor_id);
-	require(admin.admin@?{ account } != null, "User not an admin");
+	val active_filechain = active_filechain@{ .filechain.brid == from_chain, account };	
 
-	val files = file@*{ name, timestamp, .filechain.brid == from_chain };
+	val files = file@*{ name, timestamp, active_filechain.filechain };
 	
 	for (file in files) {
 		delete file_chunk@* { file };
