@@ -62,7 +62,7 @@ export default class FilehubAdministrator extends AbstractAdministrator {
       for (const fileTimestamp of fileTimestamps) {
         await this.filehub.executeOperation(user, op(
           "migrate_file",
-          user.authDescriptor.hash().toString("hex"),
+          user.authDescriptor.id,
           fileTimestamp.name,
           fileTimestamp.timestamp,
           fromBrid
@@ -76,7 +76,7 @@ export default class FilehubAdministrator extends AbstractAdministrator {
         await this.filehub.executeOperation(
           user,
           op("mark_file_migrated",
-            user.authDescriptor.hash().toString("hex"),
+            user.authDescriptor.id,
             fileTimestamp.name,
             fileTimestamp.timestamp,
             fromBrid

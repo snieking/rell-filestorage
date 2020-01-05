@@ -60,7 +60,7 @@ operation migrate_file(descriptor_id: byte_array, name, timestamp, from_chain: b
 	val account = util.get_account_by_descriptor_id(descriptor_id);
 	val active_filechain = active_filechain@{ .filechain.brid == from_chain, account };	
 	
-	val old_files = file@*{ name, timestamp, .filechain.brid == from_chain };
+	val old_files = file@*{ name, timestamp, active_filechain.filechain };
 	
 	log("Old files for name: ", name, old_files);
 	
