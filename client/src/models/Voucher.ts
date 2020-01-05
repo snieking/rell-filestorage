@@ -1,6 +1,6 @@
 export interface Voucher {
   timestamp: number;
-  plan: number;
+  plan: string;
   asset: string;
   amount: number;
 }

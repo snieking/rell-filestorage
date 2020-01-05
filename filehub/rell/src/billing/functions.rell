@@ -13,3 +13,10 @@ function text_to_plan(text): plan {
 		else -> return plan.COMMON;
 	}
 }
+
+function plan_to_text(plan_to_convert: plan): text {
+	when {
+		plan_to_convert == plan.CHROMIA -> return "CHROMIA";
+		else -> return "COMMON";
+	}
+}

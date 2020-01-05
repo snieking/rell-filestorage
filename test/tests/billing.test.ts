@@ -7,6 +7,7 @@ import {
   SUFFICIENT_BALANCE_FOR_CHROMIA_VOUCHER,
   SUFFICIENT_BALANCE_FOR_COMMON_VOUCHER
 } from "./utils/constants";
+import logger from "../logger";
 
 /**
  * @group ci
@@ -38,6 +39,8 @@ describe("Billing tests", () => {
 
     const hasActiveVoucher = await FILEHUB.hasActiveVoucher(user, CHROMIA_PLAN);
     const vouchers = await FILEHUB.getVouchers(user);
+
+    logger.info("Active vouchers for user: %O", vouchers);
 
     expect(hasActiveVoucher).toBeTruthy();
     expect(vouchers.length).toBe(1);
