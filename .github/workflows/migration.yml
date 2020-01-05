@@ -96,4 +96,4 @@ jobs:
 
       - name: Output new Filechain log
         run: cat new-filechain.log
-        working-directory: migration-filechain/rell
+        working-directory: test/filechains/migration/rell
