@@ -58,6 +58,13 @@ operation deallocate_file(descriptor_id: byte_array, name) {
 
 operation migrate_file(descriptor_id: byte_array, name, timestamp, from_chain: byte_array) {
 	val account = util.get_account_by_descriptor_id(descriptor_id);
+	
+	val chains_for_debug = active_filechain@*{};
+	
+	for (chain in chains_for_debug) {
+		log("Found filechain with brid: ", chain.filechain.brid, " with account owner: ", chain.account.id);
+	}
+	
 	val active_filechain = active_filechain@{ .filechain.brid == from_chain, account };	
 	
 	val old_files = file@*{ name, timestamp, active_filechain.filechain };
