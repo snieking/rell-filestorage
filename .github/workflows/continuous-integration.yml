@@ -32,19 +32,30 @@ jobs:
         run: ./run-dev-node.sh WIPE_DB > filehub.log &
         working-directory: filehub/rell
       
-      # Build and deploy the Filechain
-      - name: Download Postchain and Rell Binaries 
+      # Build and deploy CHROMIA Filechain
+      - name: Download Postchain and Rell Binaries
         run: ./download-binaries.sh
         working-directory: filechain/rell
       - name: Add Filehub BRID to run.xml
         run: sed -i "s/FILEHUB_BRID/$(cat ../../filehub/rell/target/blockchains/1/brid.txt)/g" run.xml
         working-directory: filechain/rell
-      - name: Build Filechain
+      - name: Build CHROMIA Filechain
         run: ./build.sh
         working-directory: filechain/rell
-      - name: Run Filechain
+      - name: Run CHROMIA Filechain
         run: ./run-dev-node.sh > filechain.log &
         working-directory: filechain/rell
+
+      # Build and deploy COMMON Filechain
+      - name: Add Filehub BRID to run.xml
+        run: sed -i "s/FILEHUB_BRID/$(cat ../../../../filehub/rell/target/blockchains/1/brid.txt)/g" run.xml
+        working-directory: test/filechains/common/rell
+      - name: Build COMMON Filechain
+        run: ./build.sh
+        working-directory: test/filechains/common/rell
+      - name: Run COMMON Filechain
+        run: ./run-dev-node.sh > filechain.log &
+        working-directory: test/filechains/common/rell
 
       # Build File Storage Client (fs-client)
       - name: Install dependencies for fs-client
@@ -69,10 +80,19 @@ jobs:
         working-directory: test
         continue-on-error: false
 
+      - name: Run common filechains tests
+        run: npm run silent-test-common-ci
+        working-directory: test
+        continue-on-error: false
+
       - name: Output Filehub log
         run: cat filehub.log
         working-directory: filehub/rell
 
-      - name: Output Filechain log
+      - name: Output CHROMIA Filechain log
         run: cat filechain.log
         working-directory: filechain/rell
+
+      - name: Output COMMON Filechain log
+        run: cat filechain.log
+        working-directory: test/filechains/common/rell

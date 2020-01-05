@@ -1,12 +1,21 @@
 import {createFt3User} from "./utils/users";
 import {FILEHUB, FILEHUB_ADMININISTRATOR, initFilehub} from "../blockchain/Postchain";
 import {User} from "ft3-lib";
-import {addBalance, generateRandomString, registerAsset} from "./utils/utils";
+import {
+  addBalance,
+  bufferToHex,
+  generateData,
+  generateRandomString,
+  registerAsset,
+  storeData,
+  storeGeneratedData
+} from "./utils/utils";
 import FsFile from "../../client/lib/models/FsFile";
 import * as path from "path";
 import * as fs from "fs";
 import * as config from "../blockchain/config";
 import logger from "../logger";
+import {BYTES_IN_MB, CHROMIA_PLAN, SUFFICIENT_BALANCE_FOR_CHROMIA_VOUCHER} from "./utils/constants";
 
 jest.setTimeout(60000);
 
@@ -14,11 +23,6 @@ jest.setTimeout(60000);
  * @group ci
  */
 describe("Storing files tests", () => {
-
-  const SUFFICIENT_BALANCE_FOR_CHROMIA_VOUCHER = 40;
-  const CHROMIA_PLAN = "CHROMIA";
-
-  const BYTES_IN_MB = 1024 * 1024;
 
   let user: User;
 
@@ -300,20 +304,3 @@ describe("Storing files tests", () => {
   });
 
 });
-
-const storeGeneratedData = (name: string, dataLength: number, user: User) => {
-  const data = Buffer.from(generateRandomString(dataLength), "utf8");
-  return FILEHUB.storeFile(user, FsFile.fromData(name, data));
-};
-
-const generateData = (length: number) => {
-  return Buffer.from(generateRandomString(length), "utf8");
-};
-
-const storeData = (name: string, data: Buffer, user: User) => {
-  return FILEHUB.storeFile(user, FsFile.fromData(name, data));
-};
-
-const bufferToHex = (buffer: Buffer) => {
-  return buffer.toString("hex").toLocaleUpperCase();
-};

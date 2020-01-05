@@ -1,0 +1,18 @@
+<run wipe-db="false">
+    <nodes>
+        <config src="config/node-config.properties" add-signers="true" />
+    </nodes>
+    <chains>
+    	<chain name="filechain" iid="4">
+    		<config height="0">
+    			<app module="" />
+                <gtv path="gtx/filechain-id">
+                    <string>common-filechain</string>
+                </gtv>
+                <dependencies>
+                    <dependency name="filehub" brid="FILEHUB_BRID"/>
+                </dependencies>
+    		</config>
+    	</chain>
+    </chains>
+</run>

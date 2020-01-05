@@ -12,4 +12,7 @@ config.filechainRID = process.env.REACT_APP_FILECHAIN_BRID;
 config.newFilechainNodeApiUrl = "http://localhost:7743";
 config.newFilechainRID = process.env.REACT_APP_NEW_FILECHAIN_BRID;
 
+config.commonFilechainNodeApiUrl = "http://localhost:7744";
+config.commonFilechainRID = process.env.REACT_APP_COMMON_FILECHAIN_BRID;
+
 module.exports = config;

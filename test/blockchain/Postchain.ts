@@ -18,12 +18,18 @@ const FILECHAIN_BLOCKCHAIN_RID = config.filechainRID;
 const NEW_FILECHAIN_NODE_API_URL = config.newFilechainNodeApiUrl;
 const NEW_FILECHAIN_BLOCKCHAIN_RID = config.newFilechainRID;
 
+const COMMON_FILECHAIN_NODE_API_URL = config.commonFilechainNodeApiUrl;
+const COMMON_FILECHAIN_BLOCKCHAIN_RID = config.commonFilechainRID;
+
 export const CHAINS = [
   new ChainConnectionInfo(Buffer.from(FILEHUB_BLOCKCHAIN_RID, "hex"), FILEHUB_NODE_API_URL),
   new ChainConnectionInfo(Buffer.from(FILECHAIN_BLOCKCHAIN_RID, "hex"), FILECHAIN_NODE_API_URL),
   new ChainConnectionInfo(NEW_FILECHAIN_BLOCKCHAIN_RID != undefined
     ? Buffer.from(NEW_FILECHAIN_BLOCKCHAIN_RID, "hex")
-    : Buffer.from([]), NEW_FILECHAIN_NODE_API_URL)
+    : Buffer.alloc(0), NEW_FILECHAIN_NODE_API_URL),
+  new ChainConnectionInfo(COMMON_FILECHAIN_BLOCKCHAIN_RID != undefined
+    ? Buffer.from(COMMON_FILECHAIN_BLOCKCHAIN_RID, "hex")
+    : Buffer.alloc(0), COMMON_FILECHAIN_NODE_API_URL)
 ];
 
 export const FILEHUB = new Filehub(FILEHUB_NODE_API_URL, FILEHUB_BLOCKCHAIN_RID, CHAINS);

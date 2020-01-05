@@ -1,7 +1,8 @@
-import {FILEHUB_BLOCKCHAIN, FILEHUB_BLOCKCHAIN_RID} from "../../blockchain/Postchain";
+import {FILEHUB, FILEHUB_BLOCKCHAIN, FILEHUB_BLOCKCHAIN_RID} from "../../blockchain/Postchain";
 import {Asset} from "../../domain/Asset";
 import Operation from "ft3-lib/dist/lib/ft3/operation";
 import {User} from "ft3-lib";
+import FsFile from "../../../client/lib/models/FsFile";
 
 const TOKEN_NAME = "CHR";
 
@@ -41,4 +42,21 @@ export const generateRandomString = (length: number) => {
     text += possible.charAt(Math.floor(Math.random() * possible.length));
 
   return text;
+};
+
+export const storeGeneratedData = (name: string, dataLength: number, user: User) => {
+  const data = Buffer.from(generateRandomString(dataLength), "utf8");
+  return FILEHUB.storeFile(user, FsFile.fromData(name, data));
+};
+
+export const generateData = (length: number) => {
+  return Buffer.from(generateRandomString(length), "utf8");
+};
+
+export const storeData = (name: string, data: Buffer, user: User) => {
+  return FILEHUB.storeFile(user, FsFile.fromData(name, data));
+};
+
+export const bufferToHex = (buffer: Buffer) => {
+  return buffer.toString("hex").toLocaleUpperCase();
 };

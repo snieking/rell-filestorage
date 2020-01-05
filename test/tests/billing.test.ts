@@ -1,16 +1,17 @@
 import {createFt3User} from "./utils/users";
 import {registerAsset, addBalance} from "./utils/utils";
 import {FILEHUB, initFilehub} from "../blockchain/Postchain";
+import {
+  CHROMIA_PLAN,
+  COMMON_PLAN,
+  SUFFICIENT_BALANCE_FOR_CHROMIA_VOUCHER,
+  SUFFICIENT_BALANCE_FOR_COMMON_VOUCHER
+} from "./utils/constants";
 
 /**
  * @group ci
  */
 describe("Billing tests", () => {
-
-  const SUFFICIENT_BALANCE_FOR_CHROMIA_VOUCHER = 40;
-  const SUFFICIENT_BALANCE_FOR_COMMON_VOUCHER = 10;
-  const CHROMIA_VOUCHER = "CHROMIA";
-  const COMMON_VOUCHER = "COMMON";
 
   beforeAll(async () => {
     await initFilehub();
@@ -20,22 +21,22 @@ describe("Billing tests", () => {
 
   it("Not enough balance to purchase CHROMIA voucher", async () => {
     const user = await createFt3User();
-    await FILEHUB.purchaseVoucher(user, CHROMIA_VOUCHER).catch(error => expect(error).toBeDefined());
+    await FILEHUB.purchaseVoucher(user, CHROMIA_PLAN).catch(error => expect(error).toBeDefined());
     expect.assertions(1);
   });
 
   it("Not enough balance to purchase COMMON voucher", async () => {
     const user = await createFt3User();
-    await FILEHUB.purchaseVoucher(user, COMMON_VOUCHER).catch(error => expect(error).toBeDefined());
+    await FILEHUB.purchaseVoucher(user, COMMON_PLAN).catch(error => expect(error).toBeDefined());
     expect.assertions(1);
   });
 
   it("Purchase a CHROMIA voucher", async () => {
     const user = await createFt3User();
     await addBalance(user, SUFFICIENT_BALANCE_FOR_CHROMIA_VOUCHER);
-    await FILEHUB.purchaseVoucher(user, CHROMIA_VOUCHER);
+    await FILEHUB.purchaseVoucher(user, CHROMIA_PLAN);
 
-    const hasActiveVoucher = await FILEHUB.hasActiveVoucher(user, CHROMIA_VOUCHER);
+    const hasActiveVoucher = await FILEHUB.hasActiveVoucher(user, CHROMIA_PLAN);
     const vouchers = await FILEHUB.getVouchers(user);
 
     expect(hasActiveVoucher).toBeTruthy();
@@ -45,9 +46,9 @@ describe("Billing tests", () => {
   it("Purchase a COMMON voucher", async () => {
     const user = await createFt3User();
     await addBalance(user, SUFFICIENT_BALANCE_FOR_COMMON_VOUCHER);
-    await FILEHUB.purchaseVoucher(user, COMMON_VOUCHER);
+    await FILEHUB.purchaseVoucher(user, COMMON_PLAN);
 
-    const hasActiveVoucher = await FILEHUB.hasActiveVoucher(user, COMMON_VOUCHER);
+    const hasActiveVoucher = await FILEHUB.hasActiveVoucher(user, COMMON_PLAN);
     const vouchers = await FILEHUB.getVouchers(user);
 
     expect(hasActiveVoucher).toBeTruthy();
@@ -58,11 +59,11 @@ describe("Billing tests", () => {
     const user = await createFt3User();
     await addBalance(user, SUFFICIENT_BALANCE_FOR_CHROMIA_VOUCHER);
 
-    await FILEHUB.purchaseVoucher(user, CHROMIA_VOUCHER);
-    await FILEHUB.purchaseVoucher(user, CHROMIA_VOUCHER).catch(error => expect(error).toBeDefined());
-    await FILEHUB.purchaseVoucher(user, CHROMIA_VOUCHER).catch(error => expect(error).toBeDefined());
+    await FILEHUB.purchaseVoucher(user, CHROMIA_PLAN);
+    await FILEHUB.purchaseVoucher(user, CHROMIA_PLAN).catch(error => expect(error).toBeDefined());
+    await FILEHUB.purchaseVoucher(user, CHROMIA_PLAN).catch(error => expect(error).toBeDefined());
 
-    const hasActiveVoucher = await FILEHUB.hasActiveVoucher(user, CHROMIA_VOUCHER);
+    const hasActiveVoucher = await FILEHUB.hasActiveVoucher(user, CHROMIA_PLAN);
     const vouchers = await FILEHUB.getVouchers(user);
 
     expect(hasActiveVoucher).toBeTruthy();
@@ -74,11 +75,11 @@ describe("Billing tests", () => {
     const user = await createFt3User();
     await addBalance(user, SUFFICIENT_BALANCE_FOR_COMMON_VOUCHER);
 
-    await FILEHUB.purchaseVoucher(user, COMMON_VOUCHER);
-    await FILEHUB.purchaseVoucher(user, COMMON_VOUCHER).catch(error => expect(error).toBeDefined());
-    await FILEHUB.purchaseVoucher(user, COMMON_VOUCHER).catch(error => expect(error).toBeDefined());
+    await FILEHUB.purchaseVoucher(user, COMMON_PLAN);
+    await FILEHUB.purchaseVoucher(user, COMMON_PLAN).catch(error => expect(error).toBeDefined());
+    await FILEHUB.purchaseVoucher(user, COMMON_PLAN).catch(error => expect(error).toBeDefined());
 
-    const hasActiveVoucher = await FILEHUB.hasActiveVoucher(user, COMMON_VOUCHER);
+    const hasActiveVoucher = await FILEHUB.hasActiveVoucher(user, COMMON_PLAN);
     const vouchers = await FILEHUB.getVouchers(user);
 
     expect(hasActiveVoucher).toBeTruthy();
@@ -90,11 +91,11 @@ describe("Billing tests", () => {
     const user = await createFt3User();
     await addBalance(user, SUFFICIENT_BALANCE_FOR_CHROMIA_VOUCHER + SUFFICIENT_BALANCE_FOR_COMMON_VOUCHER);
 
-    await FILEHUB.purchaseVoucher(user, CHROMIA_VOUCHER);
-    await FILEHUB.purchaseVoucher(user, COMMON_VOUCHER);
+    await FILEHUB.purchaseVoucher(user, CHROMIA_PLAN);
+    await FILEHUB.purchaseVoucher(user, COMMON_PLAN);
 
-    const hasActiveChromiaVoucher = await FILEHUB.hasActiveVoucher(user, CHROMIA_VOUCHER);
-    const hasActiveCommonVoucher = await FILEHUB.hasActiveVoucher(user, CHROMIA_VOUCHER);
+    const hasActiveChromiaVoucher = await FILEHUB.hasActiveVoucher(user, CHROMIA_PLAN);
+    const hasActiveCommonVoucher = await FILEHUB.hasActiveVoucher(user, CHROMIA_PLAN);
     expect(hasActiveChromiaVoucher).toBeTruthy();
     expect(hasActiveCommonVoucher).toBeTruthy();
 
@@ -106,11 +107,11 @@ describe("Billing tests", () => {
     const user = await createFt3User();
     await addBalance(user, SUFFICIENT_BALANCE_FOR_CHROMIA_VOUCHER);
 
-    await FILEHUB.purchaseVoucher(user, CHROMIA_VOUCHER);
-    await FILEHUB.purchaseVoucher(user, COMMON_VOUCHER).catch(error => expect(error).toBeDefined());
+    await FILEHUB.purchaseVoucher(user, CHROMIA_PLAN);
+    await FILEHUB.purchaseVoucher(user, COMMON_PLAN).catch(error => expect(error).toBeDefined());
 
-    const hasActiveChromiaVoucher = await FILEHUB.hasActiveVoucher(user, CHROMIA_VOUCHER);
-    const hasActiveCommonVoucher = await FILEHUB.hasActiveVoucher(user, COMMON_VOUCHER);
+    const hasActiveChromiaVoucher = await FILEHUB.hasActiveVoucher(user, CHROMIA_PLAN);
+    const hasActiveCommonVoucher = await FILEHUB.hasActiveVoucher(user, COMMON_PLAN);
     expect(hasActiveChromiaVoucher).toBeTruthy();
     expect(hasActiveCommonVoucher).toBeFalsy();
 

@@ -5,6 +5,7 @@ import FsFile from "../../client/lib/models/FsFile";
 import {addBalance, registerAsset} from "./utils/utils";
 import {User} from "ft3-lib";
 import logger from "../logger";
+import {CHROMIA_PLAN, SUFFICIENT_BALANCE_FOR_CHROMIA_VOUCHER} from "./utils/constants";
 
 jest.setTimeout(120000);
 
@@ -14,8 +15,6 @@ const SUITE_NAME = "Migration tests";
  * @group migration
  */
 describe(SUITE_NAME, () => {
-
-  const SUFFICIENT_BALANCE_FOR_CHROMIA_VOUCHER = 40;
 
   const MIGRATE_CHAIN = "Migrate chain";
 
@@ -34,7 +33,7 @@ describe(SUITE_NAME, () => {
     logger.info(`[${SUITE_NAME}]: Running ${MIGRATE_CHAIN}`);
     const user = await createFt3User();
     await addBalance(user, SUFFICIENT_BALANCE_FOR_CHROMIA_VOUCHER);
-    await FILEHUB.purchaseVoucher(user, "CHROMIA");
+    await FILEHUB.purchaseVoucher(user, CHROMIA_PLAN);
     await FILEHUB.storeFile(user, FsFile.fromData(filename, Buffer.alloc(6)));
 
     await FILEHUB_ADMININISTRATOR.migrateFilechain(admin, config.filechainRID, config.newFilechainRID);

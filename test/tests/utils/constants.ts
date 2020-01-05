@@ -1,0 +1,7 @@
+export const SUFFICIENT_BALANCE_FOR_CHROMIA_VOUCHER = 40;
+export const SUFFICIENT_BALANCE_FOR_COMMON_VOUCHER = 10;
+
+export const CHROMIA_PLAN = "CHROMIA";
+export const COMMON_PLAN = "COMMON";
+
+export const BYTES_IN_MB = 1024 * 1024;
