@@ -1,4 +1,10 @@
-import {adminUser, FILEHUB, FILEHUB_ADMININISTRATOR, initFilehub} from "../blockchain/Postchain";
+import {
+  adminUser,
+  FILECHAIN_ADMINISTRATOR,
+  FILEHUB,
+  FILEHUB_ADMININISTRATOR,
+  initFilehub
+} from "../blockchain/Postchain";
 import {createFt3User} from "./utils/users";
 import * as config from "../blockchain/config";
 import FsFile from "../../client/lib/models/FsFile";
@@ -35,6 +41,12 @@ describe(SUITE_NAME, () => {
     await addBalance(user, SUFFICIENT_BALANCE_FOR_CHROMIA_VOUCHER);
     await FILEHUB.purchaseVoucher(user, CHROMIA_PLAN);
     await FILEHUB.storeFile(user, FsFile.fromData(filename, Buffer.alloc(6)));
+
+    logger.info("Registering filechain %s", config.newFilechainRID);
+    await FILEHUB_ADMININISTRATOR.registerFilechain(user, config.newFilechainRID);
+
+    logger.info("Disabling filechain %s", config.filechainRID);
+    await FILECHAIN_ADMINISTRATOR.disableFilechain(user, config.filechainRID);
 
     await FILEHUB_ADMININISTRATOR.migrateFilechain(admin, config.filechainRID, config.newFilechainRID);
     const file = await FILEHUB.getFileByName(user, filename);

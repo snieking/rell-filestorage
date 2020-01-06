@@ -31,10 +31,6 @@ export default class FilehubAdministrator extends AbstractAdministrator {
     return this.filehub.executeOperation(user, op("add_chromia_filechain", user.authDescriptor.id, rid));
   };
 
-  public disableFilechain(user: User, brid: string): Promise<any> {
-    return this.filehub.executeOperation(user, op("disable_chromia_filechain", user.authDescriptor.id, brid));
-  }
-
   public listFilechainApplications(): Promise<FilechainApplication[]> {
     return this.filehub.executeQuery("list_filechain_applications", {});
   }
@@ -48,11 +44,6 @@ export default class FilehubAdministrator extends AbstractAdministrator {
   }
 
   public async migrateFilechain(user: User, fromBrid: string, toBrid: string) {
-    logger.info("Registering filechain %s", toBrid);
-    await this.registerFilechain(user, toBrid);
-    logger.info("Disabling filechain %s", fromBrid);
-    await this.disableFilechain(user, fromBrid);
-
     let timestamp: number = FilehubAdministrator.FIRST_TIMESTAMP;
 
     logger.info("Starting migration to filechain: %s", toBrid);

@@ -1,4 +1,4 @@
-import {adminUser, COMMON_FILECHAIN_ADMINISTRATOR, FILEHUB_ADMININISTRATOR, initFilehub} from "../blockchain/Postchain";
+import {adminUser, FILECHAIN_ADMINISTRATOR, FILEHUB_ADMININISTRATOR, initFilehub} from "../blockchain/Postchain";
 import {createFt3User} from "./utils/users";
 import {addBalance, generateRandomString, registerAsset} from "./utils/utils";
 import {User} from "ft3-lib";
@@ -25,7 +25,7 @@ describe("Administration of a common filechain", () => {
     await addBalance(user, INSUFFICIENT_BALANCE);
 
     const brid = createBrid();
-    await COMMON_FILECHAIN_ADMINISTRATOR.sendFilechainApplication(user, brid, "localhost", "github.com")
+    await FILECHAIN_ADMINISTRATOR.sendCommonFilechainApplication(user, brid, "localhost", "github.com")
       .catch(error => expect(error).toBeDefined());
 
     const applications = await FILEHUB_ADMININISTRATOR.listFilechainApplications();
@@ -39,7 +39,7 @@ describe("Administration of a common filechain", () => {
     await addBalance(user, SUFFICIENT_BALANCE);
 
     const brid = createBrid();
-    await COMMON_FILECHAIN_ADMINISTRATOR.sendFilechainApplication(user, brid, "localhost", "github.com");
+    await FILECHAIN_ADMINISTRATOR.sendCommonFilechainApplication(user, brid, "localhost", "github.com");
     let applications = await FILEHUB_ADMININISTRATOR.listFilechainApplications();
     expect(applications.length).toEqual(1);
 
@@ -54,7 +54,7 @@ describe("Administration of a common filechain", () => {
 
     // Send application
     const brid = createBrid();
-    await COMMON_FILECHAIN_ADMINISTRATOR.sendFilechainApplication(user, brid, "localhost", "github.com");
+    await FILECHAIN_ADMINISTRATOR.sendCommonFilechainApplication(user, brid, "localhost", "github.com");
     let applications = await FILEHUB_ADMININISTRATOR.listFilechainApplications();
     expect(applications.length).toEqual(1);
 
@@ -77,7 +77,7 @@ describe("Administration of a common filechain", () => {
 
     // Create application
     const brid = createBrid();
-    await COMMON_FILECHAIN_ADMINISTRATOR.sendFilechainApplication(user, brid, "localhost", "github.com");
+    await FILECHAIN_ADMINISTRATOR.sendCommonFilechainApplication(user, brid, "localhost", "github.com");
     let applications = await FILEHUB_ADMININISTRATOR.listFilechainApplications();
     expect(applications.length).toEqual(1);
 
