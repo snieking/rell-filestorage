@@ -6,7 +6,6 @@ import ChainConnectionInfo from "ft3-lib/dist/lib/ft3/chain-connection-info";
 import {createFt3User} from "../tests/utils/users";
 import logger from "../logger";
 import FilehubAdministrator from "../../client/lib/clients/FilehubAdministrator";
-import CommonFilechainAdministrator from "../../client/lib/clients/CommonFilechainAdministrator";
 import FilechainAdministrator from "../../client/lib/clients/FilechainAdministrator";
 
 // Filehub chain
