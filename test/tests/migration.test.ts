@@ -48,7 +48,7 @@ describe(SUITE_NAME, () => {
     logger.info("Disabling filechain %s", config.filechainRID);
     await FILECHAIN_ADMINISTRATOR.disableFilechain(admin, config.filechainRID);
 
-    await FILEHUB_ADMININISTRATOR.migrateFilechain(admin, config.filechainRID, config.newFilechainRID);
+    await FILECHAIN_ADMINISTRATOR.migrateFilechain(admin, config.filechainRID);
     const file = await FILEHUB.getFileByName(user, filename);
     expect(file.readFullData().length).toEqual(6);
   });

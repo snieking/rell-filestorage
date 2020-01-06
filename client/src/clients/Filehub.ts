@@ -84,9 +84,14 @@ export default class Filehub {
   /**
    * Store chunk in the provided BRID.
    */
-  public async copyChunkDataToOtherBrid(user: User, chunkHash: ChunkHashFilechain, brid: string) {
+  public async copyChunkDataToOtherBrid(user: User, chunkHash: ChunkHashFilechain) {
     const oldFilechain = this.initFilechainClient(chunkHash.brid);
-    const newFilechain = this.initFilechainClient(brid);
+
+    const newBrid: string = await this.executeQuery("get_active_filechain_for_hash_in_disabled_filechain", {
+      hash: chunkHash.hash, brid: chunkHash.brid
+    });
+
+    const newFilechain = this.initFilechainClient(newBrid);
 
     const data = await oldFilechain.getChunkDataByHash(chunkHash.hash.toString("hex"));
     return this.persistChunkDataInFilechain(user, newFilechain, Buffer.from(data, "hex"));

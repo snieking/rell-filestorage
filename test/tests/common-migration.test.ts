@@ -72,7 +72,7 @@ describe(SUITE_NAME, () => {
     await FILEHUB_ADMININISTRATOR.approveCommonFilechainApplication(admin, config.commonMigrationFilechainRID);
     await FILECHAIN_ADMINISTRATOR.disableFilechain(commonFilechainOwner, config.commonFilechainRID);
 
-    await FILEHUB_ADMININISTRATOR.migrateFilechain(commonFilechainOwner, config.commonFilechainRID, config.commonMigrationFilechainRID);
+    await FILECHAIN_ADMINISTRATOR.migrateFilechain(commonFilechainOwner, config.commonFilechainRID);
     const file = await FILEHUB.getFileByName(user, filename);
     expect(file.readFullData().length).toEqual(6);
   });
