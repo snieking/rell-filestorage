@@ -47,6 +47,7 @@ describe(SUITE_NAME, () => {
     await FILEHUB.purchaseVoucher(user, COMMON_PLAN);
     await FILEHUB.storeFile(user, FsFile.fromData(filename, Buffer.alloc(6)));
 
+    await addBalance(commonFilechainOwner, 100);
     await FILECHAIN_ADMINISTRATOR.sendCommonFilechainApplication(
       commonFilechainOwner,
       config.commonMigrationFilechainRID,
