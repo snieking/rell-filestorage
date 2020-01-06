@@ -38,6 +38,20 @@ describe(SUITE_NAME, () => {
     commonFilechainOwner = await createFt3User(config.commonFilechainOwnerPrivateKey);
     admin = await adminUser();
     await registerAsset(commonFilechainOwner);
+
+    await addBalance(commonFilechainOwner, 100);
+    try {
+      await FILECHAIN_ADMINISTRATOR.sendCommonFilechainApplication(
+        commonFilechainOwner,
+        config.commonFilechainRID,
+        config.commonFilechainNodeApiUrl,
+        "github.com"
+      );
+
+      await FILEHUB_ADMININISTRATOR.approveCommonFilechainApplication(admin, config.commonFilechainRID);
+    } catch (error) {
+      logger.info("Error caught, perhaps filechain already was added?");
+    }
   });
 
   it(MIGRATE_CHAIN, async () => {
@@ -51,7 +65,7 @@ describe(SUITE_NAME, () => {
     await FILECHAIN_ADMINISTRATOR.sendCommonFilechainApplication(
       commonFilechainOwner,
       config.commonMigrationFilechainRID,
-      config.commonFilechainNodeApiUrl,
+      config.commonMigrationFilechainNodeApiUrl,
       "github.com"
     );
 
