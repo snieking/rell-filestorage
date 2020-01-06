@@ -3,7 +3,7 @@
         <config src="config/node-config.properties" add-signers="true" />
     </nodes>
     <chains>
-    	<chain name="filechain" iid="4">
+    	<chain name="filechain" iid="5">
     		<config height="0">
     			<app module="" />
                 <gtv path="gtx/filechain-id">
