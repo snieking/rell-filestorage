@@ -27,7 +27,12 @@ operation allocate_chunk(descriptor_id: byte_array, name, hash: byte_array, chun
 	
 	val file = file@{ name, account };
 	
-	var chunk = chunk@?{ hash };
+	val matching_chunks = chunk@*{ hash };
+	
+	var chunk = (chunk, active_filechain)@?{
+		chunk.hash == hash,
+		chunk.filechain == active_filechain.filechain
+	} ( chunk ) limit 1;
 	
 	if (chunk == null) {
 		val current_timestamp = op_context.last_block_time;
@@ -38,7 +43,7 @@ operation allocate_chunk(descriptor_id: byte_array, name, hash: byte_array, chun
 	
 	create file_chunk(file@{ name, account }, chunk, idx, timestamp = op_context.last_block_time);
 	
-	val stored_size = chunk_size@?{ .chunk == chunk };
+	val stored_size = chunk_size@?{ .chunk == chunk } limit 1;
 	
 	if (stored_size != null) {
 		require(stored_size.size == chunk_size, "Chunk size doesn't match provided file_size");
