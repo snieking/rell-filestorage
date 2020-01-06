@@ -43,10 +43,10 @@ describe(SUITE_NAME, () => {
     await FILEHUB.storeFile(user, FsFile.fromData(filename, Buffer.alloc(6)));
 
     logger.info("Registering filechain %s", config.newFilechainRID);
-    await FILEHUB_ADMININISTRATOR.registerFilechain(user, config.newFilechainRID);
+    await FILEHUB_ADMININISTRATOR.registerFilechain(admin, config.newFilechainRID);
 
     logger.info("Disabling filechain %s", config.filechainRID);
-    await FILECHAIN_ADMINISTRATOR.disableFilechain(user, config.filechainRID);
+    await FILECHAIN_ADMINISTRATOR.disableFilechain(admin, config.filechainRID);
 
     await FILEHUB_ADMININISTRATOR.migrateFilechain(admin, config.filechainRID, config.newFilechainRID);
     const file = await FILEHUB.getFileByName(user, filename);
