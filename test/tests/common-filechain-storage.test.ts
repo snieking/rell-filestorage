@@ -8,6 +8,7 @@ import {
 } from "./utils/constants";
 import FsFile from "../../client/lib/models/FsFile";
 import * as path from "path";
+import * as config from "../blockchain/config";
 
 jest.setTimeout(60000);
 
@@ -21,7 +22,7 @@ describe("Store files in common filechain", () => {
   beforeAll(async () => {
     await initFilehub();
 
-    user = await createFt3User();
+    user = await createFt3User(config.commonFilechainOwnerPrivateKey);
     await registerAsset(user);
     await addBalance(user, SUFFICIENT_BALANCE_FOR_COMMON_VOUCHER);
     await FILEHUB.purchaseVoucher(user, COMMON_PLAN);

@@ -9,7 +9,9 @@
     "test-common-ci": "jest --setupFiles dotenv/config --group=common-ci",
     "silent-test-common-ci": "jest --setupFiles dotenv/config --silent --group=common-ci",
     "test-migration": "jest --setupFiles dotenv/config --group=migration",
-    "silent-test-migration": "jest --setupFiles dotenv/config --silent --group=migration"
+    "silent-test-migration": "jest --setupFiles dotenv/config --silent --group=migration",
+    "test-common-migration": "jest --setupFiles dotenv/config --group=common-migration",
+    "silent-test-common-migration": "jest --setupFiles dotenv/config --silent --group=common-migration"
   },
   "keywords": [],
   "author": "",
