@@ -21,8 +21,6 @@ export default class Filehub {
   private readonly blockchain: Promise<Blockchain>;
   private readonly chains: ChainConnectionInfo[];
 
-  private assetId?: string;
-
   public constructor(nodeApiUrl: string, brid: string, chainConnectionInfo: ChainConnectionInfo[]) {
     this.brid = brid;
     this.nodeApiUrl = nodeApiUrl;
@@ -244,11 +242,10 @@ export default class Filehub {
   }
 
   public async getBalance(user: User): Promise<number> {
-    const asset: Asset = await this.executeQuery("ft3.get_asset_by_name", { name: "CHR" });
+    const asset: Asset[] = await this.executeQuery("ft3.get_asset_by_name", { name: "CHR" });
     logger.info("*** ASSETID: %O", asset);
-    this.assetId = asset.id;
 
-    return this.executeQuery("ft3.get_asset_balance", { account_id: user.authDescriptor.id, asset_id: asset.id })
+    return this.executeQuery("ft3.get_asset_balance", { account_id: user.authDescriptor.id, asset_id: asset[0].id })
       .then((assetBalance: AssetBalance) => assetBalance.amount);
   }
 
