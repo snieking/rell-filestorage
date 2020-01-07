@@ -247,9 +247,10 @@ export default class Filehub {
     if (!this.assetId) {
       this.assetId = await this.executeQuery("ft3.get_asset_by_name", { name: "CHR" })
         .then((asset: Asset) => asset.id);
+      console.log("*** ASSETID: ", this.assetId);
     }
 
-    return this.executeQuery("ft3.get_asset_balance", { account_id: user.authDescriptor.id, asset_id: this.assetId })
+    return this.executeQuery("ft3.get_asset_balance", { account_id: user.authDescriptor.id, asset_id: !this.assetId })
       .then((assetBalance: AssetBalance) => assetBalance.amount);
   }
 
