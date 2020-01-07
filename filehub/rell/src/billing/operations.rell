@@ -1,10 +1,10 @@
 import ft3_acc: lib.ft3.account;
 import ft3_core: lib.ft3.core;
 import util;
+import admin;
 
 operation create_voucher(descriptor_id: byte_array, plan_to_use: text) {
 	val account = util.get_account_by_descriptor_id(descriptor_id);
-	ft3_acc.require_auth(account, descriptor_id, ["A"]);
 	
 	val selected_plan: plan = text_to_plan(plan_to_use);
 	val current_timestamp = op_context.last_block_time;
@@ -22,29 +22,43 @@ operation create_voucher(descriptor_id: byte_array, plan_to_use: text) {
 	val month_in_millis = util._get_period_in_millis("month");
 	
 	if (active_invoice == null) {
-		_create_voucher(account, selected_plan, current_timestamp + month_in_millis);
+		_create_voucher(descriptor_id, account, selected_plan, current_timestamp + month_in_millis);
 	} else {
 		val active_invoice_expires_in = active_invoice.timestamp - current_timestamp;
 		val day_in_millis = util._get_period_in_millis("day");
 		
 		require(active_invoice_expires_in <= day_in_millis, "[FH-00]: Not eligible for a new voucher yet");
-		_create_voucher(account, selected_plan, current_timestamp + month_in_millis + active_invoice_expires_in);
+		_create_voucher(descriptor_id, account, selected_plan, current_timestamp + month_in_millis + active_invoice_expires_in);
 	}
 }
 
-function _create_voucher(account: ft3_acc.account, plan, valid_until: integer) {
+function _create_voucher(descriptor_id: byte_array, account: ft3_acc.account, plan, valid_until: integer) {
 	val asset = ft3_core.asset@{ .id == ("CHR", chain_context.blockchain_rid).hash() };
 	val token_cost = _get_voucher_price(plan);
 	
-	charge_chromia_tokens(account, token_cost);
+	charge_chromia_tokens(descriptor_id, account, token_cost);
 	create voucher(account, timestamp = valid_until, asset, amount = token_cost, plan);
 }
 
-function charge_chromia_tokens(account: ft3_acc.account, amount: integer) {
+function charge_chromia_tokens(descriptor_id: byte_array, account: ft3_acc.account, amount: integer) {
+	ft3_acc.require_auth(account, descriptor_id, ["T"]);
+	
 	val asset = ft3_core.asset@{ .id == ("CHR", chain_context.blockchain_rid).hash() };
-	ft3_core.deduct_balance(account, asset, amount);
+	val admin = admin.admin@{} ( .account );
+	
+	val xfer_input = ft3_core.xfer_input(account_id = account.id, asset_id = asset.id, auth_descriptor_id = descriptor_id, amount, map<text, gtv>());
+	val xfer_output = ft3_core.xfer_output(account_id = admin.id, asset_id = asset.id, amount, map<text, gtv>());
+	
+	ft3_core._transfer([xfer_input], [xfer_output]);	
 }
 
 function payout_chromia_tokens(account: ft3_acc.account, amount: integer) {
-	// TODO
+	val asset = ft3_core.asset@{ .id == ("CHR", chain_context.blockchain_rid).hash() };
+	val admin = admin.admin@{} ( .account );
+	val admin_auth_descriptor = ft3_acc.account_auth_descriptor@{ admin, "T" };
+	
+	val xfer_input = ft3_core.xfer_input(account_id = admin.id, asset_id = asset.id, auth_descriptor_id = admin_auth_descriptor.descriptor_id, amount, map<text, gtv>());
+	val xfer_output = ft3_core.xfer_output(account_id = account.id, asset_id = asset.id, amount, map<text, gtv>());
+	
+	ft3_core._transfer([xfer_input], [xfer_output]);
 }
