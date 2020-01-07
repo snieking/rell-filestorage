@@ -12,6 +12,7 @@ import {ChunkHashFilechain, ChunkHashIndex, ChunkIndex} from "../models/Chunk";
 import * as fs from "fs";
 import {FileStoringOptions} from "../models/FileStoringOptions";
 import logger from "../logger";
+import {Asset, AssetBalance} from "../models/Asset";
 
 export default class Filehub {
 
@@ -19,6 +20,8 @@ export default class Filehub {
   private readonly nodeApiUrl: string;
   private readonly blockchain: Promise<Blockchain>;
   private readonly chains: ChainConnectionInfo[];
+
+  private assetId?: string;
 
   public constructor(nodeApiUrl: string, brid: string, chainConnectionInfo: ChainConnectionInfo[]) {
     this.brid = brid;
@@ -238,6 +241,16 @@ export default class Filehub {
     return this.executeQuery("get_allocated_bytes", {
       descriptor_id: user.authDescriptor.hash().toString("hex")
     });
+  }
+
+  public async getBalance(user: User): Promise<number> {
+    if (!this.assetId) {
+      this.assetId = await this.executeQuery("get_asset_by_name", { name: "CHR" })
+        .then((asset: Asset) => asset.id);
+    }
+
+    return this.executeQuery("get_asset_balance", { account_id: user.authDescriptor.id, asset_id: this.assetId })
+      .then((assetBalance: AssetBalance) => assetBalance.amount);
   }
 
   private storeChunk(user: User, filechain: Filechain, chunkIndex: ChunkIndex, name: string, options?: FileStoringOptions) {

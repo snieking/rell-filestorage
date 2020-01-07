@@ -38,4 +38,8 @@ export default class FilehubAdministrator extends AbstractAdministrator {
     return this.filehub.executeOperation(user, op("reject_filechain_application", user.authDescriptor.id, brid));
   }
 
+  public handlePayouts(user: User) {
+    return this.filehub.executeOperation(user, op("handle_payouts", user.authDescriptor.id));
+  }
+
 }

@@ -6,7 +6,7 @@ import FsFile from "../../../client/lib/models/FsFile";
 
 const TOKEN_NAME = "CHR";
 
-let assetId: Buffer = null;
+export let assetId: Buffer = null;
 
 export const registerAsset = async (user: User) => {
   if (assetId == null) {

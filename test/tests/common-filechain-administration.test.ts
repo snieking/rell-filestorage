@@ -1,4 +1,10 @@
-import {adminUser, FILECHAIN_ADMINISTRATOR, FILEHUB_ADMININISTRATOR, initFilehub} from "../blockchain/Postchain";
+import {
+  adminUser,
+  FILECHAIN_ADMINISTRATOR,
+  FILEHUB,
+  FILEHUB_ADMININISTRATOR,
+  initFilehub
+} from "../blockchain/Postchain";
 import {createFt3User} from "./utils/users";
 import {addBalance, generateRandomString, registerAsset} from "./utils/utils";
 import {User} from "ft3-lib";
@@ -46,6 +52,12 @@ describe("Administration of a common filechain", () => {
     await FILEHUB_ADMININISTRATOR.rejectCommonFilechainApplication(admin, brid);
     applications = await FILEHUB_ADMININISTRATOR.listFilechainApplications();
     expect(applications.length).toEqual(0);
+
+    const balancePrior = await FILEHUB.getBalance(user);
+    await FILEHUB_ADMININISTRATOR.handlePayouts(admin);
+    const balanceAfter = await FILEHUB.getBalance(user);
+
+    expect(balanceAfter).toBeGreaterThan(balancePrior);
   });
 
   it("Only admin can approve application", async () => {
