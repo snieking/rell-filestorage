@@ -245,8 +245,10 @@ export default class Filehub {
     const asset: Asset[] = await this.executeQuery("ft3.get_asset_by_name", { name: "CHR" });
     logger.info("*** ASSETID: %O", asset);
 
-    return this.executeQuery("ft3.get_asset_balance", { account_id: user.authDescriptor.id, asset_id: asset[0].id })
-      .then((assetBalance: AssetBalance) => assetBalance.amount);
+    return this.executeQuery("ft3.get_asset_balance", {
+      account_id: user.authDescriptor.hash().toString("hex"),
+      asset_id: asset[0].id.toString("hex")
+    }).then((assetBalance: AssetBalance) => assetBalance.amount);
   }
 
   private storeChunk(user: User, filechain: Filechain, chunkIndex: ChunkIndex, name: string, options?: FileStoringOptions) {

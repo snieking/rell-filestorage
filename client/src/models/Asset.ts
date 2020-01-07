@@ -1,12 +1,12 @@
 export interface Asset {
-  id: string;
+  id: Buffer;
   name: string;
-  issuing_chain_rid: string;
+  issuing_chain_rid: Buffer;
 }
 
 export interface AssetBalance {
-  id: string;
+  id: Buffer;
   name: string;
   amount: number;
-  chain_id: string;
+  chain_id: Buffer;
 }
