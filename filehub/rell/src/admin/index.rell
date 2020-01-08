@@ -10,8 +10,3 @@ entity filechain_application {
 	node_url: text;
 	source_code: text;
 }
-
-entity payout {
-	account_id: byte_array;
-	amount: integer;
-}

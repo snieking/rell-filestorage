@@ -78,12 +78,12 @@ jobs:
       - name: Run tests
         run: npm run silent-test-ci
         working-directory: test
-        continue-on-error: true
+        continue-on-error: false
 
       - name: Run common filechains tests
         run: npm run silent-test-common-ci
         working-directory: test
-        continue-on-error: true
+        continue-on-error: false
 
       - name: Output Filehub log
         run: cat filehub.log

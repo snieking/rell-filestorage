@@ -49,12 +49,12 @@ describe("Administration of a common filechain", () => {
     let applications = await FILEHUB_ADMININISTRATOR.listFilechainApplications();
     expect(applications.length).toEqual(1);
 
+    const balancePrior = await FILEHUB.getBalance(user);
+
     await FILEHUB_ADMININISTRATOR.rejectCommonFilechainApplication(admin, brid);
     applications = await FILEHUB_ADMININISTRATOR.listFilechainApplications();
     expect(applications.length).toEqual(0);
 
-    const balancePrior = await FILEHUB.getBalance(user);
-    await FILEHUB_ADMININISTRATOR.handlePayouts(admin);
     const balanceAfter = await FILEHUB.getBalance(user);
 
     expect(balanceAfter).toBeGreaterThan(balancePrior);

@@ -27,7 +27,7 @@ operation reject_filechain_application(descriptor_id: byte_array, brid: byte_arr
     require(admin@?{ account } != null, "User not an admin");
     
     val application = filechain_application@{ brid };
-    create payout(application.account.id, 100);
+    billing.payout_chromia_tokens(application.account, 100);
     delete application;
 }
 
@@ -67,21 +67,5 @@ operation register_admin(descriptor_id: byte_array) {
     if (admin@?{} == null) {
         val account = util.get_account_by_descriptor_id(descriptor_id);
         create admin(account);
-    }
-}
-
-operation handle_payouts(descriptor_id: byte_array) {
-	val account = util.get_account_by_descriptor_id(descriptor_id);
-    require(admin@?{ account } != null, "User not an admin");
-    ft3_acc.require_auth(account, descriptor_id, ["T"]);
-    
-	val asset = ft3_core.asset@{ .id == ("CHR", chain_context.blockchain_rid).hash() };
-    
-    val payouts = payout@*{};
-    for (p in payouts) {
-    	val xfer_input = ft3_core.xfer_input(account_id = account.id, asset_id = asset.id, auth_descriptor_id = descriptor_id, p.amount, map<text, gtv>());
-		val xfer_output = ft3_core.xfer_output(account_id = p.account_id, asset_id = asset.id, p.amount, map<text, gtv>());
-	
-		ft3_core._transfer([xfer_input], [xfer_output]);
     }
 }

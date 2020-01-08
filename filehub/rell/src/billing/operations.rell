@@ -51,3 +51,20 @@ function charge_chromia_tokens(descriptor_id: byte_array, account: ft3_acc.accou
 	
 	ft3_core._transfer([xfer_input], [xfer_output]);	
 }
+
+function payout_chromia_tokens(receiver: ft3_acc.account, amount: integer) {
+	val asset = ft3_core.asset@{ .id == ("CHR", chain_context.blockchain_rid).hash() };
+	val admin = admin.admin@{} ( .account );
+	
+	val auth_descriptors = (ft3_acc.account_auth_descriptor)@*{ admin, "S" };
+	
+	for (descriptor in auth_descriptors) {
+		if (ft3_acc.check_single_sig_auth(descriptor.args, ft3_acc.auth_descriptor_participant@*{ descriptor } ( .id ), ["T"])) {
+			val xfer_input = ft3_core.xfer_input(account_id = admin.id, asset_id = asset.id, auth_descriptor_id = descriptor.descriptor_id, amount, map<text, gtv>());
+			val xfer_output = ft3_core.xfer_output(account_id = receiver.id, asset_id = asset.id, amount, map<text, gtv>());
+	
+			ft3_core._transfer([xfer_input], [xfer_output]);
+			break;
+		}
+	}
+}

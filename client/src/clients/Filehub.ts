@@ -243,7 +243,6 @@ export default class Filehub {
 
   public async getBalance(user: User): Promise<number> {
     const asset: Asset[] = await this.executeQuery("ft3.get_asset_by_name", { name: "CHR" });
-    logger.info("*** ASSETID: %O", asset);
 
     return this.executeQuery("ft3.get_asset_balance", {
       account_id: user.authDescriptor.hash().toString("hex"),
