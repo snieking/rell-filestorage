@@ -2,6 +2,7 @@ import ft3_acc: lib.ft3.account;
 import ft3_core: lib.ft3.core;
 import util;
 import admin;
+import storage;
 
 operation create_voucher(descriptor_id: byte_array, plan_to_use: text) {
 	val account = util.get_account_by_descriptor_id(descriptor_id);
@@ -30,6 +31,66 @@ operation create_voucher(descriptor_id: byte_array, plan_to_use: text) {
 		require(active_invoice_expires_in <= day_in_millis, "[FH-00]: Not eligible for a new voucher yet");
 		_create_voucher(descriptor_id, account, selected_plan, current_timestamp + month_in_millis + active_invoice_expires_in);
 	}
+}
+
+operation request_payment(descriptor_id: byte_array) {
+	val account = util.get_account_by_descriptor_id(descriptor_id);
+	
+	var payment_sent = false;
+	for (chain in storage.active_filechain@*{ account }) {
+		val sent = request_payment_for_filechain(account, chain.filechain, chain.plan, op_context.last_block_time);
+		if (sent) {
+			payment_sent = true;
+		}
+	}
+	
+	for (chain in storage.disabled_filechain@*{ account }) {
+		val sent = request_payment_for_filechain(account, chain.filechain, chain.plan, op_context.last_block_time);
+		if (sent) {
+			payment_sent = true;
+		}
+	}
+	
+	require(payment_sent, "No payment could be completed, check back another time");
+}
+
+function request_payment_for_filechain(ft3_acc.account, storage.filechain, plan, timestamp): boolean {
+	val one_month_ago = timestamp - util._get_period_in_millis("month");
+	val recent_payment = filechain_payment_record@?{ filechain, .timestamp > one_month_ago };
+	
+	if (recent_payment == null) {
+		var request_payment_since = filechain_payment_record@? { filechain } (
+			@sort_desc .timestamp
+		) limit 1;
+		
+		if (request_payment_since == null) {
+			request_payment_since = 0;
+		}
+		
+		val stored_chunk_sizes = (storage.chunk_size, storage.file_chunk)@* {
+			chunk_size.chunk.filechain == filechain,
+			chunk_size.chunk == file_chunk.chunk,
+			file_chunk.timestamp > request_payment_since
+		} ( .size );
+		
+		var stored_bytes = 0;
+		for (size in stored_chunk_sizes) {
+			stored_bytes += size;
+		}
+		
+		val allowed_bytes_per_voucher = util._get_allowed_storage_bytes(plan);
+		val voucher_cost = _get_voucher_price(plan);
+		
+		val factor = stored_bytes / allowed_bytes_per_voucher;
+		val tokens_to_receive = factor * voucher_cost;
+		
+		create filechain_payment_record(filechain, timestamp);
+		payout_chromia_tokens(account, tokens_to_receive);
+		
+		return true;
+	}
+	
+	return false;
 }
 
 function _create_voucher(descriptor_id: byte_array, account: ft3_acc.account, plan, valid_until: integer) {

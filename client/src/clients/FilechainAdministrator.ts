@@ -23,6 +23,10 @@ export default class FilechainAdministrator extends AbstractAdministrator {
     ));
   }
 
+  public requestPayment(user: User) {
+    return this.filehub.executeOperation(user, op("request_payment", user.authDescriptor.id));
+  }
+
   public async migrateFilechain(user: User, fromBrid: string) {
     let timestamp: number = FilechainAdministrator.FIRST_TIMESTAMP;
 

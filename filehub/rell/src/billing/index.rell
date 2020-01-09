@@ -1,11 +1,16 @@
 import ft3_acc: lib.ft3.account;
 import ft3_core: lib.ft3.core;
+import storage;
 
 entity voucher {
 	key account: ft3_acc.account, timestamp;
 	plan;
 	ft3_core.asset;
 	amount: integer;
+}
+
+entity filechain_payment_record {
+	key storage.filechain, timestamp;
 }
 
 enum plan {
