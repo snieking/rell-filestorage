@@ -23,7 +23,7 @@ export default class Filechain {
     tx.addOperation("add_chunk_data", data);
     tx.sign(user.keyPair.privKey, user.keyPair.pubKey);
     return tx.postAndWaitConfirmation().catch((error: Error) => {
-      return this.restClient.query("file_hash_exists", { hash: hash })
+      return this.restClient.query("chunk_hash_exists", { hash: hash })
         .then((exists: boolean) => {
           if (!exists) {
             if (error.message.includes("500")) {
