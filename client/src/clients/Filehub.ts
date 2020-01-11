@@ -119,7 +119,7 @@ export default class Filehub {
     const bc = await this.blockchain;
     return await bc.transactionBuilder()
       .add(nop())
-      .add(op("create_voucher", user.authDescriptor.id, plan))
+      .add(op("purchase_voucher", user.authDescriptor.id, plan))
       .buildAndSign(user)
       .post();
   }

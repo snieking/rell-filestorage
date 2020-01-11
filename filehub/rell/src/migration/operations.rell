@@ -1,10 +1,47 @@
 import storage;
+import util;
 
-query get_active_filechain_for_hash_in_disabled_filechain(hash: byte_array, brid: byte_array) {
-	val plan = storage.disabled_filechain@{ .filechain.brid == brid } ( .plan );
-	return (storage.chunk, storage.active_filechain)@{ 
-		chunk.hash == hash,
-		chunk.filechain == active_filechain.filechain,
-		active_filechain.plan == plan
-	} ( chunk.filechain.brid ) limit 1;
+operation migrate_file(descriptor_id: byte_array, name, timestamp, from_chain: byte_array) {
+	val account = util.get_account_by_descriptor_id(descriptor_id);
+	
+	val disabled_filechain = storage.disabled_filechain@{ .filechain.brid == from_chain, account };	
+	
+	val old_files = storage.file@*{ name, timestamp, disabled_filechain.filechain };
+	
+	log("Old files for name: ", name, old_files);
+	
+	val filechain = storage.chain_selector(disabled_filechain.plan);
+	
+	for (old_file in old_files) {
+		val file_chunks = storage.file_chunk@*{ old_file };
+		log("File chunks for file", old_file);
+		
+		val new_file = create storage.file(old_file.name, old_file.account, filechain, op_context.last_block_time, old_file.plan);
+		
+		for (file_chunk in file_chunks) {
+			log("Creating chunk with hash: ", file_chunk.chunk.hash, " in filechain: ", filechain.brid, " for filename: ", name);
+			
+			var chunk = storage.chunk@?{ file_chunk.chunk.hash, filechain };
+			
+			if (chunk == null) {
+				chunk = create storage.chunk(file_chunk.chunk.hash, filechain);
+				val old_chunk_size = storage.chunk_size@{ file_chunk.chunk };
+				create storage.chunk_size(chunk, old_chunk_size.size);
+			}
+			
+			create storage.file_chunk(new_file, idx = file_chunk.idx, chunk, timestamp = op_context.last_block_time);
+		}
+	}
+}
+
+operation mark_file_migrated(descriptor_id: byte_array, name, timestamp, from_chain: byte_array) {
+	val account = util.get_account_by_descriptor_id(descriptor_id);
+	val disabled_filechain = storage.disabled_filechain@{ .filechain.brid == from_chain, account };	
+	
+	val files = storage.file@*{ name, timestamp, disabled_filechain.filechain };
+	
+	for (file in files) {
+		delete storage.file_chunk@* { file };
+		delete file;
+	}
 }

@@ -64,8 +64,9 @@ operation disable_filechain(descriptor_id: byte_array, rid: byte_array) {
 }
 
 operation register_admin(descriptor_id: byte_array) {
-    if (admin@?{} == null) {
-        val account = util.get_account_by_descriptor_id(descriptor_id);
-        create admin(account);
-    }
+	require(admin@?{} == null, "Admin already exists");
+    
+    val account = util.get_account_by_descriptor_id(descriptor_id);
+    create admin(account);
+    
 }

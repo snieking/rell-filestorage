@@ -52,60 +52,6 @@ operation allocate_chunk(descriptor_id: byte_array, name, hash: byte_array, chun
 	}
 }
 
-operation deallocate_file(descriptor_id: byte_array, name) {
-	val account = util.get_account_by_descriptor_id(descriptor_id);
-	ft3_acc.require_auth(account, descriptor_id, ["A"]);
-	
-	val file = file@{ name, account };
-	delete file_chunk@*{ file };
-	delete file;
-}
-
-operation migrate_file(descriptor_id: byte_array, name, timestamp, from_chain: byte_array) {
-	val account = util.get_account_by_descriptor_id(descriptor_id);
-	
-	val disabled_filechain = disabled_filechain@{ .filechain.brid == from_chain, account };	
-	
-	val old_files = file@*{ name, timestamp, disabled_filechain.filechain };
-	
-	log("Old files for name: ", name, old_files);
-	
-	val filechain = chain_selector(disabled_filechain.plan);
-	
-	for (old_file in old_files) {
-		val file_chunks = file_chunk@*{ old_file };
-		log("File chunks for file", old_file);
-		
-		val new_file = create file(old_file.name, old_file.account, filechain, op_context.last_block_time, old_file.plan);
-		
-		for (file_chunk in file_chunks) {
-			log("Creating chunk with hash: ", file_chunk.chunk.hash, " in filechain: ", filechain.brid, " for filename: ", name);
-			
-			var chunk = chunk@?{ file_chunk.chunk.hash, filechain };
-			
-			if (chunk == null) {
-				chunk = create chunk(file_chunk.chunk.hash, filechain);
-				val old_chunk_size = chunk_size@{ file_chunk.chunk };
-				create chunk_size(chunk, old_chunk_size.size);
-			}
-			
-			create file_chunk(new_file, idx = file_chunk.idx, chunk, timestamp = op_context.last_block_time);
-		}
-	}
-}
-
-operation mark_file_migrated(descriptor_id: byte_array, name, timestamp, from_chain: byte_array) {
-	val account = util.get_account_by_descriptor_id(descriptor_id);
-	val disabled_filechain = disabled_filechain@{ .filechain.brid == from_chain, account };	
-	
-	val files = file@*{ name, timestamp, disabled_filechain.filechain };
-	
-	for (file in files) {
-		delete file_chunk@* { file };
-		delete file;
-	}
-}
-
 function chain_selector(billing.plan): filechain {
 	log("Selecting chain for plan: ", plan);
 	return active_filechain@{ plan } ( .filechain, @omit @sort_desc .timestamp ) limit 1;

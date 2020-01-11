@@ -4,7 +4,7 @@ import util;
 import admin;
 import storage;
 
-operation create_voucher(descriptor_id: byte_array, plan_to_use: text) {
+operation purchase_voucher(descriptor_id: byte_array, plan_to_use: text) {
 	val account = util.get_account_by_descriptor_id(descriptor_id);
 	
 	val selected_plan: plan = text_to_plan(plan_to_use);

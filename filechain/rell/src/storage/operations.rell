@@ -10,17 +10,3 @@ operation add_chunk_data(data: byte_array) {
    require(stored_file == null, "[FC-00]: Chunk already exists");
    create stored_file(hash, op_context.transaction);
 }
-
-operation remove_chunk_data(data: byte_array, pubkey) {
-	val hash = data.sha256();
-	remove_by_hash(hash, pubkey);
-}
-
-operation remove_chunk_data_by_hash(hash: byte_array, pubkey) {
-	remove_by_hash(hash, pubkey);
-}
-
-function remove_by_hash(hash: byte_array, pubkey) {
-    val chunk = chunk@{ hash, pubkey };
-    delete stored_file@{ hash };
-}

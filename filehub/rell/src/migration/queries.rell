@@ -1,0 +1,10 @@
+import storage;
+
+query get_active_filechain_for_hash_in_disabled_filechain(hash: byte_array, brid: byte_array) {
+	val plan = storage.disabled_filechain@{ .filechain.brid == brid } ( .plan );
+	return (storage.chunk, storage.active_filechain)@{ 
+		chunk.hash == hash,
+		chunk.filechain == active_filechain.filechain,
+		active_filechain.plan == plan
+	} ( chunk.filechain.brid ) limit 1;
+}
