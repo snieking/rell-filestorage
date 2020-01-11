@@ -40,7 +40,7 @@ export default class Filechain {
 
   public getChunkDataByHash(hash: string): Promise<string> {
     logger.debug("Retrieving chunk data by hash %s from filechain: %s", hash, this.brid);
-    return this.restClient.query("get_file", { hash: hash });
+    return this.restClient.query("get_chunk", { hash: hash });
   }
 
 }

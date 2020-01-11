@@ -1,4 +1,5 @@
 import storage;
+import billing;
 
 query get_active_filechain_for_hash_in_disabled_filechain(hash: byte_array, brid: byte_array) {
 	val plan = storage.disabled_filechain@{ .filechain.brid == brid } ( .plan );
@@ -7,4 +8,36 @@ query get_active_filechain_for_hash_in_disabled_filechain(hash: byte_array, brid
 		chunk.filechain == active_filechain.filechain,
 		active_filechain.plan == plan
 	} ( chunk.filechain.brid ) limit 1;
+}
+
+query get_files_belonging_to_active_voucher_in_brid_after_timestamp(
+	brid: byte_array, 
+	stored_at: timestamp, 
+	current_time: timestamp, 
+	page_size: integer
+) {
+	return (storage.file, billing.voucher)@*{
+		voucher.timestamp > current_time,
+		file.plan == voucher.plan,
+		file.timestamp >= stored_at,
+		file.filechain.brid == brid,
+		file.account == voucher.account
+	} (
+		name = file.name,
+		timestamp = file.timestamp
+	) limit page_size;
+}
+
+query get_all_migratable_chunks_by_file(brid: byte_array, name, timestamp, current_time: timestamp) {
+	return (storage.file_chunk, billing.voucher, storage.disabled_filechain)@*{
+		disabled_filechain.filechain.brid == brid,
+		file_chunk.file.filechain == disabled_filechain.filechain,
+		file_chunk.file.name == name,
+		file_chunk.file.timestamp == timestamp,
+		voucher.timestamp > current_time,
+		file_chunk.file.account == voucher.account
+	} (
+		hash = file_chunk.chunk.hash,
+		brid = file_chunk.chunk.filechain.brid
+	);
 }
