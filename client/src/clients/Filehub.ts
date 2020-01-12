@@ -58,7 +58,20 @@ export default class Filehub {
   }
 
   /**
-   * Stores a file. Contacts the filehub and allocates a chunk, and then persists the data in the correct filechain.
+   * Purchases a new voucher if possible.
+   * It is only possible to buy a new voucher when there is less than a day left on your current one.
+   */
+  public async purchaseVoucher(user: User, plan: string): Promise<any> {
+    const bc = await this.blockchain;
+    return await bc.transactionBuilder()
+      .add(nop())
+      .add(op("purchase_voucher", user.authDescriptor.id, plan))
+      .buildAndSign(user)
+      .post();
+  }
+
+  /**
+   * Stores a file. Contacts the Filehub and allocates a chunk, and then persists the data in the correct filechain.
    *
    * @param passphrase optional options for storing the file.
    */
@@ -80,48 +93,6 @@ export default class Filehub {
     const brid = await this.getFileLocation(user, fileName);
 
     return await this.storeChunks(user, file, brid.toString("hex"), fileName, options);
-  }
-
-  /**
-   * Store chunk in the provided BRID.
-   */
-  public async copyChunkDataToOtherBrid(user: User, chunkHash: ChunkHashFilechain) {
-    const oldFilechain = this.initFilechainClient(chunkHash.brid);
-
-    const newBrid: string = await this.executeQuery("get_active_filechain_for_hash_in_disabled_filechain", {
-      hash: chunkHash.hash, brid: chunkHash.brid
-    });
-
-    const newFilechain = this.initFilechainClient(newBrid);
-
-    const data = await oldFilechain.getChunkDataByHash(chunkHash.hash.toString("hex"));
-    return this.persistChunkDataInFilechain(user, newFilechain, Buffer.from(data, "hex"));
-  }
-
-  private storeChunks(user: User, file: FsFile, brid: string, fileName: string, options?: FileStoringOptions) {
-    const filechain: Filechain = this.initFilechainClient(brid);
-
-    const promises: Promise<any>[] = [];
-    for (let i = 0; i < file.numberOfChunks(); i++) {
-      promises.push(
-        file.getChunk(i).then(chunk => this.storeChunk(user, filechain, new ChunkIndex(chunk, i), fileName, options))
-      );
-    }
-
-    return Promise.all(promises);
-  }
-
-  /**
-   * Purchases a new voucher if possible.
-   * It is only possible to buy a new voucher when there is less than a day left on your current one.
-   */
-  public async purchaseVoucher(user: User, plan: string): Promise<any> {
-    const bc = await this.blockchain;
-    return await bc.transactionBuilder()
-      .add(nop())
-      .add(op("purchase_voucher", user.authDescriptor.id, plan))
-      .buildAndSign(user)
-      .post();
   }
 
   /**
@@ -167,6 +138,10 @@ export default class Filehub {
     }
   }
 
+  /**
+   * Downloads a file by its name to the specified path (if provided),
+   * else it will just use the filename and the current path.
+   */
   public async downloadFileByName(user: User, name: string, path?: string, options?: FileStoringOptions) {
     const brid = await this.getFileLocation(user, name);
 
@@ -241,6 +216,9 @@ export default class Filehub {
     });
   }
 
+  /**
+   * Returns the balance of the user.
+   */
   public async getBalance(user: User): Promise<number> {
     const asset: Asset[] = await this.executeQuery("ft3.get_asset_by_name", { name: "CHR" });
 
@@ -248,6 +226,35 @@ export default class Filehub {
       account_id: user.authDescriptor.hash().toString("hex"),
       asset_id: asset[0].id.toString("hex")
     }).then((assetBalance: AssetBalance) => assetBalance.amount);
+  }
+
+  /**
+   * Store chunk in the provided BRID.
+   */
+  public async copyChunkDataToOtherBrid(user: User, chunkHash: ChunkHashFilechain) {
+    const oldFilechain = this.initFilechainClient(chunkHash.brid);
+
+    const newBrid: string = await this.executeQuery("get_active_filechain_for_hash_in_disabled_filechain", {
+      hash: chunkHash.hash, brid: chunkHash.brid
+    });
+
+    const newFilechain = this.initFilechainClient(newBrid);
+
+    const data = await oldFilechain.getChunkDataByHash(chunkHash.hash.toString("hex"));
+    return this.persistChunkDataInFilechain(user, newFilechain, Buffer.from(data, "hex"));
+  }
+
+  private storeChunks(user: User, file: FsFile, brid: string, fileName: string, options?: FileStoringOptions) {
+    const filechain: Filechain = this.initFilechainClient(brid);
+
+    const promises: Promise<any>[] = [];
+    for (let i = 0; i < file.numberOfChunks(); i++) {
+      promises.push(
+        file.getChunk(i).then(chunk => this.storeChunk(user, filechain, new ChunkIndex(chunk, i), fileName, options))
+      );
+    }
+
+    return Promise.all(promises);
   }
 
   private storeChunk(user: User, filechain: Filechain, chunkIndex: ChunkIndex, name: string, options?: FileStoringOptions) {

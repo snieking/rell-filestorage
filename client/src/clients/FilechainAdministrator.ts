@@ -13,6 +13,9 @@ export default class FilechainAdministrator extends AbstractAdministrator {
     super(filehub);
   }
 
+  /**
+   * Sends an application for a Filechain to join the pool of COMMON Filechains.
+   */
   public sendCommonFilechainApplication(user: User, brid: string, nodeUrl: string, sourceCodeUrl: string) {
     return this.filehub.executeOperation(user, op(
       "add_filechain_application",
@@ -23,10 +26,17 @@ export default class FilechainAdministrator extends AbstractAdministrator {
     ));
   }
 
+  /**
+   * Requests payment for data stored in your Filechains.
+   * Data is only able to be paid out after it has been persisted for 30 days or more.
+   */
   public requestPayment(user: User) {
     return this.filehub.executeOperation(user, op("request_payment", user.authDescriptor.id));
   }
 
+  /**
+   * Migrates data stored in the Filechain to another one.
+   */
   public async migrateFilechain(user: User, fromBrid: string) {
     let timestamp: number = FilechainAdministrator.FIRST_TIMESTAMP;
 
@@ -67,6 +77,9 @@ export default class FilechainAdministrator extends AbstractAdministrator {
     }
   }
 
+  /**
+   * Disables a Filechain.
+   */
   public disableFilechain(user: User, brid: string): Promise<any> {
     return this.filehub.executeOperation(user, op("disable_filechain", user.authDescriptor.id, brid));
   }

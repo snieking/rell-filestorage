@@ -17,7 +17,7 @@ export default class FilehubAdministrator extends AbstractAdministrator {
   };
 
   /**
-   * Registers a filechain to persist files in.
+   * Registers a Filechain to persist files in.
    *
    * @param user that is an admin of the filehub.
    * @param rid of the filechain.
@@ -26,14 +26,23 @@ export default class FilehubAdministrator extends AbstractAdministrator {
     return this.filehub.executeOperation(user, op("add_chromia_filechain", user.authDescriptor.id, rid));
   };
 
+  /**
+   * Returns a list of active Filechain applications.
+   */
   public listFilechainApplications(): Promise<FilechainApplication[]> {
     return this.filehub.executeQuery("list_filechain_applications", {});
   }
 
+  /**
+   * Approves a Filechain application.
+   */
   public approveCommonFilechainApplication(user: User, brid: string) {
     return this.filehub.executeOperation(user, op("approve_filechain_application", user.authDescriptor.id, brid));
   }
 
+  /**
+   * Rejects a Filechain application.
+   */
   public rejectCommonFilechainApplication(user: User, brid: string) {
     return this.filehub.executeOperation(user, op("reject_filechain_application", user.authDescriptor.id, brid));
   }
