@@ -14,7 +14,7 @@ The file hub also has the responsibility of billing.
 A file hub can contain multiple file chains.
 
 ## Modules
-The project consists of 3 modules.
+The project consists of 4 modules.
 1. **Filehub:** A filehub is a blockchain that handles the logic around on who is allowed to store, 
    and how the billing is done.
 2. **Filechain:** A blockchain that stores files. 
@@ -22,4 +22,5 @@ The project consists of 3 modules.
    has talked to the **Filehub** prior to storing and that they are to store. 
    A **Filechain** can be connected to different types of **Filehub** implementations with different 
    rules on storing.
+3. **client:** JS/TS client for interacting with the Filestorage, for details on how to use it, see the [wiki](https://github.com/snieking/rell-filestorage/wiki/JavaScript-&-TypeScript-Client).
 3. **Test**: A test client that verifies the integration between the **Filehub** and **Filechain**.
