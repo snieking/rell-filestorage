@@ -76,6 +76,27 @@ describe("Storing files tests", () => {
     expect(foundAfterRemoval).toBeFalsy();
   });
 
+  it("May only remove 1 file today", async () => {
+    const user = await createFt3User();
+    await addBalance(user, SUFFICIENT_BALANCE_FOR_CHROMIA_VOUCHER);
+    await FILEHUB.purchaseVoucher(user, "CHROMIA");
+
+    const name1 = generateRandomString(36);
+    const data1 = Buffer.from(name, "utf8");
+
+    await FILEHUB.storeFile(user, FsFile.fromData(name1, data1));
+
+    const name2 = generateRandomString(36);
+    const data2 = Buffer.from(name, "utf8");
+
+    await FILEHUB.storeFile(user, FsFile.fromData(name2, data2));
+
+    await FILEHUB.removeFile(user, name1);
+    await FILEHUB.removeFile(user, name2).catch(error => expect(error).toBeDefined());
+
+    expect.assertions(1);
+  });
+
   it("Store actual file", async () => {
     const filepath = path.resolve("./tests/files/small.txt");
     const file = FsFile.fromPath(filepath);
