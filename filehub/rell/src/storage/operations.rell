@@ -71,6 +71,8 @@ operation deallocate_file(descriptor_id: byte_array, name) {
 		file.filechain == active_filechain.filechain
 	} ( file );
 	
+	create deleted_timestamp(account, current_timestamp);
+	
 	delete file_chunk@?{ file };
 	delete file;
 }
