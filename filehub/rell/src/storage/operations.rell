@@ -60,7 +60,7 @@ operation deallocate_file(descriptor_id: byte_array, name) {
 	
 	val recent_delete = deleted_timestamp@?{ 
 		account, 
-		.timestamp < current_timestamp - day_millis
+		.timestamp >= current_timestamp - day_millis
 	};
 	
 	require(recent_delete == null, "Only 1 file per day may be de-allocated");
