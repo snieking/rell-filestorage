@@ -56,6 +56,26 @@ describe("Storing files tests", () => {
     expect(bufferToHex(file.readFullData())).toEqual(bufferToHex(data));
   });
 
+  it("Store & remove file", async () => {
+    const name = generateRandomString(36);
+    const data = Buffer.from(name, "utf8");
+
+    await FILEHUB.storeFile(user, FsFile.fromData(name, data));
+
+    const fileNames = await FILEHUB.getUserFileNames(user);
+    const found = fileNames.includes(name);
+    expect(found).toBeTruthy();
+
+    const file = await FILEHUB.getFileByName(user, name);
+    expect(bufferToHex(file.readFullData())).toEqual(bufferToHex(data));
+
+    await FILEHUB.removeFile(user, name);
+
+    const fileNamesAfterRemoval = await FILEHUB.getUserFileNames(user);
+    const foundAfterRemoval = fileNamesAfterRemoval.includes(name);
+    expect(foundAfterRemoval).toBeFalsy();
+  });
+
   it("Store actual file", async () => {
     const filepath = path.resolve("./tests/files/small.txt");
     const file = FsFile.fromPath(filepath);

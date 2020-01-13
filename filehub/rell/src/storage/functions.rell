@@ -1,4 +1,6 @@
 import ft3_acc: lib.ft3.account;
+import billing;
+import util;
 
 function _get_allocated_bytes(ft3_acc.account): integer {
 	val stored_item_sizes = (file_chunk, chunk_size)@*{ 
@@ -12,4 +14,24 @@ function _get_allocated_bytes(ft3_acc.account): integer {
 	}
 	
 	return total_size;
+}
+
+function chain_selector(billing.plan): filechain {
+	return active_filechain@{ plan } ( .filechain, @omit @sort_desc .timestamp ) limit 1;
+}
+
+function verify_voucher(ft3_acc.account, billing.plan, timestamp, file_size: integer) {
+	val active_voucher = billing.voucher@?{ 
+		account, 
+		plan == plan,
+		.timestamp > timestamp
+	} (
+		@sort_desc .timestamp,
+		.plan,
+		.asset,
+		.amount
+	) limit 1;
+	
+	require(active_voucher, "User must have an active invoice");
+	require(util._get_allowed_storage_bytes(active_voucher.plan) >= _get_allocated_bytes(account) + file_size, "Not enough storage left for user");
 }

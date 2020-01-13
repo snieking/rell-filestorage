@@ -42,3 +42,7 @@ entity file_chunk {
 	chunk;
 	index timestamp;
 }
+
+entity deleted_timestamp {
+	key ft3_acc.account, timestamp;
+}

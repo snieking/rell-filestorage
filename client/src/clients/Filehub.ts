@@ -96,6 +96,17 @@ export default class Filehub {
   }
 
   /**
+   * Marks a file for removal, the chunks of the file are removed at the next Filechain migration.
+   */
+  public removeFile(user: User, name: string, options?: FileStoringOptions): Promise<any> {
+    const fileName = options != undefined && options && options.passphrase != undefined && options.filenameEncrypted
+      ? Filehub.encrypt(name, options.passphrase)
+      : name;
+
+    return this.executeOperation(user, op("deallocate_file", user.authDescriptor.id, fileName));
+  }
+
+  /**
    * Get file names stored by a user.
    */
   public getUserFileNames(user: User): Promise<string[]> {
