@@ -22,5 +22,5 @@ The project consists of 4 modules.
    has talked to the **Filehub** prior to storing and that they are to store. 
    A **Filechain** can be connected to different types of **Filehub** implementations with different 
    rules on storing.
-3. **client:** JS/TS client for interacting with the Filestorage, for details on how to use it, see the [wiki](https://github.com/snieking/rell-filestorage/wiki/JavaScript-&-TypeScript-Client).
+3. **Client:** JS/TS client for interacting with the Filestorage, for details on how to use it, see the [wiki](https://github.com/snieking/rell-filestorage/wiki/JavaScript-&-TypeScript-Client).
 3. **Test**: A test client that verifies the integration between the **Filehub** and **Filechain**.
