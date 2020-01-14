@@ -121,31 +121,38 @@ export default class Filehub {
    * @param passphrase optional options for retrieving file.
    */
   public async getFileByName(user: User, name: string, options?: FileStoringOptions): Promise<FsFile> {
-    const brid = await this.getFileLocation(user, name);
+    try {
 
-    const chunkHashes: ChunkHashIndex[] = await this.executeQuery("get_file_chunks", {
-      descriptor_id: user.authDescriptor.hash().toString("hex"),
-      name: name
-    });
+      const brid = await this.getFileLocation(user, name);
 
-    const filechain = this.initFilechainClient(brid.toString("hex"));
+      const chunkHashes: ChunkHashIndex[] = await this.executeQuery("get_file_chunks", {
+        descriptor_id: user.authDescriptor.hash().toString("hex"),
+        name: name
+      });
 
-    const promises: Promise<ChunkIndex>[] = [];
+      const filechain = this.initFilechainClient(brid.toString("hex"));
 
-    for (let i = 0; i < chunkHashes.length; i++) {
-      promises.push(this.getChunk(filechain, chunkHashes[i]));
-    }
+      const promises: Promise<ChunkIndex>[] = [];
 
-    const chunkIndexes = await Promise.all(promises);
+      for (let i = 0; i < chunkHashes.length; i++) {
+        promises.push(this.getChunk(filechain, chunkHashes[i]));
+      }
 
-    if (!options || !options.passphrase) {
-      return new Promise(resolve => resolve(FsFile.fromChunks(name, chunkIndexes)));
-    } else {
-      return new Promise(resolve => resolve(FsFile.fromChunks(
-        options.filenameEncrypted
-          ? Filehub.decrypt(name, options.passphrase!)
-          : name,
-        chunkIndexes.map(chunk => new ChunkIndex(Buffer.from(Filehub.decrypt(chunk.data.toString("utf8"), options.passphrase!), "utf8"), chunk.idx)))));
+      const chunkIndexes = await Promise.all(promises);
+
+      if (!options || !options.passphrase) {
+        return new Promise(resolve => resolve(FsFile.fromChunks(name, chunkIndexes)));
+      } else {
+        return new Promise(resolve => resolve(FsFile.fromChunks(
+          options.filenameEncrypted
+            ? Filehub.decrypt(name, options.passphrase!)
+            : name,
+          chunkIndexes.map(chunk => new ChunkIndex(Buffer.from(Filehub.decrypt(chunk.data.toString("utf8"), options.passphrase!), "utf8"), chunk.idx)))));
+      }
+
+    } catch (error) {
+      const reject: Promise<FsFile> = Promise.reject(error);
+      return reject;
     }
   }
 
