@@ -3,7 +3,11 @@ import billing;
 
 query get_file_location(descriptor_id: byte_array, name) {
 	val account = util.get_account_by_descriptor_id(descriptor_id);
-	return file@*{ name, account } ( .filechain.brid, @omit @sort .timestamp ) limit 1;
+	return (file, offline_filechain)@*{ 
+		file.name == name, 
+		file.account == account,
+		file.filechain != offline_filechain.filechain
+	} ( file.filechain.brid, @omit @sort file.timestamp ) limit 1;
 }
 
 query get_file_chunks(descriptor_id: byte_array, name) {

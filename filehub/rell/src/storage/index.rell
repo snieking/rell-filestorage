@@ -31,6 +31,10 @@ entity disabled_filechain {
 	timestamp;
 }
 
+entity offline_filechain {
+	key filechain, timestamp; 
+}
+
 entity file {
 	key name, ft3_acc.account, filechain;
 	index timestamp;

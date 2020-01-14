@@ -63,6 +63,30 @@ operation disable_filechain(descriptor_id: byte_array, rid: byte_array) {
     delete the_filechain;
 }
 
+operation report_filechain_offline(descriptor_id: byte_array, brid: byte_array) {
+	val account = util.get_account_by_descriptor_id(descriptor_id);
+    require(admin@?{ account } != null, "User not an admin");
+    
+    val filechain = storage.filechain@{ brid };
+    require(storage.offline_filechain@?{ filechain } == null, "Already reported offline");
+    
+    create storage.offline_filechain(filechain, op_context.last_block_time);
+}
+
+operation report_filechain_online(descriptor_id: byte_array, brid: byte_array) {
+	val account = util.get_account_by_descriptor_id(descriptor_id);
+    require(admin@?{ account } != null, "User not an admin");
+    
+    val filechain = storage.filechain@{ brid };
+    val offline_filechain = storage.offline_filechain@{ filechain };
+    
+    create offline_filechain_report(
+    	filechain, 
+    	offline_at = offline_filechain.timestamp,
+    	online_at = op_context.last_block_time
+    );
+}
+
 operation register_admin(descriptor_id: byte_array) {
 	require(admin@?{} == null, "Admin already exists");
     

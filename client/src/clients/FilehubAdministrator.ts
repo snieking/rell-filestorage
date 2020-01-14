@@ -47,4 +47,22 @@ export default class FilehubAdministrator extends AbstractAdministrator {
     return this.filehub.executeOperation(user, op("reject_filechain_application", user.authDescriptor.id, brid));
   }
 
+  /**
+   * Report a Filechain as offline.
+   */
+  public reportFilechainOffline(user: User, brid: string) {
+    return this.reportFilechain(user, "report_filechain_offline", brid);
+  }
+
+  /**
+   * Report a Filechain as online.
+   */
+  public reportFilechainOnline(user: User, brid: string) {
+    return this.reportFilechain(user, "report_filechain_online", brid);
+  }
+
+  private reportFilechain(user: User, operation: string, brid: string) {
+    return this.filehub.executeOperation(user, op(operation, user.authDescriptor.id, brid));
+  }
+
 }

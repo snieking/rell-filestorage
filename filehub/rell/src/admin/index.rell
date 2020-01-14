@@ -1,4 +1,5 @@
 import ft3_acc: lib.ft3.account;
+import storage;
 
 entity admin {
     account: ft3_acc.account;
@@ -9,4 +10,9 @@ entity filechain_application {
 	index ft3_acc.account;
 	node_url: text;
 	source_code: text;
+}
+
+entity offline_filechain_report {
+	key storage.filechain, offline_at: timestamp;
+	online_at: timestamp;
 }
