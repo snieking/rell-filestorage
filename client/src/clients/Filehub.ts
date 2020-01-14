@@ -151,6 +151,7 @@ export default class Filehub {
       }
 
     } catch (error) {
+      logger.info("Error retrieving file: %O", error);
       const reject: Promise<FsFile> = Promise.reject(error);
       return reject;
     }

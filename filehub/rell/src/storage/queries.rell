@@ -16,6 +16,8 @@ query get_file_location(descriptor_id: byte_array, name): byte_array {
 		}
 	}
 	
+	require(locations.size() > 0, "No chain available with the data");
+	
 	return locations.get(0);
 }
 
