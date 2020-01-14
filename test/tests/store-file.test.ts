@@ -352,7 +352,12 @@ describe("Storing files tests", () => {
 
     const admin = await adminUser();
     await FILEHUB_ADMININISTRATOR.reportFilechainOffline(admin, config.filechainRID);
-    await FILEHUB.getFileByName(user, name).catch(error => expect(error).toBeDefined());
+    logger.info("Before GetFileByName");
+    await FILEHUB.getFileByName(user, name).catch(error => {
+      logger.info("Caught exception in promise getting file by name");
+      expect(error).toBeDefined();
+    });
+    logger.info("After GetFileByName");
     await FILEHUB_ADMININISTRATOR.reportFilechainOnline(admin, config.filechainRID);
 
     const file = await FILEHUB.getFileByName(user, name);
