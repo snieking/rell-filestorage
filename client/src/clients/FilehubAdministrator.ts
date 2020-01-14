@@ -62,7 +62,7 @@ export default class FilehubAdministrator extends AbstractAdministrator {
   }
 
   private reportFilechain(user: User, operation: string, brid: string) {
-    return this.filehub.executeOperation(user, op(operation, user.authDescriptor.id, brid));
+    return this.filehub.executeOperation(user, op(operation, user.authDescriptor.id, brid), true);
   }
 
 }

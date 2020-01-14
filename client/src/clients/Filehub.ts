@@ -37,10 +37,16 @@ export default class Filehub {
    * @param user to sign the operation.
    * @param operation to perform.
    */
-  public executeOperation(user: User, operation: Operation): Promise<void> {
+  public executeOperation(user: User, operation: Operation, addNop?: boolean): Promise<void> {
     return this.blockchain.then(bc => {
+      const trxBuilder = bc.transactionBuilder().add(operation);
+
+      if (addNop) {
+        trxBuilder.add(nop());
+      }
+
       logger.debug("Executing %O", operation);
-      return bc.call(operation, user);
+      return trxBuilder.buildAndSign(user).post();
     });
   }
 
