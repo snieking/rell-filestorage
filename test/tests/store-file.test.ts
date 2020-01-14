@@ -1,5 +1,5 @@
 import {createFt3User} from "./utils/users";
-import {FILEHUB, FILEHUB_ADMININISTRATOR, initFilehub} from "../blockchain/Postchain";
+import {adminUser, FILEHUB, FILEHUB_ADMININISTRATOR, initFilehub} from "../blockchain/Postchain";
 import {User} from "ft3-lib";
 import {
   addBalance,
@@ -343,5 +343,22 @@ describe("Storing files tests", () => {
     expect(bufferToHex(user2File.readFullData())).toEqual(bufferToHex(data));
     expect(bufferToHex(user1File.readFullData())).toEqual(bufferToHex(user2File.readFullData()));
   });
+
+  it("Store file and try to retrieve from disabled filechain", async () => {
+    const name = generateRandomString(16);
+    const data = generateData(1024);
+
+    await storeData(name, data, user);
+
+    const admin = await adminUser();
+    await FILEHUB_ADMININISTRATOR.reportFilechainOffline(admin, config.filechainRID);
+    await FILEHUB.getFileByName(user, name).catch(error => expect(error).toBeDefined());
+    await FILEHUB_ADMININISTRATOR.reportFilechainOnline(admin, config.filechainRID);
+
+    const file = await FILEHUB.getFileByName(user, name);
+    expect(file).toBeDefined();
+
+    expect.assertions(2);
+  })
 
 });
