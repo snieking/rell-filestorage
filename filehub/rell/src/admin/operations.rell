@@ -64,6 +64,7 @@ operation disable_filechain(descriptor_id: byte_array, rid: byte_array) {
 }
 
 operation report_filechain_offline(descriptor_id: byte_array, brid: byte_array) {
+	log("Reporting filechain offline");
 	val account = util.get_account_by_descriptor_id(descriptor_id);
     require(admin@?{ account } != null, "User not an admin");
     
@@ -74,6 +75,7 @@ operation report_filechain_offline(descriptor_id: byte_array, brid: byte_array) 
 }
 
 operation report_filechain_online(descriptor_id: byte_array, brid: byte_array) {
+	log("Reporting filechain online");
 	val account = util.get_account_by_descriptor_id(descriptor_id);
     require(admin@?{ account } != null, "User not an admin");
     
@@ -85,6 +87,8 @@ operation report_filechain_online(descriptor_id: byte_array, brid: byte_array) {
     	offline_at = offline_filechain.timestamp,
     	online_at = op_context.last_block_time
     );
+    
+    delete offline_filechain;
 }
 
 operation register_admin(descriptor_id: byte_array) {
