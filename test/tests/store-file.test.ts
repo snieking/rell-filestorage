@@ -360,7 +360,10 @@ describe("Storing files tests", () => {
     logger.info("After GetFileByName");
     await FILEHUB_ADMININISTRATOR.reportFilechainOnline(admin, config.filechainRID);
 
+    logger.info("After reporting filechain online");
+
     const file = await FILEHUB.getFileByName(user, name);
+    logger.info("After GetFileByName");
     expect(file).toBeDefined();
 
     expect.assertions(2);
