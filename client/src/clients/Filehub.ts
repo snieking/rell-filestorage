@@ -304,7 +304,7 @@ export default class Filehub {
       name: name,
       replica_chains: replicaChains
     }).then((brids: Buffer[]) => {
-      if (brids.length < replicaChains) {
+      if (brids.length < 1) {
         throw new Error("Did not receive enough active & online Filechains");
       }
       return brids;
