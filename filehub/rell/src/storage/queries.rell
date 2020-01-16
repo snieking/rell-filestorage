@@ -1,7 +1,7 @@
 import util;
 import billing;
 
-query get_file_location(descriptor_id: byte_array, name): byte_array {
+query get_file_location(descriptor_id: byte_array, name, replica_chains: integer): list<byte_array> {
 	val account = util.get_account_by_descriptor_id(descriptor_id);
 	
 	val locations = file@*{ 
@@ -9,16 +9,19 @@ query get_file_location(descriptor_id: byte_array, name): byte_array {
 		.account == account
 	} ( .filechain.brid, @omit @sort .timestamp );
 	
+	var available_chains = 0;
 	for (i in range(locations.size())) {
 		val brid = locations.get(i);
-		if (offline_filechain@?{ .filechain.brid == brid } != null) {
+		if (available_chains >= replica_chains or offline_filechain@?{ .filechain.brid == brid } != null) {
 			locations.remove_at(i);
-		}
+ 		} else {
+ 			available_chains++;
+ 		}
 	}
 	
 	require(locations.size() > 0, "No chain available with the data");
 	
-	return locations.get(0);
+	return locations;
 }
 
 query get_file_chunks(descriptor_id: byte_array, name) {

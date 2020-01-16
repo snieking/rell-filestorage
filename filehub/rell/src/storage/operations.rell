@@ -14,7 +14,11 @@ operation allocate_file(descriptor_id: byte_array, name, total_bytes: integer, p
 	val current_timestamp = op_context.last_block_time;	
 	verify_voucher(account, plan, current_timestamp, total_bytes);
 	
-	create file(name, account, chain_selector(plan), current_timestamp, plan);
+	val chains = chain_selector(plan);
+	
+	for (chain in chains) {
+		create file(name, account, chain, current_timestamp, plan);
+	}
 }
 
 operation allocate_chunk(descriptor_id: byte_array, name, hash: byte_array, chunk_size: integer, idx: integer) {
@@ -25,30 +29,44 @@ operation allocate_chunk(descriptor_id: byte_array, name, hash: byte_array, chun
 	require(name.size() < 256, "Length of a name isn't allowed to be longer than 256");
 	require(chunk_size < 1024 * 1024, "Chunk must be less than a mb");
 	
-	val file = file@{ name, account };
+	val files = file@*{ name, account };
 	
-	val matching_chunks = chunk@*{ hash };
-	
-	var chunk = (chunk, active_filechain)@?{
-		chunk.hash == hash,
-		chunk.filechain == active_filechain.filechain
-	} ( chunk ) limit 1;
-	
-	if (chunk == null) {
-		val current_timestamp = op_context.last_block_time;
-		
-		verify_voucher(account, file.plan, current_timestamp, chunk_size);
-		chunk = create chunk(hash, file.filechain);			
+	for (i in range(files.size())) {
+		if (file_chunk@?{ 
+			files.get(i),
+			.chunk.hash == hash,
+			.idx == idx
+		} != null) {
+			log("Filtered out filechain: " + files.get(i).filechain.brid + " due to file_chunk already existing in it");
+			files.remove_at(i);
+		}
 	}
 	
-	create file_chunk(file@{ name, account }, chunk, idx, timestamp = op_context.last_block_time);
+	require(files.size() > 0, "No work to be done");
 	
-	val stored_size = chunk_size@?{ .chunk == chunk } limit 1;
-	
-	if (stored_size != null) {
-		require(stored_size.size == chunk_size, "Chunk size doesn't match provided file_size");
-	} else {
-		create chunk_size(chunk, chunk_size);
+	for (file in files) {	
+		var chunk = (chunk, active_filechain)@?{
+			chunk.hash == hash,
+			chunk.filechain == file.filechain,
+			chunk.filechain == active_filechain.filechain
+		} ( chunk ) limit 1;
+		
+		if (chunk == null) {
+			val current_timestamp = op_context.last_block_time;
+			
+			verify_voucher(account, file.plan, current_timestamp, chunk_size);
+			chunk = create chunk(hash, file.filechain);			
+		}
+		
+		create file_chunk(file, chunk, idx, timestamp = op_context.last_block_time);
+		
+		val stored_size = chunk_size@?{ .chunk == chunk } limit 1;
+		
+		if (stored_size != null) {
+			require(stored_size.size == chunk_size, "Chunk size doesn't match provided file_size");
+		} else {
+			create chunk_size(chunk, chunk_size);
+		}
 	}
 }
 

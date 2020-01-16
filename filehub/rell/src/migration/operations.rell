@@ -10,7 +10,7 @@ operation migrate_file(descriptor_id: byte_array, name, timestamp, from_chain: b
 	
 	log("Old files for name: ", name, old_files);
 	
-	val filechain = storage.chain_selector(disabled_filechain.plan);
+	val filechain = storage.chain_selector(disabled_filechain.plan).get(0);
 	
 	for (old_file in old_files) {
 		val file_chunks = storage.file_chunk@*{ old_file };

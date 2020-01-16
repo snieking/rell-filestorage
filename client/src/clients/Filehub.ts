@@ -96,9 +96,12 @@ export default class Filehub {
       options && options.plan ? options.plan : "CHROMIA"
     ));
 
-    const brid = await this.getFileLocation(user, fileName);
+    const brids = await this.getFileLocation(user, fileName, 3);
 
-    return await this.storeChunks(user, file, brid.toString("hex"), fileName, options);
+    const promises: Promise<any>[] = [];
+    brids.forEach(brid => promises.push(this.storeChunks(user, file, brid.toString("hex"), fileName, options)));
+
+    return await Promise.all(promises);
   }
 
   /**
@@ -129,14 +132,14 @@ export default class Filehub {
   public async getFileByName(user: User, name: string, options?: FileStoringOptions): Promise<FsFile> {
     try {
 
-      const brid = await this.getFileLocation(user, name);
+      const brids = await this.getFileLocation(user, name, 1);
 
       const chunkHashes: ChunkHashIndex[] = await this.executeQuery("get_file_chunks", {
         descriptor_id: user.authDescriptor.hash().toString("hex"),
         name: name
       });
 
-      const filechain = this.initFilechainClient(brid.toString("hex"));
+      const filechain = this.initFilechainClient(brids[0].toString("hex"));
 
       const promises: Promise<ChunkIndex>[] = [];
 
@@ -168,14 +171,14 @@ export default class Filehub {
    * else it will just use the filename and the current path.
    */
   public async downloadFileByName(user: User, name: string, path?: string, options?: FileStoringOptions) {
-    const brid = await this.getFileLocation(user, name);
+    const brids = await this.getFileLocation(user, name, 1);
 
     const chunkHashes: ChunkHashIndex[] = await this.executeQuery("get_file_chunks", {
       descriptor_id: user.authDescriptor.hash().toString("hex"),
       name: name
     });
 
-    const filechain = this.initFilechainClient(brid.toString("hex"));
+    const filechain = this.initFilechainClient(brids[0].toString("hex"));
 
     const sortedArray = chunkHashes.sort((a, b) => a.idx - b.idx);
     const bufferedArray: ChunkHashIndex[][] = Filehub.bufferArray(sortedArray, 10);
@@ -295,10 +298,16 @@ export default class Filehub {
     return filechain.storeChunkData(user, data);
   }
 
-  private getFileLocation(user: User, name: string): Promise<Buffer> {
+  private getFileLocation(user: User, name: string, replicaChains: number): Promise<Buffer[]> {
     return this.executeQuery("get_file_location", {
       descriptor_id: user.authDescriptor.hash().toString("hex"),
-      name: name
+      name: name,
+      replica_chains: replicaChains
+    }).then((brids: Buffer[]) => {
+      if (brids.length < replicaChains) {
+        throw new Error("Did not receive enough active & online Filechains");
+      }
+      return brids;
     });
   }
 

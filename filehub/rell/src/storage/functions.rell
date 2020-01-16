@@ -16,8 +16,14 @@ function _get_allocated_bytes(ft3_acc.account): integer {
 	return total_size;
 }
 
-function chain_selector(billing.plan): filechain {
-	return active_filechain@{ plan } ( .filechain, @omit @sort_desc .timestamp ) limit 1;
+function chain_selector(used_plan: billing.plan): list<filechain> {
+	var chains = 1;
+	
+	if (used_plan == billing.plan.COMMON) {
+		chains = 3;
+	}
+	
+	return active_filechain@*{ used_plan } ( .filechain, @omit @sort_desc .timestamp ) limit chains;
 }
 
 function verify_voucher(ft3_acc.account, billing.plan, timestamp, file_size: integer) {

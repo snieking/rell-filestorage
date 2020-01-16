@@ -82,10 +82,10 @@ function request_payment_for_filechain(ft3_acc.account, storage.filechain, plan,
 		val voucher_cost = _get_voucher_price(plan);
 		
 		val factor = stored_bytes / allowed_bytes_per_voucher;
-		val tokens_to_receive = factor * voucher_cost;
+		val tokens_to_receive = (factor * voucher_cost) * 0.33;
 		
 		create filechain_payment_record(filechain, timestamp);
-		payout_chromia_tokens(account, tokens_to_receive);
+		payout_chromia_tokens(account, tokens_to_receive.to_integer());
 		
 		return true;
 	}
