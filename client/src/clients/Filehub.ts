@@ -13,6 +13,7 @@ import * as fs from "fs";
 import {FileStoringOptions} from "../models/FileStoringOptions";
 import logger from "../logger";
 import {Asset, AssetBalance} from "../models/Asset";
+import {FilechainLocation} from "../models/FilechainLocation";
 
 export default class Filehub {
 
@@ -96,10 +97,10 @@ export default class Filehub {
       options && options.plan ? options.plan : "CHROMIA"
     ));
 
-    const brids = await this.getFileLocation(user, fileName, 3);
+    const filechainLocations = await this.getFileLocation(user, fileName, 3);
 
     const promises: Promise<any>[] = [];
-    brids.forEach(brid => promises.push(this.storeChunks(user, file, brid.toString("hex"), fileName, options)));
+    filechainLocations.forEach(filechainLocation => promises.push(this.storeChunks(user, file, filechainLocation, fileName, options)));
 
     return await Promise.all(promises);
   }
@@ -132,14 +133,14 @@ export default class Filehub {
   public async getFileByName(user: User, name: string, options?: FileStoringOptions): Promise<FsFile> {
     try {
 
-      const brids = await this.getFileLocation(user, name, 1);
+      const filechainLocations = await this.getFileLocation(user, name, 1);
 
       const chunkHashes: ChunkHashIndex[] = await this.executeQuery("get_file_chunks", {
         descriptor_id: user.authDescriptor.hash().toString("hex"),
         name: name
       });
 
-      const filechain = this.initFilechainClient(brids[0].toString("hex"));
+      const filechain = this.initFilechainClient(filechainLocations[0]);
 
       const promises: Promise<ChunkIndex>[] = [];
 
@@ -171,14 +172,14 @@ export default class Filehub {
    * else it will just use the filename and the current path.
    */
   public async downloadFileByName(user: User, name: string, path?: string, options?: FileStoringOptions) {
-    const brids = await this.getFileLocation(user, name, 1);
+    const filechainLocations = await this.getFileLocation(user, name, 1);
 
     const chunkHashes: ChunkHashIndex[] = await this.executeQuery("get_file_chunks", {
       descriptor_id: user.authDescriptor.hash().toString("hex"),
       name: name
     });
 
-    const filechain = this.initFilechainClient(brids[0].toString("hex"));
+    const filechain = this.initFilechainClient(filechainLocations[0]);
 
     const sortedArray = chunkHashes.sort((a, b) => a.idx - b.idx);
     const bufferedArray: ChunkHashIndex[][] = Filehub.bufferArray(sortedArray, 10);
@@ -260,20 +261,21 @@ export default class Filehub {
    * Store chunk in the provided BRID.
    */
   public async copyChunkDataToOtherBrid(user: User, chunkHash: ChunkHashFilechain) {
-    const oldFilechain = this.initFilechainClient(chunkHash.brid);
+    const filechainLocation: FilechainLocation = { brid: chunkHash.brid, location: chunkHash.location };
+    const oldFilechain = this.initFilechainClient(filechainLocation);
 
-    const newBrid: string = await this.executeQuery("get_active_filechain_for_hash_in_disabled_filechain", {
-      hash: chunkHash.hash, brid: chunkHash.brid
+    const newLocation: FilechainLocation = await this.executeQuery("get_active_filechain_for_hash_in_disabled_filechain", {
+      hash: chunkHash.hash, brid: chunkHash.brid.toString("hex")
     });
 
-    const newFilechain = this.initFilechainClient(newBrid);
+    const newFilechain = this.initFilechainClient(newLocation);
 
     const data = await oldFilechain.getChunkDataByHash(chunkHash.hash.toString("hex"));
     return this.persistChunkDataInFilechain(user, newFilechain, Buffer.from(data, "hex"));
   }
 
-  private storeChunks(user: User, file: FsFile, brid: string, fileName: string, options?: FileStoringOptions) {
-    const filechain: Filechain = this.initFilechainClient(brid);
+  private storeChunks(user: User, file: FsFile, filechainLocation: FilechainLocation, fileName: string, options?: FileStoringOptions) {
+    const filechain: Filechain = this.initFilechainClient(filechainLocation);
 
     const promises: Promise<any>[] = [];
     for (let i = 0; i < file.numberOfChunks(); i++) {
@@ -298,16 +300,16 @@ export default class Filehub {
     return filechain.storeChunkData(user, data);
   }
 
-  private getFileLocation(user: User, name: string, replicaChains: number): Promise<Buffer[]> {
+  private getFileLocation(user: User, name: string, replicaChains: number): Promise<FilechainLocation[]> {
     return this.executeQuery("get_file_location", {
       descriptor_id: user.authDescriptor.hash().toString("hex"),
       name: name,
       replica_chains: replicaChains
-    }).then((brids: Buffer[]) => {
-      if (brids.length < 1) {
+    }).then((locations: FilechainLocation[]) => {
+      if (locations.length < 1) {
         throw new Error("Did not receive enough active & online Filechains");
       }
-      return brids;
+      return locations;
     });
   }
 
@@ -331,21 +333,30 @@ export default class Filehub {
     return this.executeOperation(user, operation);
   };
 
-  private initFilechainClient(brid: string): Filechain {
+  private initFilechainClient(filechainLocation: FilechainLocation): Filechain {
+    const brid = filechainLocation.brid.toString("hex");
+    var location = filechainLocation.location;
+
     logger.debug("Initializing filechain client with brid: %s", brid);
-    const chain = this.chains
-      .find(c => {
-        const directoryChain = c.chainId.toString("hex").toLocaleUpperCase();
-        logger.silly("Found in DC: %s", directoryChain);
 
-        return directoryChain === brid.toLocaleUpperCase();
-      });
+    if (location === "@DirectoryService") {
+      logger.debug("Searching for Filechain location [%s] in DirectoryService", brid);
+      const chain = this.chains
+        .find(c => {
+          const directoryChain = c.chainId.toString("hex").toLocaleUpperCase();
+          logger.silly("Found in DC: %s", directoryChain);
 
-    if (chain == null) {
-      throw new Error("Expected filechain not found in directory service");
+          return directoryChain === brid.toLocaleUpperCase();
+        });
+
+      if (chain == null) {
+        throw new Error("Expected filechain not found in directory service");
+      }
+
+      location = chain.url;
     }
 
-    return new Filechain(chain.url, chain.chainId.toString("hex"));
+    return new Filechain(location, brid);
   }
 
   private static encrypt(data: string, passphrase: string): string {

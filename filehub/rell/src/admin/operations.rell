@@ -17,7 +17,7 @@ operation approve_filechain_application(descriptor_id: byte_array, brid: byte_ar
     require(admin@?{ account } != null, "User not an admin");
     
     val application = filechain_application@{ brid };
-    val filechain = create storage.filechain(brid);
+    val filechain = create storage.filechain(brid, application.node_url);
     create storage.active_filechain(filechain, billing.plan.COMMUNITY, op_context.last_block_time, application.account);
     delete application;
 }
@@ -37,7 +37,7 @@ operation add_chromia_filechain(descriptor_id: byte_array, rid: byte_array) {
 
     if (storage.filechain@?{ rid } == null) {
     	log("Adding filechain with brid: ", rid);
-        val filechain = create storage.filechain(rid);
+        val filechain = create storage.filechain(rid, "@DirectoryService");
         create storage.active_filechain(filechain, billing.plan.CHROMIA, op_context.last_block_time, account);
 	}
 }

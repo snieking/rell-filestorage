@@ -5,7 +5,8 @@ export interface ChunkHashIndex {
 
 export interface ChunkHashFilechain {
   hash: Buffer;
-  brid: string;
+  brid: Buffer;
+  location: string;
 }
 
 export class ChunkIndex {

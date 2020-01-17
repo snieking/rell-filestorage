@@ -5,6 +5,7 @@ import billing;
 @log
 entity filechain {
 	key brid: byte_array;
+	location: text;
 }
 
 @log

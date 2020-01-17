@@ -7,7 +7,7 @@ query get_active_filechain_for_hash_in_disabled_filechain(hash: byte_array, brid
 		chunk.hash == hash,
 		chunk.filechain == active_filechain.filechain,
 		active_filechain.plan == plan
-	} ( chunk.filechain.brid ) limit 1;
+	} ( brid = chunk.filechain.brid, location = chunk.filechain.location ) limit 1;
 }
 
 query get_files_belonging_to_active_voucher_in_brid_after_timestamp(
@@ -38,6 +38,7 @@ query get_all_migratable_chunks_by_file(brid: byte_array, name, timestamp, curre
 		file_chunk.file.account == voucher.account
 	} (
 		hash = file_chunk.chunk.hash,
-		brid = file_chunk.chunk.filechain.brid
+		brid = file_chunk.chunk.filechain.brid,
+		location = file_chunk.chunk.filechain.location
 	);
 }
