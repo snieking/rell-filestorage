@@ -36,14 +36,14 @@ export default class FilehubAdministrator extends AbstractAdministrator {
   /**
    * Approves a Filechain application.
    */
-  public approveCommonFilechainApplication(user: User, brid: string) {
+  public approveCommunityFilechainApplication(user: User, brid: string) {
     return this.filehub.executeOperation(user, op("approve_filechain_application", user.authDescriptor.id, brid));
   }
 
   /**
    * Rejects a Filechain application.
    */
-  public rejectCommonFilechainApplication(user: User, brid: string) {
+  public rejectCommunityFilechainApplication(user: User, brid: string) {
     return this.filehub.executeOperation(user, op("reject_filechain_application", user.authDescriptor.id, brid));
   }
 

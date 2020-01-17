@@ -3,8 +3,8 @@ import {User} from "ft3-lib";
 import {createFt3User} from "./utils/users";
 import {addBalance, bufferToHex, generateRandomString, registerAsset} from "./utils/utils";
 import {
-  COMMON_PLAN,
-  SUFFICIENT_BALANCE_FOR_COMMON_VOUCHER
+  COMMUNITY_PLAN,
+  SUFFICIENT_BALANCE_FOR_COMMUNITY_VOUCHER
 } from "./utils/constants";
 import FsFile from "../../client/lib/models/FsFile";
 import * as path from "path";
@@ -13,19 +13,19 @@ import * as config from "../blockchain/config";
 jest.setTimeout(60000);
 
 /**
- * @group common-ci
+ * @group community-ci
  */
-describe("Store files in common filechain", () => {
+describe("Store files in COMMUNITY filechain", () => {
 
   let user: User;
 
   beforeAll(async () => {
     await initFilehub();
 
-    user = await createFt3User(config.commonFilechainOwnerPrivateKey);
+    user = await createFt3User(config.communityFilechainOwnerPrivateKey);
     await registerAsset(user);
-    await addBalance(user, SUFFICIENT_BALANCE_FOR_COMMON_VOUCHER);
-    await FILEHUB.purchaseVoucher(user, COMMON_PLAN);
+    await addBalance(user, SUFFICIENT_BALANCE_FOR_COMMUNITY_VOUCHER);
+    await FILEHUB.purchaseVoucher(user, COMMUNITY_PLAN);
   });
 
   it("Store simple file", async () => {

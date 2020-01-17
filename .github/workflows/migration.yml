@@ -57,27 +57,27 @@ jobs:
         run: ./run-dev-node.sh > new-filechain.log &
         working-directory: test/filechains/migration/rell
 
-      # Build and deploy COMMON Filechain
+      # Build and deploy COMMUNITY Filechain
       - name: Add Filehub BRID to run.xml
         run: sed -i "s/FILEHUB_BRID/$(cat ../../../../filehub/rell/target/blockchains/1/brid.txt)/g" run.xml
-        working-directory: test/filechains/common/rell
-      - name: Build COMMON Filechain
+        working-directory: test/filechains/community/rell
+      - name: Build COMMUNITY Filechain
         run: ./build.sh
-        working-directory: test/filechains/common/rell
-      - name: Run COMMON Filechain
+        working-directory: test/filechains/community/rell
+      - name: Run COMMUNITY Filechain
         run: ./run-dev-node.sh > filechain.log &
-        working-directory: test/filechains/common/rell
+        working-directory: test/filechains/community/rell
 
-      # Build and deploy COMMON migration Filechain
+      # Build and deploy COMMUNITY migration Filechain
       - name: Add Filehub BRID to run.xml
         run: sed -i "s/FILEHUB_BRID/$(cat ../../../../filehub/rell/target/blockchains/1/brid.txt)/g" run.xml
-        working-directory: test/filechains/common-migration/rell
-      - name: Build COMMON Filechain
+        working-directory: test/filechains/community-migration/rell
+      - name: Build COMMUNITY Filechain
         run: ./build.sh
-        working-directory: test/filechains/common-migration/rell
-      - name: Run COMMON Filechain
+        working-directory: test/filechains/community-migration/rell
+      - name: Run COMMUNITY Filechain
         run: ./run-dev-node.sh > filechain.log &
-        working-directory: test/filechains/common-migration/rell
+        working-directory: test/filechains/community-migration/rell
 
       # Build File Storage Client (fs-client)
       - name: Install dependencies for fs-client
@@ -98,13 +98,13 @@ jobs:
         env:
           NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
 
-      - name: Run tests to insert data
+      - name: Run CHROMIA Filechain tests
         run: npm run silent-test-ci
         working-directory: test
         continue-on-error: false
 
-      - name: Run common filechains tests
-        run: npm run silent-test-common-ci
+      - name: Run COMMUNITY Filechain tests
+        run: npm run silent-test-community-ci
         working-directory: test
         continue-on-error: false
 
@@ -113,8 +113,8 @@ jobs:
         working-directory: test
         continue-on-error: false
 
-      - name: Run COMMON migration
-        run: npm run silent-test-common-migration
+      - name: Run COMMUNITY migration
+        run: npm run silent-test-community-migration
         working-directory: test
         continue-on-error: false
 

@@ -3,9 +3,9 @@ import {registerAsset, addBalance} from "./utils/utils";
 import {FILEHUB, initFilehub} from "../blockchain/Postchain";
 import {
   CHROMIA_PLAN,
-  COMMON_PLAN,
+  COMMUNITY_PLAN,
   SUFFICIENT_BALANCE_FOR_CHROMIA_VOUCHER,
-  SUFFICIENT_BALANCE_FOR_COMMON_VOUCHER
+  SUFFICIENT_BALANCE_FOR_COMMUNITY_VOUCHER
 } from "./utils/constants";
 import logger from "../logger";
 
@@ -28,7 +28,7 @@ describe("Billing tests", () => {
 
   it("Not enough balance to purchase COMMON voucher", async () => {
     const user = await createFt3User();
-    await FILEHUB.purchaseVoucher(user, COMMON_PLAN).catch(error => expect(error).toBeDefined());
+    await FILEHUB.purchaseVoucher(user, COMMUNITY_PLAN).catch(error => expect(error).toBeDefined());
     expect.assertions(1);
   });
 
@@ -48,10 +48,10 @@ describe("Billing tests", () => {
 
   it("Purchase a COMMON voucher", async () => {
     const user = await createFt3User();
-    await addBalance(user, SUFFICIENT_BALANCE_FOR_COMMON_VOUCHER);
-    await FILEHUB.purchaseVoucher(user, COMMON_PLAN);
+    await addBalance(user, SUFFICIENT_BALANCE_FOR_COMMUNITY_VOUCHER);
+    await FILEHUB.purchaseVoucher(user, COMMUNITY_PLAN);
 
-    const hasActiveVoucher = await FILEHUB.hasActiveVoucher(user, COMMON_PLAN);
+    const hasActiveVoucher = await FILEHUB.hasActiveVoucher(user, COMMUNITY_PLAN);
     const vouchers = await FILEHUB.getVouchers(user);
 
     expect(hasActiveVoucher).toBeTruthy();
@@ -76,13 +76,13 @@ describe("Billing tests", () => {
 
   it("Attempt to purchase multiple COMMON vouchers, only 1 purchased", async () => {
     const user = await createFt3User();
-    await addBalance(user, SUFFICIENT_BALANCE_FOR_COMMON_VOUCHER);
+    await addBalance(user, SUFFICIENT_BALANCE_FOR_COMMUNITY_VOUCHER);
 
-    await FILEHUB.purchaseVoucher(user, COMMON_PLAN);
-    await FILEHUB.purchaseVoucher(user, COMMON_PLAN).catch(error => expect(error).toBeDefined());
-    await FILEHUB.purchaseVoucher(user, COMMON_PLAN).catch(error => expect(error).toBeDefined());
+    await FILEHUB.purchaseVoucher(user, COMMUNITY_PLAN);
+    await FILEHUB.purchaseVoucher(user, COMMUNITY_PLAN).catch(error => expect(error).toBeDefined());
+    await FILEHUB.purchaseVoucher(user, COMMUNITY_PLAN).catch(error => expect(error).toBeDefined());
 
-    const hasActiveVoucher = await FILEHUB.hasActiveVoucher(user, COMMON_PLAN);
+    const hasActiveVoucher = await FILEHUB.hasActiveVoucher(user, COMMUNITY_PLAN);
     const vouchers = await FILEHUB.getVouchers(user);
 
     expect(hasActiveVoucher).toBeTruthy();
@@ -92,10 +92,10 @@ describe("Billing tests", () => {
 
   it("Purchase both COMMON and CHROMIA voucher", async () => {
     const user = await createFt3User();
-    await addBalance(user, SUFFICIENT_BALANCE_FOR_CHROMIA_VOUCHER + SUFFICIENT_BALANCE_FOR_COMMON_VOUCHER);
+    await addBalance(user, SUFFICIENT_BALANCE_FOR_CHROMIA_VOUCHER + SUFFICIENT_BALANCE_FOR_COMMUNITY_VOUCHER);
 
     await FILEHUB.purchaseVoucher(user, CHROMIA_PLAN);
-    await FILEHUB.purchaseVoucher(user, COMMON_PLAN);
+    await FILEHUB.purchaseVoucher(user, COMMUNITY_PLAN);
 
     const hasActiveChromiaVoucher = await FILEHUB.hasActiveVoucher(user, CHROMIA_PLAN);
     const hasActiveCommonVoucher = await FILEHUB.hasActiveVoucher(user, CHROMIA_PLAN);
@@ -111,10 +111,10 @@ describe("Billing tests", () => {
     await addBalance(user, SUFFICIENT_BALANCE_FOR_CHROMIA_VOUCHER);
 
     await FILEHUB.purchaseVoucher(user, CHROMIA_PLAN);
-    await FILEHUB.purchaseVoucher(user, COMMON_PLAN).catch(error => expect(error).toBeDefined());
+    await FILEHUB.purchaseVoucher(user, COMMUNITY_PLAN).catch(error => expect(error).toBeDefined());
 
     const hasActiveChromiaVoucher = await FILEHUB.hasActiveVoucher(user, CHROMIA_PLAN);
-    const hasActiveCommonVoucher = await FILEHUB.hasActiveVoucher(user, COMMON_PLAN);
+    const hasActiveCommonVoucher = await FILEHUB.hasActiveVoucher(user, COMMUNITY_PLAN);
     expect(hasActiveChromiaVoucher).toBeTruthy();
     expect(hasActiveCommonVoucher).toBeFalsy();
 

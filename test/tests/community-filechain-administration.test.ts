@@ -13,7 +13,7 @@ import * as crypto from "crypto";
 /**
  * @group ci
  */
-describe("Administration of a common filechain", () => {
+describe("Administration of a COMMUNITY filechain", () => {
 
   const SUFFICIENT_BALANCE = 100;
   const INSUFFICIENT_BALANCE = 99;
@@ -31,7 +31,7 @@ describe("Administration of a common filechain", () => {
     await addBalance(user, INSUFFICIENT_BALANCE);
 
     const brid = createBrid();
-    await FILECHAIN_ADMINISTRATOR.sendCommonFilechainApplication(user, brid, "localhost", "github.com")
+    await FILECHAIN_ADMINISTRATOR.sendCommunityFilechainApplication(user, brid, "localhost", "github.com")
       .catch(error => expect(error).toBeDefined());
 
     const applications = await FILEHUB_ADMININISTRATOR.listFilechainApplications();
@@ -45,13 +45,13 @@ describe("Administration of a common filechain", () => {
     await addBalance(user, SUFFICIENT_BALANCE);
 
     const brid = createBrid();
-    await FILECHAIN_ADMINISTRATOR.sendCommonFilechainApplication(user, brid, "localhost", "github.com");
+    await FILECHAIN_ADMINISTRATOR.sendCommunityFilechainApplication(user, brid, "localhost", "github.com");
     let applications = await FILEHUB_ADMININISTRATOR.listFilechainApplications();
     expect(applications.length).toEqual(1);
 
     const balancePrior = await FILEHUB.getBalance(user);
 
-    await FILEHUB_ADMININISTRATOR.rejectCommonFilechainApplication(admin, brid);
+    await FILEHUB_ADMININISTRATOR.rejectCommunityFilechainApplication(admin, brid);
     applications = await FILEHUB_ADMININISTRATOR.listFilechainApplications();
     expect(applications.length).toEqual(0);
 
@@ -66,17 +66,17 @@ describe("Administration of a common filechain", () => {
 
     // Send application
     const brid = createBrid();
-    await FILECHAIN_ADMINISTRATOR.sendCommonFilechainApplication(user, brid, "localhost", "github.com");
+    await FILECHAIN_ADMINISTRATOR.sendCommunityFilechainApplication(user, brid, "localhost", "github.com");
     let applications = await FILEHUB_ADMININISTRATOR.listFilechainApplications();
     expect(applications.length).toEqual(1);
 
     // Non-user attempts to approve
-    await FILEHUB_ADMININISTRATOR.approveCommonFilechainApplication(user, brid).catch(error => expect(error).toBeDefined());
+    await FILEHUB_ADMININISTRATOR.approveCommunityFilechainApplication(user, brid).catch(error => expect(error).toBeDefined());
     applications = await FILEHUB_ADMININISTRATOR.listFilechainApplications();
     expect(applications.length).toEqual(1);
 
     // Admin rejects to clean-up
-    await FILEHUB_ADMININISTRATOR.rejectCommonFilechainApplication(admin, brid);
+    await FILEHUB_ADMININISTRATOR.rejectCommunityFilechainApplication(admin, brid);
     applications = await FILEHUB_ADMININISTRATOR.listFilechainApplications();
     expect(applications.length).toEqual(0);
 
@@ -89,17 +89,17 @@ describe("Administration of a common filechain", () => {
 
     // Create application
     const brid = createBrid();
-    await FILECHAIN_ADMINISTRATOR.sendCommonFilechainApplication(user, brid, "localhost", "github.com");
+    await FILECHAIN_ADMINISTRATOR.sendCommunityFilechainApplication(user, brid, "localhost", "github.com");
     let applications = await FILEHUB_ADMININISTRATOR.listFilechainApplications();
     expect(applications.length).toEqual(1);
 
     // Non-admin tries to reject
-    await FILEHUB_ADMININISTRATOR.rejectCommonFilechainApplication(user, brid).catch(error => expect(error).toBeDefined());
+    await FILEHUB_ADMININISTRATOR.rejectCommunityFilechainApplication(user, brid).catch(error => expect(error).toBeDefined());
     applications = await FILEHUB_ADMININISTRATOR.listFilechainApplications();
     expect(applications.length).toEqual(1);
 
     // Admin rejects to clean-up
-    await FILEHUB_ADMININISTRATOR.rejectCommonFilechainApplication(admin, brid);
+    await FILEHUB_ADMININISTRATOR.rejectCommunityFilechainApplication(admin, brid);
     applications = await FILEHUB_ADMININISTRATOR.listFilechainApplications();
     expect(applications.length).toEqual(0);
 

@@ -6,12 +6,12 @@
   "scripts": {
     "test-ci": "jest --setupFiles dotenv/config --group=ci",
     "silent-test-ci": "jest --setupFiles dotenv/config --silent --group=ci",
-    "test-common-ci": "jest --setupFiles dotenv/config --group=common-ci",
-    "silent-test-common-ci": "jest --setupFiles dotenv/config --silent --group=common-ci",
+    "test-community-ci": "jest --setupFiles dotenv/config --group=community-ci",
+    "silent-test-community-ci": "jest --setupFiles dotenv/config --silent --group=community-ci",
     "test-migration": "jest --setupFiles dotenv/config --group=migration",
     "silent-test-migration": "jest --setupFiles dotenv/config --silent --group=migration",
-    "test-common-migration": "jest --setupFiles dotenv/config --group=common-migration",
-    "silent-test-common-migration": "jest --setupFiles dotenv/config --silent --group=common-migration"
+    "test-community-migration": "jest --setupFiles dotenv/config --group=community-migration",
+    "silent-test-community-migration": "jest --setupFiles dotenv/config --silent --group=community-migration"
   },
   "keywords": [],
   "author": "",

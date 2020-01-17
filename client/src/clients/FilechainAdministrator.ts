@@ -14,9 +14,9 @@ export default class FilechainAdministrator extends AbstractAdministrator {
   }
 
   /**
-   * Sends an application for a Filechain to join the pool of COMMON Filechains.
+   * Sends an application for a Filechain to join the pool of COMMUNITY Filechains.
    */
-  public sendCommonFilechainApplication(user: User, brid: string, nodeUrl: string, sourceCodeUrl: string) {
+  public sendCommunityFilechainApplication(user: User, brid: string, nodeUrl: string, sourceCodeUrl: string) {
     return this.filehub.executeOperation(user, op(
       "add_filechain_application",
       user.authDescriptor.id,

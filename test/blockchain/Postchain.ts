@@ -18,11 +18,11 @@ const FILECHAIN_BLOCKCHAIN_RID = config.filechainRID;
 const NEW_FILECHAIN_NODE_API_URL = config.newFilechainNodeApiUrl;
 const NEW_FILECHAIN_BLOCKCHAIN_RID = config.newFilechainRID;
 
-const COMMON_FILECHAIN_NODE_API_URL = config.commonFilechainNodeApiUrl;
-const COMMON_FILECHAIN_BLOCKCHAIN_RID = config.commonFilechainRID;
+const COMMUNITY_FILECHAIN_NODE_API_URL = config.communityFilechainNodeApiUrl;
+const COMMUNITY_FILECHAIN_BLOCKCHAIN_RID = config.communityFilechainRID;
 
-const COMMON_MIGRATION_FILECHAIN_NODE_API_URL = config.commonMigrationFilechainNodeApiUrl;
-const COMMON_MIGRATION_FILECHAIN_BLOCKCHAIN_RID = config.commonMigrationFilechainRID;
+const COMMUNITY_MIGRATION_FILECHAIN_NODE_API_URL = config.communityMigrationFilechainNodeApiUrl;
+const COMMUNITY_MIGRATION_FILECHAIN_BLOCKCHAIN_RID = config.communityMigrationFilechainRID;
 
 export const CHAINS = [
   new ChainConnectionInfo(Buffer.from(FILEHUB_BLOCKCHAIN_RID, "hex"), FILEHUB_NODE_API_URL),
@@ -30,12 +30,12 @@ export const CHAINS = [
   new ChainConnectionInfo(NEW_FILECHAIN_BLOCKCHAIN_RID != undefined
     ? Buffer.from(NEW_FILECHAIN_BLOCKCHAIN_RID, "hex")
     : Buffer.alloc(0), NEW_FILECHAIN_NODE_API_URL),
-  new ChainConnectionInfo(COMMON_FILECHAIN_BLOCKCHAIN_RID != undefined
-    ? Buffer.from(COMMON_FILECHAIN_BLOCKCHAIN_RID, "hex")
-    : Buffer.alloc(0), COMMON_FILECHAIN_NODE_API_URL),
-  new ChainConnectionInfo(COMMON_MIGRATION_FILECHAIN_BLOCKCHAIN_RID != undefined
-    ? Buffer.from(COMMON_MIGRATION_FILECHAIN_BLOCKCHAIN_RID, "hex")
-    : Buffer.alloc(0), COMMON_MIGRATION_FILECHAIN_NODE_API_URL)
+  new ChainConnectionInfo(COMMUNITY_FILECHAIN_BLOCKCHAIN_RID != undefined
+    ? Buffer.from(COMMUNITY_FILECHAIN_BLOCKCHAIN_RID, "hex")
+    : Buffer.alloc(0), COMMUNITY_FILECHAIN_NODE_API_URL),
+  new ChainConnectionInfo(COMMUNITY_MIGRATION_FILECHAIN_BLOCKCHAIN_RID != undefined
+    ? Buffer.from(COMMUNITY_MIGRATION_FILECHAIN_BLOCKCHAIN_RID, "hex")
+    : Buffer.alloc(0), COMMUNITY_MIGRATION_FILECHAIN_NODE_API_URL)
 ];
 
 export const FILEHUB = new Filehub(FILEHUB_NODE_API_URL, FILEHUB_BLOCKCHAIN_RID, CHAINS);

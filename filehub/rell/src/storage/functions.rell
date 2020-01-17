@@ -19,7 +19,8 @@ function _get_allocated_bytes(ft3_acc.account): integer {
 function chain_selector(used_plan: billing.plan): list<filechain> {
 	var chains = 1;
 	
-	if (used_plan == billing.plan.COMMON) {
+	// If we are storing in a COMMUNITY Filechain, then we need a higher level of HA.
+	if (used_plan == billing.plan.COMMUNITY) {
 		chains = 3;
 	}
 	

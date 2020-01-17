@@ -7,16 +7,16 @@ function _get_voucher_price(billing_plan: plan): integer {
 }
 
 function text_to_plan(text): plan {
-	require(text == "CHROMIA" or text == "COMMON", "undefined plan");
+	require(text == "CHROMIA" or text == "COMMUNITY", "undefined plan");
 	when {
 		text == "CHROMIA" -> return plan.CHROMIA;
-		else -> return plan.COMMON;
+		else -> return plan.COMMUNITY;
 	}
 }
 
 function plan_to_text(plan_to_convert: plan): text {
 	when {
 		plan_to_convert == plan.CHROMIA -> return "CHROMIA";
-		else -> return "COMMON";
+		else -> return "COMMUNITY";
 	}
 }

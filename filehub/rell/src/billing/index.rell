@@ -15,5 +15,5 @@ entity filechain_payment_record {
 
 enum plan {
 	CHROMIA,
-	COMMON
+	COMMUNITY
 }

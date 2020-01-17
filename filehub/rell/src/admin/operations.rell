@@ -18,7 +18,7 @@ operation approve_filechain_application(descriptor_id: byte_array, brid: byte_ar
     
     val application = filechain_application@{ brid };
     val filechain = create storage.filechain(brid);
-    create storage.active_filechain(filechain, billing.plan.COMMON, op_context.last_block_time, application.account);
+    create storage.active_filechain(filechain, billing.plan.COMMUNITY, op_context.last_block_time, application.account);
     delete application;
 }
 

@@ -7,7 +7,7 @@
     		<config height="0">
     			<app module="" />
                 <gtv path="gtx/filechain-id">
-                    <string>common-filechain</string>
+                    <string>community-filechain</string>
                 </gtv>
                 <dependencies>
                     <dependency name="filehub" brid="FILEHUB_BRID"/>
