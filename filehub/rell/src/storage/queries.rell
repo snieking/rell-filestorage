@@ -12,7 +12,7 @@ query get_file_location(descriptor_id: byte_array, name, replica_chains: integer
 	var available_chains = 0;
 	for (i in range(locations.size())) {
 		val brid = locations.get(i).brid;
-		if (available_chains >= replica_chains or offline_filechain@?{ .filechain.brid == brid } != null) {
+		if (available_chains > replica_chains or offline_filechain@?{ .filechain.brid == brid } != null) {
 			locations.remove_at(i);
  		} else {
  			available_chains++;

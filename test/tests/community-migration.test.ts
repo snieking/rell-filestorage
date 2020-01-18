@@ -62,6 +62,7 @@ describe(SUITE_NAME, () => {
     await FILEHUB.storeFile(user, FsFile.fromData(filename, Buffer.alloc(6)));
 
     await addBalance(communityFilechainOwner, 100);
+
     await FILECHAIN_ADMINISTRATOR.sendCommunityFilechainApplication(
       communityFilechainOwner,
       config.communityMigrationFilechainRID,

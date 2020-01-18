@@ -9,53 +9,51 @@ jobs:
 
     steps:
       - uses: actions/checkout@v1
-      - name: Setup PostgreSQL
-        uses: Harmon758/postgresql-action@v1.0.0
+
+      - name: Build Filehub image
+        run: ./build-image.sh
+        working-directory: filehub
+
+      - name: Build Filechain image
+        run: ./build-image.sh
+        working-directory: filechain
+
+      - name: Start Postgres
+        run: docker-compose up -d postgres
+        working-directory: test
+
+      - name: Start Filehub
+        run: docker-compose up -d filehub
+        working-directory: test
+
+      - name: Sleep for 15 seconds
+        uses: jakejarvis/wait-action@master
         with:
-          # Version of PostgreSQL to use
-          postgresql version: 10
-          # POSTGRES_DB - name for the default database that is created
-          postgresql db: filestorage 
-          # POSTGRES_USER - create the specified user with superuser power
-          postgresql user: postchain 
-          # POSTGRES_PASSWORD - superuser password
-          postgresql password: postchain
+          time: '15s'
 
-      # Build and deploy the Filehub
-      - name: Download Postchain and Rell binaries
-        run: ./download-binaries.sh
-        working-directory: filehub/rell
-      - name: Build Filehub
-        run: ./build.sh
-        working-directory: filehub/rell
-      - name: Run Filehub
-        run: ./run-dev-node.sh WIPE_DB > filehub.log &
-        working-directory: filehub/rell
-      
-      # Build and deploy CHROMIA Filechain
-      - name: Download Postchain and Rell Binaries
-        run: ./download-binaries.sh
-        working-directory: filechain/rell
-      - name: Add Filehub BRID to run.xml
-        run: sed -i "s/FILEHUB_BRID/$(cat ../../filehub/rell/target/blockchains/1/brid.txt)/g" run.xml
-        working-directory: filechain/rell
-      - name: Build CHROMIA Filechain
-        run: ./build.sh
-        working-directory: filechain/rell
-      - name: Run CHROMIA Filechain
-        run: ./run-dev-node.sh > filechain.log &
-        working-directory: filechain/rell
+      - name: Output Filehubs logs to verify it started correctly
+        run: docker logs filehub
 
-      # Build and deploy COMMUNITY Filechain
-      - name: Add Filehub BRID to run.xml
-        run: sed -i "s/FILEHUB_BRID/$(cat ../../../../filehub/rell/target/blockchains/1/brid.txt)/g" run.xml
-        working-directory: test/filechains/community/rell
-      - name: Build COMMUNITY Filechain
-        run: ./build.sh
-        working-directory: test/filechains/community/rell
-      - name: Run COMMUNITY Filechain
-        run: ./run-dev-node.sh > filechain.log &
-        working-directory: test/filechains/community/rell
+      - name: Save Filehub BRID to .env
+        run: ./env.sh
+        working-directory: test
+
+      - name: Start Filechains
+        run: docker-compose up -d
+        working-directory: test
+
+      - name: Sleep for 15 seconds
+        uses: jakejarvis/wait-action@master
+        with:
+          time: '15s'
+
+      - name: Save Filechain BRIDs to .env
+        run: ./add-filechain-to-env.sh
+        working-directory: test
+
+      - name: Output env
+        run: cat .env
+        working-directory: test
 
       # Build File Storage Client (fs-client)
       - name: Install dependencies for fs-client
@@ -85,14 +83,39 @@ jobs:
         working-directory: test
         continue-on-error: false
 
+      - name: Run CHROMIA migration
+        run: npm run silent-test-migration
+        working-directory: test
+        continue-on-error: false
+
+      - name: Run COMMUNITY migration
+        run: npm run silent-test-community-migration
+        working-directory: test
+        continue-on-error: false
+
       - name: Output Filehub log
-        run: cat filehub.log
-        working-directory: filehub/rell
+        run: docker logs filehub
 
       - name: Output CHROMIA Filechain log
-        run: cat filechain.log
-        working-directory: filechain/rell
+        run: docker logs chromia-filechain
 
       - name: Output COMMUNITY Filechain log
-        run: cat filechain.log
-        working-directory: test/filechains/community/rell
+        run: docker logs community-filechain
+
+      - name: Output old COMMUNITY Filechain log
+        run: docker logs community-filechain
+
+      - name: Output new COMMUNITY Filechain log
+        run: docker logs community-migration-filechain
+
+      - name: Docker login
+        uses: Azure/docker-login@v1
+        with:
+          username: snieking
+          password: ${{ secrets.DOCKER_HUB_PASSWORD }}
+
+      - name: Docker push filehub
+        run: docker push snieking/filehub
+
+      - name: Docker push filechain
+        run: docker push snieking/filechain

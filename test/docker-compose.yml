@@ -1,0 +1,82 @@
+version: "3"
+
+services:
+  postgres:
+    container_name: postgres
+    image: postgres:11
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_DB: filestorage
+      POSTGRES_USER: postchain
+      POSTGRES_PASSWORD: postchain
+#    volumes:
+#      - $HOME/docker/volumes/postgres:/var/lib/postgresql/data
+
+  filehub:
+    container_name: filehub
+    image: snieking/filehub
+    links:
+      - postgres
+    ports:
+      - 7740:7740
+      - 9870:9870
+    environment:
+      POSTGRES_HOST: postgres
+      CHAIN_IID: 0
+
+  chromia-filechain:
+    container_name: chromia-filechain
+    image: snieking/filechain
+    links:
+      - postgres
+      - filehub
+    ports:
+      - 7741:7740
+      - 9871:9870
+    environment:
+      FILEHUB_BRID: $FILEHUB_BRID
+      POSTGRES_HOST: postgres
+      CHAIN_IID: 1
+
+  chromia-migration-filechain:
+    container_name: chromia-migration-filechain
+    image: snieking/filechain
+    links:
+      - postgres
+      - filehub
+    ports:
+      - 7742:7740
+      - 9872:9870
+    environment:
+      FILEHUB_BRID: $FILEHUB_BRID
+      POSTGRES_HOST: postgres
+      CHAIN_IID: 2
+
+  community-filechain:
+    container_name: community-filechain
+    image: snieking/filechain
+    links:
+      - postgres
+      - filehub
+    ports:
+      - 7743:7740
+      - 9873:9870
+    environment:
+      FILEHUB_BRID: $FILEHUB_BRID
+      POSTGRES_HOST: postgres
+      CHAIN_IID: 3
+
+  community-migration-filechain:
+    container_name: community-migration-filechain
+    image: snieking/filechain
+    links:
+      - postgres
+      - filehub
+    ports:
+      - 7744:7740
+      - 9874:9870
+    environment:
+      FILEHUB_BRID: $FILEHUB_BRID
+      POSTGRES_HOST: postgres
+      CHAIN_IID: 4

@@ -3,11 +3,11 @@
         <config src="config/node-config.properties" add-signers="true" />
     </nodes>
     <chains>
-    	<chain name="filechain" iid="2">
+    	<chain name="filechain" iid="CHAIN_IID">
     		<config height="0">
     			<app module="" />
                 <gtv path="gtx/filechain-id">
-                    <string>chromia_filechain</string>
+                    <string>FILECHAIN_UID</string>
                 </gtv>
                 <dependencies>
                     <dependency name="filehub" brid="FILEHUB_BRID"/>

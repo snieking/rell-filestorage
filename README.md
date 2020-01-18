@@ -1,5 +1,5 @@
 # Rell Filestorage
-[![CI Build Status](https://github.com/snieking/rell-filestorage/workflows/continuous-integration/badge.svg)](https://github.com/snieking/rell-filestorage/actions) [![Migration Build Status](https://github.com/snieking/rell-filestorage/workflows/migration/badge.svg)](https://github.com/snieking/rell-filestorage/actions)
+[![CI Build Status](https://github.com/snieking/rell-filestorage/workflows/continuous-integration/badge.svg)](https://github.com/snieking/rell-filestorage/actions)
 
 See the [wiki](https://github.com/snieking/rell-filestorage/wiki) for all kinds of information on the project.
 

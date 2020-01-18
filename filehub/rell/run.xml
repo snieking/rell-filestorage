@@ -3,7 +3,7 @@
         <config src="config/node-config.properties" add-signers="true" />
     </nodes>
     <chains>
-    	<chain name="filehub" iid="1">
+    	<chain name="filehub" iid="CHAIN_IID">
     		<config height="0">
     			<app module="" />
     		</config>

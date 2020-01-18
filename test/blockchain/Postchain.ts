@@ -18,12 +18,6 @@ const FILECHAIN_BLOCKCHAIN_RID = config.filechainRID;
 const NEW_FILECHAIN_NODE_API_URL = config.newFilechainNodeApiUrl;
 const NEW_FILECHAIN_BLOCKCHAIN_RID = config.newFilechainRID;
 
-const COMMUNITY_FILECHAIN_NODE_API_URL = config.communityFilechainNodeApiUrl;
-const COMMUNITY_FILECHAIN_BLOCKCHAIN_RID = config.communityFilechainRID;
-
-const COMMUNITY_MIGRATION_FILECHAIN_NODE_API_URL = config.communityMigrationFilechainNodeApiUrl;
-const COMMUNITY_MIGRATION_FILECHAIN_BLOCKCHAIN_RID = config.communityMigrationFilechainRID;
-
 export const CHAINS = [
   new ChainConnectionInfo(Buffer.from(FILEHUB_BLOCKCHAIN_RID, "hex"), FILEHUB_NODE_API_URL),
   new ChainConnectionInfo(Buffer.from(FILECHAIN_BLOCKCHAIN_RID, "hex"), FILECHAIN_NODE_API_URL),
