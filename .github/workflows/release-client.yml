@@ -1,4 +1,4 @@
-name: publish-fs-client
+name: release-fs-client
 
 on:
   push:
