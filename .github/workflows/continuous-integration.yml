@@ -10,21 +10,9 @@ jobs:
     steps:
       - uses: actions/checkout@v1
 
-      - name: Filehub Docker lint check
-        uses: luke142367/Docker-Lint-Action@v1.0.0
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          TARGET: filehub/Dockerfile
-
       - name: Build Filehub image
         run: ./build-image.sh
         working-directory: filehub
-
-      - name: Filechain Docker lint check
-        uses: luke142367/Docker-Lint-Action@v1.0.0
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          TARGET: filechain/Dockerfile
 
       - name: Build Filechain image
         run: ./build-image.sh
