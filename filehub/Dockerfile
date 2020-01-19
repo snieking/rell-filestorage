@@ -1,4 +1,5 @@
 FROM openjdk:8
+MAINTAINER viktor.plane@chromia.com
 
 ENV POSTGRES_HOST=localhost
 ENV POSTGRES_SCHEMA=blockchain
