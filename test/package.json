@@ -4,6 +4,7 @@
   "private": true,
   "description": "Test project for the file storage dapp",
   "scripts": {
+    "format": "prettier --write \"**/*.ts\" \"**/*.js\"",
     "test-ci": "jest --setupFiles dotenv/config --group=ci",
     "silent-test-ci": "jest --setupFiles dotenv/config --silent --group=ci",
     "test-community-ci": "jest --setupFiles dotenv/config --group=community-ci",

@@ -1,0 +1,30 @@
+name: push-filechain
+
+on:
+  schedule:
+    - cron: "* 23 * * *"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Format client code
+        run: npm run format
+        working-directory: client
+
+      - name: Format test code
+        run: npm run format
+        working-directory: client
+
+      - name: Commit files
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git commit -m "Format code" -a
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
