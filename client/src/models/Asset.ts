@@ -1,10 +1,10 @@
-export interface Asset {
+export interface IAsset {
   id: Buffer;
   name: string;
   issuing_chain_rid: Buffer;
 }
 
-export interface AssetBalance {
+export interface IAssetBalance {
   id: Buffer;
   name: string;
   amount: number;

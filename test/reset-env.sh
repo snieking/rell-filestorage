@@ -14,10 +14,18 @@ cd ../test
 docker-compose up -d postgres
 docker-compose up -d filehub
 
-sleep 10
-./env.sh
+cd ../client
+npm install
+npm run build
 
+sleep 5
+
+cd ../test
+./env.sh
 docker-compose up -d
 
-sleep 15
+npm install
+
+sleep 5
+
 ./add-filechain-to-env.sh

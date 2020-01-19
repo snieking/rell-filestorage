@@ -1,6 +1,6 @@
 import Filehub from "./Filehub";
-import {FileTimestamp} from "../models/FileTimestamp";
-import {ChunkHashFilechain} from "../models/Chunk";
+import {IFileTimestamp} from "../models/FileTimestamp";
+import {IChunkHashFilechain} from "../models/Chunk";
 
 export default class AbstractAdministrator {
 
@@ -26,7 +26,7 @@ export default class AbstractAdministrator {
     return this.filehub.executeQuery("get_allocated_mb_in_filechain", { brid: brid });
   }
 
-  protected getFileTimestamps(brid: string, storedAt: number): Promise<FileTimestamp[]> {
+  protected getFileTimestamps(brid: string, storedAt: number): Promise<IFileTimestamp[]> {
     return this.filehub.executeQuery("get_files_belonging_to_active_voucher_in_brid_after_timestamp", {
       brid: brid,
       stored_at: storedAt,
@@ -35,7 +35,7 @@ export default class AbstractAdministrator {
     });
   }
 
-  protected getMigratableChunkHashesByName(brid: string, filetimestamp: FileTimestamp): Promise<ChunkHashFilechain[]> {
+  protected getMigratableChunkHashesByName(brid: string, filetimestamp: IFileTimestamp): Promise<IChunkHashFilechain[]> {
     return this.filehub.executeQuery("get_all_migratable_chunks_by_file", {
       brid: brid,
       name: filetimestamp.name,

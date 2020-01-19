@@ -1,7 +1,7 @@
 import Filehub from "./Filehub";
 import {op, User} from "ft3-lib";
 import AbstractAdministrator from "./AbstractAdministrator";
-import {FilechainApplication} from "../models/FilechainApplication";
+import {IFilechainApplication} from "../models/FilechainApplication";
 
 export default class FilehubAdministrator extends AbstractAdministrator {
 
@@ -29,7 +29,7 @@ export default class FilehubAdministrator extends AbstractAdministrator {
   /**
    * Returns a list of active Filechain applications.
    */
-  public listFilechainApplications(): Promise<FilechainApplication[]> {
+  public listFilechainApplications(): Promise<IFilechainApplication[]> {
     return this.filehub.executeQuery("list_filechain_applications", {});
   }
 

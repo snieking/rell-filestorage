@@ -1,4 +1,4 @@
-export interface FilechainLocation {
+export interface IFilechainLocation {
   brid: Buffer;
   location: string;
 }

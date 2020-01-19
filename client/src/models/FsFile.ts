@@ -5,9 +5,9 @@ import * as fs from "fs";
 export default class FsFile {
   private static BYTES: number = 100000;
 
-  readonly name: string;
-  readonly chunks?: Buffer[];
-  readonly size: number;
+  public readonly name: string;
+  public readonly chunks?: Buffer[];
+  public readonly size: number;
 
   private readonly data?: Buffer;
 
@@ -20,12 +20,11 @@ export default class FsFile {
       this.size = data.length;
     } else {
       const stats = fs.statSync(name);
-      this.size = stats["size"];
+      this.size = stats.size;
     }
   }
 
   public getChunk(index: number): Promise<Buffer> {
-    console.log("Reading chunk by index: ", index);
     if (this.data != null) {
       return new Promise<Buffer>((resolve, error) => this.chunks != null
         ? resolve(this.chunks[index])

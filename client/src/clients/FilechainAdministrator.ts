@@ -2,8 +2,8 @@ import Filehub from "./Filehub";
 import AbstractAdministrator from "./AbstractAdministrator";
 import {op, User} from "ft3-lib";
 import logger from "../logger";
-import {FileTimestamp} from "../models/FileTimestamp";
-import {ChunkHashFilechain} from "../models/Chunk";
+import {IFileTimestamp} from "../models/FileTimestamp";
+import {IChunkHashFilechain} from "../models/Chunk";
 
 export default class FilechainAdministrator extends AbstractAdministrator {
 
@@ -42,7 +42,7 @@ export default class FilechainAdministrator extends AbstractAdministrator {
 
     logger.info("Starting migration from filechain: %s", fromBrid);
     for (;;) {
-      const fileTimestamps: FileTimestamp[] = await this.getFileTimestamps(fromBrid, FilechainAdministrator.FIRST_TIMESTAMP);
+      const fileTimestamps: IFileTimestamp[] = await this.getFileTimestamps(fromBrid, FilechainAdministrator.FIRST_TIMESTAMP);
 
       for (const fileTimestamp of fileTimestamps) {
         await this.filehub.executeOperation(user, op(
@@ -52,7 +52,7 @@ export default class FilechainAdministrator extends AbstractAdministrator {
           fileTimestamp.timestamp,
           fromBrid
         ));
-        const chunkHashes: ChunkHashFilechain[] = await this.getMigratableChunkHashesByName(fromBrid, fileTimestamp);
+        const chunkHashes: IChunkHashFilechain[] = await this.getMigratableChunkHashesByName(fromBrid, fileTimestamp);
 
         for (const chunkHash of chunkHashes) {
           await this.filehub.copyChunkDataToOtherBrid(user, chunkHash);
