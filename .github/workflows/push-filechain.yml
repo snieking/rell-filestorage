@@ -41,9 +41,10 @@ jobs:
           replace-with: ""
 
       - name: Publish image
-        uses: manusa/actions-publish-docker@v1.0.1
+        uses: elgohr/Publish-Docker-Github-Action@master
         with:
           name: snieking/filechain
-          tag: ${{ steps.tag_final.outputs.replaced }}
+          tags: ${{ steps.tag_final.outputs.replaced }}
           username: snieking
           password: ${{ secrets.DOCKER_HUB_PASSWORD }}
+          workdir: filechain
