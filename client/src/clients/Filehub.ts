@@ -67,7 +67,10 @@ export default class Filehub {
       }
 
       logger.debug("Executing %O", operation);
-      return trxBuilder.buildAndSign(user).post();
+      return trxBuilder.buildAndSign(user).post().catch(error => {
+        logger.error("Error executing operation %s %O", operation.name, error);
+        throw error;
+      });
     });
   }
 
