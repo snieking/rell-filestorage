@@ -1,6 +1,7 @@
 # Rell Filestorage
 [![CI Build Status](https://github.com/snieking/rell-filestorage/workflows/continuous-integration/badge.svg)](https://github.com/snieking/rell-filestorage/actions)
-[![@snieking/fs-client](https://img.shields.io/npm/v/@snieking/fs-client?label=%40snieking%2Ffs-client)](https://img.shields.io/npm/v/@snieking/fs-client?label=%40snieking%2Ffs-client)
+[![fs-client](https://img.shields.io/npm/v/@snieking/fs-client?label=fs-client)](https://img.shields.io/npm/v/@snieking/fs-client?label=fs-client)
+[![fs-client downloads](https://img.shields.io/npm/dt/@snieking/fs-client?label=fs-client%20downloads)](https://img.shields.io/npm/dt/@snieking/fs-client?label=fs-client%20downloads)
 [![Filechain Docker Pulls](https://img.shields.io/docker/pulls/snieking/filechain?label=filechain%20docker%20pulls)](https://img.shields.io/docker/pulls/snieking/filechain?label=filechain%20docker%20pulls)
 [![Filehub Docker Pulls](https://img.shields.io/docker/pulls/snieking/filehub?label=filehub%20docker%20pulls)](https://img.shields.io/docker/pulls/snieking/filehub?label=filehub%20docker%20pulls)
 
