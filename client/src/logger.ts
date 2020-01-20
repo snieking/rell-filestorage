@@ -2,6 +2,7 @@ import { createLogger, format, transports } from 'winston';
 
 const { combine, timestamp, colorize, printf, splat, label} = format;
 const logger = createLogger({
+  exitOnError: false,
   format: combine(
     timestamp(),
     colorize(),
@@ -13,8 +14,7 @@ const logger = createLogger({
     new transports.Console({
       level: process.env.NODE_ENV === "production" ? "info" : "debug"
     })
-  ],
-  exitOnError: false,
+  ]
 });
 
 export default logger;

@@ -1,8 +1,8 @@
-name: push-filechain
+name: formatting
 
 on:
   schedule:
-    - cron: "* 23 * * *"
+    - cron: "10 23 * * *"
 
 jobs:
   build:
@@ -14,10 +14,14 @@ jobs:
       - name: Format client code
         run: npm run format
         working-directory: client
+        env:
+          NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
 
       - name: Format test code
         run: npm run format
-        working-directory: client
+        working-directory: test
+        env:
+          NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
 
       - name: Commit files
         run: |

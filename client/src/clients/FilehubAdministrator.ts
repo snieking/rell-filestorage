@@ -1,7 +1,7 @@
-import Filehub from "./Filehub";
 import {op, User} from "ft3-lib";
-import AbstractAdministrator from "./AbstractAdministrator";
 import {IFilechainApplication} from "../models/FilechainApplication";
+import AbstractAdministrator from "./AbstractAdministrator";
+import Filehub from "./Filehub";
 
 export default class FilehubAdministrator extends AbstractAdministrator {
 

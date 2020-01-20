@@ -1,7 +1,7 @@
-import * as pcl from "postchain-client";
 import {User} from "ft3-lib";
-import {hashData} from "../utils/crypto";
+import * as pcl from "postchain-client";
 import logger from "../logger";
+import {hashData} from "../utils/crypto";
 
 export default class Filechain {
 
@@ -23,7 +23,7 @@ export default class Filechain {
     tx.addOperation("add_chunk_data", data);
     tx.sign(user.keyPair.privKey, user.keyPair.pubKey);
     return tx.postAndWaitConfirmation().catch((error: Error) => {
-      return this.restClient.query("chunk_hash_exists", { hash: hash })
+      return this.restClient.query("chunk_hash_exists", { hash })
         .then((exists: boolean) => {
           if (!exists) {
             if (error.message.includes("500")) {
@@ -40,7 +40,7 @@ export default class Filechain {
 
   public getChunkDataByHash(hash: string): Promise<string> {
     logger.debug("Retrieving chunk data by hash %s from filechain: %s", hash, this.brid);
-    return this.restClient.query("get_chunk", { hash: hash });
+    return this.restClient.query("get_chunk", { hash });
   }
 
 }

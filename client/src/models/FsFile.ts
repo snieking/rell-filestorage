@@ -1,12 +1,38 @@
-import {ChunkIndex} from "./Chunk";
-import readChunk from "read-chunk";
 import * as fs from "fs";
+import readChunk from "read-chunk";
+import {ChunkIndex} from "./Chunk";
 
 export default class FsFile {
+
+  public static fromPath(name: string) {
+    return new FsFile(name, undefined);
+  }
+
+  public static fromData(name: string, data: Buffer) {
+    return new FsFile(name, data);
+  }
+
+  public static fromChunks(name: string, chunks: ChunkIndex[]) {
+    const dataChunks: Buffer[] = chunks.sort((a: ChunkIndex, b: ChunkIndex) => a.idx - b.idx).map((c: ChunkIndex) => c.data);
+    return new FsFile(name, Buffer.concat(dataChunks));
+  }
+
   private static BYTES: number = 100000;
+
+  private static sliceIntoChunks(data: Buffer): Buffer[] {
+    const nrOfChunks = Math.ceil(data.length / FsFile.BYTES);
+
+    const chunks: Buffer[] = [];
+    for (let i = 0; i < nrOfChunks; i++) {
+      chunks.push(data.slice(i * FsFile.BYTES, (i+1) * FsFile.BYTES));
+    }
+
+    return chunks;
+  }
 
   public readonly name: string;
   public readonly chunks?: Buffer[];
+
   public readonly size: number;
 
   private readonly data?: Buffer;
@@ -53,30 +79,6 @@ export default class FsFile {
     }
 
     return Buffer.concat(dataChunks);
-  }
-
-  public static fromPath(name: string) {
-    return new FsFile(name, undefined);
-  }
-
-  public static fromData(name: string, data: Buffer) {
-    return new FsFile(name, data);
-  }
-
-  public static fromChunks(name: string, chunks: ChunkIndex[]) {
-    const dataChunks: Buffer[] = chunks.sort((a: ChunkIndex, b: ChunkIndex) => a.idx - b.idx).map((c: ChunkIndex) => c.data);
-    return new FsFile(name, Buffer.concat(dataChunks));
-  }
-
-  private static sliceIntoChunks(data: Buffer): Buffer[] {
-    const nrOfChunks = Math.ceil(data.length / FsFile.BYTES);
-
-    const chunks: Buffer[] = [];
-    for (let i = 0; i < nrOfChunks; i++) {
-      chunks.push(data.slice(i * FsFile.BYTES, (i+1) * FsFile.BYTES));
-    }
-
-    return chunks;
   }
 
 }

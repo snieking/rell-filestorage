@@ -1,9 +1,9 @@
-import Filehub from "./Filehub";
-import AbstractAdministrator from "./AbstractAdministrator";
 import {op, User} from "ft3-lib";
 import logger from "../logger";
-import {IFileTimestamp} from "../models/FileTimestamp";
 import {IChunkHashFilechain} from "../models/Chunk";
+import {IFileTimestamp} from "../models/FileTimestamp";
+import AbstractAdministrator from "./AbstractAdministrator";
+import Filehub from "./Filehub";
 
 export default class FilechainAdministrator extends AbstractAdministrator {
 
