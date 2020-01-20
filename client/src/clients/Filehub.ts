@@ -283,7 +283,7 @@ export default class Filehub {
     return this.persistChunkDataInFilechain(user, newFilechain, Buffer.from(data, "hex"));
   }
 
-  private storeChunks(user: User, file: FsFile, filechainLocation: IFilechainLocation, fileName: string, options?: IFileStoringOptions) {
+  private async storeChunks(user: User, file: FsFile, filechainLocation: IFilechainLocation, fileName: string, options?: IFileStoringOptions) {
     const filechain: Filechain = this.initFilechainClient(filechainLocation);
 
     const promises: Array<Promise<any>> = [];
@@ -293,7 +293,8 @@ export default class Filehub {
       );
     }
 
-    return Promise.all(promises);
+    const result = await Promise.all(promises);
+    return result;
   }
 
   private storeChunk(user: User, filechain: Filechain, chunkIndex: ChunkIndex, name: string, options?: IFileStoringOptions) {
