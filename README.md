@@ -1,5 +1,5 @@
 # Rell Filestorage
-[![CI Build Status](https://github.com/snieking/rell-filestorage/workflows/continuous-integration/badge.svg)](https://github.com/snieking/rell-filestorage/actions)
+[![CI Build Status](https://github.com/snieking/rell-filestorage/workflows/continuous-integration/badge.svg)](https://github.com/snieking/rell-filestorage/actions) [![@snieking/fs-client](https://img.shields.io/npm/v/@snieking/fs-client?label=%40snieking%2Ffs-client)](https://img.shields.io/npm/v/@snieking/fs-client?label=%40snieking%2Ffs-client)
 
 See the [wiki](https://github.com/snieking/rell-filestorage/wiki) for all kinds of information on the project.
 
