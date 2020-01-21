@@ -1,0 +1,43 @@
+{
+  "name": "healthchecker",
+  "version": "1.0.0",
+  "description": "Checks the health of community Filechains",
+  "main": "src/main.ts",
+  "bugs": {
+    "url": "https://github.com/snieking/rell-filestorage/issues"
+  },
+  "homepage": "https://github.com/snieking/rell-filestorage#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/snieking/rell-filestorage.git"
+  },
+  "scripts": {
+    "build": "tsc",
+    "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
+    "lint": "tslint -p tsconfig.json",
+    "health-check": "node -r dotenv/config lib/main.js"
+  },
+  "dependencies": {
+    "@types/node": "^13.1.2",
+    "dotenv": "^8.2.0",
+    "fs-client": "file:../client"
+  },
+  "devDependencies": {
+    "@types/crypto-js": "^3.1.43",
+    "prettier": "^1.19.1",
+    "tslint": "^5.20.1",
+    "tslint-config-prettier": "^1.18.0",
+    "tslint-eslint-rules": "^5.4.0",
+    "tslint-react": "^4.1.0",
+    "typescript": "^3.7.4"
+  },
+  "keywords": [
+    "chromia",
+    "blockchain",
+    "filestorage",
+    "filehub",
+    "filechain"
+  ],
+  "author": "snieking",
+  "license": "ISC"
+}

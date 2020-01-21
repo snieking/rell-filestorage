@@ -286,6 +286,32 @@ export default class Filehub {
     return this.persistChunkDataInFilechain(user, newFilechain, Buffer.from(data, "hex"));
   }
 
+  initFilechainClient(filechainLocation: IFilechainLocation): Filechain {
+    const brid = filechainLocation.brid.toString("hex");
+    let location = filechainLocation.location;
+
+    logger.debug("Initializing filechain client with brid: %s", brid);
+
+    if (location === "@DirectoryService") {
+      logger.debug("Searching for Filechain location [%s] in DirectoryService", brid);
+      const chain = this.chains
+        .find(c => {
+          const directoryChain = c.chainId.toString("hex").toLocaleUpperCase();
+          logger.silly("Found in DC: %s", directoryChain);
+
+          return directoryChain === brid.toLocaleUpperCase();
+        });
+
+      if (chain == null) {
+        throw new Error("Expected filechain not found in directory service");
+      }
+
+      location = chain.url;
+    }
+
+    return new Filechain(location, brid);
+  }
+
   private async storeChunks(user: User, file: FsFile, filechainLocation: IFilechainLocation, fileName: string, options?: IFileStoringOptions) {
     const filechain: Filechain = this.initFilechainClient(filechainLocation);
 
@@ -345,31 +371,5 @@ export default class Filehub {
 
     return this.executeOperation(user, operation);
   };
-
-  private initFilechainClient(filechainLocation: IFilechainLocation): Filechain {
-    const brid = filechainLocation.brid.toString("hex");
-    let location = filechainLocation.location;
-
-    logger.debug("Initializing filechain client with brid: %s", brid);
-
-    if (location === "@DirectoryService") {
-      logger.debug("Searching for Filechain location [%s] in DirectoryService", brid);
-      const chain = this.chains
-        .find(c => {
-          const directoryChain = c.chainId.toString("hex").toLocaleUpperCase();
-          logger.silly("Found in DC: %s", directoryChain);
-
-          return directoryChain === brid.toLocaleUpperCase();
-        });
-
-      if (chain == null) {
-        throw new Error("Expected filechain not found in directory service");
-      }
-
-      location = chain.url;
-    }
-
-    return new Filechain(location, brid);
-  }
 
 }

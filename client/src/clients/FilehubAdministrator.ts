@@ -2,6 +2,8 @@ import {op, User} from "ft3-lib";
 import {IFilechainApplication} from "../models/FilechainApplication";
 import AbstractAdministrator from "./AbstractAdministrator";
 import Filehub from "./Filehub";
+import {IFilechainLocation} from "../models/FilechainLocation";
+import Filechain from "./Filechain";
 
 export default class FilehubAdministrator extends AbstractAdministrator {
 
@@ -25,6 +27,20 @@ export default class FilehubAdministrator extends AbstractAdministrator {
   public registerFilechain(user: User, rid: string): Promise<any> {
     return this.filehub.executeOperation(user, op("add_chromia_filechain", user.authDescriptor.id, rid));
   };
+
+  /**
+   * List community filechain locations.
+   */
+  public listCommunityFilechainLocations(): Promise<Array<IFilechainLocation>> {
+    return this.filehub.executeQuery("list_community_filechain_locations", {});
+  }
+
+  /**
+   * Gets a Filechain from a filechain location.
+   */
+  public getFilechain(filechainLocation: IFilechainLocation): Filechain {
+    return this.filehub.initFilechainClient(filechainLocation);
+  }
 
   /**
    * Returns a list of active Filechain applications.

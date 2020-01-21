@@ -11,22 +11,26 @@ jobs:
     steps:
       - uses: actions/checkout@v1
 
+      - name: Install dependencies
+        run: npm install
+        working-directory: client
+
       - name: Format client code
         run: npm run format
         working-directory: client
-        env:
-          NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+
+      - name: Install dependencies
+        run: npm install
+        working-directory: test
 
       - name: Format test code
         run: npm run format
         working-directory: test
-        env:
-          NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
 
       - name: Commit files
         run: |
           git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
+          git config --local user.name "Formatter"
           git commit -m "Format code" -a
       - name: Push changes
         uses: ad-m/github-push-action@master
