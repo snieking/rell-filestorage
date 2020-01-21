@@ -5,16 +5,13 @@ import {
   FILEHUB_ADMININISTRATOR,
   initFilehub
 } from "../blockchain/Postchain";
-import {createFt3User} from "./utils/users";
+import { createFt3User } from "./utils/users";
 import * as config from "../blockchain/config";
 import FsFile from "../../client/lib/models/FsFile";
-import {addBalance, registerAsset} from "./utils/utils";
-import {User} from "ft3-lib";
+import { addBalance, registerAsset } from "./utils/utils";
+import { User } from "ft3-lib";
 import logger from "../logger";
-import {
-  COMMUNITY_PLAN,
-  SUFFICIENT_BALANCE_FOR_COMMUNITY_VOUCHER
-} from "./utils/constants";
+import { COMMUNITY_PLAN, SUFFICIENT_BALANCE_FOR_COMMUNITY_VOUCHER } from "./utils/constants";
 
 jest.setTimeout(120000);
 
@@ -24,7 +21,6 @@ const SUITE_NAME = "COMMUNITY Migration tests";
  * @group community-migration
  */
 describe(SUITE_NAME, () => {
-
   const MIGRATE_CHAIN = "Migrate chain";
 
   const filename = "file-to-be-migrated";
@@ -77,5 +73,4 @@ describe(SUITE_NAME, () => {
     const file = await FILEHUB.getFileByName(user, filename);
     expect(file.readFullData().length).toEqual(6);
   });
-
 });

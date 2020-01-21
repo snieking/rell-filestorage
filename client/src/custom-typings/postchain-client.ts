@@ -1,2 +1,2 @@
 // @ts-ignore
-declare module 'postchain-client';
+declare module "postchain-client";

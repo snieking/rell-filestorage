@@ -5,16 +5,15 @@ import {
   FILEHUB_ADMININISTRATOR,
   initFilehub
 } from "../blockchain/Postchain";
-import {createFt3User} from "./utils/users";
-import {addBalance, generateRandomString, registerAsset} from "./utils/utils";
-import {User} from "ft3-lib";
+import { createFt3User } from "./utils/users";
+import { addBalance, generateRandomString, registerAsset } from "./utils/utils";
+import { User } from "ft3-lib";
 import * as crypto from "crypto";
 
 /**
  * @group ci
  */
 describe("Administration of a COMMUNITY filechain", () => {
-
   const SUFFICIENT_BALANCE = 100;
   const INSUFFICIENT_BALANCE = 99;
 
@@ -31,8 +30,12 @@ describe("Administration of a COMMUNITY filechain", () => {
     await addBalance(user, INSUFFICIENT_BALANCE);
 
     const brid = createBrid();
-    await FILECHAIN_ADMINISTRATOR.sendCommunityFilechainApplication(user, brid, "localhost", "github.com")
-      .catch(error => expect(error).toBeDefined());
+    await FILECHAIN_ADMINISTRATOR.sendCommunityFilechainApplication(
+      user,
+      brid,
+      "localhost",
+      "github.com"
+    ).catch(error => expect(error).toBeDefined());
 
     const applications = await FILEHUB_ADMININISTRATOR.listFilechainApplications();
     expect(applications.length).toEqual(0);
@@ -71,7 +74,9 @@ describe("Administration of a COMMUNITY filechain", () => {
     expect(applications.length).toEqual(1);
 
     // Non-user attempts to approve
-    await FILEHUB_ADMININISTRATOR.approveCommunityFilechainApplication(user, brid).catch(error => expect(error).toBeDefined());
+    await FILEHUB_ADMININISTRATOR.approveCommunityFilechainApplication(user, brid).catch(error =>
+      expect(error).toBeDefined()
+    );
     applications = await FILEHUB_ADMININISTRATOR.listFilechainApplications();
     expect(applications.length).toEqual(1);
 
@@ -94,7 +99,9 @@ describe("Administration of a COMMUNITY filechain", () => {
     expect(applications.length).toEqual(1);
 
     // Non-admin tries to reject
-    await FILEHUB_ADMININISTRATOR.rejectCommunityFilechainApplication(user, brid).catch(error => expect(error).toBeDefined());
+    await FILEHUB_ADMININISTRATOR.rejectCommunityFilechainApplication(user, brid).catch(error =>
+      expect(error).toBeDefined()
+    );
     applications = await FILEHUB_ADMININISTRATOR.listFilechainApplications();
     expect(applications.length).toEqual(1);
 
@@ -105,9 +112,12 @@ describe("Administration of a COMMUNITY filechain", () => {
 
     expect.assertions(4);
   });
-
 });
 
 const createBrid = () => {
-  return crypto.createHash("SHA256").update(generateRandomString(36)).digest().toString("hex");
+  return crypto
+    .createHash("SHA256")
+    .update(generateRandomString(36))
+    .digest()
+    .toString("hex");
 };

@@ -1,9 +1,8 @@
-import {IChunkHashFilechain} from "../models/Chunk";
-import {IFileTimestamp} from "../models/FileTimestamp";
+import { IChunkHashFilechain } from "../models/Chunk";
+import { IFileTimestamp } from "../models/FileTimestamp";
 import Filehub from "./Filehub";
 
 export default class AbstractAdministrator {
-
   protected static PAGE_SIZE = 100;
 
   protected readonly filehub: Filehub;
@@ -35,7 +34,10 @@ export default class AbstractAdministrator {
     });
   }
 
-  protected getMigratableChunkHashesByName(brid: string, filetimestamp: IFileTimestamp): Promise<IChunkHashFilechain[]> {
+  protected getMigratableChunkHashesByName(
+    brid: string,
+    filetimestamp: IFileTimestamp
+  ): Promise<IChunkHashFilechain[]> {
     return this.filehub.executeQuery("get_all_migratable_chunks_by_file", {
       brid,
       current_time: Date.now(),
@@ -43,5 +45,4 @@ export default class AbstractAdministrator {
       timestamp: filetimestamp.timestamp
     });
   }
-
 }

@@ -1,6 +1,6 @@
-import { createLogger, format, transports } from 'winston';
+import { createLogger, format, transports } from "winston";
 
-const { combine, timestamp, colorize, printf, splat, label} = format;
+const { combine, timestamp, colorize, printf, splat, label } = format;
 const logger = createLogger({
   exitOnError: false,
   format: combine(

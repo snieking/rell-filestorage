@@ -1,20 +1,19 @@
-import { AES, enc } from 'crypto-js';
-import {Blockchain, ChainConnectionInfo, nop, op, Operation, User} from "ft3-lib";
-import {hashData} from "../utils/crypto";
+import { AES, enc } from "crypto-js";
+import { Blockchain, ChainConnectionInfo, nop, op, Operation, User } from "ft3-lib";
+import { hashData } from "../utils/crypto";
 import DirectoryService from "./DirectoryService";
 
 import * as fs from "fs";
-import {IVoucher} from "..";
+import { IVoucher } from "..";
 import logger from "../logger";
-import {IAsset, IAssetBalance} from "../models/Asset";
-import {ChunkIndex, IChunkHashFilechain, IChunkHashIndex} from "../models/Chunk";
-import {IFilechainLocation} from "../models/FilechainLocation";
-import {IFileStoringOptions} from "../models/FileStoringOptions";
+import { IAsset, IAssetBalance } from "../models/Asset";
+import { ChunkIndex, IChunkHashFilechain, IChunkHashIndex } from "../models/Chunk";
+import { IFilechainLocation } from "../models/FilechainLocation";
+import { IFileStoringOptions } from "../models/FileStoringOptions";
 import FsFile from "../models/FsFile";
 import Filechain from "./Filechain";
 
 export default class Filehub {
-
   private static encrypt(data: string, passphrase: string): string {
     return AES.encrypt(data, passphrase).toString();
   }
@@ -29,8 +28,8 @@ export default class Filehub {
 
   private static bufferArray(array: any[], buffer: number): any[][] {
     const arrayOfArrays: any[][] = [];
-    for (let i=0; i<array.length; i+=buffer) {
-      arrayOfArrays.push(array.slice(i, i+buffer));
+    for (let i = 0; i < array.length; i += buffer) {
+      arrayOfArrays.push(array.slice(i, i + buffer));
     }
 
     return arrayOfArrays;
@@ -46,10 +45,7 @@ export default class Filehub {
     this.brid = brid;
     this.nodeApiUrl = nodeApiUrl;
     this.chains = chainConnectionInfo;
-    this.blockchain = Blockchain.initialize(
-      Buffer.from(brid, "hex"),
-      new DirectoryService(chainConnectionInfo)
-    );
+    this.blockchain = Blockchain.initialize(Buffer.from(brid, "hex"), new DirectoryService(chainConnectionInfo));
   }
 
   /**
@@ -67,10 +63,13 @@ export default class Filehub {
       }
 
       logger.debug("Executing %O", operation);
-      return trxBuilder.buildAndSign(user).post().catch(error => {
-        logger.error("Error executing operation %s %O", operation.name, error);
-        throw error;
-      });
+      return trxBuilder
+        .buildAndSign(user)
+        .post()
+        .catch(error => {
+          logger.error("Error executing operation %s %O", operation.name, error);
+          throw error;
+        });
     });
   }
 
@@ -93,7 +92,8 @@ export default class Filehub {
    */
   public async purchaseVoucher(user: User, plan: string): Promise<any> {
     const bc = await this.blockchain;
-    return bc.transactionBuilder()
+    return bc
+      .transactionBuilder()
       .add(nop())
       .add(op("purchase_voucher", user.authDescriptor.id, plan))
       .buildAndSign(user)
@@ -106,22 +106,28 @@ export default class Filehub {
    * @param passphrase optional options for storing the file.
    */
   public async storeFile(user: User, file: FsFile, options?: IFileStoringOptions): Promise<any> {
-    const fileName = options !== undefined && options && options.passphrase !== undefined && options.filenameEncrypted
-      ? Filehub.encrypt(file.name, options.passphrase)
-      : file.name;
+    const fileName =
+      options !== undefined && options && options.passphrase !== undefined && options.filenameEncrypted
+        ? Filehub.encrypt(file.name, options.passphrase)
+        : file.name;
 
-    await this.executeOperation(user, op(
-      "allocate_file",
-      user.authDescriptor.id,
-      fileName,
-      file.size,
-      options && options.plan ? options.plan : "CHROMIA"
-    ));
+    await this.executeOperation(
+      user,
+      op(
+        "allocate_file",
+        user.authDescriptor.id,
+        fileName,
+        file.size,
+        options && options.plan ? options.plan : "CHROMIA"
+      )
+    );
 
     const filechainLocations = await this.getFileLocation(user, fileName, 3);
 
     const promises: Array<Promise<any>> = [];
-    filechainLocations.forEach(filechainLocation => promises.push(this.storeChunks(user, file, filechainLocation, fileName, options)));
+    filechainLocations.forEach(filechainLocation =>
+      promises.push(this.storeChunks(user, file, filechainLocation, fileName, options))
+    );
 
     const result = await Promise.all(promises);
     return result;
@@ -131,9 +137,10 @@ export default class Filehub {
    * Marks a file for removal, the chunks of the file are removed at the next Filechain migration.
    */
   public removeFile(user: User, name: string, options?: IFileStoringOptions): Promise<any> {
-    const fileName = options !== undefined && options && options.passphrase !== undefined && options.filenameEncrypted
-      ? Filehub.encrypt(name, options.passphrase)
-      : name;
+    const fileName =
+      options !== undefined && options && options.passphrase !== undefined && options.filenameEncrypted
+        ? Filehub.encrypt(name, options.passphrase)
+        : name;
 
     return this.executeOperation(user, op("deallocate_file", user.authDescriptor.id, fileName));
   }
@@ -154,7 +161,6 @@ export default class Filehub {
    */
   public async getFileByName(user: User, name: string, options?: IFileStoringOptions): Promise<FsFile> {
     try {
-
       const filechainLocations = await this.getFileLocation(user, name, 1);
 
       const chunkHashes: IChunkHashIndex[] = await this.executeQuery("get_file_chunks", {
@@ -172,13 +178,21 @@ export default class Filehub {
       if (!options || !options.passphrase) {
         return new Promise(resolve => resolve(FsFile.fromChunks(name, chunkIndexes)));
       } else {
-        return new Promise(resolve => resolve(FsFile.fromChunks(
-          options.filenameEncrypted
-            ? Filehub.decrypt(name, options.passphrase!)
-            : name,
-          chunkIndexes.map(chunk => new ChunkIndex(Buffer.from(Filehub.decrypt(chunk.data.toString("utf8"), options.passphrase!), "utf8"), chunk.idx)))));
+        return new Promise(resolve =>
+          resolve(
+            FsFile.fromChunks(
+              options.filenameEncrypted ? Filehub.decrypt(name, options.passphrase!) : name,
+              chunkIndexes.map(
+                chunk =>
+                  new ChunkIndex(
+                    Buffer.from(Filehub.decrypt(chunk.data.toString("utf8"), options.passphrase!), "utf8"),
+                    chunk.idx
+                  )
+              )
+            )
+          )
+        );
       }
-
     } catch (error) {
       logger.info("Error retrieving file: %O", error);
       const reject: Promise<FsFile> = Promise.reject(error);
@@ -205,7 +219,9 @@ export default class Filehub {
 
     const location = path
       ? path
-      : (options && options.passphrase && options.filenameEncrypted ? Filehub.decrypt(name, options.passphrase) : name);
+      : options && options.passphrase && options.filenameEncrypted
+      ? Filehub.decrypt(name, options.passphrase)
+      : name;
 
     fs.writeFileSync(location, [], "utf8");
 
@@ -216,13 +232,20 @@ export default class Filehub {
 
       const chunkIndexes = await Promise.all(promises);
       const deletePromises: Array<Promise<void>> = [];
-      chunkIndexes.every(value => deletePromises.push(
-        new Promise<void>(resolve => resolve(fs.appendFileSync(
-          location, options && options.passphrase
-            ? Filehub.decrypt(value.data.toString(), options.passphrase)
-            : value.data.toString())
-        ))
-      ));
+      chunkIndexes.every(value =>
+        deletePromises.push(
+          new Promise<void>(resolve =>
+            resolve(
+              fs.appendFileSync(
+                location,
+                options && options.passphrase
+                  ? Filehub.decrypt(value.data.toString(), options.passphrase)
+                  : value.data.toString()
+              )
+            )
+          )
+        )
+      );
 
       await Promise.all(deletePromises);
     }
@@ -276,9 +299,13 @@ export default class Filehub {
     const filechainLocation: IFilechainLocation = { brid: chunkHash.brid, location: chunkHash.location };
     const oldFilechain = this.initFilechainClient(filechainLocation);
 
-    const newLocation: IFilechainLocation = await this.executeQuery("get_active_filechain_for_hash_in_disabled_filechain", {
-      brid: chunkHash.brid.toString("hex"), hash: chunkHash.hash
-    });
+    const newLocation: IFilechainLocation = await this.executeQuery(
+      "get_active_filechain_for_hash_in_disabled_filechain",
+      {
+        brid: chunkHash.brid.toString("hex"),
+        hash: chunkHash.hash
+      }
+    );
 
     const newFilechain = this.initFilechainClient(newLocation);
 
@@ -294,13 +321,12 @@ export default class Filehub {
 
     if (location === "@DirectoryService") {
       logger.debug("Searching for Filechain location [%s] in DirectoryService", brid);
-      const chain = this.chains
-        .find(c => {
-          const directoryChain = c.chainId.toString("hex").toLocaleUpperCase();
-          logger.silly("Found in DC: %s", directoryChain);
+      const chain = this.chains.find(c => {
+        const directoryChain = c.chainId.toString("hex").toLocaleUpperCase();
+        logger.silly("Found in DC: %s", directoryChain);
 
-          return directoryChain === brid.toLocaleUpperCase();
-        });
+        return directoryChain === brid.toLocaleUpperCase();
+      });
 
       if (chain == null) {
         throw new Error("Expected filechain not found in directory service");
@@ -312,7 +338,13 @@ export default class Filehub {
     return new Filechain(location, brid);
   }
 
-  private async storeChunks(user: User, file: FsFile, filechainLocation: IFilechainLocation, fileName: string, options?: IFileStoringOptions) {
+  private async storeChunks(
+    user: User,
+    file: FsFile,
+    filechainLocation: IFilechainLocation,
+    fileName: string,
+    options?: IFileStoringOptions
+  ) {
     const filechain: Filechain = this.initFilechainClient(filechainLocation);
 
     const promises: Array<Promise<any>> = [];
@@ -326,13 +358,21 @@ export default class Filehub {
     return result;
   }
 
-  private storeChunk(user: User, filechain: Filechain, chunkIndex: ChunkIndex, name: string, options?: IFileStoringOptions) {
-    const chunkToStore = options !== undefined && options.passphrase != null
-      ? Buffer.from(Filehub.encrypt(chunkIndex.data.toString("utf8"), options.passphrase), "utf8")
-      : chunkIndex.data;
+  private storeChunk(
+    user: User,
+    filechain: Filechain,
+    chunkIndex: ChunkIndex,
+    name: string,
+    options?: IFileStoringOptions
+  ) {
+    const chunkToStore =
+      options !== undefined && options.passphrase != null
+        ? Buffer.from(Filehub.encrypt(chunkIndex.data.toString("utf8"), options.passphrase), "utf8")
+        : chunkIndex.data;
 
-    return this.allocateChunk(user, chunkToStore, name, chunkIndex.idx)
-      .then(() => this.persistChunkDataInFilechain(user, filechain, chunkToStore));
+    return this.allocateChunk(user, chunkToStore, name, chunkIndex.idx).then(() =>
+      this.persistChunkDataInFilechain(user, filechain, chunkToStore)
+    );
   }
 
   private persistChunkDataInFilechain(user: User, filechain: Filechain, data: Buffer) {
@@ -353,8 +393,9 @@ export default class Filehub {
   }
 
   private getChunk(filechain: Filechain, chunkHash: IChunkHashIndex): Promise<ChunkIndex> {
-    return Filehub.getChunkDataByHash(filechain, chunkHash.hash)
-      .then((data: string) => new ChunkIndex(Buffer.from(data, "hex"), chunkHash.idx));
+    return Filehub.getChunkDataByHash(filechain, chunkHash.hash).then(
+      (data: string) => new ChunkIndex(Buffer.from(data, "hex"), chunkHash.idx)
+    );
   }
 
   private allocateChunk(user: User, chunk: Buffer, name: string, index: number): Promise<any> {
@@ -370,6 +411,5 @@ export default class Filehub {
     );
 
     return this.executeOperation(user, operation);
-  };
-
+  }
 }

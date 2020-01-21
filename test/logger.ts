@@ -1,4 +1,4 @@
-import { createLogger, format, transports } from 'winston';
+import { createLogger, format, transports } from "winston";
 
 const { combine, timestamp, colorize, printf, splat, label } = format;
 const logger = createLogger({
@@ -14,7 +14,7 @@ const logger = createLogger({
       level: process.env.NODE_ENV === "production" ? "info" : "debug"
     })
   ],
-  exitOnError: false,
+  exitOnError: false
 });
 
 export default logger;

@@ -1,6 +1,6 @@
-import {createFt3User} from "./utils/users";
-import {registerAsset, addBalance} from "./utils/utils";
-import {FILEHUB, initFilehub} from "../blockchain/Postchain";
+import { createFt3User } from "./utils/users";
+import { registerAsset, addBalance } from "./utils/utils";
+import { FILEHUB, initFilehub } from "../blockchain/Postchain";
 import {
   CHROMIA_PLAN,
   COMMUNITY_PLAN,
@@ -13,7 +13,6 @@ import logger from "../logger";
  * @group ci
  */
 describe("Billing tests", () => {
-
   beforeAll(async () => {
     await initFilehub();
     const admin = await createFt3User();
@@ -123,5 +122,4 @@ describe("Billing tests", () => {
 
     expect.assertions(4);
   });
-
 });

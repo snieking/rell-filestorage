@@ -1,11 +1,8 @@
-import {FILEHUB, initFilehub} from "../blockchain/Postchain";
-import {User} from "ft3-lib";
-import {createFt3User} from "./utils/users";
-import {addBalance, bufferToHex, generateRandomString, registerAsset} from "./utils/utils";
-import {
-  COMMUNITY_PLAN,
-  SUFFICIENT_BALANCE_FOR_COMMUNITY_VOUCHER
-} from "./utils/constants";
+import { FILEHUB, initFilehub } from "../blockchain/Postchain";
+import { User } from "ft3-lib";
+import { createFt3User } from "./utils/users";
+import { addBalance, bufferToHex, generateRandomString, registerAsset } from "./utils/utils";
+import { COMMUNITY_PLAN, SUFFICIENT_BALANCE_FOR_COMMUNITY_VOUCHER } from "./utils/constants";
 import FsFile from "../../client/lib/models/FsFile";
 import * as path from "path";
 import * as config from "../blockchain/config";
@@ -16,7 +13,6 @@ jest.setTimeout(60000);
  * @group community-ci
  */
 describe("Store files in COMMUNITY filechain", () => {
-
   let user: User;
 
   beforeAll(async () => {
@@ -55,5 +51,4 @@ describe("Store files in COMMUNITY filechain", () => {
     const readFile = await FILEHUB.getFileByName(user, filepath);
     expect(bufferToHex(readFile.readFullData())).toEqual(bufferToHex(file.readFullData()));
   });
-
 });

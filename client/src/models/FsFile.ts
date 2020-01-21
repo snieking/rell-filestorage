@@ -1,9 +1,8 @@
 import * as fs from "fs";
 import readChunk from "read-chunk";
-import {ChunkIndex} from "./Chunk";
+import { ChunkIndex } from "./Chunk";
 
 export default class FsFile {
-
   public static fromPath(name: string) {
     return new FsFile(name, undefined);
   }
@@ -13,7 +12,9 @@ export default class FsFile {
   }
 
   public static fromChunks(name: string, chunks: ChunkIndex[]) {
-    const dataChunks: Buffer[] = chunks.sort((a: ChunkIndex, b: ChunkIndex) => a.idx - b.idx).map((c: ChunkIndex) => c.data);
+    const dataChunks: Buffer[] = chunks
+      .sort((a: ChunkIndex, b: ChunkIndex) => a.idx - b.idx)
+      .map((c: ChunkIndex) => c.data);
     return new FsFile(name, Buffer.concat(dataChunks));
   }
 
@@ -24,7 +25,7 @@ export default class FsFile {
 
     const chunks: Buffer[] = [];
     for (let i = 0; i < nrOfChunks; i++) {
-      chunks.push(data.slice(i * FsFile.BYTES, (i+1) * FsFile.BYTES));
+      chunks.push(data.slice(i * FsFile.BYTES, (i + 1) * FsFile.BYTES));
     }
 
     return chunks;
@@ -52,9 +53,9 @@ export default class FsFile {
 
   public getChunk(index: number): Promise<Buffer> {
     if (this.data != null) {
-      return new Promise<Buffer>((resolve, error) => this.chunks != null
-        ? resolve(this.chunks[index])
-        : error("Chunks undefined"));
+      return new Promise<Buffer>((resolve, error) =>
+        this.chunks != null ? resolve(this.chunks[index]) : error("Chunks undefined")
+      );
     } else {
       return readChunk(this.name, index * FsFile.BYTES, FsFile.BYTES);
     }
@@ -80,5 +81,4 @@ export default class FsFile {
 
     return Buffer.concat(dataChunks);
   }
-
 }

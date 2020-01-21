@@ -10,7 +10,6 @@ export interface IChunkHashFilechain {
 }
 
 export class ChunkIndex {
-
   public readonly data: Buffer;
   public readonly idx: number;
 
@@ -18,5 +17,4 @@ export class ChunkIndex {
     this.data = data;
     this.idx = idx;
   }
-
 }

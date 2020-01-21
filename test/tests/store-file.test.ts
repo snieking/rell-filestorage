@@ -1,6 +1,6 @@
-import {createFt3User} from "./utils/users";
-import {adminUser, FILEHUB, FILEHUB_ADMININISTRATOR, initFilehub} from "../blockchain/Postchain";
-import {User} from "ft3-lib";
+import { createFt3User } from "./utils/users";
+import { adminUser, FILEHUB, FILEHUB_ADMININISTRATOR, initFilehub } from "../blockchain/Postchain";
+import { User } from "ft3-lib";
 import {
   addBalance,
   bufferToHex,
@@ -15,7 +15,7 @@ import * as path from "path";
 import * as fs from "fs";
 import * as config from "../blockchain/config";
 import logger from "../logger";
-import {BYTES_IN_MB, CHROMIA_PLAN, SUFFICIENT_BALANCE_FOR_CHROMIA_VOUCHER} from "./utils/constants";
+import { BYTES_IN_MB, CHROMIA_PLAN, SUFFICIENT_BALANCE_FOR_CHROMIA_VOUCHER } from "./utils/constants";
 
 jest.setTimeout(60000);
 
@@ -23,7 +23,6 @@ jest.setTimeout(60000);
  * @group ci
  */
 describe("Storing files tests", () => {
-
   let user: User;
 
   beforeAll(async () => {
@@ -203,8 +202,12 @@ describe("Storing files tests", () => {
   });
 
   it("Allocated MB in filechain", async () => {
-    const storedMegabytesPriorToLargeFile = await FILEHUB_ADMININISTRATOR.getAllocatedMbInFilechain(config.filechainRID);
-    const storedPaidMegabytesPriorToLargeFile = await FILEHUB_ADMININISTRATOR.getAllocatedMbInFilechain(config.filechainRID);
+    const storedMegabytesPriorToLargeFile = await FILEHUB_ADMININISTRATOR.getAllocatedMbInFilechain(
+      config.filechainRID
+    );
+    const storedPaidMegabytesPriorToLargeFile = await FILEHUB_ADMININISTRATOR.getAllocatedMbInFilechain(
+      config.filechainRID
+    );
 
     const s = generateRandomString(36);
     const data = Buffer.from(s, "utf8");
@@ -212,17 +215,27 @@ describe("Storing files tests", () => {
     await FILEHUB.storeFile(user, FsFile.fromData(s, data));
 
     const storedMegabytesAfterLargeFile = await FILEHUB_ADMININISTRATOR.getAllocatedMbInFilechain(config.filechainRID);
-    const storedPaidMegabytesAfterLargeFile = await FILEHUB_ADMININISTRATOR.getAllocatedMbInFilechain(config.filechainRID);
+    const storedPaidMegabytesAfterLargeFile = await FILEHUB_ADMININISTRATOR.getAllocatedMbInFilechain(
+      config.filechainRID
+    );
 
-    logger.debug("Stored MB before large file: %d, after: %d",
-      storedMegabytesPriorToLargeFile, storedMegabytesAfterLargeFile);
-    logger.debug("Stored paid-for MB before large file: %d, after: %d",
-      storedPaidMegabytesPriorToLargeFile, storedPaidMegabytesAfterLargeFile);
+    logger.debug(
+      "Stored MB before large file: %d, after: %d",
+      storedMegabytesPriorToLargeFile,
+      storedMegabytesAfterLargeFile
+    );
+    logger.debug(
+      "Stored paid-for MB before large file: %d, after: %d",
+      storedPaidMegabytesPriorToLargeFile,
+      storedPaidMegabytesAfterLargeFile
+    );
 
-    expect(storedMegabytesAfterLargeFile - storedMegabytesPriorToLargeFile)
-      .toBeGreaterThanOrEqual(data.length / BYTES_IN_MB);
-    expect(storedPaidMegabytesAfterLargeFile - storedPaidMegabytesPriorToLargeFile)
-      .toBeGreaterThanOrEqual(data.length / BYTES_IN_MB);
+    expect(storedMegabytesAfterLargeFile - storedMegabytesPriorToLargeFile).toBeGreaterThanOrEqual(
+      data.length / BYTES_IN_MB
+    );
+    expect(storedPaidMegabytesAfterLargeFile - storedPaidMegabytesPriorToLargeFile).toBeGreaterThanOrEqual(
+      data.length / BYTES_IN_MB
+    );
   });
 
   it("Store file, encrypted", async () => {
@@ -276,21 +289,20 @@ describe("Storing files tests", () => {
   });
 
   it("File name with 256 length not allowed", async () => {
-    await storeGeneratedData(generateRandomString(256), 36, user)
-      .catch(error => expect(error).toBeDefined());
+    await storeGeneratedData(generateRandomString(256), 36, user).catch(error => expect(error).toBeDefined());
     expect.assertions(1);
   });
 
   it("File name above 256 length not allowed", async () => {
-    await storeGeneratedData(generateRandomString(257), 36, user)
-      .catch(error => expect(error).toBeDefined());
+    await storeGeneratedData(generateRandomString(257), 36, user).catch(error => expect(error).toBeDefined());
     expect.assertions(1);
   });
 
   it("Store data, no voucher", async () => {
     const userWithoutVoucher = await createFt3User();
-    await storeGeneratedData(generateRandomString(36), 36, userWithoutVoucher)
-      .catch(error => expect(error).toBeDefined());
+    await storeGeneratedData(generateRandomString(36), 36, userWithoutVoucher).catch(error =>
+      expect(error).toBeDefined()
+    );
     expect.assertions(1);
   });
 
@@ -359,6 +371,5 @@ describe("Storing files tests", () => {
     expect(file).toBeDefined();
 
     expect.assertions(2);
-  })
-
+  });
 });
