@@ -32,6 +32,7 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "Formatter"
           git commit -m "Format code" -a
+        continue-on-error: true
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
