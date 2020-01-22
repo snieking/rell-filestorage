@@ -17,5 +17,4 @@ describe("Filechain reported offline tests", () => {
     const offlineReport = offlineReports[0];
     expect(offlineReport.online_at).toBeGreaterThanOrEqual(offlineReport.offline_at);
   });
-
 });

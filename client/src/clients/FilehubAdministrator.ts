@@ -4,7 +4,7 @@ import AbstractAdministrator from "./AbstractAdministrator";
 import Filehub from "./Filehub";
 import { IFilechainLocation } from "../models/FilechainLocation";
 import Filechain from "./Filechain";
-import {IOfflineFilechainReport} from "../models/OfflineFilechainReport";
+import { IOfflineFilechainReport } from "../models/OfflineFilechainReport";
 
 export default class FilehubAdministrator extends AbstractAdministrator {
   public constructor(filehub: Filehub) {
