@@ -10,7 +10,7 @@ postchain-node/
 logs
 
 # compiled code
-client/lib
+#client/lib
 healthchecker/lib
 
 # dependencies
