@@ -22,7 +22,7 @@ export default class Filechain {
     tx.addOperation("add_chunk_data", data);
     tx.sign(user.keyPair.privKey, user.keyPair.pubKey);
     return tx.postAndWaitConfirmation().catch((error: Error) => {
-      return this.restClient.query("chunk_hash_exists", { hash }).then((exists: boolean) => {
+      return this.chunkHashExists(hash).then((exists: boolean) => {
         if (!exists) {
           if (error.message.includes("500")) {
             logger.info(
@@ -38,6 +38,10 @@ export default class Filechain {
         }
       });
     });
+  }
+
+  public chunkHashExists(hash: string): Promise<boolean> {
+    return this.restClient.query("chunk_hash_exists", { hash });
   }
 
   public getChunkDataByHash(hash: string): Promise<string> {

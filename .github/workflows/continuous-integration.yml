@@ -93,6 +93,42 @@ jobs:
         working-directory: test
         continue-on-error: false
 
+      - name: Populate ADMIN KEY into healthchecker .env
+        run: echo "ADMIN_PRIVATE_KEY=3132333435363738393031323334353637383930313233343536373839303131" > .env
+        working-directory: healthchecker
+
+      - name: Populate NODE URL into healthchecker .env
+        run: echo "NODE_URL=http://localhost:7740" >> .env
+        working-directory: healthchecker
+
+      - name: Populate FILEHUB_BRID into healthchecker .env
+        run: echo "FILEHUB_BRID=$(docker exec -i filehub cat /usr/src/filehub/rell/target/blockchains/0/brid.txt)" >> .env
+        working-directory: healthchecker
+
+      - name: Build healthchecker
+        run: npm install && npm run build
+        working-directory: healthchecker
+
+      - name: Run healthcheck where everything is expected to be online
+        run: npm run health-check
+        working-directory: healthchecker
+
+      - name: Bring Filechain offline
+        run: docker-compose stop community-migration-filechain
+        working-directory: test
+
+      - name: Run healthcheck where Filechain is expected to be offline
+        run: npm run health-check
+        working-directory: healthchecker
+
+      - name: Bring Filechain back online
+        run: docker-compose start community-migration-filechain
+        working-directory: test
+
+      - name: Run healthcheck where Filechain is expected to be online again
+        run: npm run health-check
+        working-directory: healthchecker
+
       - name: Output Filehub log
         run: docker logs filehub
 

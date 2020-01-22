@@ -9,17 +9,15 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const FilehubAdministrator_1 = require("../../client/src/clients/FilehubAdministrator");
+const Filehub_1 = require("../../client/src/clients/Filehub");
 const ft3_lib_1 = require("ft3-lib");
 const logger_1 = require("./logger");
-const Filehub_1 = require("../../client/lib/clients/Filehub");
-const FilehubAdministrator_1 = require("../../client/lib/clients/FilehubAdministrator");
 const ADMIN_PRIVATE_KEY = process.env.ADMIN_PRIVATE_KEY;
 const NODE_URL = process.env.NODE_URL;
 const BRID = process.env.FILEHUB_BRID;
 console.log("Using admin key: ", ADMIN_PRIVATE_KEY);
-const FILEHUB = new Filehub_1.default(NODE_URL ? NODE_URL : "", BRID ? BRID : "", [
-    new ft3_lib_1.ChainConnectionInfo(BRID ? Buffer.from(BRID, "hex") : Buffer.alloc(0), NODE_URL ? NODE_URL : "")
-]);
+const FILEHUB = new Filehub_1.default(NODE_URL, BRID, []);
 const FILEHUB_ADMIN = new FilehubAdministrator_1.default(FILEHUB);
 FILEHUB_ADMIN.listCommunityFilechainLocations()
     .then(locations => locations.every(value => checkFilechainOnline(value)));
@@ -27,7 +25,7 @@ const checkFilechainOnline = (filechainLocation) => __awaiter(void 0, void 0, vo
     const brid = filechainLocation.brid.toString("hex");
     const location = filechainLocation.location;
     logger_1.default.info("Checking if %s at %s is online", brid, location);
-    const user = exports.createFt3User(ADMIN_PRIVATE_KEY ? ADMIN_PRIVATE_KEY : "");
+    const user = yield exports.createFt3User(ADMIN_PRIVATE_KEY);
     const filechain = FILEHUB_ADMIN.getFilechain(filechainLocation);
     return filechain.chunkHashExists("FF").catch(error => {
         if (error != null) {

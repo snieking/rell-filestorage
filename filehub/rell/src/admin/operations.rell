@@ -80,11 +80,13 @@ operation report_filechain_online(descriptor_id: byte_array, brid: byte_array) {
     require(admin@?{ account } != null, "User not an admin");
     
     val filechain = storage.filechain@{ brid };
-    val offline_filechain = storage.offline_filechain@{ filechain };
+    val offline_filechain = storage.offline_filechain@?{ filechain };
+    
+    require(offline_filechain != null, "Filechain was already online");
     
     create offline_filechain_report(
     	filechain, 
-    	offline_at = offline_filechain.timestamp,
+    	offline_at = offline_filechain!!.timestamp,
     	online_at = op_context.last_block_time
     );
     
