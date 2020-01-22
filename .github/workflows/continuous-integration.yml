@@ -129,6 +129,10 @@ jobs:
         run: npm run health-check
         working-directory: healthchecker
 
+      - name: Verify filechain reported offline
+        run: npm run verify-filechain-reported-offline
+        working-directory: test
+
       - name: Output Filehub log
         run: docker logs filehub
 

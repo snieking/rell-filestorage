@@ -12,7 +12,8 @@
     "test-migration": "jest --setupFiles dotenv/config --group=migration",
     "silent-test-migration": "jest --setupFiles dotenv/config --silent --group=migration",
     "test-community-migration": "jest --setupFiles dotenv/config --group=community-migration",
-    "silent-test-community-migration": "jest --setupFiles dotenv/config --silent --group=community-migration"
+    "silent-test-community-migration": "jest --setupFiles dotenv/config --silent --group=community-migration",
+    "verify-filechain-reported-offline": "jest --setupFiles dotenv/config --silent --group=verify-filechain-offline-report"
   },
   "keywords": [],
   "author": "",

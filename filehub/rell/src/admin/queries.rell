@@ -14,3 +14,13 @@ query list_community_filechain_locations() {
 		.plan == billing.plan.COMMUNITY
 	} ( brid = .filechain.brid, location = .filechain.location );
 }
+
+query get_offline_community_filechain_reports(since: timestamp) {
+	return offline_filechain_report@*{
+		.offline_at >= since
+	} (
+		brid = .filechain.brid,
+		offline_at = .offline_at,
+		online_at = .online_at
+	);
+}

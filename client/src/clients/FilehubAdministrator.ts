@@ -4,6 +4,7 @@ import AbstractAdministrator from "./AbstractAdministrator";
 import Filehub from "./Filehub";
 import { IFilechainLocation } from "../models/FilechainLocation";
 import Filechain from "./Filechain";
+import {IOfflineFilechainReport} from "../models/OfflineFilechainReport";
 
 export default class FilehubAdministrator extends AbstractAdministrator {
   public constructor(filehub: Filehub) {
@@ -74,6 +75,10 @@ export default class FilehubAdministrator extends AbstractAdministrator {
    */
   public reportFilechainOnline(user: User, brid: string) {
     return this.reportFilechain(user, "report_filechain_online", brid);
+  }
+
+  public getOfflineFilechainReportsSinceTimestamp(since: number): Promise<Array<IOfflineFilechainReport>> {
+    return this.filehub.executeQuery("get_offline_community_filechain_reports", { since });
   }
 
   private reportFilechain(user: User, operation: string, brid: string) {
