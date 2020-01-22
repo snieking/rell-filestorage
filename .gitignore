@@ -9,8 +9,8 @@
 postchain-node/
 logs
 
-# client
-client/lib
+# compiled code
+# **/lib
 
 # dependencies
 node_modules
