@@ -11,6 +11,29 @@
 	              <bytea>0350fe40766bc0ce8d08b3f5b810e49a8352fdd458606bd5fafe5acdcdc8ff3f57</bytea>
 	            </arg>
             </args>
+            <args module="lib.ft3.core">
+	            <arg key="my_blockchain_name">
+	              <string>Filehub</string>
+	            </arg>
+	            <arg key="my_blockchain_website">
+	              <string>filehub.chromia.dev</string>
+	            </arg>
+	            <arg key="my_blockchain_description">
+	              <string>Filestorage</string>
+	            </arg>
+	            <arg key="rate_limit_active">
+	              <int>1</int>
+	            </arg>
+	            <arg key="rate_limit_max_points">
+	              <int>20</int>
+	            </arg>
+	            <arg key="rate_limit_recovery_time">
+	              <int>5000</int>
+	            </arg>
+	            <arg key="rate_limit_points_at_account_creation">
+	              <int>20</int>
+	            </arg>
+	          </args>
     			</app>
     		</config>
     	</chain>

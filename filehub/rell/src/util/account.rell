@@ -1,5 +1,5 @@
 import ft3_acc: lib.ft3.account;
 
 function get_account_by_descriptor_id(descriptor_id: byte_array): ft3_acc.account {
-    return ft3_acc.account_auth_descriptor@{ .descriptor_id == descriptor_id } ( .account );
+    return ft3_acc.account_auth_descriptor @ { .descriptor_id == descriptor_id } ( .account );
 }

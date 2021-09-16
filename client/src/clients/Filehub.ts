@@ -1,13 +1,12 @@
-import { Blockchain, ChainConnectionInfo, nop, op, Operation, User } from 'ft3-lib';
+import { Blockchain, ChainConnectionInfo, nop, op, Operation, Postchain, User } from 'ft3-lib';
 import { hashData } from '../utils/crypto';
-import DirectoryService from './DirectoryService';
 
 import logger from '../logger';
 import { ChunkIndex, IChunkHashIndex } from '../models/Chunk';
 import { IFilechainLocation } from '../models/FilechainLocation';
 import FsFile from '../models/FsFile';
 import Filechain from './Filechain';
-import TransactionBuilder from 'ft3-lib/dist/lib/ft3/transaction-builder';
+import TransactionBuilder from 'ft3-lib/dist/ft3/core/transaction-builder';
 
 export default class Filehub {
   private static getChunkDataByHash(filechain: Filechain, hash: Buffer): Promise<string> {
@@ -15,11 +14,9 @@ export default class Filehub {
   }
 
   private readonly blockchain: Promise<Blockchain>;
-  private readonly chains: ChainConnectionInfo[];
 
-  public constructor(brid: string, chainConnectionInfo: ChainConnectionInfo[]) {
-    this.chains = chainConnectionInfo;
-    this.blockchain = Blockchain.initialize(Buffer.from(brid, 'hex'), new DirectoryService(chainConnectionInfo));
+  public constructor(nodeUrl: string, brid: string) {
+    this.blockchain = new Postchain(nodeUrl).blockchain(brid);
   }
 
   /**
@@ -75,23 +72,6 @@ export default class Filehub {
     let location = filechainLocation.location;
 
     logger.debug('Initializing filechain client with brid: %s', brid);
-
-    if (location === '@DirectoryService') {
-      logger.debug('Searching for Filechain location [%s] in DirectoryService', brid);
-      const chain = this.chains.find(c => {
-        const directoryChain = c.chainId.toString('hex').toLocaleUpperCase();
-        logger.silly('Found in DC: %s', directoryChain);
-
-        return directoryChain === brid.toLocaleUpperCase();
-      });
-
-      if (chain == null) {
-        throw new Error('Expected filechain not found in directory service');
-      }
-
-      location = chain.url;
-    }
-
     return new Filechain(location, brid);
   }
 
