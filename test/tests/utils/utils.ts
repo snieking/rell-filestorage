@@ -1,8 +1,7 @@
-import { FILEHUB, FILEHUB_BLOCKCHAIN, FILEHUB_BLOCKCHAIN_RID } from "../../blockchain/Postchain";
+import { FILEHUB_BLOCKCHAIN, FILEHUB_BLOCKCHAIN_RID } from "../../blockchain/Postchain";
 import { Asset } from "../../domain/Asset";
 import Operation from "ft3-lib/dist/lib/ft3/operation";
 import { User } from "ft3-lib";
-import FsFile from "../../../client/lib/models/FsFile";
 
 const TOKEN_NAME = "CHR";
 
