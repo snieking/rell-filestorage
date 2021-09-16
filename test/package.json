@@ -5,7 +5,8 @@
   "description": "Test project for the file storage dapp",
   "scripts": {
     "format": "prettier --write \"**/*.ts\" \"**/*.js\"",
-    "test": "jest --setupFiles dotenv/config --group=ci"
+    "test": "jest --setupFiles dotenv/config --group=ci",
+    "test-ci": "jest --setupFiles dotenv/config --silent --group=ci"
   },
   "keywords": [],
   "author": "",

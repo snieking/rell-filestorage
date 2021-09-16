@@ -74,7 +74,7 @@ jobs:
           NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
 
       - name: Run tests
-        run: npm run test
+        run: npm run test-ci
         working-directory: test
         continue-on-error: false
 
