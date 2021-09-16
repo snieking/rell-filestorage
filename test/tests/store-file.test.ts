@@ -34,7 +34,7 @@ describe("Storing files tests", () => {
 
     await filehub.storeFile(user, file);
 
-    const storedFile = await filehub.getFileByName(file.hash);
+    const storedFile = await filehub.getFile(file.hash);
     expect(storedFile.data).toEqual(data);
   });
 
@@ -45,7 +45,7 @@ describe("Storing files tests", () => {
 
     await filehub.storeFile(user, file);
 
-    const storedFile = await filehub.getFileByName(file.hash);
+    const storedFile = await filehub.getFile(file.hash);
     expect(storedFile.data).toEqual(file.data);
   });
 
@@ -55,7 +55,7 @@ describe("Storing files tests", () => {
 
     await filehub.storeFile(user, file);
 
-    const storedFile = await filehub.getFileByName(file.hash);
+    const storedFile = await filehub.getFile(file.hash);
     expect(bufferToHex(storedFile.data)).toEqual(bufferToHex(file.data));
   });
 
@@ -66,7 +66,7 @@ describe("Storing files tests", () => {
 
     await filehub.storeFile(user, file);
 
-    const storedFile = await filehub.getFileByName(file.hash);
+    const storedFile = await filehub.getFile(file.hash);
     expect(storedFile.numberOfChunks()).toEqual(21);
     expect(storedFile.numberOfChunks()).toEqual(file.numberOfChunks());
   });

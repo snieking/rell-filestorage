@@ -1,4 +1,4 @@
-import { Blockchain, ChainConnectionInfo, nop, op, Operation, Postchain, User } from 'ft3-lib';
+import { Blockchain, nop, op, Operation, Postchain, User } from 'ft3-lib';
 import { hashData } from '../utils/crypto';
 
 import logger from '../logger';
@@ -37,11 +37,11 @@ export default class Filehub {
   }
 
   /**
-   * Retrieves a file by its name.
+   * Retrieves a file by its hash.
    *
    * @param passphrase optional options for retrieving file.
    */
-  public async getFileByName(hash: Buffer): Promise<FsFile> {
+  public async getFile(hash: Buffer): Promise<FsFile> {
     try {
       const filechainLocations = await this.getFileLocation(hash);
 
