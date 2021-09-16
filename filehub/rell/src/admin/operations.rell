@@ -1,102 +1,25 @@
 import util;
-import storage;
-import billing;
 import ft3_acc: lib.ft3.account;
 import ft3_core: lib.ft3.core;
 
-operation add_filechain_application(descriptor_id: byte_array, brid: byte_array, node_url: text, source_code: text) {
-	require(storage.filechain@?{ brid } == null, "Brid is already in-use");
+operation add_filechain(brid: byte_array, node_url: text) {
+	require(op_context.is_signer(chain_context.args.pubkey));
+	require(fs.filechain @? { brid } == null, "Brid is already in-use");
 	
-	val account = util.get_account_by_descriptor_id(descriptor_id);
-	billing.charge_chromia_tokens(descriptor_id, account, 100);
-	create filechain_application(account, brid, node_url = node_url, source_code = source_code);
+	val filechain = create fs.filechain(brid);
+	create fs.active_filechain(filechain, node_url, op_context.last_block_time);
 }
 
-operation approve_filechain_application(descriptor_id: byte_array, brid: byte_array) {
-	val account = util.get_account_by_descriptor_id(descriptor_id);
-    require(admin@?{ account } != null, "User not an admin");
-    
-    val application = filechain_application@{ brid };
-    val filechain = create storage.filechain(brid, application.node_url);
-    create storage.active_filechain(filechain, billing.plan.COMMUNITY, op_context.last_block_time, application.account);
-    delete application;
-}
-
-operation reject_filechain_application(descriptor_id: byte_array, brid: byte_array) {
-	val account = util.get_account_by_descriptor_id(descriptor_id);
-    require(admin@?{ account } != null, "User not an admin");
-    
-    val application = filechain_application@{ brid };
-    billing.payout_chromia_tokens(application.account, 100);
-    delete application;
-}
-
-operation add_chromia_filechain(descriptor_id: byte_array, rid: byte_array) {
-    val account = util.get_account_by_descriptor_id(descriptor_id);
-    require(admin@?{ account } != null, "User not an admin");
-
-    if (storage.filechain@?{ rid } == null) {
-    	log("Adding filechain with brid: ", rid);
-        val filechain = create storage.filechain(rid, "@DirectoryService");
-        create storage.active_filechain(filechain, billing.plan.CHROMIA, op_context.last_block_time, account);
-	}
-}
-
-operation disable_filechain(descriptor_id: byte_array, rid: byte_array) {
-	val account = util.get_account_by_descriptor_id(descriptor_id);
+operation disable_filechain(rid: byte_array) {
 	log("Disabling filechain with brid: ", rid);
 		
-	val the_filechain = storage.active_filechain@{ .filechain.brid == rid, account };
-	
-	require(
-		storage.active_filechain@?{ .filechain.brid != rid, .plan == the_filechain.plan } != null, 
-		"There must be another filechain active of type: " + the_filechain.plan
-	);
-	
-	create storage.disabled_filechain(
-		the_filechain.filechain, 
-		the_filechain.plan, 
-		the_filechain.account, 
-		op_context.last_block_time
-	);
-	
-    delete the_filechain;
+	val active = fs.active_filechain @ { .filechain.brid == rid };
+	create fs.disabled_filechain(active.filechain, op_context.last_block_time);
+	delete active;
 }
 
-operation report_filechain_offline(descriptor_id: byte_array, brid: byte_array) {
-	log("Reporting filechain offline");
-	val account = util.get_account_by_descriptor_id(descriptor_id);
-    require(admin@?{ account } != null, "User not an admin");
-    
-    val filechain = storage.filechain@{ brid };
-    require(storage.offline_filechain@?{ filechain } == null, "Already reported offline");
-    
-    create storage.offline_filechain(filechain, op_context.last_block_time);
-}
-
-operation report_filechain_online(descriptor_id: byte_array, brid: byte_array) {
-	log("Reporting filechain online");
-	val account = util.get_account_by_descriptor_id(descriptor_id);
-    require(admin@?{ account } != null, "User not an admin");
-    
-    val filechain = storage.filechain@{ brid };
-    val offline_filechain = storage.offline_filechain@?{ filechain };
-    
-    require(offline_filechain != null, "Filechain was already online");
-    
-    create offline_filechain_report(
-    	filechain, 
-    	offline_at = offline_filechain!!.timestamp,
-    	online_at = op_context.last_block_time
-    );
-    
-    delete offline_filechain;
-}
-
-operation register_admin(descriptor_id: byte_array) {
-	require(admin@?{} == null, "Admin already exists");
-    
-    val account = util.get_account_by_descriptor_id(descriptor_id);
-    create admin(account);
-    
+operation enable_filechain(rid: byte_array, node_url: text) {
+	val disabled = fs.disabled_filechain @ { .filechain.brid == rid };
+	create fs.active_filechain(disabled.filechain, node_url, op_context.last_block_time);
+	delete disabled;
 }

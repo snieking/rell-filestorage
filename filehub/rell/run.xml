@@ -5,7 +5,13 @@
     <chains>
     	<chain name="filehub" iid="CHAIN_IID">
     		<config height="0">
-    			<app module="" />
+    			<app module="">
+	    			<args module="admin">
+	    				<arg key="pubkey">
+	              <bytea>0350fe40766bc0ce8d08b3f5b810e49a8352fdd458606bd5fafe5acdcdc8ff3f57</bytea>
+	            </arg>
+            </args>
+    			</app>
     		</config>
     	</chain>
     </chains>

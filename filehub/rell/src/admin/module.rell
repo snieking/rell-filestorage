@@ -1,0 +1,8 @@
+@mount("admin") module;
+
+import ft3_acc: lib.ft3.account;
+import fs;
+
+struct module_args {
+	pubkey;
+}

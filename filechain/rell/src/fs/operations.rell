@@ -1,12 +1,12 @@
 operation add_chunk_data(data: byte_array) {
    val hash = data.sha256();
    log("add_chunk_data, searching for hash: ", hash, " in filechain: ", chain_context.blockchain_rid);
-   val chunk = chunk@{ .hash == hash, .filechain.brid == chain_context.blockchain_rid };
+   val chunk = chunk @ { .hash == hash, .filechain.brid == chain_context.blockchain_rid };
    
    val chunk_size = chunk_size@?{ chunk, data.size() };
    require(chunk_size, "No chunk with the correct size found, no one has accurately paid for it");
    
-   val stored_file = stored_file@?{ hash };
-   require(stored_file == null, "[FC-00]: Chunk already exists");
+   val stored_file = stored_file @? { hash };
+   require(stored_file == null, "[OK]: Chunk already exists");
    create stored_file(hash, op_context.transaction);
 }

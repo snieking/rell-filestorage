@@ -1,11 +1,11 @@
+@mount("fs") module;
+
 import ft3_acc: lib.ft3.account;
 import ft3_core: lib.ft3.core;
-import billing;
 
 @log
 entity filechain {
 	key brid: byte_array;
-	location: text;
 }
 
 @log
@@ -20,34 +20,21 @@ entity chunk_size {
 
 entity active_filechain {
 	key filechain;
-	index billing.plan;
+	mutable location: text;
 	index timestamp;
-	index ft3_acc.account;
 }
 
 entity disabled_filechain {
 	key filechain;
-	index billing.plan;
-	index ft3_acc.account;
 	timestamp;
 }
 
-entity offline_filechain {
-	key filechain, timestamp; 
-}
-
 entity file {
-	key name, ft3_acc.account, filechain;
-	index timestamp;
-	index billing.plan;
+	key hash: byte_array, filechain;
+	timestamp;
 }
 
 entity file_chunk {
 	key file, idx: integer;
 	chunk;
-	index timestamp;
-}
-
-entity deleted_timestamp {
-	key ft3_acc.account, timestamp;
 }

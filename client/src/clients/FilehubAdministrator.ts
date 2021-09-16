@@ -1,21 +1,15 @@
-import { op, User } from "ft3-lib";
-import { IFilechainApplication } from "../models/FilechainApplication";
-import AbstractAdministrator from "./AbstractAdministrator";
-import Filehub from "./Filehub";
-import { IFilechainLocation } from "../models/FilechainLocation";
-import Filechain from "./Filechain";
-import { IOfflineFilechainReport } from "../models/OfflineFilechainReport";
+import { KeyPair, nop, op, User } from 'ft3-lib';
+import Filehub from './Filehub';
+import { IFilechainLocation } from '../models/FilechainLocation';
+import Filechain from './Filechain';
 
-export default class FilehubAdministrator extends AbstractAdministrator {
-  public constructor(filehub: Filehub) {
-    super(filehub);
-  }
+export default class FilehubAdministrator {
+  private readonly filehub: Filehub;
+  private readonly admin: KeyPair;
 
-  /**
-   * Registers the admin user, this operation is only valid when there are no other admins.
-   */
-  public registerAdmin(user: User): Promise<void> {
-    return this.filehub.executeOperation(user, op("register_admin", user.authDescriptor.id));
+  public constructor(filehub: Filehub, admin: KeyPair) {
+    this.filehub = filehub;
+    this.admin = admin;
   }
 
   /**
@@ -24,15 +18,39 @@ export default class FilehubAdministrator extends AbstractAdministrator {
    * @param user that is an admin of the filehub.
    * @param rid of the filechain.
    */
-  public registerFilechain(user: User, rid: string): Promise<any> {
-    return this.filehub.executeOperation(user, op("add_chromia_filechain", user.authDescriptor.id, rid));
+  public async registerFilechain(rid: string, url: string) {
+    const trxBuilder = await this.filehub.transactionBuilder();
+    return trxBuilder
+      .add(op('admin.add_filechain', rid, url))
+      .build([this.admin.pubKey])
+      .sign(this.admin)
+      .post();
   }
 
   /**
-   * List community filechain locations.
+   * Disables a Filechain
    */
-  public listCommunityFilechainLocations(): Promise<Array<IFilechainLocation>> {
-    return this.filehub.executeQuery("list_community_filechain_locations", {});
+  public async disableFilechain(rid: string) {
+    const trxBuilder = await this.filehub.transactionBuilder();
+    return trxBuilder
+      .add(op('admin.disable_filechain', rid))
+      .add(nop())
+      .build([this.admin.pubKey])
+      .sign(this.admin)
+      .post();
+  }
+
+  /**
+   * Enables a Filechain
+   */
+  public async enableFilechain(rid: string, url: string) {
+    const trxBuilder = await this.filehub.transactionBuilder();
+    return trxBuilder
+      .add(op('admin.enable_filechain', rid, url))
+      .add(nop())
+      .build([this.admin.pubKey])
+      .sign(this.admin)
+      .post();
   }
 
   /**
@@ -40,48 +58,5 @@ export default class FilehubAdministrator extends AbstractAdministrator {
    */
   public getFilechain(filechainLocation: IFilechainLocation): Filechain {
     return this.filehub.initFilechainClient(filechainLocation);
-  }
-
-  /**
-   * Returns a list of active Filechain applications.
-   */
-  public listFilechainApplications(): Promise<IFilechainApplication[]> {
-    return this.filehub.executeQuery("list_filechain_applications", {});
-  }
-
-  /**
-   * Approves a Filechain application.
-   */
-  public approveCommunityFilechainApplication(user: User, brid: string) {
-    return this.filehub.executeOperation(user, op("approve_filechain_application", user.authDescriptor.id, brid));
-  }
-
-  /**
-   * Rejects a Filechain application.
-   */
-  public rejectCommunityFilechainApplication(user: User, brid: string) {
-    return this.filehub.executeOperation(user, op("reject_filechain_application", user.authDescriptor.id, brid));
-  }
-
-  /**
-   * Report a Filechain as offline.
-   */
-  public reportFilechainOffline(user: User, brid: string) {
-    return this.reportFilechain(user, "report_filechain_offline", brid);
-  }
-
-  /**
-   * Report a Filechain as online.
-   */
-  public reportFilechainOnline(user: User, brid: string) {
-    return this.reportFilechain(user, "report_filechain_online", brid);
-  }
-
-  public getOfflineFilechainReportsSinceTimestamp(since: number): Promise<Array<IOfflineFilechainReport>> {
-    return this.filehub.executeQuery("get_offline_community_filechain_reports", { since });
-  }
-
-  private reportFilechain(user: User, operation: string, brid: string) {
-    return this.filehub.executeOperation(user, op(operation, user.authDescriptor.id, brid), true);
   }
 }

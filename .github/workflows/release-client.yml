@@ -1,9 +1,8 @@
 name: release-fs-client
 
 on:
-  push:
-    tags:
-      - client-v*
+  release:
+    types: [created]
 
 jobs:
   build:

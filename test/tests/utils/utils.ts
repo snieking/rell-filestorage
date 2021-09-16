@@ -48,17 +48,8 @@ export const generateRandomString = (length: number) => {
   return text;
 };
 
-export const storeGeneratedData = (name: string, dataLength: number, user: User) => {
-  const data = Buffer.from(generateRandomString(dataLength), "utf8");
-  return FILEHUB.storeFile(user, FsFile.fromData(name, data));
-};
-
 export const generateData = (length: number) => {
   return Buffer.from(generateRandomString(length), "utf8");
-};
-
-export const storeData = (name: string, data: Buffer, user: User) => {
-  return FILEHUB.storeFile(user, FsFile.fromData(name, data));
 };
 
 export const bufferToHex = (buffer: Buffer) => {

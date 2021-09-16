@@ -1,21 +1,26 @@
-import * as fs from "fs";
-import readChunk from "read-chunk";
-import { ChunkIndex } from "./Chunk";
+import { hashData } from '../utils/crypto';
+import { ChunkIndex } from './Chunk';
+import * as fs from 'fs';
+import * as util from 'util';
 
 export default class FsFile {
-  public static fromPath(name: string) {
-    return new FsFile(name, undefined);
+  public static async fromLocalFile(path: string): Promise<FsFile> {
+    const readFile = util.promisify(fs.readFile);
+    const data = await readFile(path);
+    return new FsFile(data);
   }
 
-  public static fromData(name: string, data: Buffer) {
-    return new FsFile(name, data);
+  public static fromData(data: Buffer) {
+    return new FsFile(data);
   }
 
-  public static fromChunks(name: string, chunks: ChunkIndex[]) {
+  public static fromChunks(chunks: ChunkIndex[]) {
     const dataChunks: Buffer[] = chunks
       .sort((a: ChunkIndex, b: ChunkIndex) => a.idx - b.idx)
       .map((c: ChunkIndex) => c.data);
-    return new FsFile(name, Buffer.concat(dataChunks));
+
+    const data = Buffer.concat(dataChunks);
+    return new FsFile(data);
   }
 
   private static BYTES: number = 100000;
@@ -31,54 +36,23 @@ export default class FsFile {
     return chunks;
   }
 
-  public readonly name: string;
-  public readonly chunks?: Buffer[];
-
+  public readonly hash: Buffer;
+  public readonly chunks: Buffer[];
   public readonly size: number;
+  public readonly data: Buffer;
 
-  private readonly data?: Buffer;
-
-  private constructor(name: string, data?: Buffer) {
-    this.name = name;
-
-    if (data != null) {
-      this.data = data;
-      this.chunks = FsFile.sliceIntoChunks(data);
-      this.size = data.length;
-    } else {
-      const stats = fs.statSync(name);
-      this.size = stats.size;
-    }
+  private constructor(data: Buffer) {
+    this.hash = hashData(data);
+    this.data = data;
+    this.chunks = FsFile.sliceIntoChunks(data);
+    this.size = data.length;
   }
 
-  public getChunk(index: number): Promise<Buffer> {
-    if (this.data != null) {
-      return new Promise<Buffer>((resolve, error) =>
-        this.chunks != null ? resolve(this.chunks[index]) : error("Chunks undefined")
-      );
-    } else {
-      return readChunk(this.name, index * FsFile.BYTES, FsFile.BYTES);
-    }
-  }
-
-  public readChunkSync(index: number): Buffer {
-    if (this.chunks != null) {
-      return this.chunks[index];
-    } else {
-      return readChunk.sync(this.name, index * FsFile.BYTES, FsFile.BYTES);
-    }
+  public getChunk(index: number): Buffer {
+    return this.chunks[index];
   }
 
   public numberOfChunks(): number {
     return Math.ceil(this.size / FsFile.BYTES);
-  }
-
-  public readFullData(): Buffer {
-    const dataChunks: Buffer[] = [];
-    for (let i = 0; i < this.numberOfChunks(); i++) {
-      dataChunks.push(this.readChunkSync(i));
-    }
-
-    return Buffer.concat(dataChunks);
   }
 }

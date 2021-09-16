@@ -1,7 +1,6 @@
 @external('filehub') @log
 entity filechain { 
 	key brid: byte_array;
-	location: text;
 }
 
 @external('filehub') @log
@@ -17,20 +16,4 @@ entity chunk_size {
 entity stored_file {
 	key hash: byte_array;
 	transaction;
-}
-
-struct gtx_operation {
-    name;
-    args: list<gtv>;
-}
-
-struct gtx_transaction_body {
-    blockchain_rid: byte_array;
-    operations: list<gtx_operation>;
-    signers: list<gtv>;
-}
-
-struct gtx_transaction {
-   body: gtx_transaction_body;
-   signatures: list<gtv>;
 }
