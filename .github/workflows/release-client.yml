@@ -18,9 +18,14 @@ jobs:
         with:
           node-version: '16.x'
           registry-url: 'https://registry.npmjs.org'
-      - run: cd client
+
       - run: npm install
+        working-directory: client
+
       - run: npx build
+        working-directory: client
+
       - run: npm publish
+        working-directory: client
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
