@@ -1,9 +1,8 @@
 import * as config from "./config.js";
-import DirectoryService from "../../client/src/clients/DirectoryService";
-import { Blockchain, KeyPair, Postchain } from "ft3-lib";
-import Filehub from "fs-client/lib/clients/Filehub";
+import { KeyPair, Postchain } from "ft3-lib";
+import { Filehub } from "fs-client";
 import logger from "../logger";
-import FilehubAdministrator from "../../client/lib/clients/FilehubAdministrator";
+import { FilehubAdministrator } from "fs-client";
 
 // Filehub chain
 const FILEHUB_NODE_API_URL = config.filehubNodeApiUrl;
@@ -32,6 +31,6 @@ export const initFilehub = async () => {
     }
   } else {
     logger.info("Filehub already initialized");
-    await new Promise(resolve => setTimeout(resolve, 5000));
+    await new Promise((resolve) => setTimeout(resolve, 5000));
   }
 };

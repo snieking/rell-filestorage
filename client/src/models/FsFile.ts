@@ -3,7 +3,7 @@ import { ChunkIndex } from './Chunk';
 import * as fs from 'fs';
 import * as util from 'util';
 
-export default class FsFile {
+export class FsFile {
   public static async fromLocalFile(path: string): Promise<FsFile> {
     const readFile = util.promisify(fs.readFile);
     const data = await readFile(path);

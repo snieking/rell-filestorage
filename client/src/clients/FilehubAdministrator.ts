@@ -1,9 +1,9 @@
-import { KeyPair, nop, op, User } from 'ft3-lib';
-import Filehub from './Filehub';
+import { KeyPair, nop, op } from 'ft3-lib';
+import { Filehub } from './Filehub';
 import { IFilechainLocation } from '../models/FilechainLocation';
 import Filechain from './Filechain';
 
-export default class FilehubAdministrator {
+export class FilehubAdministrator {
   private readonly filehub: Filehub;
   private readonly admin: KeyPair;
 
@@ -20,11 +20,7 @@ export default class FilehubAdministrator {
    */
   public async registerFilechain(rid: string, url: string) {
     const trxBuilder = await this.filehub.transactionBuilder();
-    return trxBuilder
-      .add(op('admin.add_filechain', rid, url))
-      .build([this.admin.pubKey])
-      .sign(this.admin)
-      .post();
+    return trxBuilder.add(op('admin.add_filechain', rid, url)).build([this.admin.pubKey]).sign(this.admin).post();
   }
 
   /**

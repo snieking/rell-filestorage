@@ -4,11 +4,11 @@ import { hashData } from '../utils/crypto';
 import logger from '../logger';
 import { ChunkIndex, IChunkHashIndex } from '../models/Chunk';
 import { IFilechainLocation } from '../models/FilechainLocation';
-import FsFile from '../models/FsFile';
+import { FsFile } from '../models/FsFile';
 import Filechain from './Filechain';
 import TransactionBuilder from 'ft3-lib/dist/ft3/core/transaction-builder';
 
-export default class Filehub {
+export class Filehub {
   private static getChunkDataByHash(filechain: Filechain, hash: Buffer): Promise<string> {
     return filechain.getChunkDataByHash(hash.toString('hex'));
   }
@@ -30,7 +30,7 @@ export default class Filehub {
     const filechainLocations = await this.getFileLocation(file.hash);
 
     const promises: Array<Promise<any>> = [];
-    filechainLocations.forEach(filechainLocation => promises.push(this.storeChunks(user, file, filechainLocation)));
+    filechainLocations.forEach((filechainLocation) => promises.push(this.storeChunks(user, file, filechainLocation)));
 
     const result = await Promise.all(promises);
     return result;
@@ -52,10 +52,10 @@ export default class Filehub {
       const filechain = this.initFilechainClient(filechainLocations[0]);
 
       const promises: Array<Promise<ChunkIndex>> = [];
-      chunkHashes.every(value => promises.push(this.getChunk(filechain, value)));
+      chunkHashes.every((value) => promises.push(this.getChunk(filechain, value)));
 
       const chunkIndexes = await Promise.all(promises);
-      return new Promise(resolve => resolve(FsFile.fromChunks(chunkIndexes)));
+      return new Promise((resolve) => resolve(FsFile.fromChunks(chunkIndexes)));
     } catch (error) {
       logger.info('Error retrieving file: %O', error);
       const reject: Promise<FsFile> = Promise.reject(error);
@@ -64,7 +64,7 @@ export default class Filehub {
   }
 
   transactionBuilder(): Promise<TransactionBuilder> {
-    return this.blockchain.then(bc => bc.transactionBuilder());
+    return this.blockchain.then((bc) => bc.transactionBuilder());
   }
 
   initFilechainClient(filechainLocation: IFilechainLocation): Filechain {
@@ -138,7 +138,7 @@ export default class Filehub {
    * @param operation to perform.
    */
   private executeOperation(user: User, operation: Operation, addNop?: boolean): Promise<void> {
-    return this.blockchain.then(bc => {
+    return this.blockchain.then((bc) => {
       const trxBuilder = bc.transactionBuilder().add(operation);
 
       if (addNop) {
@@ -157,7 +157,7 @@ export default class Filehub {
    * @param data to provide in the query.
    */
   private executeQuery(query: string, data: unknown) {
-    return this.blockchain.then(bc => {
+    return this.blockchain.then((bc) => {
       logger.debug("Executing query '%s' with data: %O", query, data);
       return bc.query(query, data);
     });

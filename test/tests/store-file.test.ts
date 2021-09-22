@@ -2,7 +2,7 @@ import { createFt3User } from "./utils/users";
 import { filehub, initFilehub } from "../blockchain/Postchain";
 import { User } from "ft3-lib";
 import { bufferToHex, generateData, generateRandomString } from "./utils/utils";
-import FsFile from "../../client/lib/models/FsFile";
+import { FsFile } from "fs-client";
 import * as path from "path";
 
 jest.setTimeout(60000);

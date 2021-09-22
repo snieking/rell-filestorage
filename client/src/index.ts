@@ -1,3 +1,3 @@
-export * from './clients/Filehub';
-export * from './clients/FilehubAdministrator';
-export * from './models/FsFile';
+export { Filehub } from './clients/Filehub';
+export { FilehubAdministrator } from './clients/FilehubAdministrator';
+export { FsFile } from './models/FsFile';
