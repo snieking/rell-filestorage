@@ -30,11 +30,13 @@ entity disabled_filechain {
 }
 
 entity file {
-	key hash: byte_array, filechain;
+	key hash: byte_array;
 	timestamp;
+	allocated_size: integer;
 }
 
 entity file_chunk {
 	key file, idx: integer;
+	filechain;
 	chunk;
 }

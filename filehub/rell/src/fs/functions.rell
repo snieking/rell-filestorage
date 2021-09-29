@@ -1,16 +1,8 @@
 import ft3_acc: lib.ft3.account;
 import util;
 
-function chain_selector(): set<filechain> {
-	val chains = set<filechain>();
-	
-	val redundancy = 1;
+function chain_selector(seed: integer = 0): filechain {
 	val filechains = active_filechain @* {} ( .filechain );
-	
-	for(i in range(redundancy)) {
-		val random_index = (op_context.last_block_time - op_context.block_height + i) % filechains.size();
-		chains.add(filechains.get(random_index));
-	}
-	
-	return chains;
+	val random_index = (op_context.last_block_time - op_context.block_height + seed) % filechains.size();
+	return filechains.get(random_index);
 }
