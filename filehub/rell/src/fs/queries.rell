@@ -4,9 +4,11 @@ query get_file_location(file_hash: byte_array) {
 	return (active: active_filechain, file_chunk) @* { 
 		file_chunk.file.hash == file_hash,
 		file_chunk.filechain == active.filechain
-	} ( 
+	} (
+		@sort idx = file_chunk.idx,
+		hash = file_chunk.chunk.hash,
 		brid = active.filechain.brid, 
-		location = active.location, @omit @sort file_chunk.file.timestamp
+		location = active.location
 	);
 }
 
