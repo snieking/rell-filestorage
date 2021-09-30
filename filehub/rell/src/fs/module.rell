@@ -30,11 +30,14 @@ entity disabled_filechain {
 }
 
 entity file {
-	key hash: byte_array, filechain;
+	key hash: byte_array;
 	timestamp;
+	allocated_size: integer;
+	creator: ft3_acc.account;
 }
 
 entity file_chunk {
 	key file, idx: integer;
+	filechain;
 	chunk;
 }

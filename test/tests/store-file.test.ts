@@ -56,6 +56,7 @@ describe("Storing files tests", () => {
     await filehub.storeFile(user, file);
 
     const storedFile = await filehub.getFile(file.hash);
+    expect(storedFile.data.length).toEqual(file.data.length);
     expect(bufferToHex(storedFile.data)).toEqual(bufferToHex(file.data));
   });
 

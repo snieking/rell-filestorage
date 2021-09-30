@@ -1,17 +1,34 @@
 import util;
 
-query get_file_location(file_hash: byte_array) {	
-	return (active: active_filechain, file) @* { 
-		file.filechain == active.filechain,
-		file.hash == file_hash
-	} ( brid = active.filechain.brid, location = active.location, @omit @sort file.timestamp );
+struct chunk_location {
+	idx: integer;
+	hash: byte_array;
+	brid: byte_array;
+	location: text;
 }
 
-query get_file_chunks(file_hash: byte_array) {
-	return set(file_chunk @* { .file.hash == file_hash } ( 
-		hash = .chunk.hash, 
-		@sort idx = .idx
-	));
+query get_chunk_locations(file_hash: byte_array) {
+	val chunks = (active: active_filechain, file_chunk) @* { 
+		file_chunk.file.hash == file_hash,
+		file_chunk.filechain == active.filechain
+	} (
+		@sort idx = file_chunk.idx,
+		hash = file_chunk.chunk.hash,
+		brid = active.filechain.brid, 
+		location = active.location
+	);
+	
+	val persisted_indexes = set<integer>();
+	val filtered = list<chunk_location>();
+	
+	for (chunk in chunks) {
+		if (not persisted_indexes.contains(chunk.idx)) {
+			filtered.add(chunk_location(chunk.idx, hash = chunk.hash, brid = chunk.brid, chunk.location));
+			persisted_indexes.add(chunk.idx);
+		}
+	}
+	
+	return filtered;
 }
 
 query get_allocated_mb_in_filechain(brid: byte_array) {

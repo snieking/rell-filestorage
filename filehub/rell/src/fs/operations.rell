@@ -4,65 +4,56 @@ import admin;
 
 operation allocate_file(descriptor_id: byte_array, file_hash: byte_array, total_bytes: integer) {
 	val account = util.get_account_by_descriptor_id(descriptor_id);
-	
 	ft3_acc.require_auth(account, descriptor_id, ["A"]);
-	require(file_hash.size() < 256, "File hash isn't allowed to be longer than 256");
+	
+	require(file_hash.size() <= 32, "File hash isn't allowed to be longer than 32 bytes");
 	
 	val current_timestamp = op_context.last_block_time;
 	
 	val file = file @? { file_hash } limit 1;
 	require(file == null, "[OK] File already stored");
 	
-	val chains = chain_selector();
-	
-	for (chain in chains) {
-		create file(file_hash, chain, current_timestamp);
-	}
+	create file(
+		file_hash, 
+		timestamp = op_context.last_block_time, 
+		allocated_size = total_bytes,
+		account
+	);
 }
 
 operation allocate_chunk(descriptor_id: byte_array, file_hash: byte_array, chunk_hash: byte_array, chunk_size: integer, idx: integer) {
-	log("allocate_chunk");
-	val account = util.get_account_by_descriptor_id(descriptor_id);
+	require(chunk_size < 1024 * 1024, "Chunk must be less than 1mb");
 	
-	ft3_acc.require_auth(account, descriptor_id, ["A"]);
-	require(chunk_size < 1024 * 1024, "Chunk must be less than a mb");
+	val file = file @ { file_hash };
+	ft3_acc.require_auth(file.creator, descriptor_id, ["A"]);
 	
-	val files = file @* { file_hash };
+	val allocated_size = (fc: file_chunk, cs: chunk_size) @ { 
+		fc.file == file,
+		fc.chunk == cs.chunk
+	} ( @sum cs.size );
 	
-	for (i in range(files.size())) {
-		if (file_chunk @? { 
-			files.get(i),
-			.chunk.hash == chunk_hash,
-			.idx == idx
-		} != null) {
-			log("Filtered out filechain: " + files.get(i).filechain.brid + " due to file_chunk already existing in it");
-			files.remove_at(i);
-		}
-	}
-	
-	require(files.size() > 0, "[OK] No work to be done");
-	
-	for (file in files) {	
-		var chunk = (chunk, active_filechain)@?{
-			chunk.hash == chunk_hash,
-			chunk.filechain == file.filechain,
-			chunk.filechain == active_filechain.filechain
-		} ( chunk ) limit 1;
+	require(allocated_size + chunk_size <= file.allocated_size, "No more space allocated for file");
+	require(file_chunk @? { file, idx } == null, "[OK] No work to be done");
 		
-		if (chunk == null) {
-			val current_timestamp = op_context.last_block_time;
+	var chunk = (active: active_filechain, file_chunk) @? {
+		file_chunk.chunk.hash == chunk_hash,
+		file_chunk.filechain == active.filechain
+	} ( file_chunk.chunk ) limit 1;
 			
-			chunk = create chunk(chunk_hash, file.filechain);			
-		}
-		
-		create file_chunk(file, chunk, idx);
-		
-		val stored_size = chunk_size@?{ .chunk == chunk } limit 1;
-		
-		if (stored_size != null) {
-			require(stored_size.size == chunk_size, "Chunk size doesn't match provided file_size");
-		} else {
-			create chunk_size(chunk, chunk_size);
-		}
+	if (chunk == null) {
+		val chain = chain_selector(idx);
+		chunk = create chunk(chunk_hash, chain);
+		create chunk_size(chunk, chunk_size);
 	}
+		
+	create file_chunk(file, idx, chunk.filechain, chunk);
+	
+	log("Storing chunk with idx: ", idx);
+}
+
+operation delete_file(hash: byte_array) {
+	// TODO: Admin verification
+	// Has to exist in order to delete illegal content
+	val file = file @ { hash };
+	delete file_chunk @* { file };
 }
