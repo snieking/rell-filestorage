@@ -1,6 +1,6 @@
 import { KeyPair, nop, op } from 'ft3-lib';
 import { Filehub } from './Filehub';
-import { IFilechainLocation } from '../models/FilechainLocation';
+import { IChunkLocation } from '../models/FilechainLocation';
 import Filechain from './Filechain';
 
 export class FilehubAdministrator {
@@ -52,7 +52,7 @@ export class FilehubAdministrator {
   /**
    * Gets a Filechain from a filechain location.
    */
-  public getFilechain(filechainLocation: IFilechainLocation): Filechain {
-    return this.filehub.initFilechainClient(filechainLocation);
+  public getFilechain(filechainLocation: IChunkLocation): Filechain {
+    return this.filehub.initFilechainClient(filechainLocation.location, filechainLocation.brid.toString('hex'));
   }
 }
