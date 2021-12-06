@@ -40,7 +40,9 @@ async function main() {
 
 // This is an admin only function to register a new filechain in the filehub
 async function registerFilechain(filehub, filechainUrl, filechainBrid) {
-  const adminKeyPair = new KeyPair('');
+  const adminKeyPair = new KeyPair(
+    '093c5d39705432f3b2036e4add82f1242c7f311bc49c4796e00468d5d5bc6b1b'
+  );
   const filehubAdministrator = new FilehubAdministrator(filehub, adminKeyPair);
 
   await filehubAdministrator.registerFilechain(filechainBrid, filechainUrl);

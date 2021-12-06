@@ -8,7 +8,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@snieking/fs-client": "0.0.3",
+    "@snieking/fs-client": "0.0.4",
     "ft3-lib": "^3.4.2",
     "secp256k1": "^4.0.2"
   }

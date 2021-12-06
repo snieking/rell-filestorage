@@ -8,7 +8,7 @@
     			<app module="">
 	    			<args module="admin">
 	    				<arg key="pubkey">
-	              <bytea>0350fe40766bc0ce8d08b3f5b810e49a8352fdd458606bd5fafe5acdcdc8ff3f57</bytea>
+	              <bytea>036fae54a1bb72638ab73b141db2bd40bf69639bd961d92c57c492de871aff448d</bytea>
 	            </arg>
             </args>
             <args module="lib.ft3.core">
