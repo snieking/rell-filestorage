@@ -27,6 +27,10 @@ export class Filehub {
     return this.storeChunks(user, file);
   }
 
+  public async hasFile(hash: Buffer): Promise<boolean> {
+    return this.executeQuery('fs.has_file', { file_hash: hash.toString('hex') });
+  }
+
   /**
    * Retrieves a file by its hash.
    *

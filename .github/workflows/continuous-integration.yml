@@ -25,6 +25,18 @@ jobs:
         run: docker-compose up -d filehub
         working-directory: test
 
+      # Build File Storage Client (fs-client)
+      - name: Install dependencies for fs-client
+        run: npm install
+        working-directory: client
+        env:
+          NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+      - name: Build fs-client
+        run: npm run build
+        working-directory: client
+        env:
+          NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+
       - name: Sleep for 15 seconds
         uses: jakejarvis/wait-action@master
         with:
@@ -33,6 +45,7 @@ jobs:
       - name: Output Filehubs logs to verify it started correctly
         run: docker logs filehub
 
+      # Start Filechains
       - name: Save Filehub BRID to .env
         run: ./env.sh
         working-directory: test
@@ -54,18 +67,6 @@ jobs:
         run: cat .env
         working-directory: test
 
-      # Build File Storage Client (fs-client)
-      - name: Install dependencies for fs-client
-        run: npm install
-        working-directory: client
-        env:
-          NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
-      - name: Build fs-client
-        run: npm run build
-        working-directory: client
-        env:
-          NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
-
       # Run test client
       - name: Install dependencies
         run: npm install
@@ -81,8 +82,8 @@ jobs:
       - name: Output Filehub log
         run: docker logs filehub
 
-      - name: Output CHROMIA Filechain1 log
+      - name: Output Filechain1 log
         run: docker logs filechain1
 
-      - name: Output COMMUNITY Filechain2 log
+      - name: Output Filechain2 log
         run: docker logs filechain2

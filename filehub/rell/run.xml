@@ -1,41 +1,41 @@
 <run wipe-db="false">
     <nodes>
-        <config src="config/node-config.properties" add-signers="true" />
+        <config src="config/node-config.properties" add-signers="true"/>
     </nodes>
     <chains>
-    	<chain name="filehub" iid="CHAIN_IID">
-    		<config height="0">
-    			<app module="">
-	    			<args module="admin">
-	    				<arg key="pubkey">
-	              <bytea>036fae54a1bb72638ab73b141db2bd40bf69639bd961d92c57c492de871aff448d</bytea>
-	            </arg>
-            </args>
-            <args module="lib.ft3.core">
-	            <arg key="my_blockchain_name">
-	              <string>Filehub</string>
-	            </arg>
-	            <arg key="my_blockchain_website">
-	              <string>filehub.chromia.dev</string>
-	            </arg>
-	            <arg key="my_blockchain_description">
-	              <string>Filestorage</string>
-	            </arg>
-	            <arg key="rate_limit_active">
-	              <int>1</int>
-	            </arg>
-	            <arg key="rate_limit_max_points">
-	              <int>20</int>
-	            </arg>
-	            <arg key="rate_limit_recovery_time">
-	              <int>5000</int>
-	            </arg>
-	            <arg key="rate_limit_points_at_account_creation">
-	              <int>20</int>
-	            </arg>
-	          </args>
-    			</app>
-    		</config>
-    	</chain>
+        <chain name="filehub" iid="CHAIN_IID">
+            <config height="0">
+                <app module="">
+                    <args module="admin">
+                        <arg key="pubkey">
+                            <bytea>036fae54a1bb72638ab73b141db2bd40bf69639bd961d92c57c492de871aff448d</bytea>
+                        </arg>
+                    </args>
+                    <args module="lib.ft3.core">
+                        <arg key="my_blockchain_name">
+                            <string>Filehub</string>
+                        </arg>
+                        <arg key="my_blockchain_website">
+                            <string>filehub.chromia.dev</string>
+                        </arg>
+                        <arg key="my_blockchain_description">
+                            <string>Filestorage</string>
+                        </arg>
+                        <arg key="rate_limit_active">
+                            <int>1</int>
+                        </arg>
+                        <arg key="rate_limit_max_points">
+                            <int>20</int>
+                        </arg>
+                        <arg key="rate_limit_recovery_time">
+                            <int>5000</int>
+                        </arg>
+                        <arg key="rate_limit_points_at_account_creation">
+                            <int>20</int>
+                        </arg>
+                    </args>
+                </app>
+            </config>
+        </chain>
     </chains>
 </run>
