@@ -4,8 +4,12 @@ module;
 import dev_op: ^^.core.dev_op;
 import acc: ^^.account; 
 
+struct module_args {
+  authority: pubkey;
+}
 
 operation dev_register_account (acc.auth_descriptor) {
+    require(chain_context.args.authority.empty() or op_context.is_signer(chain_context.args.authority));
     dev_op.require_dev();
     acc.create_account_with_auth( auth_descriptor );
 }

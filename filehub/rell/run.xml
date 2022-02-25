@@ -34,6 +34,11 @@
                             <int>20</int>
                         </arg>
                     </args>
+                    <args module="lib.ft3.operations.dev_op_account">
+                        <arg key="authority">
+                            <bytea></bytea>
+                        </arg>
+                    </args>
                 </app>
             </config>
         </chain>
