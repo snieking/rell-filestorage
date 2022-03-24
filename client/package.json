@@ -1,6 +1,6 @@
 {
   "name": "@snieking/fs-client",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Client for communicating with Filehubs and Filechains in the Chromia blockchain",
   "main": "lib/index.js",
   "files": [
