@@ -1,8 +1,9 @@
 {
   "name": "@snieking/fs-client",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Client for communicating with Filehubs and Filechains in the Chromia blockchain",
   "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "files": [
     "lib/**/*"
   ],
@@ -16,6 +17,7 @@
   },
   "scripts": {
     "build": "tsc",
+    "prepare": "npm run build",
     "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
     "lint": "tslint -p tsconfig.json"
   },
