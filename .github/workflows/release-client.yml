@@ -1,4 +1,4 @@
-name: release-fs-client
+name: Release Client
 
 on:
   release:
