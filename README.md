@@ -1,3 +1,5 @@
+This project started out as a hobby project but has now been absorbed by ChromaWay and therefore moved to [ChromaWay Gitlab](https://gitlab.com/chromaway/filehub). I am still the maintainer, but this repository here on Github will no longer get updates.
+
 # Rell Filestorage
 [![CI Build Status](https://github.com/snieking/rell-filestorage/workflows/continuous-integration/badge.svg)](https://github.com/snieking/rell-filestorage/actions)
 [![fs-client](https://img.shields.io/npm/v/@snieking/fs-client?label=fs-client)](https://www.npmjs.com/package/@snieking/fs-client)
